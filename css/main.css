@@ -27,6 +27,10 @@
   --code: #ddd;
   --hr: #ddd;
   --radius: 2px;
+  --kw-todo: var(--heading);
+  --kw-doing: var(--algorithm-border);
+  --kw-done: var(--aside-border);
+  --line-height: 1.4em;
 }
 
 * {
@@ -40,7 +44,7 @@ html {
   color: var(--main-text);
   background: var(--main-bg);
   font-size: 16px;
-  line-height: 1.4;
+  line-height: var(--line-height);
   text-rendering: optimizeLegibility;
   text-align: justify;
 }
@@ -241,7 +245,7 @@ h6 {
 }
 
 p {
-  margin-bottom: 1rem;
+  margin-bottom: var(--line-height);
 }
 
 .cartridge {
@@ -413,6 +417,40 @@ aside {
 
 aside p {
   margin: 0;
+}
+
+.keyword {
+  font-family: "Victor Mono";
+  padding: 0 0.2em;
+  margin-right: 0.5em;
+  color: var(--main-bg);
+  border-radius: var(--radius);
+  font-weight: bold;
+  text-transform: uppercase;
+
+  &.todo {
+    background-color: var(--kw-todo);
+  }
+
+  &.todo::before {
+    content: "todo";
+  }
+
+  &.doing {
+    background-color: var(--kw-doing);
+  }
+
+  &.doing::before {
+    content: "doing";
+  }
+
+  &.done {
+    background-color: var(--kw-done);
+  }
+
+  &.done::before {
+    content: "done";
+  }
 }
 
 @media (max-width: 1200px) {
