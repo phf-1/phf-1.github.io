@@ -34,6 +34,7 @@
   --kw-waiting: var(--kw-doing);
   --kw-done: var(--aside-border);
   --line-height: 1.4;
+  --annotation: #777;
 }
 
 * {
@@ -252,6 +253,7 @@ p {
 }
 
 .cartridge {
+	position: relative;
   max-width: 80%;
   margin: 4rem auto;
   padding: 1rem;
@@ -266,6 +268,15 @@ p {
     border: 1px solid var(--abstract-border);
   }
 
+  &.abstract::before {
+      content: "Abstract";
+      position: absolute;
+      top: calc(-1*(1em + 1px + 0.75em));
+      right: 0;
+      font-size: 0.75em;
+      color: var(--annotation);	  
+  }  
+
   &.definition {
     background-color: var(--definition-bg);
     border: 1px solid var(--definition-border);
@@ -273,6 +284,11 @@ p {
 
   &.definition::before {
       content: "Definition";
+      position: absolute;
+      top: calc(-1*(1em + 1px + 0.75em));
+      right: 0;
+      font-size: 0.75em;
+      color: var(--annotation);	  
   }
 
   &.note {
@@ -280,10 +296,29 @@ p {
     border: 1px solid var(--note-border);
   }
 
+  &.note::before {
+      content: "Note";
+      position: absolute;
+      top: calc(-1*(1em + 1px + 0.75em));
+      right: 0;
+      font-size: 0.75em;
+      color: var(--annotation);	  
+  }    
+
   &.algorithm {
     background-color: var(--algorithm-bg);
     border: 1px solid var(--algorithm-border);
   }
+
+  &.algorithm::before {
+      content: "Algorithm";
+      position: absolute;
+      top: calc(-1*(1em + 1px + 0.75em));
+      right: 0;
+      font-size: 0.75em;
+      color: var(--annotation);	  
+  }    
+  
 }
 
 a {
@@ -328,7 +363,19 @@ blockquote {
   color: var(--main-text);
   background-color: var(--quote-bg);
   border: 1px solid var(--quote-border);
+
+  &::before {
+      content: "Quote";
+      position: absolute;
+      top: calc(-1*(1em + 1px + 0.75em));
+      right: 0;
+      font-size: 0.75em;
+      color: var(--annotation);	  
+  }      
 }
+
+
+
 
 blockquote footer {
   text-align: right;
