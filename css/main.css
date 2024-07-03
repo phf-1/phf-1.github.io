@@ -271,6 +271,10 @@ p {
     border: 1px solid var(--definition-border);
   }
 
+  &.definition::before {
+      content: "Definition";
+  }
+
   &.note {
     background-color: var(--note-bg);
     border: 1px solid var(--note-border);
