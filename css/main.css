@@ -253,7 +253,7 @@ p {
 }
 
 .cartridge {
-	position: relative;
+  position: relative;
   max-width: 80%;
   margin: 4rem auto;
   padding: 1rem;
@@ -269,13 +269,13 @@ p {
   }
 
   &.abstract::before {
-      content: "Abstract";
-      position: absolute;
-      top: calc(-1*(1em + 1px + 0.75em));
-      right: 0;
-      font-size: 0.75em;
-      color: var(--annotation);	  
-  }  
+    content: "Abstract";
+    position: absolute;
+    top: calc(-1 * (1em + 1px + 0.75em));
+    right: 0;
+    font-size: 0.75em;
+    color: var(--annotation);
+  }
 
   &.definition {
     background-color: var(--definition-bg);
@@ -283,12 +283,12 @@ p {
   }
 
   &.definition::before {
-      content: "Definition";
-      position: absolute;
-      top: calc(-1*(1em + 1px + 0.75em));
-      right: 0;
-      font-size: 0.75em;
-      color: var(--annotation);	  
+    content: "Definition";
+    position: absolute;
+    top: calc(-1 * (1em + 1px + 0.75em));
+    right: 0;
+    font-size: 0.75em;
+    color: var(--annotation);
   }
 
   &.note {
@@ -297,13 +297,13 @@ p {
   }
 
   &.note::before {
-      content: "Note";
-      position: absolute;
-      top: calc(-1*(1em + 1px + 0.75em));
-      right: 0;
-      font-size: 0.75em;
-      color: var(--annotation);	  
-  }    
+    content: "Note";
+    position: absolute;
+    top: calc(-1 * (1em + 1px + 0.75em));
+    right: 0;
+    font-size: 0.75em;
+    color: var(--annotation);
+  }
 
   &.algorithm {
     background-color: var(--algorithm-bg);
@@ -311,14 +311,13 @@ p {
   }
 
   &.algorithm::before {
-      content: "Algorithm";
-      position: absolute;
-      top: calc(-1*(1em + 1px + 0.75em));
-      right: 0;
-      font-size: 0.75em;
-      color: var(--annotation);	  
-  }    
-  
+    content: "Algorithm";
+    position: absolute;
+    top: calc(-1 * (1em + 1px + 0.75em));
+    right: 0;
+    font-size: 0.75em;
+    color: var(--annotation);
+  }
 }
 
 a {
@@ -365,17 +364,14 @@ blockquote {
   border: 1px solid var(--quote-border);
 
   &::before {
-      content: "Quote";
-      position: absolute;
-      top: calc(-1*(1em + 1px + 0.75em));
-      right: 0;
-      font-size: 0.75em;
-      color: var(--annotation);	  
-  }      
+    content: "Quote";
+    position: absolute;
+    top: calc(-1 * (1em + 1px + 0.75em));
+    right: 0;
+    font-size: 0.75em;
+    color: var(--annotation);
+  }
 }
-
-
-
 
 blockquote footer {
   text-align: right;
