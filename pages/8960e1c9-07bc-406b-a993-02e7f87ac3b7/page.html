@@ -6,7 +6,7 @@
 		 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Hidden page.">
+	<meta name="description" content="Defines Actor.">
 	<title>Pierre-Henry Fröhring's Website</title>
 	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
@@ -22,43 +22,62 @@
 	  <article id="content">
 		<div class="topbar"><div class="actions"><button onclick="toggle_toc()">toggle TOC</button></div><nav class="navbar" id="navbar"><a href="/">HOME</a></nav></div>
 
-		<h1>Hidden</h1>
-<ul>
-  <li>
-    <a href="/pages/215d1b76-e844-4e52-b1ac-93cada6d57cf/page.html"
-      >Switzerland</a
-    >
-  </li>
-  <li>
-    <a href="https://github.com/phf-1/phf-1.github.io">Website's sources</a>
-  </li>
-  <li>
-    <a href="/pages/abcca906-94c6-4abc-8a10-000872b215cd/page.html"
-      >Website's manual</a
-    >
-  </li>
-  <li>
-    <a href="/pages/00e566bf-0733-4e8b-9350-bc9df1221635/page.html"
-      >Style test page</a
-    >
-  </li>
-  <li>
-    <a href="/pages/e336fbeb-9fe0-4d08-8f49-1ebe2f8ccbff/page.html"
-      >Aphorisms</a
-    >
-  </li>
-  <li>
-    <a href="/pages/4802e536-3c15-47d8-8cfd-6ac722b31e34/page.html"
-      >Allegories</a
-    >
-  </li>
-  <li>
-    <a href="/pages/73f16a66-8b12-4ac2-95cb-57f01e7eeabf/page.html">Sleep</a>
-  </li>
-  <li>
-    <a href="/pages/8960e1c9-07bc-406b-a993-02e7f87ac3b7/page.html">Actor</a>
-  </li>
-</ul>
+		<h1>Actor</h1>
+
+<h2>How to build an Actor?</h2>
+
+<div class="cartridge definition">
+  <h3>Actor</h3>
+
+  <h4>Interfaces</h4>
+
+  <p>
+    Each section matches a type of message and has a predefined algorithm that
+    can compute an answer, potentially from data stored in the state.
+  </p>
+
+  <h5>What is the objective?</h5>
+
+  <p>The answer is: …</p>
+
+  <h4>State</h4>
+
+  <p>Data used to compute answers.</p>
+
+  <h4>Objectives</h4>
+
+  <p>The objectives pursued in order.</p>
+
+  <h5><span class="keyword todo"></span>An objective.</h5>
+
+  <h5><span class="keyword waiting"></span>An objective.</h5>
+
+  <p>
+    The actor is waiting to receive a message before continuing to pursue this
+    objective.
+  </p>
+
+  <h5><span class="keyword doing"></span>An objective.</h5>
+
+  <p>The actor is making progress on this objective now.</p>
+
+  <h5><span class="keyword done"></span>An objective is defined.</h5>
+
+  <p>
+    This objective has been attained. A proof should be added to confirm this.
+  </p>
+
+  <h4>Messages</h4>
+
+  <ul>
+    <li>Messages waiting to be processed.</li>
+    <li>A message may or may not match an interface.</li>
+    <li>
+      New interfaces, states, and objectives may be added to the actor to react
+      to a message.
+    </li>
+  </ul>
+</div>
 
 
 		<hr />

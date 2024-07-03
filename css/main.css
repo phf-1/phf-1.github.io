@@ -19,6 +19,8 @@
   --note-border: #33691e;
   --abstract-bg: #f3e5f5;
   --abstract-border: #4a148c;
+  --definition-bg: #e0f2f1;
+  --definition-border: #004d40;
   --quote-bg: #fff3e0;
   --quote-border: #e65100;
   --aside-border: #1b5e20;
@@ -28,7 +30,8 @@
   --hr: #ddd;
   --radius: 2px;
   --kw-todo: var(--heading);
-  --kw-doing: var(--algorithm-border);
+  --kw-doing: var(--quote-border);
+  --kw-waiting: var(--kw-doing);
   --kw-done: var(--aside-border);
   --line-height: 1.4;
 }
@@ -254,9 +257,18 @@ p {
   padding: 1rem;
   border-radius: var(--radius);
 
+  & *:last-child {
+    margin-bottom: 0;
+  }
+
   &.abstract {
     background-color: var(--abstract-bg);
     border: 1px solid var(--abstract-border);
+  }
+
+  &.definition {
+    background-color: var(--definition-bg);
+    border: 1px solid var(--definition-border);
   }
 
   &.note {
@@ -267,10 +279,6 @@ p {
   &.algorithm {
     background-color: var(--algorithm-bg);
     border: 1px solid var(--algorithm-border);
-    & ol,
-    & ul {
-      margin-bottom: 0;
-    }
   }
 }
 
@@ -442,6 +450,14 @@ aside p {
 
   &.doing::before {
     content: "doing";
+  }
+
+  &.waiting {
+    background-color: var(--kw-waiting);
+  }
+
+  &.waiting::before {
+    content: "waiting";
   }
 
   &.done {
