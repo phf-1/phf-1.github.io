@@ -29,10 +29,7 @@
 
 <h2>Interfaces</h2>
 
-<p>
-  Each section matches a type of message and has a predefined algorithm that may
-  compute an answer.
-</p>
+<p>Each section matches a type of message and has a predefined algorithm that may compute an answer.</p>
 
 <h3>Objective?</h3>
 
@@ -51,39 +48,45 @@ Data used to compute answers.
 <h2>Objectives</h2>
 
 <p>
-  The objectives pursued in order, bottom to top. An objective may be tagged
-  with a keyword. <span class="keyword done"></span> keyword is ommitted to
-  prevent noise.
+  The objectives pursued in order, bottom to top. An objective may be tagged with a keyword.
+  <span class="keyword done"></span>
+  keyword is ommitted to prevent noise.
 </p>
 <ol>
-  <li><span class="keyword todo"></span>: Means « yet to be done ».</li>
   <li>
-    <span class="keyword doing"></span>: Means « a result is being built ».
+    <span class="keyword todo"></span>
+    : Means « yet to be done ».
   </li>
   <li>
-    <span class="keyword waiting"></span>: Means « waiting for an other actor
-    response ».
+    <span class="keyword doing"></span>
+    : Means « a result is being built ».
   </li>
   <li>
-    <span class="keyword done"></span>: Means « a result has been built and it
-    satisfies the objective ».
+    <span class="keyword waiting"></span>
+    : Means « waiting for an other actor response ».
   </li>
   <li>
-    <span class="keyword failed"></span>: Means « a result — if any — has been
-    built and it does not satisfy the objective ».
+    <span class="keyword done"></span>
+    : Means « a result has been built and it satisfies the objective ».
+  </li>
+  <li>
+    <span class="keyword failed"></span>
+    : Means « a result — if any — has been built and it does not satisfy the objective ».
   </li>
 </ol>
 
-<h3><span class="keyword todo"></span>An objective.</h3>
+<h3>
+  <span class="keyword todo"></span>
+  An objective.
+</h3>
 
 <a href="https://example.com">A result.</a>
 
 <h2>Messages</h2>
 
 <p>
-  Messages waiting to be processed, bottom to top. A message may or may not
-  match an interface. New interfaces, states, and objectives may be added to the
-  actor to react to a message.
+  Messages waiting to be processed, bottom to top. A message may or may not match an interface. New interfaces, states,
+  and objectives may be added to the actor to react to a message.
 </p>
 
 <h3>A message</h3>
