@@ -6,7 +6,7 @@
 		 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="A list of aphorisms.">
+	<meta name="description" content="Defines Actor.">
 	<title>Pierre-Henry Fröhring's Website</title>
 	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
@@ -20,52 +20,64 @@
   <body>
 	<main id="main">
 	  <article id="content">
-		<div class="topbar"><div class="actions"><button onclick="toggle_toc()">toggle TOC</button></div><nav class="navbar" id="navbar"><a href="/">HOME</a></nav></div>
+		<div class="topbar"><div class="actions"><button class="button" onclick="toggle_toc()">toggle TOC</button></div><nav class="navbar" id="navbar"><a class="button" href="/">home</a></nav></div>
 
-		<h1>Aphorisms</h1>
+		<h1>Actor</h1>
 
-<p class="cartridge abstract">A list of aphorisms.</p>
+<h2>How to build an Actor?</h2>
 
-<h2>What is the objective?</h2>
+<div class="cartridge definition">
+  <h3>Actor</h3>
 
-<p>
-  The objective is to list aphorisms because they proved to be useful or for
-  some other reason.
-</p>
+  <h4>Interfaces</h4>
 
-<h2>List of aphorisms</h2>
+  <p>
+    Each section matches a type of message and has a predefined algorithm that
+    can compute an answer, potentially from data stored in the state.
+  </p>
 
-<ul>
-  <li>Measure twice, cut once.</li>
-  <li>
-    There will always be an army in your country, if it's not yours, then it
-    will be your neighbor's.
-  </li>
-  <li>You don't swim in the same river twice.</li>
-  <li>The only real danger is man himself.</li>
-  <li>Where there's a will, there's a way.</li>
-  <li>Always plan ahead. It wasn’t raining when Noah built the ark.</li>
-  <li>
-    It is not enough to win a war; it is more important to organize the peace.
-  </li>
-  <li>
-    In preparing for battle, plans are useless but planning is indispensable.
-  </li>
-  <li>Actions speak louder than words.</li>
-  <li>The tail does not wag the dog.</li>
-  <li>
-    The best time to plant a tree was 20 years ago. The next best time is today.
-  </li>
-  <li>
-    If you use a ruler to measure a table you may also be using the table to
-    measure the ruler.
-  </li>
-  <li>If you want to make God laugh, tell him about your plans.</li>
-  <li>Do not treat others the way you would not like them to treat you.</li>
-  <li>Roughly 80% of consequences come from 20% of causes.</li>
-  <li>History is written by the victors.</li>
-  <li><i>Vae victis.</i></li>
-</ul>
+  <h5>What is the objective?</h5>
+
+  <p>The answer is: …</p>
+
+  <h4>State</h4>
+
+  <p>Data used to compute answers.</p>
+
+  <h4>Objectives</h4>
+
+  <p>The objectives pursued in order.</p>
+
+  <h5><span class="keyword todo"></span>An objective.</h5>
+
+  <h5><span class="keyword waiting"></span>An objective.</h5>
+
+  <p>
+    The actor is waiting to receive a message before continuing to pursue this
+    objective.
+  </p>
+
+  <h5><span class="keyword doing"></span>An objective.</h5>
+
+  <p>The actor is making progress on this objective now.</p>
+
+  <h5><span class="keyword done"></span>An objective is defined.</h5>
+
+  <p>
+    This objective has been attained. A proof should be added to confirm this.
+  </p>
+
+  <h4>Messages</h4>
+
+  <ul>
+    <li>Messages waiting to be processed.</li>
+    <li>A message may or may not match an interface.</li>
+    <li>
+      New interfaces, states, and objectives may be added to the actor to react
+      to a message.
+    </li>
+  </ul>
+</div>
 
 
 		<hr />
