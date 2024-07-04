@@ -22,74 +22,71 @@
 	  <article id="content">
 		<div class="topbar"><div class="actions"><button class="button" onclick="toggle_toc()">toggle TOC</button></div><nav class="navbar" id="navbar"><a class="button" href="/">home</a></nav></div>
 
-		<h1>Actor</h1>
+		<!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
+<!-- :ID: 101e3f53-f9e2-465a-a0e3-d0685b8e4f21 -->
 
-<h2>How to build an Actor?</h2>
+<h1 class="title">Actor</h1>
 
-<div class="cartridge definition">
-  <h3>Actor</h3>
+<h2>Interfaces</h2>
 
-  <h4>Interfaces</h4>
+<p>
+  Each section matches a type of message and has a predefined algorithm that
+  may compute an answer.
+</p>
 
-  <p>
-    Each section matches a type of message and has a predefined algorithm that
-    may compute an answer.
-  </p>
+<h3>Objective?</h3>
 
-  <h5>What is the objective?</h5>
+<p>The result should be: …</p>
 
-  <p>The result should be: …</p>
+<h3>Result?</h3>
 
-  <h5>What is the result?</h5>
+<p>The result so far is: …</p>
 
-  <p>The result so far is: …</p>
+<hr />
 
-  <hr />
+<h2>State</h2>
 
-  <h4>State</h4>
+Data used to compute answers.
 
-  Data used to compute answers.
+<h2>Objectives</h2>
 
-  <h4>Objectives</h4>
+<p>
+  The objectives pursued in order, bottom to top. An objective may be tagged
+  with a keyword. <span class="keyword done"></span> keyword is ommitted to
+  prevent noise.
+</p>
+<ol>
+  <li><span class="keyword todo"></span>: Means « yet to be done ».</li>
+  <li>
+    <span class="keyword doing"></span>: Means « a result is being built ».
+  </li>
+  <li>
+    <span class="keyword waiting"></span>: Means « waiting for an other actor
+    response ».
+  </li>
+  <li>
+    <span class="keyword done"></span>: Means « a result has been built and it
+    satisfies the objective ».
+  </li>
+  <li>
+    <span class="keyword failed"></span>: Means « a result — if any — has been
+    built and it does not satisfy the objective ».
+  </li>
+</ol>
 
-  <p>
-    The objectives pursued in order, bottom to top. An objective may be tagged
-    with a keyword. <span class="keyword done"></span> keyword is ommitted to
-    prevent noise.
-  </p>
-  <ol>
-    <li><span class="keyword todo"></span>: Means « yet to be done ».</li>
-    <li>
-      <span class="keyword doing"></span>: Means « a result is being built ».
-    </li>
-    <li>
-      <span class="keyword waiting"></span>: Means « waiting for an other actor
-      response ».
-    </li>
-    <li>
-      <span class="keyword done"></span>: Means « a result has been built and it
-      satisfies the objective ».
-    </li>
-    <li>
-      <span class="keyword failed"></span>: Means « a result — if any — has been
-      built and it does not satisfy the objective ».
-    </li>
-  </ol>
+<h3><span class="keyword todo"></span>An objective.</h3>
 
-  <h5><span class="keyword todo"></span>An objective.</h5>
+<a href="https://example.com">A result.</a>
 
-  <a href="https://example.com">A result.</a>
+<h2>Messages</h2>
 
-  <h4>Messages</h4>
+<p>
+  Messages waiting to be processed, bottom to top. A message may or may not
+  match an interface. New interfaces, states, and objectives may be added to
+  the actor to react to a message.
+</p>
 
-  <p>
-  	Messages waiting to be processed, bottom to top. A message may or may not match an
-    interface. New interfaces, states, and objectives may be added to the actor to
-    react to a message.
-  </p>
-
-  <h5>A message</h5>
-</div>
+<h3>A message</h3>
 
 
 		<hr />

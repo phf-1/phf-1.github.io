@@ -107,6 +107,13 @@ main {
   display: none;
 }
 
+.title {
+  display: block;
+  text-align: center;
+  border-bottom: none;
+  margin: 10vh auto;
+}
+
 h1,
 h2,
 h3,
@@ -124,9 +131,6 @@ h6 {
 }
 
 h1 {
-  display: block;
-  text-align: center;
-  border-bottom: none;
   font-size: 2rem;
   margin-bottom: 2rem;
 }
@@ -183,16 +187,14 @@ hr + * {
   display: none;
   margin-left: 2rem;
   max-width: 40ch;
-
-  h1 {
-    display: none;
-  }
-
+  
+  h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
+	  text-align: left;	  
     font-size: 1rem;
     font-weight: normal;
     padding: 0;
@@ -204,20 +206,23 @@ hr + * {
     border: none;
   }
 
+  h1 {
+    margin-left: 0em;
+  }
   h2 {
-    margin-left: 0rem;
+    margin-left: 1em;
   }
   h3 {
-    margin-left: 0.5rem;
+    margin-left: 2em;
   }
   h4 {
-    margin-left: 1rem;
+    margin-left: 3em;
   }
   h5 {
-    margin-left: 1.5rem;
+      margin-left: 4em;
   }
   h6 {
-    margin-left: 2rem;
+    margin-left: 5rem;
   }
 }
 
@@ -242,9 +247,10 @@ p {
   }
 
   &.abstract {
+	  font-size: 0.9em;
     background-color: var(--abstract-bg);
     border: 1px solid var(--abstract-border);
-	max-width: 80%;	
+    max-width: 80%;
   }
 
   &.abstract::before {
@@ -523,9 +529,6 @@ aside p {
   }
 
   h1 {
-    display: block;
-    text-align: center;
-    border-bottom: none;
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
   }
