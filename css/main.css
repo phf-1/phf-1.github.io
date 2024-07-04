@@ -74,34 +74,34 @@ main {
 }
 
 .button {
-    appearance: none;
-    text-transform: uppercase;
-    border: 1px solid var(--annotation);
-    padding: 1em;
-    color: var(--main-text);
-    font-weight: lighter;
-    font-family: 'Open Sans';
-    background-color: inherit;
-    border-radius: 2px;
-	font-size: 0.8rem;
+  appearance: none;
+  text-transform: uppercase;
+  border: 1px solid var(--annotation);
+  padding: 1em;
+  color: var(--main-text);
+  font-weight: lighter;
+  font-family: "Open Sans";
+  background-color: inherit;
+  border-radius: 2px;
+  font-size: 0.8rem;
 }
 
 .button:hover {
-    background-color: var(--button-over);
-    text-decoration: none;
-    transition-duration: 0.1s;
+  background-color: var(--button-over);
+  text-decoration: none;
+  transition-duration: 0.1s;
 }
 
 .button:focus {
-    outline: 1px transparent;
+  outline: 1px transparent;
 }
 
 .button:before {
-    display: none;
+  display: none;
 }
 
 .button:-webkit-details-marker {
-    display: none;
+  display: none;
 }
 
 h1,
