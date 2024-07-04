@@ -187,14 +187,14 @@ hr + * {
   display: none;
   margin-left: 2rem;
   max-width: 40ch;
-  
+
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-	  text-align: left;	  
+    text-align: left;
     font-size: 1rem;
     font-weight: normal;
     padding: 0;
@@ -219,7 +219,7 @@ hr + * {
     margin-left: 3em;
   }
   h5 {
-      margin-left: 4em;
+    margin-left: 4em;
   }
   h6 {
     margin-left: 5rem;
@@ -247,7 +247,7 @@ p {
   }
 
   &.abstract {
-	  font-size: 0.9em;
+    font-size: 0.9em;
     background-color: var(--abstract-bg);
     border: 1px solid var(--abstract-border);
     max-width: 80%;

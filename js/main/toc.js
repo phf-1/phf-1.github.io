@@ -22,7 +22,7 @@ const toc_build = (function (toc_id) {
     toc.id = toc_id;
     const add_heading_to_toc = function (heading) {
       const toc_heading = heading.cloneNode();
-      heading.id = heading.id === '' ? id_build() : heading.id;
+      heading.id = heading.id === "" ? id_build() : heading.id;
       const a = document.createElement("a");
       a.href = "#" + heading.id;
       a.innerHTML = heading.innerHTML;
