@@ -85,7 +85,8 @@ main {
 }
 
 .button {
-  appearance: none;
+	appearance: none;
+	cursor:pointer;	
   text-transform: uppercase;
   border: 1px solid var(--annotation);
   padding: 1em;
