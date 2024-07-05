@@ -8,35 +8,43 @@
 @import url(/css/font.css);
 
 :root {
-  /* https://m2.material.io/design/color/the-color-system.html#tools-for-picking-colors */
-  --main-bg: #fffff8;
-  --main-text: #111111;
-  --heading: #b71c1c;
-  --mark: #ffccbc;
-  --algorithm-bg: #e3f2fd;
-  --algorithm-border: #0d47a1;
-  --note-bg: #f1f8e9;
-  --note-border: #33691e;
-  --abstract-bg: #f3e5f5;
-  --abstract-border: #4a148c;
-  --definition-bg: #eceff1;
-  --definition-border: #263238;
-  --quote-bg: #fff3e0;
-  --quote-border: #e65100;
-  --aside-border: #1b5e20;
-  --aside-bg: #e8f5e9;
-  --link: #007acc;
-  --code: #ddd;
-  --hr: #ddd;
-  --radius: 2px;
-  --kw-todo: var(--heading);
-  --kw-doing: var(--quote-border);
-  --kw-waiting: var(--kw-doing);
-  --kw-done: var(--aside-border);
-  --kw-failed: var(--main-text);
-  --line-height: 1.4;
-  --annotation: #777;
-  --button-over: #fffff0;
+	/* https://m2.material.io/design/color/the-color-system.html#tools-for-picking-colors */
+	--font-size: 18px;
+	--font-h-factor: 1.1;
+	--h6-size: calc(var(--font-size) * var(--font-h-factor));
+	--h5-size: calc(var(--h6-size) * var(--font-h-factor));
+	--h4-size: calc(var(--h5-size) * var(--font-h-factor));
+	--h3-size: calc(var(--h4-size) * var(--font-h-factor));
+	--h2-size: calc(var(--h3-size) * var(--font-h-factor));
+	--h1-size: calc(var(--h2-size) * var(--font-h-factor));	
+	--main-bg: #fffff8;
+	--main-text: #111111;
+	--heading: #b71c1c;
+	--mark: #ffccbc;
+	--algorithm-bg: #e3f2fd;
+	--algorithm-border: #0d47a1;
+	--note-bg: #f1f8e9;
+	--note-border: #33691e;
+	--abstract-bg: #f3e5f5;
+	--abstract-border: #4a148c;
+	--definition-bg: #eceff1;
+	--definition-border: #263238;
+	--quote-bg: #fff3e0;
+	--quote-border: #e65100;
+	--aside-border: #1b5e20;
+	--aside-bg: #e8f5e9;
+	--link: #007acc;
+	--code: #ddd;
+	--hr: #ddd;
+	--radius: 2px;
+	--kw-todo: var(--heading);
+	--kw-doing: var(--quote-border);
+	--kw-waiting: var(--kw-doing);
+	--kw-done: var(--aside-border);
+	--kw-failed: var(--main-text);
+	--line-height: 1.4;
+	--annotation: #777;
+	--button-over: #fffff0;
 }
 
 * {
@@ -49,7 +57,7 @@ html {
   font-family: "Open Sans";
   color: var(--main-text);
   background: var(--main-bg);
-  font-size: 16px;
+  font-size: 18px;
   line-height: var(--line-height);
   text-rendering: optimizeLegibility;
   text-align: justify;
@@ -62,7 +70,7 @@ body {
 main {
   display: flex;
   justify-content: center;
-  max-width: 1200px;
+  max-width: 125ch;
   margin: 0 auto;
   padding: 20px;
   margin-bottom: 66vh;
@@ -131,28 +139,28 @@ h6 {
 }
 
 h1 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: var(--h1-size);
+  margin-bottom: var(--h1-size);
 }
 h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
+  font-size: var(--h2-size);
+  margin-bottom: var(--h2-size);
 }
 h3 {
-  font-size: 1.25rem;
-  margin-bottom: 1.25rem;
+  font-size: var(--h3-size);
+  margin-bottom: var(--h3-size);
 }
 h4 {
-  font-size: 1rem;
-  margin-bottom: 1rem;
+  font-size: var(--h4-size);
+  margin-bottom: var(--h4-size);
 }
 h5 {
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
+  font-size: var(--h5-size);
+  margin-bottom: var(--h5-size);
 }
 h6 {
-  font-size: 0.8rem;
-  margin-bottom: 1rem;
+  font-size: var(--h6-size);
+  margin-bottom: var(--h6-size);
 }
 
 .small-caps {
@@ -168,6 +176,8 @@ h6 {
   position: relative;
   max-width: 80ch;
   flex-grow: 1;
+  border: 1px solid var(--annotation);
+  padding: 1rem;  
 }
 
 hr + * {
@@ -184,8 +194,8 @@ hr + * {
 }
 
 #table-of-content {
-  display: none;
-  margin-left: 2rem;
+	/* display: none; */
+  margin-left: 1rem;
   max-width: 40ch;
 
   h1,
@@ -467,6 +477,7 @@ aside p {
   border-radius: var(--radius);
   font-weight: bold;
   text-transform: uppercase;
+  font-size: 0.75em;
 
   &.todo {
     background-color: var(--kw-todo);
@@ -509,15 +520,10 @@ aside p {
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 800px) {
   body {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 900px) {
-  body {
-    margin: 0;
+      margin: 0;
+      font-size: 14px;	  
   }
 
   main {
@@ -528,42 +534,12 @@ aside p {
     margin-bottom: 2rem;
   }
 
-  h1 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-  h2 {
-    font-size: 1.25rem;
-    margin-bottom: 1.25rem;
-  }
-  h3 {
-    font-size: 1.1rem;
-    margin-bottom: 1.1rem;
-  }
-  h4 {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
-  h5 {
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-  }
-  h6 {
-    font-size: 0.8rem;
-    margin-bottom: 1rem;
-  }
-}
-
-@media (max-width: 800px) {
-  main {
-    display: block;
-  }
-
   #table-of-content {
     display: none;
   }
 
   aside {
     display: none;
-  }
+  }  
 }
+

@@ -8,14 +8,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Website's manual.">
 	<title>Pierre-Henry Fröhring's Website</title>
-	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-	<link rel="manifest" href="/site.webmanifest">
+	<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+	<link rel="manifest" href="./site.webmanifest">
 	<link rel="canonical" href="https://phfrohring.com/">
-	<link rel="stylesheet" href="/css/main.css">
-	<script defer src="/js/highlight/highlight.min.js"></script>
-	<script defer src="/main.min.js"></script>
+	<link rel="stylesheet" href="./css/main.css">
+	<script defer src="./js/highlight/highlight.min.js"></script>
+	<script defer src="./main.min.js"></script>
   </head>
   <body>
 	<main id="main">
@@ -35,55 +35,47 @@
 </ul>
 
 <h2>How to install and start this website locally?</h2>
+
 <pre><code>git clone https://github.com/phf-1/phf-1.github.io.git website
 cd website
 make server</code></pre>
 
 <h2>How to add a page?</h2>
+
 <pre><code>make new</code></pre>
 
 <h2>How to modify a page?</h2>
+
 <ul>
   <li>Use your favorite text editor and modify the relevant HTML file.</li>
-  <li>
-    Add data —
-    <i>e.g.</i>
-    pictures, videos and sound files — under the relevant
-    <code>data</code>
-    directory
-  </li>
-  <li>
-    Use the
-    <a href="/pages/00e566bf-0733-4e8b-9350-bc9df1221635/">style test page</a>
-    to choose relevant HTML elements.
-  </li>
+  <li>Add data — <i>e.g.</i> pictures, videos and sound files — under the relevant <code>data</code> directory</li>
+  <li>Use the<a href="/pages/00e566bf-0733-4e8b-9350-bc9df1221635/">style test page</a> to choose relevant HTML elements.</li>
 </ul>
 
 <h2>How to build a page?</h2>
+
 <pre><code>make page UUID=${UUID}</code></pre>
 
 <h2>How to delete a page?</h2>
+
 <pre><code>make delete UUID=${UUID}</code></pre>
 
 <h2>How to list pages?</h2>
+
 <pre><code>make list</code></pre>
 
 <h2>How to modify the style of pages?</h2>
-<p>
-  Modify the file
-  <a href="/css/main.css">/css/main.css</a>
-  .
-</p>
+
+<p>Modify the file <a href="/css/main.css">/css/main.css</a>.</p>
 
 <h2>How to publish pages?</h2>
-<p>
-  Install a copy of the website locally and follow GitHubPages
-  <a href="https://pages.github.com/">instructions</a>
-  . Then:
-</p>
+
+<p>Install a copy of the website locally and follow GitHubPages <a href="https://pages.github.com/">instructions</a>. Then:</p>
+
 <pre><code>make publish</code></pre>
 
 <h2>How to format all code?</h2>
+
 <pre><code>make format</code></pre>
 
 
