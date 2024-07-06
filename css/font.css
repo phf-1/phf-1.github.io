@@ -5,342 +5,43 @@
  */
 
 @font-face {
-  font-family: "Open Sans";
-  font-style: italic;
-  font-weight: normal;
-  font-display: swap;
-  src:
-    url(/font/italic.woff2) format("woff2"),
-    url(/font/italic.woff) format("woff"),
-    url(/font/italic.ttf) format("ttf");
+	font-family: 'Serif';
+	src: url('/font/serif/Gelasio-VariableFont_wght.ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: "Open Sans";
-  font-style: italic;
-  font-weight: bold;
-  font-display: swap;
-  src:
-    url(/font/bolditalic.woff2) format("woff2"),
-    url(/font/bolditalic.woff) format("woff"),
-    url(/font/bolditalic.ttf) format("ttf");
+	font-family: 'Serif';
+	src: url('/font/serif/Gelasio-Italic-VariableFont_wght.ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: italic;
 }
 
 @font-face {
-  font-family: "Open Sans";
-  font-style: italic;
-  font-weight: 800;
-  font-display: swap;
-  src:
-    url(/font/extrabolditalic.woff2) format("woff2"),
-    url(/font/extrabolditalic.woff) format("woff"),
-    url(/font/extrabolditalic.ttf) format("ttf");
+	font-family: 'Sans';
+	src: url('/font/sans/OpenSans-VariableFont_wdth,wght.ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: "Open Sans";
-  font-style: italic;
-  font-weight: 600;
-  font-display: swap;
-  src:
-    url(/font/semibolditalic.woff2) format("woff2"),
-    url(/font/semibolditalic.woff) format("woff"),
-    url(/font/semibolditalic.ttf) format("ttf");
+	font-family: 'Sans';
+	src: url('/font/sans/OpenSans-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: italic;
 }
 
 @font-face {
-  font-family: "Open Sans";
-  font-style: italic;
-  font-weight: 300;
-  font-display: swap;
-  src:
-    url(/font/lightitalic.woff2) format("woff2"),
-    url(/font/lightitalic.woff) format("woff"),
-    url(/font/lightitalic.ttf) format("ttf");
+	font-family: 'Mono';
+	src: url('/font/mono/VictorMono-VariableFont_wght.ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: normal;
-  font-display: swap;
-  src:
-    url(/font/regular.woff2) format("woff2"),
-    url(/font/regular.woff) format("woff"),
-    url(/font/regular.ttf) format("ttf");
-}
-
-@font-face {
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: bold;
-  font-display: swap;
-  src:
-    url(/font/bold.woff2) format("woff2"),
-    url(/font/bold.woff) format("woff"),
-    url(/font/bold.ttf) format("ttf");
-}
-
-@font-face {
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src:
-    url(/font/extrabold.woff2) format("woff2"),
-    url(/font/extrabold.woff) format("woff"),
-    url(/font/extrabold.ttf) format("ttf");
-}
-
-@font-face {
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src:
-    url(/font/semibold.woff2) format("woff2"),
-    url(/font/semibold.woff) format("woff"),
-    url(/font/semibold.ttf) format("ttf");
-}
-
-@font-face {
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src:
-    url(/font/light.woff2) format("woff2"),
-    url(/font/light.woff) format("woff"),
-    url(/font/light.ttf) format("ttf");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src:
-    url(/font/mono-regular.woff2) format("woff2"),
-    url(/font/mono-regular.woff) format("woff"),
-    url(/font/mono-regular.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src:
-    url(/font/mono-italic.woff2) format("woff2"),
-    url(/font/mono-italic.woff) format("woff"),
-    url(/font/mono-italic.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: oblique;
-  font-weight: 400;
-  font-display: swap;
-  src:
-    url(/font/mono-oblique.woff2) format("woff2"),
-    url(/font/mono-oblique.woff) format("woff"),
-    url(/font/mono-oblique.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src:
-    url(/font/mono-bold.woff2) format("woff2"),
-    url(/font/mono-bold.woff) format("woff"),
-    url(/font/mono-bold.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src:
-    url(/font/mono-bolditalic.woff2) format("woff2"),
-    url(/font/mono-bolditalic.woff) format("woff"),
-    url(/font/mono-bolditalic.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: oblique;
-  font-weight: 700;
-  font-display: swap;
-  src:
-    url(/font/mono-boldoblique.woff2) format("woff2"),
-    url(/font/mono-boldoblique.woff) format("woff"),
-    url(/font/mono-boldoblique.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: normal;
-  font-weight: 200;
-  font-display: swap;
-  src:
-    url(/font/mono-extralight.woff2) format("woff2"),
-    url(/font/mono-extralight.woff) format("woff"),
-    url(/font/mono-extralight.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: italic;
-  font-weight: 200;
-  font-display: swap;
-  src:
-    url(/font/mono-extralightitalic.woff2) format("woff2"),
-    url(/font/mono-extralightitalic.woff) format("woff"),
-    url(/font/mono-extralightitalic.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: oblique;
-  font-weight: 200;
-  font-display: swap;
-  src:
-    url(/font/mono-extralightoblique.woff2) format("woff2"),
-    url(/font/mono-extralightoblique.woff) format("woff"),
-    url(/font/mono-extralightoblique.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src:
-    url(/font/mono-light.woff2) format("woff2"),
-    url(/font/mono-light.woff) format("woff"),
-    url(/font/mono-light.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: italic;
-  font-weight: 300;
-  font-display: swap;
-  src:
-    url(/font/mono-lightitalic.woff2) format("woff2"),
-    url(/font/mono-lightitalic.woff) format("woff"),
-    url(/font/mono-lightitalic.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: oblique;
-  font-weight: 300;
-  font-display: swap;
-  src:
-    url(/font/mono-lightoblique.woff2) format("woff2"),
-    url(/font/mono-lightoblique.woff) format("woff"),
-    url(/font/mono-lightoblique.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src:
-    url(/font/mono-medium.woff2) format("woff2"),
-    url(/font/mono-medium.woff) format("woff"),
-    url(/font/mono-medium.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: italic;
-  font-weight: 500;
-  font-display: swap;
-  src:
-    url(/font/mono-mediumitalic.woff2) format("woff2"),
-    url(/font/mono-mediumitalic.woff) format("woff"),
-    url(/font/mono-mediumitalic.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: oblique;
-  font-weight: 500;
-  font-display: swap;
-  src:
-    url(/font/mono-mediumoblique.woff2) format("woff2"),
-    url(/font/mono-mediumoblique.woff) format("woff"),
-    url(/font/mono-mediumoblique.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src:
-    url(/font/mono-semibold.woff2) format("woff2"),
-    url(/font/mono-semibold.woff) format("woff"),
-    url(/font/mono-semibold.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: italic;
-  font-weight: 600;
-  font-display: swap;
-  src:
-    url(/font/mono-semibolditalic.woff2) format("woff2"),
-    url(/font/mono-semibolditalic.woff) format("woff"),
-    url(/font/mono-semibolditalic.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: oblique;
-  font-weight: 600;
-  font-display: swap;
-  src:
-    url(/font/mono-semiboldoblique.woff2) format("woff2"),
-    url(/font/mono-semiboldoblique.woff) format("woff"),
-    url(/font/mono-semiboldoblique.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: normal;
-  font-weight: 100;
-  font-display: swap;
-  src:
-    url(/font/mono-thin.woff2) format("woff2"),
-    url(/font/mono-thin.woff) format("woff"),
-    url(/font/mono-thin.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: italic;
-  font-weight: 100;
-  font-display: swap;
-  src:
-    url(/font/mono-thinitalic.woff2) format("woff2"),
-    url(/font/mono-thinitalic.woff) format("woff"),
-    url(/font/mono-thinitalic.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Victor Mono";
-  font-style: oblique;
-  font-weight: 100;
-  font-display: swap;
-  src:
-    url(/font/mono-thinoblique.woff2) format("woff2"),
-    url(/font/mono-thinoblique.woff) format("woff"),
-    url(/font/mono-thinoblique.ttf) format("truetype");
+	font-family: 'Mono';
+	src: url('/font/mono/VictorMono-Italic-VariableFont_wght.ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: italic;
 }

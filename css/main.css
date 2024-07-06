@@ -16,7 +16,7 @@
 	--h4-size: calc(var(--h5-size) * var(--font-h-factor));
 	--h3-size: calc(var(--h4-size) * var(--font-h-factor));
 	--h2-size: calc(var(--h3-size) * var(--font-h-factor));
-	--h1-size: calc(var(--h2-size) * var(--font-h-factor));	
+	--h1-size: calc(var(--h2-size) * var(--font-h-factor));
 	--main-bg: #fffff8;
 	--main-text: #111111;
 	--heading: #b71c1c;
@@ -42,7 +42,7 @@
 	--kw-waiting: var(--kw-doing);
 	--kw-done: var(--aside-border);
 	--kw-failed: var(--main-text);
-	--line-height: 1.4;
+	--line-height: 1.5;
 	--annotation: #777;
 	--button-over: #fffff0;
 }
@@ -54,13 +54,15 @@
 }
 
 html {
-  font-family: "Open Sans";
+  font-family: "Serif";
   color: var(--main-text);
   background: var(--main-bg);
   font-size: 18px;
   line-height: var(--line-height);
   text-rendering: optimizeLegibility;
   text-align: justify;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
 }
 
 body {
@@ -85,14 +87,15 @@ main {
 }
 
 .button {
+  font-family: "Mono" !important;
 	appearance: none;
-	cursor:pointer;	
+	cursor:pointer;
   text-transform: uppercase;
   border: 1px solid var(--annotation);
   padding: 1em;
   color: var(--main-text);
   font-weight: lighter;
-  font-family: "Open Sans";
+  font-family: "Sans";
   background-color: inherit;
   border-radius: 2px;
   font-size: 0.8rem;
@@ -129,6 +132,7 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: "Sans";
   display: table;
   line-height: 1.2;
   padding-top: 1rem;
@@ -178,7 +182,7 @@ h6 {
   max-width: 80ch;
   flex-grow: 1;
   border: 1px solid var(--annotation);
-  padding: 1rem;  
+  padding: 1rem;
 }
 
 hr + * {
@@ -205,35 +209,35 @@ hr + * {
   h4,
   h5,
   h6 {
-    text-align: left;
-    font-size: 1rem;
-    font-weight: normal;
-    padding: 0;
-    margin: 0;
-    margin-bottom: 0.75em;
+	text-align: left;
+	font-size: 1rem;
+	font-weight: normal;
+	padding: 0;
+	margin: 0;
+	margin-bottom: 0.75em;
 
-    color: var(--main-text);
-    display: block;
-    border: none;
+	color: var(--main-text);
+	display: block;
+	border: none;
   }
 
   h1 {
-    margin-left: 0em;
+	margin-left: 0em;
   }
   h2 {
-    margin-left: 1em;
+	margin-left: 1em;
   }
   h3 {
-    margin-left: 2em;
+	margin-left: 2em;
   }
   h4 {
-    margin-left: 3em;
+	margin-left: 3em;
   }
   h5 {
-    margin-left: 4em;
+	margin-left: 4em;
   }
   h6 {
-    margin-left: 5rem;
+	margin-left: 5rem;
   }
 }
 
@@ -254,65 +258,66 @@ p {
   border-radius: var(--radius);
 
   & *:last-child {
-    margin-bottom: 0;
+	margin-bottom: 0;
   }
 
   &.abstract {
-    font-size: 0.9em;
-    background-color: var(--abstract-bg);
-    border: 1px solid var(--abstract-border);
-    max-width: 80%;
+	font-size: 0.9em;
+	background-color: var(--abstract-bg);
+	border: 1px solid var(--abstract-border);
+	max-width: 70%;
+	margin: 15vh auto;
   }
 
   &.abstract::before {
-    content: "Abstract";
-    position: absolute;
-    top: calc(-1 * (1em + 1px + 0.75em));
-    right: 0;
-    font-size: 0.75em;
-    color: var(--annotation);
+	content: "Abstract";
+	position: absolute;
+	top: calc(-1 * (1em + 1px + 0.75em));
+	right: 0;
+	font-size: 0.75em;
+	color: var(--annotation);
   }
 
   &.definition {
-    background-color: var(--definition-bg);
-    border: 1px solid var(--definition-border);
+	background-color: var(--definition-bg);
+	border: 1px solid var(--definition-border);
   }
 
   &.definition::before {
-    content: "Definition";
-    position: absolute;
-    top: calc(-1 * (1em + 1px + 0.75em));
-    right: 0;
-    font-size: 0.75em;
-    color: var(--annotation);
+	content: "Definition";
+	position: absolute;
+	top: calc(-1 * (1em + 1px + 0.75em));
+	right: 0;
+	font-size: 0.75em;
+	color: var(--annotation);
   }
 
   &.note {
-    background-color: var(--note-bg);
-    border: 1px solid var(--note-border);
+	background-color: var(--note-bg);
+	border: 1px solid var(--note-border);
   }
 
   &.note::before {
-    content: "Note";
-    position: absolute;
-    top: calc(-1 * (1em + 1px + 0.75em));
-    right: 0;
-    font-size: 0.75em;
-    color: var(--annotation);
+	content: "Note";
+	position: absolute;
+	top: calc(-1 * (1em + 1px + 0.75em));
+	right: 0;
+	font-size: 0.75em;
+	color: var(--annotation);
   }
 
   &.algorithm {
-    background-color: var(--algorithm-bg);
-    border: 1px solid var(--algorithm-border);
+	background-color: var(--algorithm-bg);
+	border: 1px solid var(--algorithm-border);
   }
 
   &.algorithm::before {
-    content: "Algorithm";
-    position: absolute;
-    top: calc(-1 * (1em + 1px + 0.75em));
-    right: 0;
-    font-size: 0.75em;
-    color: var(--annotation);
+	content: "Algorithm";
+	position: absolute;
+	top: calc(-1 * (1em + 1px + 0.75em));
+	right: 0;
+	font-size: 0.75em;
+	color: var(--annotation);
   }
 }
 
@@ -327,7 +332,8 @@ a:hover {
 
 code,
 pre {
-  font-family: "Victor Mono";
+	font-family: "Mono";
+	font-size: 0.9em;
   border-radius: var(--radius);
 }
 
@@ -338,12 +344,16 @@ code {
 }
 
 pre {
-  margin-bottom: 1rem;
+	margin-bottom: 1rem;
+	overflow-x: auto;
 }
 
 em,
 strong {
   font-style: italic;
+}
+
+strong {
   font-weight: bold;
 }
 
@@ -360,12 +370,12 @@ blockquote {
   border: 1px solid var(--quote-border);
 
   &::before {
-    content: "Quote";
-    position: absolute;
-    top: calc(-1 * (1em + 1px + 0.75em));
-    right: 0;
-    font-size: 0.75em;
-    color: var(--annotation);
+	content: "Quote";
+	position: absolute;
+	top: calc(-1 * (1em + 1px + 0.75em));
+	right: 0;
+	font-size: 0.75em;
+	color: var(--annotation);
   }
 }
 
@@ -471,7 +481,7 @@ aside p {
 }
 
 .keyword {
-  font-family: "Victor Mono";
+  font-family: "Mono";
   padding: 0 0.2em;
   margin-right: 0.5em;
   color: var(--main-bg);
@@ -481,66 +491,69 @@ aside p {
   font-size: 0.75em;
 
   &.todo {
-    background-color: var(--kw-todo);
+	background-color: var(--kw-todo);
   }
 
   &.todo::before {
-    content: "todo";
+	content: "todo";
   }
 
   &.doing {
-    background-color: var(--kw-doing);
+	background-color: var(--kw-doing);
   }
 
   &.doing::before {
-    content: "doing";
+	content: "doing";
   }
 
   &.waiting {
-    background-color: var(--kw-waiting);
+	background-color: var(--kw-waiting);
   }
 
   &.waiting::before {
-    content: "waiting";
+	content: "waiting";
   }
 
   &.done {
-    background-color: var(--kw-done);
+	background-color: var(--kw-done);
   }
 
   &.done::before {
-    content: "done";
+	content: "done";
   }
 
   &.failed {
-    background-color: var(--kw-failed);
+	background-color: var(--kw-failed);
   }
 
   &.failed::before {
-    content: "failed";
+	content: "failed";
   }
 }
 
 @media (max-width: 800px) {
   body {
-      margin: 0;
-      font-size: 14px;	  
+	  margin: 0;
+	  font-size: 16px;
   }
 
   main {
-    padding: 0.5rem;
+	padding: 0.5rem;
   }
 
   .topbar {
-    margin-bottom: 2rem;
+	margin-bottom: 2rem;
   }
 
   #table-of-content {
-    display: none;
+	display: none;
+  }
+
+  .cartridge.abstract {
+		max-width: 80%;
   }
 
   aside {
-    display: none;
-  }  
+	display: none;
+  }
 }
-
