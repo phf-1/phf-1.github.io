@@ -14,63 +14,78 @@
 	<link rel="manifest" href="/site.webmanifest">
 	<link rel="canonical" href="https://phfrohring.com/">
 	<link rel="stylesheet" href="/css/main.css">
-	<script defer src="/js/highlight/highlight.min.js"></script>
-	<script defer src="/main.min.js"></script>
+	<script defer type="module" src="/js/main.min.js"></script>
   </head>
   <body>
 	<main id="main">
 	  <article id="content">
-		<div class="topbar"><div class="actions"><button class="button" onclick="toggle_toc()">toggle TOC</button></div><nav class="navbar" id="navbar"><a class="button" href="/">home</a></nav></div>
+		<div class="topbar"><div class="actions"><button id="toggle_toc_btn" class="button">toggle TOC</button></div><nav class="navbar" id="navbar"><a class="button" href="/">home</a></nav></div>
 
-		<!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
-<!-- :ID: 101e3f53-f9e2-465a-a0e3-d0685b8e4f21 -->
+		<section>
+  <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
+  <!-- :ID: 101e3f53-f9e2-465a-a0e3-d0685b8e4f21 -->
+  <h1 class="title">Actor</h1>
 
-<h1 class="title">Actor</h1>
+  <section>
+	<h2>Interface</h2>
 
-<h2>Interfaces</h2>
+	<p>Each section matches a type of message and has a predefined algorithm that may compute an answer.</p>
 
-<p>Each section matches a type of message and has a predefined algorithm that may compute an answer.</p>
+	<section>
+	  <h3>Objective?</h3>
 
-<h3>Objective?</h3>
+	  <p>The result should be: …</p>
+	</section>
 
-<p>The result should be: …</p>
+	<section>
+	  <h3>Result?</h3>
 
-<h3>Result?</h3>
+	  <p>The result so far is: …</p>
+	</section>
+  </section>
 
-<p>The result so far is: …</p>
+  <hr />
 
-<hr />
+  <section>
+	<h2>State</h2>
 
-<h2>State</h2>
+	<p>Data used to compute answers.   </p>
+  </section>
 
-Data used to compute answers.
+  <section>
+	<h2>Context</h2>
 
-<h2>Context</h2>
+	<p>The objectives pursued in order, bottom to top. An objective may be tagged with a keyword.<span class="keyword done"></span>keyword is ommitted to prevent noise.</p>
+	<ol>
+	  <li><span class="keyword todo"></span>Means « yet to be done ».</li>
+	  <li><span class="keyword doing"></span>Means « a result is being built ».</li>
+	  <li><span class="keyword waiting"></span>Means « waiting for an other actor response ».</li>
+	  <li><span class="keyword done"></span>Means « a result has been built and it satisfies the objective ».</li>
+	  <li><span class="keyword failed"></span>Means « a result — if any — has been built and it does not satisfy the objective ».</li>
+	</ol>
 
-<p>The objectives pursued in order, bottom to top. An objective may be tagged with a keyword.<span class="keyword done"></span>keyword is ommitted to prevent noise.</p>
-<ol>
-  <li><span class="keyword todo"></span>Means « yet to be done ».</li>
-  <li><span class="keyword doing"></span>Means « a result is being built ».</li>
-  <li><span class="keyword waiting"></span>Means « waiting for an other actor response ».</li>
-  <li><span class="keyword done"></span>Means « a result has been built and it satisfies the objective ».</li>
-  <li><span class="keyword failed"></span>Means « a result — if any — has been built and it does not satisfy the objective ».</li>
-</ol>
+	<section>
+	  <h3><span class="keyword todo"></span>An objective.</h3>
+	  <a href="https://example.com">A result.</a>
+	</section>
+  </section>
 
-<h3><span class="keyword todo"></span>An objective.</h3>
+  <section>
+	<h2>Message</h2>
 
-<a href="https://example.com">A result.</a>
+	<p>Messages waiting to be processed, bottom to top. A message may or may not match an interface. New interfaces, states, and objectives may be added to the actor to react to a message.</p>
 
-<h2>Message</h2>
-
-<p>Messages waiting to be processed, bottom to top. A message may or may not match an interface. New interfaces, states, and objectives may be added to the actor to react to a message.</p>
-
-<h3>A message</h3>
+	<section>
+	  <h3>A message</h3>
+	</section>
+  </section>
+</section>
 
 
 		<hr />
 
 		<footer>
-		  <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://phfrohring.com">Pierre-Henry Fröhring</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+		  <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://phfrohring.com">Pierre-Henry <span class="small-caps">fröhring</span></a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
 		</footer>
 	  </article>
 	</main>
