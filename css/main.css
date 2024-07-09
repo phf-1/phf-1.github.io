@@ -221,16 +221,36 @@ main {
   position: relative;
   width: 70ch;
   border: 1px solid var(--annotation);
-  padding: 1rem 1.5rem;
+  border-top: none;
+  padding-bottom: 1rem;
   margin-bottom: 33vh;
+}
+#container #content .topbar {
+  z-index: 1;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--annotation);
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--annotation);
+  margin-bottom: 2rem;
+  background-color: var(--main-bg);
+}
+#container #content .padding {
+  padding: 0 1.5rem;
 }
 #container #table-of-content {
   display: none;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   padding: 1rem 0.5rem 1rem 0.5rem;
-  max-width: 40ch;
   border-top: 1px solid var(--annotation);
-  border-right: 1px solid var(--annotation);
-  border-bottom: 1px solid var(--annotation);
+  max-width: 40ch;
+  max-height: 100vh;
+  overflow-y: auto;
 }
 #container #table-of-content h1 {
   display: none;
@@ -269,13 +289,6 @@ main {
 #container #table-of-content::before {
   content: "Contents";
   color: var(--heading);
-}
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--annotation);
-  margin-bottom: 2rem;
 }
 .button {
   font-family: "Mono" !important;
@@ -407,6 +420,18 @@ p {
 }
 .cartridge.algorithm::before {
   content: "Algorithm";
+  position: absolute;
+  top: calc(-1 * (1em + 1px + 0.75em));
+  right: 0;
+  font-size: 0.75em;
+  color: var(--annotation);
+}
+.cartridge.math {
+  background-color: var(--algorithm-bg);
+  border: 1px solid var(--algorithm-border);
+}
+.cartridge.math::before {
+  content: "Math";
   position: absolute;
   top: calc(-1 * (1em + 1px + 0.75em));
   right: 0;
