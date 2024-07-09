@@ -221,6 +221,7 @@ main {
   width: 70ch;
   border: 1px solid var(--annotation);
   padding: 1rem 1.5rem;
+  margin-bottom: 33vh;
 }
 #container #table-of-content {
   display: none;
