@@ -170,7 +170,7 @@ html {
   font-kerning: normal;
 }
 body {
-  margin: 1rem;
+  margin: 0 1rem;
 }
 main {
   position: relative;
@@ -180,7 +180,7 @@ main {
   flex-direction: column;
   align-items: center;
 }
-.bg-image {
+#bg-image {
   display: block;
   overflow-y: clip;
   width: 100%;
@@ -193,7 +193,8 @@ main {
   z-index: -1;
   text-align: center;
 }
-.bg-image img {
+#bg-image #bg-image-img {
+  position: relative;
   border: none;
   margin: 0;
   padding: 0;
@@ -201,7 +202,7 @@ main {
 }
 #container {
   position: absolute;
-  top: 18vh;
+  top: 35vh;
   display: flex;
   justify-content: center;
   background-color: var(--main-bg);
@@ -637,7 +638,7 @@ aside p {
   display: none;
 }
 @media (max-width: 1000px) {
-  .bg-image {
+  #bg-image {
     display: none;
   }
   #container {
