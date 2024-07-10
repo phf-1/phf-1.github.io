@@ -170,6 +170,7 @@ html {
   font-kerning: normal;
 }
 body {
+  visibility: hidden;
   margin: 0 1rem;
 }
 main {
@@ -202,8 +203,9 @@ main {
   border-radius: 0;
 }
 #container {
+  visibility: hidden;
   position: absolute;
-  top: 35vh;
+  top: 0;
   display: flex;
   justify-content: center;
 }
@@ -684,7 +686,7 @@ aside p {
     font-size: 16px;
   }
   main {
-    padding: 0.5rem;
+    padding: 0.25rem;
   }
   .topbar {
     margin-bottom: 2rem;
