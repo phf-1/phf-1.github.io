@@ -130,14 +130,22 @@ code.hljs {
   --note-border: #33691e;
   --abstract-bg: #f3e5f5;
   --abstract-border: #4a148c;
-  --definition-bg: #eceff1;
-  --definition-border: #263238;
-  --example-bg: #FBE9E7;
-  --example-border: #BF360C;
+  --example-bg: #eceff1;
+  --example-border: #263238;
+  --definition-bg: #FBE9E7;
+  --definition-border: #BF360C;
   --quote-bg: #fff3e0;
   --quote-border: #e65100;
   --aside-border: #1b5e20;
   --aside-bg: #e8f5e9;
+  --objective-bg: var(--definition-bg);
+  --objective-border: var(--definition-border);
+  --result-bg: var(--example-bg);
+  --result-border: var(--example-border);
+  --method-bg: var(--algorithm-bg);
+  --method-border: var(--algorithm-border);
+  --context-bg: #f1f8e9;
+  --context-border: #33691e;
   --link: #007acc;
   --code: #ddd;
   --hr: #ddd;
@@ -157,6 +165,7 @@ code.hljs {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  scroll-margin-top: 4.5rem;
 }
 html {
   font-family: "Serif";
@@ -384,11 +393,34 @@ p {
 }
 .cartridge.abstract::before {
   content: "Abstract";
-  position: absolute;
-  top: calc(-1 * (1em + 1px + 0.75em));
-  right: 0;
-  font-size: 0.75em;
-  color: var(--annotation);
+}
+.cartridge.objective {
+  background-color: var(--objective-bg);
+  border-color: var(--objective-border);
+}
+.cartridge.objective::before {
+  content: "Objective";
+}
+.cartridge.result {
+  background-color: var(--result-bg);
+  border-color: var(--result-border);
+}
+.cartridge.result::before {
+  content: "Result";
+}
+.cartridge.method {
+  background-color: var(--method-bg);
+  border-color: var(--method-border);
+}
+.cartridge.method::before {
+  content: "Method";
+}
+.cartridge.context {
+  background-color: var(--context-bg);
+  border-color: var(--context-border);
+}
+.cartridge.context::before {
+  content: "Context";
 }
 .cartridge.definition {
   background-color: var(--definition-bg);
@@ -396,11 +428,6 @@ p {
 }
 .cartridge.definition::before {
   content: "Definition";
-  position: absolute;
-  top: calc(-1 * (1em + 1px + 0.75em));
-  right: 0;
-  font-size: 0.75em;
-  color: var(--annotation);
 }
 .cartridge.note {
   background-color: var(--note-bg);
@@ -408,11 +435,6 @@ p {
 }
 .cartridge.note::before {
   content: "Note";
-  position: absolute;
-  top: calc(-1 * (1em + 1px + 0.75em));
-  right: 0;
-  font-size: 0.75em;
-  color: var(--annotation);
 }
 .cartridge.algorithm {
   background-color: var(--algorithm-bg);
@@ -420,11 +442,6 @@ p {
 }
 .cartridge.algorithm::before {
   content: "Algorithm";
-  position: absolute;
-  top: calc(-1 * (1em + 1px + 0.75em));
-  right: 0;
-  font-size: 0.75em;
-  color: var(--annotation);
 }
 .cartridge.math {
   background-color: var(--algorithm-bg);
@@ -432,11 +449,6 @@ p {
 }
 .cartridge.math::before {
   content: "Math";
-  position: absolute;
-  top: calc(-1 * (1em + 1px + 0.75em));
-  right: 0;
-  font-size: 0.75em;
-  color: var(--annotation);
 }
 .cartridge.example {
   background-color: var(--example-bg);
@@ -444,6 +456,9 @@ p {
 }
 .cartridge.example::before {
   content: "Example";
+}
+.cartridge::before {
+  content: "Cartridge";
   position: absolute;
   top: calc(-1 * (1em + 1px + 0.75em));
   right: 0;
@@ -491,12 +506,7 @@ blockquote {
   border-color: var(--quote-border) !important;
 }
 blockquote::before {
-  content: "Quote";
-  position: absolute;
-  top: calc(-1 * (1em + 1px + 0.75em));
-  right: 0;
-  font-size: 0.75em;
-  color: var(--annotation);
+  content: "Quote" !important;
 }
 blockquote footer {
   text-align: right;
