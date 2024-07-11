@@ -1,76 +1,3 @@
-/* css/highlight/atom-one-dark.min.css */
-pre code.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 1em;
-}
-code.hljs {
-  padding: 3px 5px;
-}
-.hljs {
-  color: #abb2bf;
-  background: #282c34;
-}
-.hljs-comment,
-.hljs-quote {
-  color: #5c6370;
-  font-style: italic;
-}
-.hljs-doctag,
-.hljs-formula,
-.hljs-keyword {
-  color: #c678dd;
-}
-.hljs-deletion,
-.hljs-name,
-.hljs-section,
-.hljs-selector-tag,
-.hljs-subst {
-  color: #e06c75;
-}
-.hljs-literal {
-  color: #56b6c2;
-}
-.hljs-addition,
-.hljs-attribute,
-.hljs-meta .hljs-string,
-.hljs-regexp,
-.hljs-string {
-  color: #98c379;
-}
-.hljs-attr,
-.hljs-number,
-.hljs-selector-attr,
-.hljs-selector-class,
-.hljs-selector-pseudo,
-.hljs-template-variable,
-.hljs-type,
-.hljs-variable {
-  color: #d19a66;
-}
-.hljs-bullet,
-.hljs-link,
-.hljs-meta,
-.hljs-selector-id,
-.hljs-symbol,
-.hljs-title {
-  color: #61aeee;
-}
-.hljs-built_in,
-.hljs-class .hljs-title,
-.hljs-title.class_ {
-  color: #e6c07b;
-}
-.hljs-emphasis {
-  font-style: italic;
-}
-.hljs-strong {
-  font-weight: 700;
-}
-.hljs-link {
-  text-decoration: underline;
-}
-
 /* css/font.css */
 @font-face {
   font-family: "Serif";
@@ -112,13 +39,6 @@ code.hljs {
 /* css/main.css */
 :root {
   --font-size: 18px;
-  --font-h-factor: 1.15;
-  --h6-size: calc(var(--font-size) * var(--font-h-factor));
-  --h5-size: calc(var(--h6-size) * var(--font-h-factor));
-  --h4-size: calc(var(--h5-size) * var(--font-h-factor));
-  --h3-size: calc(var(--h4-size) * var(--font-h-factor));
-  --h2-size: calc(var(--h3-size) * var(--font-h-factor));
-  --h1-size: calc(var(--h2-size) * var(--font-h-factor));
   --title-font-size: 2rem;
   --main-bg: #fffff8;
   --main-text: #111111;
@@ -144,6 +64,8 @@ code.hljs {
   --result-border: var(--example-border);
   --method-bg: var(--algorithm-bg);
   --method-border: var(--algorithm-border);
+  --math-bg: var(--algorithm-bg);
+  --math-border: var(--algorithm-border);
   --context-bg: #f1f8e9;
   --context-border: #33691e;
   --link: #007acc;
@@ -160,6 +82,89 @@ code.hljs {
   --button-over: #fffff0;
   --p-margin-bottom: calc(var(--line-height) * 1em);
   --sep-margin: 4rem;
+  --x-keyword-color: var(--main-bg);
+  --x-h1-font-size: var(--title-font-size);
+  --x-h1-margin: 10vh;
+  --x-h1-font-family: "Sans";
+  --x-h1-font-weight: 400;
+  --x-h1-color: var(--heading);
+  --x-h2-font-size: 1.2rem;
+  --x-h2-font-family: "Sans";
+  --x-h2-color: var(--heading);
+  --x-h3-font-size: 1.2rem;
+  --x-h3-font-family: "Sans";
+  --x-h3-color: var(--heading);
+  --x-h4-font-size: 1.2rem;
+  --x-h4-font-family: "Sans";
+  --x-h4-color: var(--heading);
+  --x-h5-font-size: 1.2rem;
+  --x-h5-font-family: "Sans";
+  --x-h5-color: var(--heading);
+  --x-h6-font-size: 1.2rem;
+  --x-h6-font-family: "Sans";
+  --x-h6-color: var(--heading);
+  --x-cartridge-margin: var(--sep-margin);
+  --x-cartridge-bg-color: var(--cartridge-bg);
+  --x-cartridge-border-color: var(--annotation);
+  --x-cartridge-annotation-color: var(--annotation);
+  --x-blockquote-border-color: var(--quote-border);
+  --x-blockquote-color: var(--main-text);
+  --x-blockquote-bg-color: var(--quote-bg);
+  --x-blockquote-annotation-color: var(--annotation);
+  --x-note-border-color: var(--note-border);
+  --x-note-color: var(--main-text);
+  --x-note-margin: var(--sep-margin);
+  --x-note-bg-color: var(--note-bg);
+  --x-note-annotation-color: var(--annotation);
+  --x-objective-border-color: var(--objective-border);
+  --x-objective-color: var(--main-text);
+  --x-objective-margin: var(--sep-margin);
+  --x-objective-bg-color: var(--objective-bg);
+  --x-objective-annotation-color: var(--annotation);
+  --x-result-border-color: var(--result-border);
+  --x-result-color: var(--main-text);
+  --x-result-margin: var(--sep-margin);
+  --x-result-bg-color: var(--result-bg);
+  --x-result-annotation-color: var(--annotation);
+  --x-method-border-color: var(--method-border);
+  --x-method-color: var(--main-text);
+  --x-method-margin: var(--sep-margin);
+  --x-method-bg-color: var(--method-bg);
+  --x-method-annotation-color: var(--annotation);
+  --x-context-border-color: var(--context-border);
+  --x-context-color: var(--main-text);
+  --x-context-margin: var(--sep-margin);
+  --x-context-bg-color: var(--context-bg);
+  --x-context-annotation-color: var(--annotation);
+  --x-algorithm-border-color: var(--algorithm-border);
+  --x-algorithm-color: var(--main-text);
+  --x-algorithm-margin: var(--sep-margin);
+  --x-algorithm-bg-color: var(--algorithm-bg);
+  --x-algorithm-annotation-color: var(--annotation);
+  --x-definition-border-color: var(--definition-border);
+  --x-definition-color: var(--main-text);
+  --x-definition-margin: var(--sep-margin);
+  --x-definition-bg-color: var(--definition-bg);
+  --x-definition-annotation-color: var(--annotation);
+  --x-example-border-color: var(--example-border);
+  --x-example-color: var(--main-text);
+  --x-example-margin: var(--sep-margin);
+  --x-example-bg-color: var(--example-bg);
+  --x-example-annotation-color: var(--annotation);
+  --x-blockmath-border-color: var(--algorithm-border);
+  --x-blockmath-color: var(--main-text);
+  --x-blockmath-margin: var(--sep-margin);
+  --x-blockmath-bg-color: var(--algorithm-bg);
+  --x-blockmath-annotation-color: var(--annotation);
+  --x-abstract-bg-color: var(--abstract-bg);
+  --x-abstract-border-color: var(--abstract-border);
+  --x-abstract-annotation-color: var(--annotation);
+  --x-keyword-bg-color: var(--main-text);
+  --x-todo-bg-color: var(--kw-todo);
+  --x-doing-bg-color: var(--kw-doing);
+  --x-waiting-bg-color: var(--kw-waiting);
+  --x-failed-bg-color: var(--kw-failed);
+  --x-done-bg-color: var(--kw-done);
 }
 * {
   box-sizing: border-box;
@@ -190,6 +195,21 @@ main {
   flex-direction: column;
   align-items: center;
 }
+#container {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+}
+#container #content {
+  position: relative;
+  width: 70ch;
+  border: 1px solid var(--annotation);
+  padding: 0 1.5rem 1rem 1.5rem;
+  margin-bottom: 33vh;
+  background-color: var(--main-bg);
+}
 #bg-image {
   display: block;
   overflow-y: clip;
@@ -210,80 +230,6 @@ main {
   padding: 0;
   width: 100%;
   border-radius: 0;
-}
-#container {
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  display: flex;
-  justify-content: center;
-}
-#container #content section:has(h1, h2, h3, h4, h5, h6) {
-  padding-left: 1rem;
-}
-#container #content > section:has(h1) > section:has(h2) {
-  padding-left: 0;
-}
-#container #content > section:has(h1) {
-  padding-left: 0;
-}
-#container #content {
-  position: relative;
-  width: 70ch;
-  border: 1px solid var(--annotation);
-  padding: 0 1.5rem 1rem 1.5rem;
-  margin-bottom: 33vh;
-  background-color: var(--main-bg);
-}
-#container #table-of-content {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  margin-top: 1px;
-  display: none;
-  padding: 1rem 0.5rem 1rem 0.5rem;
-  max-width: 40ch;
-  max-height: 100vh;
-  overflow-y: auto;
-  background-color: var(--main-bg);
-}
-#container #table-of-content h1 {
-  display: none;
-}
-#container #table-of-content h2,
-#container #table-of-content h3,
-#container #table-of-content h4,
-#container #table-of-content h5,
-#container #table-of-content h6 {
-  text-align: left;
-  font-size: 0.9rem;
-  font-weight: normal;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
-  margin-bottom: 0.5em;
-  color: var(--main-text);
-  display: block;
-  border: none;
-}
-#container #table-of-content h2 {
-  margin-left: 0em;
-}
-#container #table-of-content h3 {
-  margin-left: 1em;
-}
-#container #table-of-content h4 {
-  margin-left: 2em;
-}
-#container #table-of-content h5 {
-  margin-left: 3em;
-}
-#container #table-of-content h6 {
-  margin-left: 4rem;
-}
-#container #table-of-content::before {
-  content: "Contents";
-  color: var(--heading);
 }
 .topbar {
   position: -webkit-sticky;
@@ -327,40 +273,6 @@ main {
 .button:-webkit-details-marker {
   display: none;
 }
-section > h1 {
-  font-size: var(--title-font-size);
-  display: block;
-  text-align: center;
-  border-bottom: none;
-  margin: 10vh auto;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  display: table;
-  padding-top: 1rem;
-  font-size: 1.2rem;
-  line-height: 1.2;
-  padding-bottom: 0.1em;
-  border-bottom: 1px solid currentColor;
-  margin-bottom: 1.2rem;
-  font-family: "Sans";
-  font-weight: normal;
-  color: var(--heading);
-}
-.small-caps {
-  font-variant: small-caps;
-  font-size: 1.2em;
-}
-.all-small-caps {
-  font-variant: all-small-caps;
-}
-hr + * {
-  padding-top: 0;
-}
 .navbar {
   text-align: end;
   font-size: 0.9rem;
@@ -369,101 +281,72 @@ hr + * {
   justify-content: center;
   align-items: center;
 }
+#table-of-content {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  margin-top: 1px;
+  display: none;
+  padding: 1rem 0.5rem 1rem 0.5rem;
+  max-width: 40ch;
+  max-height: 100vh;
+  overflow-y: auto;
+  background-color: var(--main-bg);
+}
+#table-of-content h1 {
+  display: none;
+}
+#table-of-content h2,
+#table-of-content h3,
+#table-of-content h4,
+#table-of-content h5,
+#table-of-content h6 {
+  font-family: "Sans";
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: normal;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 0.5em;
+  color: var(--main-text);
+  display: block;
+  border: none;
+}
+#table-of-content h2 {
+  margin-left: 0em;
+}
+#table-of-content h3 {
+  margin-left: 1em;
+}
+#table-of-content h4 {
+  margin-left: 2em;
+}
+#table-of-content h5 {
+  margin-left: 3em;
+}
+#table-of-content h6 {
+  margin-left: 4rem;
+}
+#table-of-content::before {
+  content: "Contents";
+  color: var(--heading);
+}
+footer {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--main-text);
+  margin-top: 2rem;
+}
 p {
   margin-bottom: var(--p-margin-bottom);
 }
-.cartridge {
-  position: relative;
-  width: 100%;
-  margin: var(--sep-margin) auto;
-  padding: 1rem;
-  border-radius: var(--radius);
-  border-top: 1px solid var(--annotation);
-  border-bottom: 1px solid var(--annotation);
+.all-small-caps {
+  font-variant: all-small-caps;
 }
-.cartridge *:last-child {
-  margin-bottom: 0;
-}
-.cartridge.abstract {
-  font-size: 0.9em;
-  background-color: var(--abstract-bg);
-  border-color: var(--abstract-border);
-  max-width: 70%;
-  margin: 15vh auto;
-}
-.cartridge.abstract::before {
-  content: "Abstract";
-}
-.cartridge.objective {
-  background-color: var(--objective-bg);
-  border-color: var(--objective-border);
-}
-.cartridge.objective::before {
-  content: "Objective";
-}
-.cartridge.result {
-  background-color: var(--result-bg);
-  border-color: var(--result-border);
-}
-.cartridge.result::before {
-  content: "Result";
-}
-.cartridge.method {
-  background-color: var(--method-bg);
-  border-color: var(--method-border);
-}
-.cartridge.method::before {
-  content: "Method";
-}
-.cartridge.context {
-  background-color: var(--context-bg);
-  border-color: var(--context-border);
-}
-.cartridge.context::before {
-  content: "Context";
-}
-.cartridge.definition {
-  background-color: var(--definition-bg);
-  border-color: var(--definition-border);
-}
-.cartridge.definition::before {
-  content: "Definition";
-}
-.cartridge.note {
-  background-color: var(--note-bg);
-  border-color: var(--note-border);
-}
-.cartridge.note::before {
-  content: "Note";
-}
-.cartridge.algorithm {
-  background-color: var(--algorithm-bg);
-  border-color: var(--algorithm-border);
-}
-.cartridge.algorithm::before {
-  content: "Algorithm";
-}
-.cartridge.math {
-  background-color: var(--algorithm-bg);
-  border-color: var(--algorithm-border);
-}
-.cartridge.math::before {
-  content: "Math";
-}
-.cartridge.example {
-  background-color: var(--example-bg);
-  border-color: var(--example-border);
-}
-.cartridge.example::before {
-  content: "Example";
-}
-.cartridge::before {
-  content: "Cartridge";
-  position: absolute;
-  top: calc(-1 * (1em + 1px + 0.75em));
-  right: 0;
-  font-size: 0.75em;
-  color: var(--annotation);
+.small-caps {
+  font-variant: small-caps;
+  font-size: 1.2em;
 }
 a {
   color: var(--link);
@@ -498,20 +381,6 @@ mark {
   background-color: var(--mark);
   border-radius: var(--radius);
   padding: 0 0.2em;
-}
-blockquote {
-  font-style: italic;
-  color: var(--main-text);
-  background-color: var(--quote-bg);
-  border-color: var(--quote-border) !important;
-}
-blockquote::before {
-  content: "Quote" !important;
-}
-blockquote footer {
-  text-align: right;
-  font-size: 0.875rem;
-  color: var(--main-text);
 }
 dl {
   margin-bottom: 1.5rem;
@@ -587,17 +456,14 @@ iframe {
   padding: 2px;
   border-radius: var(--radius);
 }
-footer {
-  text-align: center;
-  font-size: 0.875rem;
-  color: var(--main-text);
-  margin-top: 2rem;
-}
 hr {
   border: 0;
   height: 1px;
   background: var(--hr);
   margin: var(--sep-margin) 0;
+}
+hr + * {
+  padding-top: 0;
 }
 aside {
   width: 40%;
@@ -612,46 +478,6 @@ aside {
 }
 aside p {
   margin: 0;
-}
-.keyword {
-  font-family: "Mono";
-  padding: 0 0.2em;
-  margin-right: 0.5em;
-  color: var(--main-bg);
-  border-radius: var(--radius);
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 0.75em;
-}
-.keyword.todo {
-  background-color: var(--kw-todo);
-}
-.keyword.todo::before {
-  content: "todo";
-}
-.keyword.doing {
-  background-color: var(--kw-doing);
-}
-.keyword.doing::before {
-  content: "doing";
-}
-.keyword.waiting {
-  background-color: var(--kw-waiting);
-}
-.keyword.waiting::before {
-  content: "waiting";
-}
-.keyword.done {
-  background-color: var(--kw-done);
-}
-.keyword.done::before {
-  content: "done";
-}
-.keyword.failed {
-  background-color: var(--kw-failed);
-}
-.keyword.failed::before {
-  content: "failed";
 }
 .theorem {
   padding-left: 1rem;
@@ -673,6 +499,14 @@ aside p {
 .theorem .proof {
   background-color: green;
   display: none;
+}
+x-objective *:last-child,
+x-result *:last-child,
+x-method *:last-child,
+x-context *:last-child,
+x-definition *:last-child,
+x-abstract *:last-child {
+  margin-bottom: 0;
 }
 @media (max-width: 1000px) {
   body {
