@@ -40,6 +40,7 @@
 :root {
   --font-size: 18px;
   --title-font-size: 2rem;
+  --section-font-size: 1.1rem;
   --main-bg: #fffff8;
   --main-text: #111111;
   --heading: #b71c1c;
@@ -88,19 +89,19 @@
   --x-h1-font-family: "Sans";
   --x-h1-font-weight: 400;
   --x-h1-color: var(--heading);
-  --x-h2-font-size: 1.2rem;
+  --x-h2-font-size: var(--section-font-size);
   --x-h2-font-family: "Sans";
   --x-h2-color: var(--heading);
-  --x-h3-font-size: 1.2rem;
+  --x-h3-font-size: var(--section-font-size);
   --x-h3-font-family: "Sans";
   --x-h3-color: var(--heading);
-  --x-h4-font-size: 1.2rem;
+  --x-h4-font-size: var(--section-font-size);
   --x-h4-font-family: "Sans";
   --x-h4-color: var(--heading);
-  --x-h5-font-size: 1.2rem;
+  --x-h5-font-size: var(--section-font-size);
   --x-h5-font-family: "Sans";
   --x-h5-color: var(--heading);
-  --x-h6-font-size: 1.2rem;
+  --x-h6-font-size: var(--section-font-size);
   --x-h6-font-family: "Sans";
   --x-h6-color: var(--heading);
   --x-cartridge-margin: var(--sep-margin);
@@ -500,6 +501,7 @@ aside p {
   background-color: green;
   display: none;
 }
+x-example *:last-child,
 x-objective *:last-child,
 x-result *:last-child,
 x-method *:last-child,

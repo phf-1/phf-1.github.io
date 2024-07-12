@@ -36,65 +36,90 @@
 		<div id="content">
 		  <div class="topbar"><div class="actions"><button id="toggle_toc_btn" class="button">toggle TOC</button></div><nav class="navbar" id="navbar"><a class="button" href="/">home</a></nav></div>
 
-		  <section>
+		  <x-h1 name="Actor">
   <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
   <!-- :ID: 101e3f53-f9e2-465a-a0e3-d0685b8e4f21 -->
-  <h1>Actor</h1>
 
-  <section>
-	<h2>Interface</h2>
+  <x-h2 name="Objective">
+    <x-definition>
+      <p>An objective describes <strong>necessary</strong> conditions that an object should satisfy for the objective to be reached.</p>
+    </x-definition>
 
-	<p>Each section matches a type of message and has a predefined algorithm that may compute an answer.</p>
+    <x-example>
+      <p>The objective is to implement a function <x-math>f~: \N \to \N</x-math> such that <x-math>f(i) ≡ 2 \times i</x-math> in Python and in C.</p>
+    </x-example>
+  </x-h2>
 
-	<section>
-	  <h3>Objective</h3>
+  <x-h2 name="Result">
+    <x-definition>
+      <p>An result is an object that has been built <strong>so far</strong> to reach the objective.</p>
+    </x-definition>
 
-	  <p>The objective is: …</p>
-	</section>
+    <x-example>
+      <p>A Python implementation:</p>
+      <x-blockcode>
+def f(x):
+    return x * 2
+      </x-blockcode>
 
-	<section>
-	  <h3>Result</h3>
+      <p>A C implementation: <x-todo></x-todo></p>
+      <x-blockcode>
+#include &lt;limits.h&gt;
 
-	  <p>The result is: …</p>
-	</section>
-  </section>
+int a = &lt;something&gt;;
+int x = &lt;something&gt;;
+// There may be a need to check for -1 for two's complement machines.
+// If one number is -1 and another is INT_MIN, multiplying them we get abs(INT_MIN) which is 1 higher than INT_MAX
+if (a == -1 && x == INT_MIN) // `a * x` can overflow
+if (x == -1 && a == INT_MIN) // `a * x` (or `a / x`) can overflow
+// general case
+if (x != 0 && a &gt; INT_MAX / x) // `a * x` would overflow
+if (x != 0 && a &lt; INT_MIN / x) // `a * x` would underflow
+      </x-blockcode>
+    </x-example>
+  </x-h2>
 
-  <hr />
+  <x-h2 name="State">
+    <x-definition>
+      <p>Arbitrary computations <strong>encapsulated</strong> by the actor that are used to — among other things — produce the result.</p>
+    </x-definition>
 
-  <section>
-	<h2>State</h2>
+    <x-example>
+      <p>The result may be a <i>PDF</i> file that needs a compilation step from encapsulated source files. So, when the result should be produced, the actor may perform an computation <i>e.g.</i> <code>make pdf</code>.</p>
+    </x-example>
+  </x-h2>
 
-	<p>Data used to compute answers.   </p>
-  </section>
+  <x-h2 name="Context">
+    <x-definition>
+      <p>The context is a record of the <strong>steps</strong> taken by the actor in order to reach its objective. It is encapsulated. A <strong>step</strong> defines at least an objective and a result. A step may be in one of several states:</p>
+      <ol>
+        <li><x-todo></x-todo> Means « yet to be done ».</li>
+        <li><x-doing></x-doing> Means « a result is being built ».</li>
+        <li><x-waiting></x-waiting> Means « waiting for an other actor response ».</li>
+        <li><x-done></x-done> Means « a result has been built and it satisfies the objective ». (Often omitted to prevent noise.)</li>
+        <li><x-failed></x-failed> Means « a result — if any — has been built and it does not satisfy the objective ».</li>
+      </ol>
+    </x-definition>
 
-  <section>
-	<h2>Context</h2>
+    <x-example>
+      <x-h3 name="K&R has be assimilated." state="todo">
+        <a href="https://example.com">A result.</a>
+      </x-h3>
+    </x-example>
+  </x-h2>
 
-	<p>The objectives pursued in order, bottom to top. An objective may be tagged with a keyword.<span class="keyword done"></span>keyword is ommitted to prevent noise.</p>
-	<ol>
-	  <li><span class="keyword todo"></span>Means « yet to be done ».</li>
-	  <li><span class="keyword doing"></span>Means « a result is being built ».</li>
-	  <li><span class="keyword waiting"></span>Means « waiting for an other actor response ».</li>
-	  <li><span class="keyword done"></span>Means « a result has been built and it satisfies the objective ».</li>
-	  <li><span class="keyword failed"></span>Means « a result — if any — has been built and it does not satisfy the objective ».</li>
-	</ol>
+  <x-h2 name="Message">
+    <x-definition>
+       <p>A message is an arbitrary immutable piece of data that the actor may process whenever it can — like reading an email from a mailbox.</p>
+    </x-definition>
 
-	<section>
-	  <h3><span class="keyword todo"></span>An objective.</h3>
-	  <a href="https://example.com">A result.</a>
-	</section>
-  </section>
-
-  <section>
-	<h2>Message</h2>
-
-	<p>Messages waiting to be processed, bottom to top. A message may or may not match an interface. New interfaces, states, and objectives may be added to the actor to react to a message.</p>
-
-	<section>
-	  <h3>A message</h3>
-	</section>
-  </section>
-</section>
+    <x-example>
+      <x-h3 name="A message">
+        <p>content</p>
+      </x-h3>       
+    </x-example>
+  </x-h2>
+</x-h1>
 
 
 		  <hr />
