@@ -63,31 +63,31 @@
   <!-- :ID: 101e3f53-f9e2-465a-a0e3-d0685b8e4f21 -->
 
   <x-abstract>The definition of an <em>Actor</em> is refined.</x-abstract>
-  
-  <x-h2 name="Objective">
-    <x-definition>
-      <p>An objective describes <strong>necessary</strong> conditions that an object should satisfy for the objective to be reached.</p>
-    </x-definition>
 
-    <x-example>
-      <p>The objective is to implement a function <x-math>f~: \N \to \N</x-math> such that <x-math>f(i) ≡ 2 \times i</x-math> in Python and in C.</p>
-    </x-example>
+  <x-h2 name="Objective">
+	<x-definition>
+	  <p>An objective describes <strong>necessary</strong> conditions that an object should satisfy for the objective to be reached.</p>
+	</x-definition>
+
+	<x-example>
+	  <p>The objective is to implement a function <x-math>f~: \N \to \N</x-math> such that <x-math>f(i) ≡ 2 \times i</x-math> in Python and in C.</p>
+	</x-example>
   </x-h2>
 
   <x-h2 name="Result">
-    <x-definition>
-      <p>An result is an object that has been built <strong>so far</strong> to reach the objective.</p>
-    </x-definition>
+	<x-definition>
+	  <p>An result is an object that has been built <strong>so far</strong> to reach the objective.</p>
+	</x-definition>
 
-    <x-example>
-      <p>A Python implementation:</p>
-      <x-blockcode>
+	<x-example>
+	  <p>A Python implementation:</p>
+	  <x-blockcode>
 def f(x):
-    return x * 2
-      </x-blockcode>
+	return x * 2
+	  </x-blockcode>
 
-      <p>A C implementation: <x-todo></x-todo></p>
-      <x-blockcode>
+	  <p>A C implementation: <x-todo></x-todo></p>
+	  <x-blockcode>
 #include &lt;limits.h&gt;
 
 int a = &lt;something&gt;;
@@ -99,49 +99,49 @@ if (x == -1 && a == INT_MIN) // `a * x` (or `a / x`) can overflow
 // general case
 if (x != 0 && a &gt; INT_MAX / x) // `a * x` would overflow
 if (x != 0 && a &lt; INT_MIN / x) // `a * x` would underflow
-      </x-blockcode>
-    </x-example>
+	  </x-blockcode>
+	</x-example>
   </x-h2>
 
   <x-h2 name="State">
-    <x-definition>
-      <p>Arbitrary computations <strong>encapsulated</strong> by the actor that are used to — among other things — produce the result.</p>
-    </x-definition>
+	<x-definition>
+	  <p>Arbitrary computations <strong>encapsulated</strong> by the actor that are used to — among other things — produce the result.</p>
+	</x-definition>
 
-    <x-example>
-      <p>The result may be a <i>PDF</i> file that needs a compilation step from encapsulated source files. So, when the result should be produced, the actor may perform an computation <i>e.g.</i> <code>make pdf</code>.</p>
-    </x-example>
+	<x-example>
+	  <p>The result may be a <i>PDF</i> file that needs a compilation step from encapsulated source files. So, when the result should be produced, the actor may perform an computation <i>e.g.</i> <code>make pdf</code>.</p>
+	</x-example>
   </x-h2>
 
   <x-h2 name="Context">
-    <x-definition>
-      <p>The context is a record of the <strong>steps</strong> taken by the actor in order to reach its objective. It is encapsulated. A <strong>step</strong> defines at least an objective and a result. A step may be in one of several states:</p>
-      <ol>
-        <li><x-todo></x-todo> Means « yet to be done ».</li>
-        <li><x-doing></x-doing> Means « a result is being built ».</li>
-        <li><x-waiting></x-waiting> Means « waiting for an other actor response ».</li>
-        <li><x-done></x-done> Means « a result has been built and it satisfies the objective ». (Often omitted to prevent noise.)</li>
-        <li><x-failed></x-failed> Means « a result — if any — has been built and it does not satisfy the objective ».</li>
-      </ol>
-    </x-definition>
+	<x-definition>
+	  <p>The context is a record of the <strong>steps</strong> taken by the actor in order to reach its objective. It is encapsulated. A <strong>step</strong> defines at least an objective and a result. A step may be in one of several states:</p>
+	  <ol>
+		<li><x-todo></x-todo> Means « yet to be done ».</li>
+		<li><x-doing></x-doing> Means « a result is being built ».</li>
+		<li><x-waiting></x-waiting> Means « waiting for an other actor response ».</li>
+		<li><x-done></x-done> Means « a result has been built and it satisfies the objective ». (Often omitted to prevent noise.)</li>
+		<li><x-failed></x-failed> Means « a result — if any — has been built and it does not satisfy the objective ».</li>
+	  </ol>
+	</x-definition>
 
-    <x-example>
-      <x-h3 name="K&R has be assimilated." state="todo">
-        <a href="https://example.com">A result.</a>
-      </x-h3>
-    </x-example>
+	<x-example>
+	  <x-h3 name="K&R has be assimilated." state="todo">
+		<a href="https://example.com">A result.</a>
+	  </x-h3>
+	</x-example>
   </x-h2>
 
   <x-h2 name="Message">
-    <x-definition>
-       <p>A message is an arbitrary immutable piece of data that the actor may process whenever it can — like reading an email from a mailbox.</p>
-    </x-definition>
+	<x-definition>
+	   <p>A message is an arbitrary immutable piece of data that the actor may process whenever it can — like reading an email from a mailbox.</p>
+	</x-definition>
 
-    <x-example>
-      <x-h3 name="A message">
-        <p>content</p>
-      </x-h3>       
-    </x-example>
+	<x-example>
+	  <x-h3 name="A message">
+		<p>content</p>
+	  </x-h3>
+	</x-example>
   </x-h2>
 </x-h1>
 

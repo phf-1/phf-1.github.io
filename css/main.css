@@ -197,9 +197,7 @@ main {
   align-items: center;
 }
 #container {
-  visibility: hidden;
-  position: absolute;
-  top: 0;
+  position: relative;
   display: flex;
   justify-content: center;
 }
@@ -212,10 +210,9 @@ main {
   background-color: var(--main-bg);
 }
 #bg-image {
+  position: relative;
   display: block;
   overflow-y: clip;
-  width: 100%;
-  max-width: 1600px;
   aspect-ratio: 16 / 9;
   top: 0;
   left: 0;
@@ -223,6 +220,9 @@ main {
   padding: 0;
   z-index: -1;
   text-align: center;
+  border: 1px solid var(--annotation);
+  border-top: none;
+  border-radius: 0;
 }
 #bg-image #bg-image-img {
   position: relative;
@@ -488,6 +488,15 @@ aside {
 aside p {
   margin: 0;
 }
+x-example *:last-child,
+x-objective *:last-child,
+x-result *:last-child,
+x-method *:last-child,
+x-context *:last-child,
+x-definition *:last-child,
+x-abstract *:last-child {
+  margin-bottom: 0;
+}
 .theorem {
   padding-left: 1rem;
   background-color: blue;
@@ -508,15 +517,6 @@ aside p {
 .theorem .proof {
   background-color: green;
   display: none;
-}
-x-example *:last-child,
-x-objective *:last-child,
-x-result *:last-child,
-x-method *:last-child,
-x-context *:last-child,
-x-definition *:last-child,
-x-abstract *:last-child {
-  margin-bottom: 0;
 }
 @media (max-width: 1000px) {
   body {
