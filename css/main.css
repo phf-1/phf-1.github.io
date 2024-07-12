@@ -303,16 +303,24 @@ main {
 #table-of-content h5,
 #table-of-content h6 {
   font-family: "Sans";
-  text-align: left;
   font-size: 0.9rem;
+}
+#table-of-content h2 a,
+#table-of-content h3 a,
+#table-of-content h4 a,
+#table-of-content h5 a,
+#table-of-content h6 a {
+  padding: 0.1em;
+  margin-bottom: 0.4em;
   font-weight: normal;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
-  margin-bottom: 0.5em;
-  color: var(--main-text);
-  display: block;
-  border: none;
+  color: var(--link);
+}
+#table-of-content h2.highlight,
+#table-of-content h3.highlight,
+#table-of-content h4.highlight,
+#table-of-content h5.highlight,
+#table-of-content h6.highlight {
+  background-color: var(--algorithm-bg);
 }
 #table-of-content h2 {
   margin-left: 0em;
