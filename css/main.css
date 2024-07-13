@@ -80,7 +80,7 @@
   --kw-failed: var(--main-text);
   --line-height: 1.5;
   --annotation: #777;
-  --button-over: #fffff0;
+  --button-hover: #fffff0;
   --p-margin-bottom: calc(var(--line-height) * 1em);
   --sep-margin: 4rem;
   --img-shadow: 2px 2px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -113,6 +113,14 @@
   --x-blockquote-color: var(--main-text);
   --x-blockquote-bg-color: var(--quote-bg);
   --x-blockquote-annotation-color: var(--annotation);
+  --x-question-border-color: var(--quote-border);
+  --x-question-color: var(--main-text);
+  --x-question-bg-color: var(--quote-bg);
+  --x-question-annotation-color: var(--annotation);
+  --x-answer-border-color: var(--quote-border);
+  --x-answer-color: var(--main-text);
+  --x-answer-bg-color: var(--quote-bg);
+  --x-answer-annotation-color: var(--annotation);
   --x-note-border-color: var(--note-border);
   --x-note-color: var(--main-text);
   --x-note-margin: var(--sep-margin);
@@ -167,6 +175,11 @@
   --x-waiting-bg-color: var(--kw-waiting);
   --x-failed-bg-color: var(--kw-failed);
   --x-done-bg-color: var(--kw-done);
+  --x-link-color: var(--link);
+  --x-button-border: var(--annotation);
+  --x-button-color: var(--main-text);
+  --x-button-bg-color-hover: var(--button-hover);
+  --x-button-box-shadow: var(--img-shadow);
 }
 * {
   box-sizing: border-box;
@@ -267,8 +280,9 @@ main {
   font-size: 0.8rem;
 }
 .button:hover {
-  background-color: var(--button-over);
+  background-color: var(--button-hover);
   text-decoration: none;
+  box-shadow: var(--img-shadow);
   transition-duration: 0.1s;
 }
 .button:focus {
@@ -495,6 +509,8 @@ aside p {
   margin: 0;
 }
 x-example *:last-child,
+x-q *:last-child,
+x-a *:last-child,
 x-objective *:last-child,
 x-result *:last-child,
 x-method *:last-child,

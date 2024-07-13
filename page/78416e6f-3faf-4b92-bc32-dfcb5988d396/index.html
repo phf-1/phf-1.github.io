@@ -6,7 +6,7 @@
 		 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Hidden page." />
+    <meta name="description" content="Question and answers." />
     <title>Pierre-Henry Fröhring's Website</title>
     <link
       rel="apple-touch-icon"
@@ -29,9 +29,7 @@
     <link rel="canonical" href="https://phfrohring.com/" />
     <link rel="stylesheet" href="/css/main.css" />
     <style>
-      #bg-image-img {
-	top: -32%;
-}
+      __CSS__
     </style>
     <script defer type="module" src="/js/main.min.js"></script>
   </head>
@@ -60,28 +58,59 @@
             </nav>
           </div>
 
-          <x-h1 name="Hidden">
-  <ul>
-	<li><a href="/page/8960e1c9-07bc-406b-a993-02e7f87ac3b7/">Actor.</a></li>
-<li><a href="/page/4802e536-3c15-47d8-8cfd-6ac722b31e34/">Allegories.</a></li>
-<li><a href="/page/e336fbeb-9fe0-4d08-8f49-1ebe2f8ccbff/">Aphorisms.</a></li>
-<li><a href="/page/683167fe-478d-4f2b-9cb6-7ccb65f4c150/">Assertion, proof, theorem and certificate.</a></li>
-<li><a href="/page/02ac057f-34c3-458a-abb2-12cfdd832eb1/">Building a research paper.</a></li>
-<li><a href="/page/6b36d55c-c45c-45dd-86e1-0969941328e3/">Definition.</a></li>
-<li><a href="/page/5de8e859-2e7b-47b5-b9fd-a2dd3ccc80b0/">Generative A.I. and education.</a></li>
-<li><a href="/page/44d9d9f7-cf37-4fab-b8a9-91759ac9e6bd/">Health.</a></li>
-<li><a href="/page/8e11bcd7-a050-40d6-ab93-71bee0640990/">Hidden page.</a></li>
-<li><a href="/page/0948f377-3970-4396-af6e-13debc5d682c/">How to write a 21st century proof.</a></li>
-<li><a href="/page/dffb18eb-1a9c-4885-8207-0e4ceb9102e4/">Natural numbers.</a></li>
-<li><a href="/page/78416e6f-3faf-4b92-bc32-dfcb5988d396/">Question and answers.</a></li>
-<li><a href="/page/73f16a66-8b12-4ac2-95cb-57f01e7eeabf/">Sleep.</a></li>
-<li><a href="/page/00e566bf-0733-4e8b-9350-bc9df1221635/">Style test page</a></li>
-<li><a href="/page/3ed8bba6-c521-426a-8059-24b0e6b3d325/">Switzerland.</a></li>
-<li><a href="/page/446d8fdc-09a1-4dd6-afd5-906bb040733f/">The scientific method.</a></li>
-<li><a href="/page/76293b05-dc07-420c-9137-b800e3d83699/">Thinking in systems.</a></li>
-<li><a href="/page/abcca906-94c6-4abc-8a10-000872b215cd/">Website's manual.</a></li>
-<li><a href="/page/00000000-0000-0000-0000-000000000000/">Welcome page.</a></li>
-  </ul>
+          <x-h1 name="Question and answer">
+  <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
+  <!-- :ID: 78416e6f-3faf-4b92-bc32-dfcb5988d396 -->
+
+  <x-abstract>Where we refine adding question/answer capabilities to the website.</x-abstract>
+
+  <x-h2 name="Objective">
+	<ul>
+	  <li>The objective is to add an efficient way for the author to add question and answer capabilities to articles.</li>
+	  <li>The association between the question and the answer should be as clear for the author, the reader and the computer.</li>
+	  <li>The reader should have the answer hidden by default and should have the possibility to make it visible.</li>
+	  <li>For a given article, there should be a way to make all answers visible or hidden.</li>
+	</ul>
+  </x-h2>
+
+  <x-h2 name="Result">
+	<p>An author may add a question/answer element just as any other HTML element using this markup:</p>
+
+	<x-blockcode>
+&lt;x-qa&gt;
+  &lt;x-q id="UUID"&gt;
+    &lt;p&gt;Arbitrary markup for the question.&lt;/p&gt;
+  &lt;/x-q&gt;	  
+  &lt;x-a id="UUID"&gt;
+    &lt;p&gt;Arbitrary markup for the answer.&lt;/p&gt;
+  &lt;/x-a&gt;	  
+&lt;/x-qa&gt;	  
+	</x-blockcode>
+
+	<p>The <code>UUIDs</code> are generated: the author does not have to care about them. Rendered into the page, we have:</p>
+
+	<x-qa>
+	  <x-q id="4cbaf744-6f6c-4393-95cd-742031f37b48">
+	    <p>Arbitrary markup for the question.</p>
+	  </x-q>
+	  <x-a id="14175ebc-d24b-4bc9-993e-a09e86520bcb">
+	    <p>Arbitrary markup for the answer.</p>
+	  </x-a>
+	</x-qa>
+
+	<p>The association between question and answer is clear to:</p>
+	<ul>
+	  <li>the author since there is a <code>x-qa</code> markup that explicits the associations ;</li>
+	  <li>the reader since one appears just after the other and reacts to the <code>show</code> and <code>hide</code> buttons ;</li>
+	  <li>the computer since the <code>x-qa</code> markup is parsed where the first leaf is the question and others are answers. The association is made independant of human interpretations thanks to the UUIDs.</li>
+	</ul>	
+  </x-h2>
+
+  <x-h2 name="State"></x-h2>
+
+  <x-h2 name="Context"></x-h2>
+
+  <x-h2 name="Message"></x-h2>
 </x-h1>
 
 
