@@ -6,7 +6,7 @@
 		 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Guix and Elixir." />
+    <meta name="description" content="Actor." />
     <title>Pierre-Henry Fröhring's Website</title>
     <link
       rel="apple-touch-icon"
@@ -29,9 +29,7 @@
     <link rel="canonical" href="https://phfrohring.com/" />
     <link rel="stylesheet" href="/css/main.css" />
     <style>
-      #bg-image-img {
-	top: -44%;
-}
+      __CSS__
     </style>
     <script defer type="module" src="/js/main.min.js"></script>
   </head>
@@ -60,65 +58,90 @@
             </nav>
           </div>
 
-          <x-h1 name="Guix and Elixir build system">
+          <x-h1 name="Actor">
   <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
-  <!-- :ID: 7cbeef0f-6f18-41be-85fb-706ee226be2b -->
+  <!-- :ID: f099c7ad-1b70-4ae3-9cfa-4063ef8cef36 -->
 
-  <x-abstract>Where we try to build a build system in <a href="https://guix.gnu.org/">Guix</a> for Elixir.</x-abstract>
+  <x-abstract>The definition of an <em>Actor</em> is refined.</x-abstract>
 
   <x-h2 name="Objective">
-	<p>The objective is to implement a <a href="https://guix.gnu.org/manual/en/html_node/Build-Systems.html">Guix build system</a> for Elixir packages.</p>
-	<p>The objective is achieved if, given a correct <a href="https://guix.gnu.org/manual/en/guix.html#Defining-Packages">Guix package definition</a> for any package <code>pkg</code> on <a href="https://hex.pm/">Hex</a>, we have <code>guix install elixir-pkg</code> working as expected.</p>
+	<x-definition>
+	  <p>An objective describes <strong>necessary</strong> conditions that an object should satisfy for the objective to be reached.</p>
+	</x-definition>
+
+	<x-example>
+	  <p>The objective is to implement a function <x-math>f~: \N \to \N</x-math> such that <x-math>f(i) ≡ 2 \times i</x-math> in Python and in C.</p>
+	</x-example>
   </x-h2>
 
-  <x-h2 name="Result" state="todo">
+  <x-h2 name="Result">
+	<x-definition>
+	  <p>An result is an object that has been built <strong>so far</strong> to reach the objective.</p>
+	</x-definition>
 
+	<x-example>
+	  <p>A Python implementation:</p>
+	  <x-blockcode>
+def f(x):
+	return x * 2
+	  </x-blockcode>
+
+	  <p>A C implementation: <x-todo></x-todo></p>
+	  <x-blockcode>
+#include &lt;limits.h&gt;
+
+int a = &lt;something&gt;;
+int x = &lt;something&gt;;
+// There may be a need to check for -1 for two's complement machines.
+// If one number is -1 and another is INT_MIN, multiplying them we get abs(INT_MIN) which is 1 higher than INT_MAX
+if (a == -1 && x == INT_MIN) // `a * x` can overflow
+if (x == -1 && a == INT_MIN) // `a * x` (or `a / x`) can overflow
+// general case
+if (x != 0 && a &gt; INT_MAX / x) // `a * x` would overflow
+if (x != 0 && a &lt; INT_MIN / x) // `a * x` would underflow
+	  </x-blockcode>
+	</x-example>
   </x-h2>
 
   <x-h2 name="State">
+	<x-definition>
+	  <p>Arbitrary computations <strong>encapsulated</strong> by the actor that are used to — among other things — produce the result.</p>
+	</x-definition>
 
+	<x-example>
+	  <p>The result may be a <i>PDF</i> file that needs a compilation step from encapsulated source files. So, when the result should be produced, the actor may perform an computation <i>e.g.</i> <code>make pdf</code>.</p>
+	</x-example>
   </x-h2>
 
   <x-h2 name="Context">
-	<x-h3 name="There is a Guix build system for Erlang" state="waiting">
-	  <p>See: <a href="https://phfrohring.com/page/f099c7ad-1b70-4ae3-9cfa-4063ef8cef36">Guix and Erlang build system</a></p>
-	</x-h3>
-	
-	<x-h3 name="An Erlang build system is necessary">
-	  <p>Since Elixir packages may <a href="#b6811d91-f44a-406a-a459-af9948fc3c4d">depend</a> on Erlang packages, an Erlang build system is necessary to implement the Elixir build system.</p>
-	</x-h3>
+	<x-definition>
+	  <p>The context is a record of the <strong>steps</strong> taken by the actor in order to reach its objective. It is encapsulated. A <strong>step</strong> defines at least an objective and a result. A step may be in one of several states:</p>
+	  <ol>
+		<li><x-todo></x-todo> Means « yet to be done ».</li>
+		<li><x-doing></x-doing> Means « a result is being built ».</li>
+		<li><x-waiting></x-waiting> Means « waiting for an other actor response ».</li>
+		<li><x-done></x-done> Means « a result has been built and it satisfies the objective ». (Often omitted to prevent noise.)</li>
+		<li><x-failed></x-failed> Means « a result — if any — has been built and it does not satisfy the objective ».</li>
+	  </ol>
+	</x-definition>
 
-	<x-h3 name="An Elixir package may depend on a Erlang package" id="b6811d91-f44a-406a-a459-af9948fc3c4d">
-	  <p><code>phoenix 1.7</code> depends on <code>telemetry 1.2.1</code>.</p>
-	  <p><code>telemetry</code> is an Erlang package:</p>
-	  <x-blockcode>
-$ mix deps | rg telemetry
-* telemetry 1.2.1 (Hex package) (rebar3)
-  locked at 1.2.1 (telemetry) dad9ce9d
-	  </x-blockcode>
-	</x-h3>
-
-	<x-h3 name="Elixir package manager">
-	  <ul>
-	    <li>Hex is the <q>The package manager for the Erlang ecosystem</q>.</li>
-		<li>A package is an <a href="#d1789991-6e9d-4a02-a1ab-edb26da5be51">Elixir project</a> <a href="https://hex.pm/docs/publish#example-mixexs-file">published</a> on <a href="https://hex.pm/">hex.pm</a></li>
-	  </ul>
-	</x-h3>
-
-	<x-h3 name="Elixir Build System">
-	  <ul>
-	    <li>The Elixir build system is called <code>mix</code>.</li>
-		<li><code>mix</code> is an executable installed along with an <a href="https://elixir-lang.org/docs.html">Elixir install</a>.</li>
-		<li>One of the function of <code>mix</code> is to build a <a href="https://en.wikipedia.org/wiki/Object_code">object code</a> executable by the <a href="https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)">EVM</a> from <a href="https://hexdocs.pm/mix/1.17.2/Mix.html" id="d1789991-6e9d-4a02-a1ab-edb26da5be51">Elixir projects</a>.</li>
-		<li>This function is implemented by the <code>mix compile</code> command.</li>
-		<li>An other function is to test an Elixir project.</li>
-		<li>This function is implemented by the <code>mix test</code> command.</li>		
-	  </ul>
-	</x-h3>
+	<x-example>
+	  <x-h3 name="K&R has be assimilated." state="todo">
+		<a href="https://example.com">A result.</a>
+	  </x-h3>
+	</x-example>
   </x-h2>
 
   <x-h2 name="Message">
+	<x-definition>
+	   <p>A message is an arbitrary immutable piece of data that the actor may process whenever it can — like reading an email from a mailbox.</p>
+	</x-definition>
 
+	<x-example>
+	  <x-h3 name="A message">
+		<p>content</p>
+	  </x-h3>
+	</x-example>
   </x-h2>
 </x-h1>
 

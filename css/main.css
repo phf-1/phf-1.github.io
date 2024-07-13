@@ -387,7 +387,7 @@ a:hover {
 code,
 pre {
   font-family: "Mono";
-  font-size: 0.9em;
+  font-size: 0.80em;
   border-radius: var(--radius);
 }
 code {
