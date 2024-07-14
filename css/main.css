@@ -540,7 +540,7 @@ x-abstract *:last-child {
   background-color: green;
   display: none;
 }
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
   body {
     margin-top: 1rem;
   }

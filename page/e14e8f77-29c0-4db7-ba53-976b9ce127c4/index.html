@@ -6,7 +6,7 @@
 		 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Actor." />
+    <meta name="description" content="The Web and Images." />
     <title>Pierre-Henry Fröhring's Website</title>
     <link
       rel="apple-touch-icon"
@@ -57,90 +57,106 @@
             </nav>
           </div>
 
-          <x-h1 name="Actor">
+          <x-h1 name="An Image On The Web">
   <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
-  <!-- :ID: 101e3f53-f9e2-465a-a0e3-d0685b8e4f21 -->
+  <!-- :ID: e14e8f77-29c0-4db7-ba53-976b9ce127c4 -->
 
-  <x-abstract>The definition of an <em>Actor</em> is refined.</x-abstract>
+  <x-abstract>Where we try to make images look good independently of the hardware / browser.</x-abstract>
 
   <x-h2 name="Objective">
-    <x-definition>
-      <p>An objective describes <strong>necessary</strong> conditions that an object should satisfy for the objective to be reached.</p>
-    </x-definition>
-
-    <x-example>
-      <p>The objective is to implement a function <x-math>f~: \N \to \N</x-math> such that <x-math>f(i) ≡ 2 \times i</x-math> in Python and in C.</p>
-    </x-example>
+    <p>The objective is not have article images look good independently of the hardware and browser. The objective is achieved if images of an article that look good on the authoring machine also look good on any other machine, if displayed at all.</p>
   </x-h2>
 
-  <x-h2 name="Result">
-    <x-definition>
-      <p>An result is an object that has been built <strong>so far</strong> to reach the objective.</p>
-    </x-definition>
-
-    <x-example>
-      <p>A Python implementation:</p>
-      <x-blockcode>
-def f(x):
-return x * 2
-      </x-blockcode>
-
-      <p>A C implementation: <x-todo></x-todo></p>
-      <x-blockcode>
-#include &lt;limits.h&gt;
-
-int a = &lt;something&gt;;
-int x = &lt;something&gt;;
-// There may be a need to check for -1 for two's complement machines.
-// If one number is -1 and another is INT_MIN, multiplying them we get abs(INT_MIN) which is 1 higher than INT_MAX
-if (a == -1 && x == INT_MIN) // `a * x` can overflow
-if (x == -1 && a == INT_MIN) // `a * x` (or `a / x`) can overflow
-// general case
-if (x != 0 && a &gt; INT_MAX / x) // `a * x` would overflow
-if (x != 0 && a &lt; INT_MIN / x) // `a * x` would underflow
-      </x-blockcode>
-    </x-example>
+  <x-h2 name="Result" state="todo">
+    <p>The background image of this article looks good independently of the hardware and browser.</p>
   </x-h2>
 
   <x-h2 name="State">
-    <x-definition>
-      <p>Arbitrary computations <strong>encapsulated</strong> by the actor that are used to — among other things — produce the result.</p>
-    </x-definition>
 
-    <x-example>
-      <p>The result may be a <i>PDF</i> file that needs a compilation step from encapsulated source files. So, when the result should be produced, the actor may perform an computation <i>e.g.</i> <code>make pdf</code>.</p>
-    </x-example>
   </x-h2>
 
   <x-h2 name="Context">
-    <x-definition>
-      <p>The context is a record of the <strong>steps</strong> taken by the actor in order to reach its objective. It is encapsulated. A <strong>step</strong> defines at least an objective and a result. A step may be in one of several states:</p>
-      <ol>
-        <li><x-todo></x-todo> Means « yet to be done ».</li>
-        <li><x-doing></x-doing> Means « a result is being built ».</li>
-        <li><x-waiting></x-waiting> Means « waiting for an other actor response ».</li>
-        <li><x-done></x-done> Means « a result has been built and it satisfies the objective ». (Often omitted to prevent noise.)</li>
-        <li><x-failed></x-failed> Means « a result — if any — has been built and it does not satisfy the objective ».</li>
-      </ol>
-    </x-definition>
+    <x-h3 name="The Resolution Switching Problem">
+      <p>Solving the <em>The Resolution Switching</em> is to answer this question: <q><em>depending on the hardware resolution, which version of an image should be served to the client?</em></q></p>
+    </x-h3>
 
-    <x-example>
-      <x-h3 name="K&R has be assimilated." state="todo">
-        <a href="https://example.com">A result.</a>
-      </x-h3>
-    </x-example>
+    <x-h3 name="A Resolution Switching Solution">
+      <p>A solution to the Resolution Switching Problem is to tell the browser which image to use depending on the hardware. For instance:</p>
+      <ul>
+        <li>if the screen width is under 600px, then: use an image with a width of 480px.</li>
+        <li>if the screen width is over 600px, then: use an image with a width of 800px.</li>
+      </ul>
+    </x-h3>
+
+    <x-h3 name="A Resolution Switching Implementation">
+      <x-blockcode>
+        &lt;img src="pic-800w.jpg"
+        sizes="(max-width: 600px) 480px, 800px"
+        srcset="pic-480w.jpg 480w, pic-800w.jpg 800w"/&gt;
+      </x-blockcode>
+    </x-h3>
+
+    <x-h3 name="CSS Pixel">
+      <p>A quantity of <em>CSS Pixels</em> is given when one writes, for instance:</p>
+      <x-blockcode>
+        img { width: 100px; }
+      </x-blockcode>
+    </x-h3>
+
+    <x-h3 name="Device Resolution">
+      <p>The <em>Device Resolution</em> is the number of device pixels per CSS pixel.</p>
+      <x-blockmath>
+        \text{device resolution} = \frac{n~\text{device pixels}}{1~\text{CSS pixel}}
+      </x-blockmath>
+    </x-h3>
+
+    <x-h3 name="Image Pixels">
+      <p>The same image may be represented using different files using different numbers of pixels. For instance: 300 × 300, 600 × 600, 1200 × 1200, <i>etc.</i></p>
+    </x-h3>
+
+    <x-h3 name="A Resolution Switching Problem">
+      <p>Given this CSS:</p>
+      <x-blockcode>
+        img { width: 100px; }
+      </x-blockcode>
+
+      <x-qa>
+        <x-q id="585c01d1-3080-47bf-b2d3-495ef4cdda38">
+          <p>which image should the browser choose? 100 × 100? 200 × 200? 400 × 400?</p>
+        </x-q>
+        <x-a id="4a3f0f1b-c303-48e0-a4f0-9d36facfe03b">
+          <p>It depends on the device resolution:	</p>
+          <ul>
+            <li>If the device resolution is 1, then: 100 × 100 ;</li>
+            <li>If the device resolution is 2, then: 200 × 200 ;</li>
+            <li>If the device resolution is 4, then: 400 × 400.</li>
+          </ul>
+        </x-a>
+      </x-qa>
+    </x-h3>
+
+    <x-h3 name="A Resolution Switching Solution">
+      <p>For a given image, the solution is to give the browser different options to choose from, and let it fetch the appropriate resolution depending on the device resolution.</p>
+    </x-h3>
+
+    <x-h3 name="A Resolution Switching Implementation">
+<x-blockcode>
+&lt;img src="pic-100w.jpg"
+     srcset="pic-100w.jpg, pic-200w.jpg 2x, pic-400w.jpg 4x"/&gt;
+</x-blockcode>
+    </x-h3>
+
+    <x-h3 name="Layout">
+      <p>Layout is the visual arrangement of elements on the screen.</p>
+    </x-h3>
+
+    <x-h3 name="The Art Direction Problem">
+      <p>Solving the <em>Art Direction Problem</em> is to answer this question: <q><em>depending on the layouts, which version of an image should be served to the client?</em></q></p>
+    </x-h3>
   </x-h2>
 
   <x-h2 name="Message">
-    <x-definition>
-       <p>A message is an arbitrary immutable piece of data that the actor may process whenever it can — like reading an email from a mailbox.</p>
-    </x-definition>
 
-    <x-example>
-      <x-h3 name="A message">
-        <p>content</p>
-      </x-h3>
-    </x-example>
   </x-h2>
 </x-h1>
 
