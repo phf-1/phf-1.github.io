@@ -65,12 +65,12 @@
   <x-abstract>Where we document how the Guix build system for Erlang has been implemented.</x-abstract>
 
   <x-h2 name="Objective">
-	<p>The objective is to implement a <a href="https://guix.gnu.org/manual/en/html_node/Build-Systems.html">Guix build system</a> for Erlang packages.</p>
-	<p>The objective is achieved if, given a correct <a href="https://guix.gnu.org/manual/en/guix.html#Defining-Packages">Guix package definition</a> for any package <code>pkg</code> on <a href="https://hex.pm/">Hex</a>, we have <code>guix install rebar3-pkg</code> working as expected.</p>
+    <p>The objective is to implement a <a href="https://guix.gnu.org/manual/en/html_node/Build-Systems.html">Guix build system</a> for Erlang packages.</p>
+    <p>The objective is achieved if, given a correct <a href="https://guix.gnu.org/manual/en/guix.html#Defining-Packages">Guix package definition</a> for any package <code>pkg</code> on <a href="https://hex.pm/">Hex</a>, we have <code>guix install rebar3-pkg</code> working as expected.</p>
   </x-h2>
 
-  <x-h2 name="Result" state="todo">
-
+  <x-h2 name="Result">
+    <p>So far, we did not find a package that does not build.</p>
   </x-h2>
 
   <x-h2 name="State">
@@ -78,7 +78,53 @@
   </x-h2>
 
   <x-h2 name="Context">
+    <x-h3 name="The Telemetry package is built">
+<x-blockcode>
+$ guix build -K -f telemetry-package.scm
+# …
+successfully built /gnu/store/…-erlang-telemetry-1.2.1.drv
+/gnu/store/…-erlang-telemetry-1.2.1
+</x-blockcode>
+    </x-h3>
 
+    <x-h3 name="Guix telemetry package definition">
+      <p>A definition of the package is:</p>
+<x-blockcode>
+(use-modules (guix packages)
+             (guix download)
+             (guix build-system rebar)
+             ((guix licenses) #:prefix license:))
+
+(package
+    (name "erlang-telemetry")
+    (version "1.2.1")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (hexpm-uri "telemetry" version))
+       (sha256
+        (base32 "1mgyx9zw92g6w8fp9pblm3b0bghwxwwcbslrixq23ipzisfwxnfs"))))
+    (build-system rebar-build-system)
+    (synopsis "Dynamic dispatching library for metrics and instrumentations")
+    (description
+     "Dynamic dispatching library for metrics and instrumentations.")
+    (home-page "https://hexdocs.pm/telemetry/")
+    (license license:asl2.0))
+</x-blockcode>
+
+      <p>To build this definition, we followed these steps:</p>
+
+      <ol>
+        <li><code>guix import hexpm telemetry > telemetry-package.scm</code></li>
+        <li>Try to build using <code>guix build -K -f telemetry-package.scm</code></li>
+        <li>While the build fails:
+          <ol>
+            <li>Add the various suggestions <i>i.e.</i> <code>(use-modules (guix packages))</code></li>
+            <li>When a symbol is undefined, search it in the Guix source tree <i>i.e.</i> <code>rg -F 'license:asl2.0' ~/src/guix</code></li>
+          </ol>
+        </li>
+      </ol>
+    </x-h3>
   </x-h2>
 
   <x-h2 name="Message">

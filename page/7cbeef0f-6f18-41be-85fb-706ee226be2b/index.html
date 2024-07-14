@@ -80,18 +80,24 @@
   </x-h2>
 
   <x-h2 name="Context">
-	<x-h3 name="Phoenix can be built" state="todo">
-	  <p><code>guix install elixir-phoenix</code> works as expected.</p>
+	<x-h3 name="Elixir Build System">
+	  <ul>
+		<li>The Elixir build system is called <code>mix</code>.</li>
+		<li><code>mix</code> is an executable installed along with an <a href="https://elixir-lang.org/docs.html">Elixir install</a>.</li>
+		<li>One of the function of <code>mix</code> is to build a <a href="https://en.wikipedia.org/wiki/Object_code">object code</a> executable by the <a href="https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)">EVM</a> from <a href="https://hexdocs.pm/mix/1.17.2/Mix.html" id="d1789991-6e9d-4a02-a1ab-edb26da5be51">Elixir projects</a>.</li>
+		<li>This function is implemented by the <code>mix compile</code> command.</li>
+		<li>An other function is to test an Elixir project.</li>
+		<li>This function is implemented by the <code>mix test</code> command.</li>
+	  </ul>
 	</x-h3>
 
-	<x-h3 name="There is a Guix build system for Erlang" state="waiting">
-	  <p>See: <a href="https://phfrohring.com/page/f099c7ad-1b70-4ae3-9cfa-4063ef8cef36/">Guix and Erlang build system</a></p>
+	<x-h3 name="Elixir package manager">
+	  <ul>
+		<li>Hex is the <q>The package manager for the Erlang ecosystem</q>.</li>
+		<li>A package is an <a href="#d1789991-6e9d-4a02-a1ab-edb26da5be51">Elixir project</a> <a href="https://hex.pm/docs/publish#example-mixexs-file">published</a> on <a href="https://hex.pm/">hex.pm</a></li>
+	  </ul>
 	</x-h3>
 	
-	<x-h3 name="An Erlang build system is necessary">
-	  <p>Since Elixir packages may <a href="#b6811d91-f44a-406a-a459-af9948fc3c4d">depend</a> on Erlang packages, an Erlang build system is necessary to implement the Elixir build system.</p>
-	</x-h3>
-
 	<x-h3 name="An Elixir package may depend on a Erlang package" id="b6811d91-f44a-406a-a459-af9948fc3c4d">
 	  <p><code>phoenix 1.7</code> depends on <code>telemetry 1.2.1</code>.</p>
 	  <p><code>telemetry</code> is an Erlang package:</p>
@@ -101,24 +107,116 @@ $ mix deps | rg telemetry
   locked at 1.2.1 (telemetry) dad9ce9d
 	  </x-blockcode>
 	</x-h3>
-
-	<x-h3 name="Elixir package manager">
-	  <ul>
-	    <li>Hex is the <q>The package manager for the Erlang ecosystem</q>.</li>
-		<li>A package is an <a href="#d1789991-6e9d-4a02-a1ab-edb26da5be51">Elixir project</a> <a href="https://hex.pm/docs/publish#example-mixexs-file">published</a> on <a href="https://hex.pm/">hex.pm</a></li>
-	  </ul>
+	
+	<x-h3 name="An Erlang build system is necessary">
+	  <p>Since Elixir packages may <a href="#b6811d91-f44a-406a-a459-af9948fc3c4d">depend</a> on Erlang packages, an Erlang build system is necessary to implement the Elixir build system.</p>
 	</x-h3>
-
-	<x-h3 name="Elixir Build System">
-	  <ul>
-	    <li>The Elixir build system is called <code>mix</code>.</li>
-		<li><code>mix</code> is an executable installed along with an <a href="https://elixir-lang.org/docs.html">Elixir install</a>.</li>
-		<li>One of the function of <code>mix</code> is to build a <a href="https://en.wikipedia.org/wiki/Object_code">object code</a> executable by the <a href="https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)">EVM</a> from <a href="https://hexdocs.pm/mix/1.17.2/Mix.html" id="d1789991-6e9d-4a02-a1ab-edb26da5be51">Elixir projects</a>.</li>
-		<li>This function is implemented by the <code>mix compile</code> command.</li>
-		<li>An other function is to test an Elixir project.</li>
-		<li>This function is implemented by the <code>mix test</code> command.</li>		
-	  </ul>
+	
+	<x-h3 name="There is a Guix build system for Erlang">
+	  <p>See: <a href="https://phfrohring.com/page/f099c7ad-1b70-4ae3-9cfa-4063ef8cef36/">Guix and Erlang build system</a></p>
 	</x-h3>
+	
+	<x-h3 name="Elixir project">
+	  <p>A test Elixir project that depends on the Erlang telemetry package is built: <a href="data/test_project.tar.gz">test_project.tar.gz</a>.</p>
+<x-blockcode>
+test_project$ iex -S mix
+===> Analyzing applications...
+===> Compiling telemetry
+Compiling 3 files (.ex)
+Generated test_project app
+Erlang/OTP 26 [erts-14.2.1] [source] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:1] [jit:ns]
+
+Interactive Elixir (1.16.0) - press Ctrl+C to exit (type h() ENTER for help)
+iex(1)> TestProject.hello("Joe")
+
+12:13:14.944 [info] [Name telemetry: Joe]
+"Hello Joe!"
+
+test_project$ mix test
+===> Analyzing applications...
+===> Compiling telemetry
+Compiling 3 files (.ex)
+Generated test_project app
+
+12:15:30.311 [info] [Name telemetry: Joe]
+.
+Finished in 0.01 seconds (0.00s async, 0.01s sync)
+1 test, 0 failures
+</x-blockcode>
+
+	  <ul>
+		<li>We built this project using:
+		  <ol>
+			<li><code>mix new test_project</code></li>
+			<li><code>{:telemetry, "~> 1.2"}</code> is added to <code>mix.exs</code></li>
+			<li>Add enough code to show that Elixir uses the Telemetry package.</li>
+		  </ol>
+		</li>
+	  </ul>
+
+	</x-h3>
+	
+	<x-h3 name="Guix package definition">
+	  <p>A Guix package definition has been built for the test project below. If this builds then at least one Elixir package may depend on an Erlang package.</p>
+<x-blockcode>
+(use-modules (guix packages)
+			 (guix download)
+			 (guix build-system mix)
+			 (guix build-system rebar)
+			 (guix gexp)
+			 ((guix licenses) #:prefix license:))
+
+(define erlang-telemetry
+  (package
+	(name "erlang-telemetry")
+	(version "1.2.1")
+	(source
+	 (origin
+	   (method url-fetch)
+	   (uri (hexpm-uri "telemetry" version))
+	   (sha256
+		(base32 "1mgyx9zw92g6w8fp9pblm3b0bghwxwwcbslrixq23ipzisfwxnfs"))))
+	(build-system rebar-build-system)
+	(synopsis "Dynamic dispatching library for metrics and instrumentations")
+	(description
+	 "Dynamic dispatching library for metrics and instrumentations.")
+	(home-page "https://hexdocs.pm/telemetry/")
+	(license license:asl2.0)))
+
+(package
+  (name "elixir-test-project")
+  (version "0")
+  (source (local-file (canonicalize-path "test_project.tar.gz")))
+  (inputs (list erlang-telemetry))
+  (build-system mix-build-system)
+  (synopsis "Test package")
+  (description "Test package.")
+  (home-page "https://example.com")
+  (license #f))
+</x-blockcode>
+	</x-h3>
+	
+	<x-h3 name="The build fails">
+	  <p>As <a href="https://issues.guix.gnu.org/67877">expected</a>, the build fails:</p>
+<x-blockcode>
+$ guix build -K -f test-package.scm
+…
+** (Mix) Could not start application telemetry: could not find application file: telemetry.app
+error: in phase 'check': uncaught exception:
+%exception #&lt;&invoke-error program: "mix" arguments: ("do" "compile" "--no-deps-check" "--no-prune-code-paths" "+" "test" "--no-deps-check") exit-status: 1 term-signal: #f stop-signal: #f&gt; 
+phase `check' failed after 0.6 seconds
+command "mix" "do" "compile" "--no-deps-check" "--no-prune-code-paths" "+" "test" "--no-deps-check" failed with status 1
+…
+</x-blockcode>
+	</x-h3>
+	
+	<x-h3 name="Test package build succeeds" state="todo">
+
+	</x-h3>
+	
+	<x-h3 name="Phoenix can be built" state="todo">
+	  <p><code>guix install elixir-phoenix</code> works as expected.</p>
+	</x-h3>	
   </x-h2>
 
   <x-h2 name="Message">
