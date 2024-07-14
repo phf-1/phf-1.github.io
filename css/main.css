@@ -194,7 +194,7 @@ html {
   font-size: 18px;
   line-height: var(--line-height);
   text-rendering: optimizeLegibility;
-  text-align: justify;
+  text-align: start;
   font-feature-settings: "kern" 1;
   font-kerning: normal;
 }

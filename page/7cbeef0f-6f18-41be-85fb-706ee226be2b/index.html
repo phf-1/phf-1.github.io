@@ -78,7 +78,7 @@
   </x-h2>
 
   <x-h2 name="Context">
-    <x-h3 name="Elixir Build System">
+    <x-h3 name="Elixir build system">
       <ul>
         <li>The Elixir build system is called <code>mix</code>.</li>
         <li><code>mix</code> is an executable installed along with an <a href="https://elixir-lang.org/docs.html">Elixir installation</a>.</li>
@@ -89,14 +89,14 @@
       </ul>
     </x-h3>
 
-    <x-h3 name="Elixir Package Manager">
+    <x-h3 name="Elixir package manager">
       <ul>
         <li>Hex is the <q>package manager for the Erlang ecosystem</q>.</li>
         <li>A package is an <a href="#d1789991-6e9d-4a02-a1ab-edb26da5be51">Elixir project</a> <a href="https://hex.pm/docs/publish#example-mixexs-file">published</a> on <a href="https://hex.pm/">hex.pm</a>.</li>
       </ul>
     </x-h3>
-    
-    <x-h3 name="An Elixir Package May Depend on an Erlang Package" id="b6811d91-f44a-406a-a459-af9948fc3c4d">
+
+    <x-h3 name="Elixir packages may depend on an Erlang packages" id="b6811d91-f44a-406a-a459-af9948fc3c4d">
       <p><code>phoenix 1.7</code> depends on <code>telemetry 1.2.1</code>.</p>
       <p><code>telemetry</code> is an Erlang package:</p>
       <x-blockcode>
@@ -105,17 +105,17 @@ $ mix deps | rg telemetry
   locked at 1.2.1 (telemetry) dad9ce9d
       </x-blockcode>
     </x-h3>
-    
-    <x-h3 name="An Erlang Build System is Necessary">
+
+    <x-h3 name="An Erlang build system is necessary">
       <p>Since Elixir packages may <a href="#b6811d91-f44a-406a-a459-af9948fc3c4d">depend</a> on Erlang packages, an Erlang build system is necessary to implement the Elixir build system.</p>
     </x-h3>
-    
-    <x-h3 name="There is a Guix Build System for Erlang">
+
+    <x-h3 name="A Guix build system for Erlang">
       <p>See: <a href="https://phfrohring.com/page/f099c7ad-1b70-4ae3-9cfa-4063ef8cef36/">Guix and Erlang Build System</a></p>
     </x-h3>
-    
-    <x-h3 name="Elixir Project">
-      <p>A test Elixir project that depends on the Erlang telemetry package has been built: <a href="data/test_project.tar.gz">test_project.tar.gz</a>.</p>
+
+    <x-h3 name="Elixir project">
+      <p>A test Elixir project that depends on the Erlang telemetry package has been built: <a href="data/guix_and_elixir/_build/test_project.tar.gz">test_project.tar.gz</a>.</p>
       <x-blockcode>
 test_project$ iex -S mix
 ===> Analyzing applications...
@@ -152,8 +152,8 @@ Finished in 0.01 seconds (0.00s async, 0.01s sync)
         </li>
       </ul>
     </x-h3>
-    
-    <x-h3 name="Guix Package Definition">
+
+    <x-h3 name="Guix package definition">
       <p>A Guix package definition has been built for the test project. If this builds, then at least one Elixir package may depend on an Erlang package.</p>
       <x-blockcode>
 (use-modules (guix packages)
@@ -192,30 +192,171 @@ Finished in 0.01 seconds (0.00s async, 0.01s sync)
   (license #f))
       </x-blockcode>
     </x-h3>
-    
-    <x-h3 name="The Build Fails">
+
+    <x-h3 name="The build fails">
       <p>As <a href="https://issues.guix.gnu.org/67877">expected</a>, the build fails:</p>
       <x-blockcode>
 $ guix build -K -f test-package.scm
 …
 ** (Mix) Could not start application telemetry: could not find application file: telemetry.app
 error: in phase 'check': uncaught exception:
-%exception #&lt;&invoke-error program: "mix" arguments: ("do" "compile" "--no-deps-check" "--no-prune-code-paths" "+" "test" "--no-deps-check") exit-status: 1 term-signal: #f stop-signal: #f&gt; 
+%exception #&lt;&invoke-error program: "mix" arguments: ("do" "compile" "--no-deps-check" "--no-prune-code-paths" "+" "test" "--no-deps-check") exit-status: 1 term-signal: #f stop-signal: #f&gt;
 phase `check' failed after 0.6 seconds
 command "mix" "do" "compile" "--no-deps-check" "--no-prune-code-paths" "+" "test" "--no-deps-check" failed with status 1
 …
       </x-blockcode>
     </x-h3>
-    
-    <x-h3 name="Test Package Build Succeeds" state="todo">
+
+    <x-h3 name="Analysis">
+      <ul>
+        <li>The build directory has been kept.
+          <ul>
+            <li><code>/tmp/guix-build-elixir-test-project-0.drv-3</code></li>
+          </ul>
+        </li>
+        <li>The telemetry package exists in the environment.
+          <ul>
+            <li>Looking at <code>$BUILD_DIR/environment-variables</code>, we find:
+              <ul>
+                <li><code>/gnu/store/…-erlang-telemetry-1.2.1/*</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+<p>The telemetry app exists:</p>
+<x-blockcode>
+$ tree /gnu/store/…-erlang-telemetry-1.2.1/
+├── lib
+│   └── erlang
+│       └── lib
+│           └── telemetry
+│               └── ebin
+│                   ├── telemetry.app
+│                   ├── telemetry_app.beam
+│                   ├── telemetry.beam
+│                   ├── telemetry_handler_table.beam
+│                   ├── telemetry_sup.beam
+│                   └── telemetry_test.beam
+└── share
+    └── doc
+        └── erlang-telemetry-1.2.1
+            └── LICENSE
+</x-blockcode>
+
+      <p>So, <code>mix</code> should be told to look at:</p>
+      <p><code>/gnu/store/…-erlang-telemetry-1.2.1/lib/erlang/lib/</code></p>
+    </x-h3>
+
+    <x-h3 name="ERL_LIBS">
+      <p>The EVM searches for library directories provided by the OS
+      using <a href="https://www.erlang.org/doc/apps/kernel/code.html#module-code-path"><code>ERL_LIBS</code></a>
+      variable. For instance:</p>
+
+      <x-blockcode>
+ERL_LIBS=/gnu/store/…-erlang-telemetry-1.2.1/lib/erlang/lib
+      </x-blockcode>
+
+      <p>would make the telemetry application available to Elixir. This means that the build systems would have gathered all Erlang dependencies specified in the package <code>inputs</code> to add them to <code>ERL_LIBS</code>.</p>
+    </x-h3>
+
+    <x-h3 name="GUIX_ERL_LIBS">
+      <p>Guix offers a way to gather the libraries that should be added to <code>ERL_LIBS</code> as described in the <a href="https://guix.gnu.org/manual/en/html_node/Search-Paths.html">Search Paths</a> section of the documentation. Using a similar mechanism, if the environment variable <code>GUIX_ERL_LIBS</code> is introduced, then Elixir would have access to the telemetry application.</p>
+    </x-h3>
+
+    <x-h3 name="How GUIX_PYTHONPATH value is built">
+
+      <p>Counting on the analogy <code>GUIX_ERL_LIBS ~ GUIX_PYTHONPATH</code>, let's find how the value of <code>GUIX_PYTHONPATH</code> is computed ; hoping to apply a similar computation to <code>GUIX_ERL_LIBS</code>. In <code>guix/gnu/packages/python.scm</code>, we find:</p>
+      <x-blockcode>
+(define-module (gnu packages python)
+  ;; …
+  #:export (customize-site
+            guix-pythonpath-search-path))
+
+;; …
+
+(define (guix-pythonpath-search-path version)
+  "Generate a GUIX_PYTHONPATH search path specification, using VERSION."
+  (search-path-specification (variable "GUIX_PYTHONPATH")
+                             (files (list (string-append
+                                           "lib/python"
+                                           (version-major+minor version)
+                                           "/site-packages")))))
+
+;; …
+
+(define-public python-3.10
+  (package
+    ;; …
+    (native-search-paths
+     (list (guix-pythonpath-search-path version)
+           ;; Used to locate tzdata by the zoneinfo module introduced in
+           ;; Python 3.9.
+           (search-path-specification
+            (variable "PYTHONTZPATH")
+            (files (list "share/zoneinfo")))))))
+      </x-blockcode>
+    </x-h3>
+
+    <x-h3 name="How GUIX_PYTHONPATH is used">
+      <p>Counting on the analogy <code>GUIX_ERL_LIBS ~ GUIX_PYTHONPATH</code>, let's find how the value of <code>GUIX_PYTHONPATH</code> is used ; hoping to use <code>GUIX_ERL_LIBS</code> similarly. We have:</p>
+      <x-blockquote author="Unknown" source="Guix Manual" url="https://guix.gnu.org/manual/en/guix.html#Build-Systems">
+        <p><code>python-build-system</code></p>
+        <p>…</p>
+<p>For packages that install stand-alone Python programs under <code>bin/</code>, it takes care of wrapping these programs so that their <code>GUIX_PYTHONPATH</code> environment variable points to all the Python libraries they depend on.</p>
+      </x-blockquote>
+
+      <p>In <code>gnu/packages/python.scm</code>, we find:</p>
+      <x-blockcode>
+(define* (customize-site version)
+  "Generate a install-sitecustomize.py phase, using VERSION."
+  `(lambda* (#:key native-inputs inputs outputs #:allow-other-keys)
+     (let* ((out (assoc-ref outputs "out"))
+            (site-packages (string-append
+                            out "/lib/python"
+                            ,(version-major+minor version)
+                            "/site-packages"))
+            (sitecustomize.py (assoc-ref (or native-inputs inputs)
+                                         "sitecustomize.py"))
+            (dest (string-append site-packages "/sitecustomize.py")))
+       (mkdir-p site-packages)
+       (copy-file sitecustomize.py dest)
+       ;; Set the correct permissions on the installed file, else the byte
+       ;; compilation phase fails with a permission denied error.
+       (chmod dest #o644))))
+      </x-blockcode>
+
+      <p>In <code>gnu/packages/aux-files/python/sitecustomize.py</code>, we find:</p>
+      <pre>
+# Site-specific customization for Guix.
+#
+# The program below honors the GUIX_PYTHONPATH environment variable to
+# discover Python packages.  File names appearing in this variable that match
+# a predefined versioned installation prefix are added to the sys.path.  To be
+# considered, a Python package must be installed under the
+# 'lib/pythonX.Y/site-packages' directory, where X and Y are the major and
+# minor version numbers of the Python interpreter.
+      </pre>
+    </x-h3>
+
+    <x-h3 name="How GUIX_ERL_LIBS may be built" state="todo">
 
     </x-h3>
-    
-    <x-h3 name="Phoenix Can Be Built" state="todo">
+
+    <x-h3 name="How GUIX_ERL_LIBS may be used" state="todo">
+
+    </x-h3>
+
+    <x-h3 name="Test package build succeeds" state="todo">
+
+    </x-h3>
+
+    <x-h3 name="Phoenix can be built" state="todo">
       <p><code>guix install elixir-phoenix</code> works as expected.</p
 
 >
-    </x-h3>  
+    </x-h3>
   </x-h2>
 
   <x-h2 name="Message">
