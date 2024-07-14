@@ -78,7 +78,7 @@
   </x-h2>
 
   <x-h2 name="Context">
-    <x-h3 name="Elixir build system">
+    <x-h3 name="Elixir build system" state="done">
       <ul>
         <li>The Elixir build system is called <code>mix</code>.</li>
         <li><code>mix</code> is an executable installed along with an <a href="https://elixir-lang.org/docs.html">Elixir installation</a>.</li>
@@ -89,14 +89,14 @@
       </ul>
     </x-h3>
 
-    <x-h3 name="Elixir package manager">
+    <x-h3 name="Elixir package manager" state="done">
       <ul>
         <li>Hex is the <q>package manager for the Erlang ecosystem</q>.</li>
         <li>A package is an <a href="#d1789991-6e9d-4a02-a1ab-edb26da5be51">Elixir project</a> <a href="https://hex.pm/docs/publish#example-mixexs-file">published</a> on <a href="https://hex.pm/">hex.pm</a>.</li>
       </ul>
     </x-h3>
 
-    <x-h3 name="Elixir packages may depend on an Erlang packages" id="b6811d91-f44a-406a-a459-af9948fc3c4d">
+    <x-h3 name="Elixir packages may depend on an Erlang packages" id="b6811d91-f44a-406a-a459-af9948fc3c4d" state="done">
       <p><code>phoenix 1.7</code> depends on <code>telemetry 1.2.1</code>.</p>
       <p><code>telemetry</code> is an Erlang package:</p>
       <x-blockcode>
@@ -106,15 +106,15 @@ $ mix deps | rg telemetry
       </x-blockcode>
     </x-h3>
 
-    <x-h3 name="An Erlang build system is necessary">
+    <x-h3 name="An Erlang build system is necessary" state="done">
       <p>Since Elixir packages may <a href="#b6811d91-f44a-406a-a459-af9948fc3c4d">depend</a> on Erlang packages, an Erlang build system is necessary to implement the Elixir build system.</p>
     </x-h3>
 
-    <x-h3 name="A Guix build system for Erlang">
+    <x-h3 name="A Guix build system for Erlang" state="done">
       <p>See: <a href="https://phfrohring.com/page/f099c7ad-1b70-4ae3-9cfa-4063ef8cef36/">Guix and Erlang Build System</a></p>
     </x-h3>
 
-    <x-h3 name="Elixir project">
+    <x-h3 name="Elixir project" state="done">
       <p>A test Elixir project that depends on the Erlang telemetry package has been built: <a href="data/guix_and_elixir/_build/test_project.tar.gz">test_project.tar.gz</a>.</p>
       <x-blockcode>
 test_project$ iex -S mix
@@ -153,7 +153,7 @@ Finished in 0.01 seconds (0.00s async, 0.01s sync)
       </ul>
     </x-h3>
 
-    <x-h3 name="Guix package definition">
+    <x-h3 name="Guix package definition" state="done">
       <p>A Guix package definition has been built for the test project. If this builds, then at least one Elixir package may depend on an Erlang package.</p>
       <x-blockcode>
 (use-modules (guix packages)
@@ -193,7 +193,7 @@ Finished in 0.01 seconds (0.00s async, 0.01s sync)
       </x-blockcode>
     </x-h3>
 
-    <x-h3 name="The build fails">
+    <x-h3 name="The build fails" state="done">
       <p>As <a href="https://issues.guix.gnu.org/67877">expected</a>, the build fails:</p>
       <x-blockcode>
 $ guix build -K -f test-package.scm
@@ -207,7 +207,7 @@ command "mix" "do" "compile" "--no-deps-check" "--no-prune-code-paths" "+" "test
       </x-blockcode>
     </x-h3>
 
-    <x-h3 name="Analysis">
+    <x-h3 name="Analysis" state="done">
       <ul>
         <li>The build directory has been kept.
           <ul>
@@ -249,7 +249,7 @@ $ tree /gnu/store/…-erlang-telemetry-1.2.1/
       <p><code>/gnu/store/…-erlang-telemetry-1.2.1/lib/erlang/lib/</code></p>
     </x-h3>
 
-    <x-h3 name="ERL_LIBS">
+    <x-h3 name="ERL_LIBS" state="done">
       <p>The EVM searches for library directories provided by the OS
       using <a href="https://www.erlang.org/doc/apps/kernel/code.html#module-code-path"><code>ERL_LIBS</code></a>
       variable. For instance:</p>
@@ -261,11 +261,11 @@ ERL_LIBS=/gnu/store/…-erlang-telemetry-1.2.1/lib/erlang/lib
       <p>would make the telemetry application available to Elixir. This means that the build systems would have gathered all Erlang dependencies specified in the package <code>inputs</code> to add them to <code>ERL_LIBS</code>.</p>
     </x-h3>
 
-    <x-h3 name="GUIX_ERL_LIBS">
+    <x-h3 name="GUIX_ERL_LIBS" state="done">
       <p>Guix offers a way to gather the libraries that should be added to <code>ERL_LIBS</code> as described in the <a href="https://guix.gnu.org/manual/en/html_node/Search-Paths.html">Search Paths</a> section of the documentation. Using a similar mechanism, if the environment variable <code>GUIX_ERL_LIBS</code> is introduced, then Elixir would have access to the telemetry application.</p>
     </x-h3>
 
-    <x-h3 name="How GUIX_PYTHONPATH value is built">
+    <x-h3 name="How GUIX_PYTHONPATH value is built" state="done">
 
       <p>Counting on the analogy <code>GUIX_ERL_LIBS ~ GUIX_PYTHONPATH</code>, let's find how the value of <code>GUIX_PYTHONPATH</code> is computed ; hoping to apply a similar computation to <code>GUIX_ERL_LIBS</code>. In <code>guix/gnu/packages/python.scm</code>, we find:</p>
       <x-blockcode>
@@ -299,7 +299,7 @@ ERL_LIBS=/gnu/store/…-erlang-telemetry-1.2.1/lib/erlang/lib
       </x-blockcode>
     </x-h3>
 
-    <x-h3 name="How GUIX_PYTHONPATH is used">
+    <x-h3 name="How GUIX_PYTHONPATH is used" state="done">
       <p>Counting on the analogy <code>GUIX_ERL_LIBS ~ GUIX_PYTHONPATH</code>, let's find how the value of <code>GUIX_PYTHONPATH</code> is used ; hoping to use <code>GUIX_ERL_LIBS</code> similarly. We have:</p>
       <x-blockquote author="Unknown" source="Guix Manual" url="https://guix.gnu.org/manual/en/guix.html#Build-Systems">
         <p><code>python-build-system</code></p>
