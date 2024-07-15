@@ -121,7 +121,16 @@
 
         <hr />
 
-<x-blockcode>
+<div>
+<pre>
+The &lt;pre&gt; HTML element represents preformatted text which is to be presented exactly
+as written in the HTML file. The text is typically rendered using a non-proportional,
+or monospaced, font. Whitespace inside this element is displayed as written.
+</pre>
+</div>  
+        <hr />
+
+        <x-blockcode>
 (define (eval exp env)
     (cond ((self-evaluating? exp) exp)
           ((variable? exp) (lookup-variable-value exp env))
