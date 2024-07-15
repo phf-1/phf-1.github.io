@@ -546,6 +546,15 @@ x-abstract *:last-child {
   background-color: green;
   display: none;
 }
+@media (min-width: 120ch) {
+  #table-of-content {
+    left: calc(70ch - 1.5rem - 1px);
+    top: -1rem;
+    right: initial;
+    min-width: 50ch;
+    border: none;
+  }
+}
 @media (max-width: 900px) {
   body {
     margin-top: 1rem;
