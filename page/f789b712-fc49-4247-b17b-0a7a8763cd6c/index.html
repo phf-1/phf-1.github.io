@@ -6,7 +6,7 @@
 		 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Style test page: end" />
+    <meta name="description" content="Style test page: 1" />
     <title>Pierre-Henry Fröhring's Website</title>
     <link
       rel="apple-touch-icon"
@@ -121,36 +121,6 @@
 
         <hr />
 
-<pre>
-The &lt;pre&gt; HTML element represents preformatted text which is to be presented exactly
-as written in the HTML file. The text is typically rendered using a non-proportional,
-or monospaced, font. Whitespace inside this element is displayed as written.
-</pre>
-
-        <hr />
-
-        <x-blockcode>
-(define (eval exp env)
-    (cond ((self-evaluating? exp) exp)
-          ((variable? exp) (lookup-variable-value exp env))
-          ((quoted? exp) (text-of-quotation exp))
-          ((assignment? exp) (eval-assignment exp env))
-          ((definition? exp) (eval-definition exp env))
-          ((if? exp) (eval-if exp env))
-          ((lambda? exp) (make-procedure (lambda-parameters exp)
-          (lambda-body exp) env))
-          ((begin? exp)
-           (eval-sequence (begin-actions exp) env))
-          ((cond? exp) (eval (cond->if exp) env))
-          ((application? exp)
-           (apply (eval (operator exp) env)
-                  (list-of-values (operands exp) env)))
-          (else
-    (error "Unknown expression type: EVAL" exp))))
-</x-blockcode>
-
-        <hr />
-
         <x-blockquote author="Aldous Huxley" url="https://example.com" source="Brave New World">
             <p>Words can be like X-rays, if you use them properly—they’ll go through anything. You read and you’re pierced.</p>
         </x-blockquote>
@@ -217,16 +187,6 @@ or monospaced, font. Whitespace inside this element is displayed as written.
         </table>
 
         <hr />
-    </x-h2>
-
-    <x-h2 name="h2: nested sections">
-        <x-h3 name="h3">
-            <x-h4 name="h4">
-                <x-h5 name="h5">
-                    <x-h6 name="h6"></x-h6>
-                </x-h5>
-            </x-h4>
-        </x-h3>
     </x-h2>
 </x-h1>
 
