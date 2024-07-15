@@ -305,6 +305,7 @@ main {
 }
 #table-of-content {
   position: absolute;
+  display: block;
   right: 0;
   top: 3rem;
   margin-top: 1rem;
