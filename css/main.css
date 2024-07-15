@@ -84,6 +84,7 @@
   --p-margin-bottom: calc(var(--line-height) * 1em);
   --sep-margin: 4rem;
   --img-shadow: 2px 2px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --border: 1px solid var(--annotation);
   --x-keyword-color: var(--main-bg);
   --x-h1-font-size: var(--title-font-size);
   --x-h1-margin: 10vh;
@@ -212,13 +213,12 @@ main {
 }
 #container {
   position: relative;
-  display: flex;
   justify-content: center;
 }
 #container #content {
   position: relative;
-  width: 70ch;
-  border: 1px solid var(--annotation);
+  max-width: 70ch;
+  border: var(--border);
   padding: 0 1.5rem 1rem 1.5rem;
   margin-bottom: 33vh;
   background-color: var(--main-bg);
@@ -238,7 +238,7 @@ main {
   padding: 0;
   z-index: -1;
   text-align: center;
-  border: 1px solid var(--annotation);
+  border: var(--border);
   border-top: none;
   border-radius: 0;
   box-shadow: var(--img-shadow);
@@ -251,7 +251,7 @@ main {
   width: 100%;
   border-radius: 0;
 }
-.topbar {
+#topbar {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -260,7 +260,7 @@ main {
   display: flex;
   justify-content: space-between;
   padding: 1rem 0;
-  border-bottom: 1px solid var(--annotation);
+  border-bottom: var(--border);
   margin-bottom: 2rem;
 }
 .button {
@@ -270,7 +270,7 @@ main {
   appearance: none;
   cursor: pointer;
   text-transform: uppercase;
-  border: 1px solid var(--annotation);
+  border: var(--border);
   padding: 1em;
   color: var(--main-text);
   font-weight: lighter;
@@ -303,17 +303,19 @@ main {
   align-items: center;
 }
 #table-of-content {
-  position: -webkit-sticky;
-  position: sticky;
+  position: absolute;
+  right: 0;
   top: 0;
-  margin-top: 1px;
+  margin-top: 1rem;
   display: none;
-  padding: 1rem 0.5rem 1rem 0.5rem;
-  max-width: 40ch;
+  padding: 0.5rem;
+  max-width: 50ch;
   max-height: 100vh;
   overflow-y: auto;
   background-color: var(--main-bg);
   flex-shrink: 0;
+  border: var(--border);
+  border-radius: var(--radius);
 }
 #table-of-content h1 {
   display: none;
@@ -388,19 +390,19 @@ a:hover {
 code,
 pre {
   font-family: "Mono";
-  font-size: 0.80em;
+  font-size: 0.75rem;
   border-radius: var(--radius);
 }
 code {
   background-color: var(--code);
   border-radius: var(--radius);
   padding: 0 0.2rem;
+  font-size: 0.75rem;
 }
 pre {
   margin-bottom: var(--p-margin-bottom);
   overflow-x: auto;
-  word-wrap: normal;
-  white-space: pre-wrap;
+  font-size: 0.75rem;
 }
 em,
 strong {
@@ -457,7 +459,7 @@ thead th {
   display: flex;
   flex-direction: column;
   margin-bottom: var(--p-margin-bottom);
-  border: 1px solid var(--annotation);
+  border: var(--border);
   border-radius: 2px;
   padding: 1em;
 }
@@ -567,7 +569,7 @@ x-abstract *:last-child {
   main {
     padding: 0.25rem;
   }
-  .topbar {
+  #topbar {
     margin-bottom: 2rem;
   }
   #table-of-content {
