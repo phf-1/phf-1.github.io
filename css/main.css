@@ -217,7 +217,7 @@ main {
 }
 #container #content {
   position: relative;
-  max-width: 70ch;
+  width: 70ch;
   border: var(--border);
   padding: 0 1.5rem 1rem 1.5rem;
   margin-bottom: 33vh;
