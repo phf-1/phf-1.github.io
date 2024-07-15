@@ -582,9 +582,6 @@ x-abstract *:last-child {
   #topbar {
     margin-bottom: 2rem;
   }
-  #table-of-content {
-    display: none;
-  }
   .cartridge.abstract {
     max-width: 80%;
   }
