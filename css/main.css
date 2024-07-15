@@ -308,7 +308,7 @@ main {
   right: 0;
   top: 3rem;
   margin-top: 1rem;
-  display: none;
+  visibility: hidden;
   padding: 0.5rem;
   max-width: 50ch;
   max-height: 80vh;
