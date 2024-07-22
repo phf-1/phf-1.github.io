@@ -50,20 +50,21 @@
         <div id="content">
           <div id="topbar">
             <div class="actions">
-              <button id="toggle_toc_btn" class="button">toggle TOC</button>
+              <button id="toggle_toc_btn" class="button">TOC</button>
             </div>
             <nav class="navbar" id="navbar">
               <a class="button" href="/">home</a>
             </nav>
+			<x-toc></x-toc>
           </div>
 
-          <x-h1 name="Actor">
+          <x-h1 name="Actor" id="c6c92a94-9130-4755-b71f-d773d884d8f2">
   <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
   <!-- :ID: 101e3f53-f9e2-465a-a0e3-d0685b8e4f21 -->
 
   <x-abstract>The definition of an <em>Actor</em> is refined.</x-abstract>
 
-  <x-h2 name="Objective">
+  <x-h2 name="Objective" id="cc05cd49-880c-4292-81d1-f0d8545f3c7a">
     <x-definition>
       <p>An objective describes <strong>necessary</strong> conditions that an object should satisfy for the objective to be reached.</p>
     </x-definition>
@@ -73,7 +74,7 @@
     </x-example>
   </x-h2>
 
-  <x-h2 name="Result">
+  <x-h2 name="Result" id="9f32ba35-280d-40c8-a034-663450597f36">
     <x-definition>
       <p>An result is an object that has been built <strong>so far</strong> to reach the objective.</p>
     </x-definition>
@@ -103,7 +104,7 @@ if (x != 0 && a &lt; INT_MIN / x) // `a * x` would underflow
     </x-example>
   </x-h2>
 
-  <x-h2 name="State">
+  <x-h2 name="State" id="59652480-5a9a-4e27-a99f-4c854d2e8bc2">
     <x-definition>
       <p>Arbitrary computations <strong>encapsulated</strong> by the actor that are used to — among other things — produce the result.</p>
     </x-definition>
@@ -113,7 +114,7 @@ if (x != 0 && a &lt; INT_MIN / x) // `a * x` would underflow
     </x-example>
   </x-h2>
 
-  <x-h2 name="Context">
+  <x-h2 name="Context" id="caeb236c-1c6a-43bc-8d20-b40e39ee2c5e">
     <x-definition>
       <p>The context is a record of the <strong>steps</strong> taken by the actor in order to reach its objective. It is encapsulated. A <strong>step</strong> defines at least an objective and a result. A step may be in one of several states:</p>
       <ol>
@@ -126,19 +127,19 @@ if (x != 0 && a &lt; INT_MIN / x) // `a * x` would underflow
     </x-definition>
 
     <x-example>
-      <x-h3 name="K&R has be assimilated." state="todo">
+      <x-h3 name="K&R has be assimilated." state="todo" id="2889c658-40f5-48d8-bba3-9663ae6aab04">
         <a href="https://example.com">A result.</a>
       </x-h3>
     </x-example>
   </x-h2>
 
-  <x-h2 name="Message">
+  <x-h2 name="Message" id="a152d91c-c2e4-4def-83fd-fc9836f9c044">
     <x-definition>
        <p>A message is an arbitrary immutable piece of data that the actor may process whenever it can — like reading an email from a mailbox.</p>
     </x-definition>
 
     <x-example>
-      <x-h3 name="A message">
+      <x-h3 name="A message" id="0e5dac15-9ce7-47d7-8eea-beb996f9b467">
         <p>content</p>
       </x-h3>
     </x-example>

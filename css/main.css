@@ -181,6 +181,11 @@
   --x-button-color: var(--main-text);
   --x-button-bg-color-hover: var(--button-hover);
   --x-button-box-shadow: var(--img-shadow);
+  --x-toc-before: var(--heading);
+  --x-toc-bg: var(--main-bg);
+  --x-toc-border: var(--border);
+  --x-toc-radius: var(--radius);
+  --x-toc-heading-highlight-bg: var(--algorithm-bg);
 }
 * {
   box-sizing: border-box;
@@ -310,7 +315,7 @@ main {
   top: 3rem;
   margin-top: 1rem;
   padding: 0.5rem;
-  max-width: 50ch;
+  max-width: 40ch;
   max-height: 80vh;
   overflow-y: auto;
   background-color: var(--main-bg);
@@ -551,7 +556,7 @@ x-abstract *:last-child {
     left: calc(70ch - 1.5rem - 1px);
     top: -1rem;
     right: initial;
-    min-width: 50ch;
+    min-width: 40ch;
     max-height: 100vh;
     border: none;
   }

@@ -50,33 +50,34 @@
         <div id="content">
           <div id="topbar">
             <div class="actions">
-              <button id="toggle_toc_btn" class="button">toggle TOC</button>
+              <button id="toggle_toc_btn" class="button">TOC</button>
             </div>
             <nav class="navbar" id="navbar">
               <a class="button" href="/">home</a>
             </nav>
+			<x-toc></x-toc>
           </div>
 
-          <x-h1 name="Guix and Erlang">
+          <x-h1 name="Guix and Erlang" id="672d7c68-d5a6-477e-9698-f3c086856a8f">
   <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
   <!-- :ID: f099c7ad-1b70-4ae3-9cfa-4063ef8cef36 -->
 
   <x-abstract>Where we document how the Guix build system for Erlang has been implemented.</x-abstract>
 
-  <x-h2 name="Objective">
+  <x-h2 name="Objective" id="f69c31d1-9157-46e8-8db4-109431b747cd">
     <p>The goal is to set up a <a href="https://guix.gnu.org/manual/en/html_node/Build-Systems.html">Guix build system</a> for Erlang packages. This will be achieved if we can take any correct <a href="https://guix.gnu.org/manual/en/guix.html#Defining-Packages">Guix package definition</a> for a package from <a href="https://hex.pm/">Hex</a> and install it using <code>guix install rebar3-pkg</code>.</p>
   </x-h2>
 
-  <x-h2 name="Result">
+  <x-h2 name="Result" id="62fa1699-851c-4921-9f10-37738eca262e">
     <p>So far, we did not find a package that does not build.</p>
   </x-h2>
 
-  <x-h2 name="State">
+  <x-h2 name="State" id="235f34e4-4223-4dfe-a2ec-b1108ace47ff">
 
   </x-h2>
 
-  <x-h2 name="Context">
-    <x-h3 name="Guix telemetry package definition">
+  <x-h2 name="Context" id="12c20e8e-baa7-493a-be61-2b501ceba647">
+    <x-h3 name="Guix telemetry package definition" id="03170d0a-5904-421d-a741-a84a1f66dc51">
       <p>A definition of the package is:</p>
 <x-blockcode>
 (use-modules (guix packages)
@@ -115,7 +116,7 @@
       </ol>
     </x-h3>
     
-    <x-h3 name="The Telemetry package is built">
+    <x-h3 name="The Telemetry package is built" id="f575320e-b7e8-43c4-a391-ce77649b10b7">
 <x-blockcode>
 $ guix build -K -f telemetry-package.scm
 # …
@@ -125,7 +126,7 @@ successfully built /gnu/store/…-erlang-telemetry-1.2.1.drv
     </x-h3>
   </x-h2>
 
-  <x-h2 name="Message">
+  <x-h2 name="Message" id="ff8b448c-840d-4ada-9b1e-af0a7e5fbca1">
 
   </x-h2>
 </x-h1>

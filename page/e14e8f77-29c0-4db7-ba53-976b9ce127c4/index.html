@@ -50,37 +50,38 @@
         <div id="content">
           <div id="topbar">
             <div class="actions">
-              <button id="toggle_toc_btn" class="button">toggle TOC</button>
+              <button id="toggle_toc_btn" class="button">TOC</button>
             </div>
             <nav class="navbar" id="navbar">
               <a class="button" href="/">home</a>
             </nav>
+			<x-toc></x-toc>
           </div>
 
-          <x-h1 name="An Image On The Web">
+          <x-h1 name="An Image On The Web" id="fbebc56f-db9d-4bdf-82a7-3bb4e37d6ff5">
   <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
   <!-- :ID: e14e8f77-29c0-4db7-ba53-976b9ce127c4 -->
 
   <x-abstract>Where we try to make images look good independently of the hardware / browser.</x-abstract>
 
-  <x-h2 name="Objective">
+  <x-h2 name="Objective" id="b8e1f31b-9071-44c5-bf2d-9aa88dc316df">
     <p>The objective is not have article images look good independently of the hardware and browser. The objective is achieved if images of an article that look good on the authoring machine also look good on any other machine, if displayed at all.</p>
   </x-h2>
 
-  <x-h2 name="Result" state="todo">
+  <x-h2 name="Result" state="todo" id="d00fc42e-ee67-4cba-88c4-cb928fbb8d7a">
     <p>The background image of this article looks good independently of the hardware and browser.</p>
   </x-h2>
 
-  <x-h2 name="State">
+  <x-h2 name="State" id="2b54cd1b-7bf3-45a2-9c4d-ef3a7d25b7eb">
 
   </x-h2>
 
-  <x-h2 name="Context">
-    <x-h3 name="The Resolution Switching Problem">
+  <x-h2 name="Context" id="8c7c3505-1ac8-477a-a260-5af60cc6cdc7">
+    <x-h3 name="The Resolution Switching Problem" id="5957241a-6a61-4914-9c96-533315e033f8">
       <p>Solving the <em>The Resolution Switching</em> is to answer this question: <q><em>depending on the hardware resolution, which version of an image should be served to the client?</em></q></p>
     </x-h3>
 
-    <x-h3 name="A Resolution Switching Solution">
+    <x-h3 name="A Resolution Switching Solution" id="e87c48aa-e6af-4281-b9e1-f7d6a1da6f6a">
       <p>A solution to the Resolution Switching Problem is to tell the browser which image to use depending on the hardware. For instance:</p>
       <ul>
         <li>if the screen width is under 600px, then: use an image with a width of 480px.</li>
@@ -88,7 +89,7 @@
       </ul>
     </x-h3>
 
-    <x-h3 name="A Resolution Switching Implementation">
+    <x-h3 name="A Resolution Switching Implementation" id="43353ab2-3852-4b49-8156-754689f06e79">
       <x-blockcode>
         &lt;img src="pic-800w.jpg"
         sizes="(max-width: 600px) 480px, 800px"
@@ -96,25 +97,25 @@
       </x-blockcode>
     </x-h3>
 
-    <x-h3 name="CSS Pixel">
+    <x-h3 name="CSS Pixel" id="aacd0e2f-067d-441d-908c-89f0fc7b4361">
       <p>A quantity of <em>CSS Pixels</em> is given when one writes, for instance:</p>
       <x-blockcode>
         img { width: 100px; }
       </x-blockcode>
     </x-h3>
 
-    <x-h3 name="Device Resolution">
+    <x-h3 name="Device Resolution" id="043c8aff-e3a8-4f9b-921b-6a5babbb3715">
       <p>The <em>Device Resolution</em> is the number of device pixels per CSS pixel.</p>
       <x-blockmath>
         \text{device resolution} = \frac{n~\text{device pixels}}{1~\text{CSS pixel}}
       </x-blockmath>
     </x-h3>
 
-    <x-h3 name="Image Pixels">
+    <x-h3 name="Image Pixels" id="24c0bc09-1d06-4df5-af24-c3352f8badcb">
       <p>The same image may be represented using different files using different numbers of pixels. For instance: 300 × 300, 600 × 600, 1200 × 1200, <i>etc.</i></p>
     </x-h3>
 
-    <x-h3 name="A Resolution Switching Problem">
+    <x-h3 name="A Resolution Switching Problem" id="044e6067-78ee-4f43-b0d8-c465fa3e0b7a">
       <p>Given this CSS:</p>
       <x-blockcode>
         img { width: 100px; }
@@ -135,27 +136,27 @@
       </x-qa>
     </x-h3>
 
-    <x-h3 name="A Resolution Switching Solution">
+    <x-h3 name="A Resolution Switching Solution" id="34bfeb03-a69f-4320-892d-03a10852db67">
       <p>For a given image, the solution is to give the browser different options to choose from, and let it fetch the appropriate resolution depending on the device resolution.</p>
     </x-h3>
 
-    <x-h3 name="A Resolution Switching Implementation">
+    <x-h3 name="A Resolution Switching Implementation" id="cf7a62e9-af86-46b9-9a39-69f1e15298b3">
 <x-blockcode>
 &lt;img src="pic-100w.jpg"
      srcset="pic-100w.jpg, pic-200w.jpg 2x, pic-400w.jpg 4x"/&gt;
 </x-blockcode>
     </x-h3>
 
-    <x-h3 name="Layout">
+    <x-h3 name="Layout" id="cb2b2cd7-6844-4c44-9171-18c1135cca95">
       <p>Layout is the visual arrangement of elements on the screen.</p>
     </x-h3>
 
-    <x-h3 name="The Art Direction Problem">
+    <x-h3 name="The Art Direction Problem" id="7235645a-fea6-44dc-907b-85f660a64a65">
       <p>Solving the <em>Art Direction Problem</em> is to answer this question: <q><em>depending on the layouts, which version of an image should be served to the client?</em></q></p>
     </x-h3>
   </x-h2>
 
-  <x-h2 name="Message">
+  <x-h2 name="Message" id="fa29dbbb-86b9-4521-bf59-2a47408372f6">
 
   </x-h2>
 </x-h1>

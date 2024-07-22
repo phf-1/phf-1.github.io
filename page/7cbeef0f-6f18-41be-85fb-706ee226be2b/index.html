@@ -52,33 +52,34 @@
         <div id="content">
           <div id="topbar">
             <div class="actions">
-              <button id="toggle_toc_btn" class="button">toggle TOC</button>
+              <button id="toggle_toc_btn" class="button">TOC</button>
             </div>
             <nav class="navbar" id="navbar">
               <a class="button" href="/">home</a>
             </nav>
+			<x-toc></x-toc>
           </div>
 
-          <x-h1 name="Guix and Elixir">
+          <x-h1 name="Guix and Elixir" id="a1ad2561-00c8-4783-855c-159ec7d95f5b">
   <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
   <!-- :ID: 7cbeef0f-6f18-41be-85fb-706ee226be2b -->
 
   <x-abstract>Here we attempt to build a build system in <a href="https://guix.gnu.org/">Guix</a> for Elixir.</x-abstract>
 
-  <x-h2 name="Objective">
+  <x-h2 name="Objective" id="3cf92627-4a43-431c-971d-94e39dfec233">
     <p>The objective is to implement a <a href="https://guix.gnu.org/manual/en/html_node/Build-Systems.html">Guix build system</a> for Elixir packages. Success is achieved if, given a correct <a href="https://guix.gnu.org/manual/en/guix.html#Defining-Packages">Guix package definition</a> for any package <code>pkg</code> on <a href="https://hex.pm/">Hex</a>, we have <code>guix install elixir-pkg</code> working as expected.</p>
   </x-h2>
 
-  <x-h2 name="Result" state="todo">
+  <x-h2 name="Result" state="todo" id="f5f91dac-81a8-4e3b-834c-1a80e8ff2cf9">
 
   </x-h2>
 
-  <x-h2 name="State">
+  <x-h2 name="State" id="96e46f9e-635b-42a8-94d8-110e12f7530b">
 
   </x-h2>
 
-  <x-h2 name="Context">
-    <x-h3 name="Elixir build system" state="done">
+  <x-h2 name="Context" id="29dc6545-9f00-4942-bd35-11aa5e49bd6f">
+    <x-h3 name="Elixir build system" state="done" id="f2fc4a39-95c4-4f68-b64c-73cd73d77270">
       <ul>
         <li>The Elixir build system is called <code>mix</code>.</li>
         <li><code>mix</code> is an executable installed along with an <a href="https://elixir-lang.org/docs.html">Elixir installation</a>.</li>
@@ -89,7 +90,7 @@
       </ul>
     </x-h3>
 
-    <x-h3 name="Elixir package manager" state="done">
+    <x-h3 name="Elixir package manager" state="done" id="d3ad1f83-aa2b-4d3e-bff2-08bd9371c647">
       <ul>
         <li>Hex is the <q>package manager for the Erlang ecosystem</q>.</li>
         <li>A package is an <a href="#d1789991-6e9d-4a02-a1ab-edb26da5be51">Elixir project</a> <a href="https://hex.pm/docs/publish#example-mixexs-file">published</a> on <a href="https://hex.pm/">hex.pm</a>.</li>
@@ -106,15 +107,15 @@ $ mix deps | rg telemetry
       </x-blockcode>
     </x-h3>
 
-    <x-h3 name="An Erlang build system is necessary" state="done">
+    <x-h3 name="An Erlang build system is necessary" state="done" id="7e35bbc7-e47c-4860-9026-90f6d0fb0dbf">
       <p>Since Elixir packages may <a href="#b6811d91-f44a-406a-a459-af9948fc3c4d">depend</a> on Erlang packages, an Erlang build system is necessary to implement the Elixir build system.</p>
     </x-h3>
 
-    <x-h3 name="A Guix build system for Erlang" state="done">
+    <x-h3 name="A Guix build system for Erlang" state="done" id="89fd3981-3f46-4d89-b026-2ba7acd6fe24">
       <p>See: <a href="https://phfrohring.com/page/f099c7ad-1b70-4ae3-9cfa-4063ef8cef36/">Guix and Erlang Build System</a></p>
     </x-h3>
 
-    <x-h3 name="Elixir project" state="done">
+    <x-h3 name="Elixir project" state="done" id="aff127d2-321b-4d15-ad24-9ff0b100e3c6">
       <p>A test Elixir project that depends on the Erlang telemetry package has been built: <a href="https://github.com/phf-1/phf-1.github.io/raw/main/page/7cbeef0f-6f18-41be-85fb-706ee226be2b/data/guix_and_elixir/_build/test_project.tar.gz">test_project.tar.gz</a>.</p>
       <x-blockcode>
 test_project$ iex -S mix
@@ -153,7 +154,7 @@ Finished in 0.01 seconds (0.00s async, 0.01s sync)
       </ul>
     </x-h3>
 
-    <x-h3 name="Guix package definition" state="done">
+    <x-h3 name="Guix package definition" state="done" id="01c07020-5a4f-4f82-8907-2b2d0a616e96">
       <p>A Guix package definition has been built for the test project. If this builds, then at least one Elixir package may depend on an Erlang package.</p>
       <x-blockcode>
 (use-modules (guix packages)
@@ -193,7 +194,7 @@ Finished in 0.01 seconds (0.00s async, 0.01s sync)
       </x-blockcode>
     </x-h3>
 
-    <x-h3 name="The build fails" state="done">
+    <x-h3 name="The build fails" state="done" id="882c32f2-086f-40fd-9b9c-ea13ebed5133">
       <p>As <a href="https://issues.guix.gnu.org/67877">expected</a>, the build fails:</p>
       <x-blockcode>
 $ guix build -K -f test-package.scm
@@ -207,7 +208,7 @@ command "mix" "do" "compile" "--no-deps-check" "--no-prune-code-paths" "+" "test
       </x-blockcode>
     </x-h3>
 
-    <x-h3 name="Analysis" state="done">
+    <x-h3 name="Analysis" state="done" id="03401fdc-d97e-4fa6-a836-9e3ef8613e6e">
       <ul>
         <li>The build directory has been kept.
           <ul>
@@ -249,7 +250,7 @@ $ tree /gnu/store/…-erlang-telemetry-1.2.1/
       <p><code>/gnu/store/…-erlang-telemetry-1.2.1/lib/erlang/lib/</code></p>
     </x-h3>
 
-    <x-h3 name="ERL_LIBS" state="done">
+    <x-h3 name="ERL_LIBS" state="done" id="779d564b-5b72-4956-89ad-277b8324ab48">
       <p>The EVM searches for library directories provided by the OS
       using <a href="https://www.erlang.org/doc/apps/kernel/code.html#module-code-path"><code>ERL_LIBS</code></a>
       variable. For instance:</p>
@@ -261,11 +262,11 @@ ERL_LIBS=/gnu/store/…-erlang-telemetry-1.2.1/lib/erlang/lib
       <p>would make the telemetry application available to Elixir. This means that the build systems would have gathered all Erlang dependencies specified in the package <code>inputs</code> to add them to <code>ERL_LIBS</code>.</p>
     </x-h3>
 
-    <x-h3 name="GUIX_ERL_LIBS" state="done">
+    <x-h3 name="GUIX_ERL_LIBS" state="done" id="34389098-4a3c-4f63-ae7c-415de3d44543">
       <p>Guix offers a way to gather the libraries that should be added to <code>ERL_LIBS</code> as described in the <a href="https://guix.gnu.org/manual/en/html_node/Search-Paths.html">Search Paths</a> section of the documentation. Using a similar mechanism, if the environment variable <code>GUIX_ERL_LIBS</code> is introduced, then Elixir would have access to the telemetry application.</p>
     </x-h3>
 
-    <x-h3 name="How GUIX_PYTHONPATH value is built" state="done">
+    <x-h3 name="How GUIX_PYTHONPATH value is built" state="done" id="6849a964-b4f8-41c5-9b6e-ea8158c7e070">
 
       <p>Counting on the analogy <code>GUIX_ERL_LIBS ~ GUIX_PYTHONPATH</code>, let's find how the value of <code>GUIX_PYTHONPATH</code> is computed ; hoping to apply a similar computation to <code>GUIX_ERL_LIBS</code>. In <code>guix/gnu/packages/python.scm</code>, we find:</p>
       <x-blockcode>
@@ -299,7 +300,7 @@ ERL_LIBS=/gnu/store/…-erlang-telemetry-1.2.1/lib/erlang/lib
       </x-blockcode>
     </x-h3>
 
-    <x-h3 name="How GUIX_PYTHONPATH is used" state="done">
+    <x-h3 name="How GUIX_PYTHONPATH is used" state="done" id="31e7c374-b009-43d5-81d9-a08261e4ffcc">
       <p>Counting on the analogy <code>GUIX_ERL_LIBS ~ GUIX_PYTHONPATH</code>, let's find how the value of <code>GUIX_PYTHONPATH</code> is used ; hoping to use <code>GUIX_ERL_LIBS</code> similarly. We have:</p>
       <x-blockquote author="Unknown" source="Guix Manual" url="https://guix.gnu.org/manual/en/guix.html#Build-Systems">
         <p><code>python-build-system</code></p>
@@ -340,26 +341,26 @@ ERL_LIBS=/gnu/store/…-erlang-telemetry-1.2.1/lib/erlang/lib
       </pre>
     </x-h3>
 
-    <x-h3 name="How GUIX_ERL_LIBS may be built" state="todo">
+    <x-h3 name="How GUIX_ERL_LIBS may be built" state="todo" id="bf72090b-ee99-40d5-9e8a-f959b1b49679">
 
     </x-h3>
 
-    <x-h3 name="How GUIX_ERL_LIBS may be used" state="todo">
+    <x-h3 name="How GUIX_ERL_LIBS may be used" state="todo" id="21e59bb2-1f46-4c8e-99cc-886ca95a40d2">
 
     </x-h3>
 
-    <x-h3 name="Test package build succeeds" state="todo">
+    <x-h3 name="Test package build succeeds" state="todo" id="50c6ddd7-5bfc-4ea5-a882-60a7305b81d0">
 
     </x-h3>
 
-    <x-h3 name="Phoenix can be built" state="todo">
+    <x-h3 name="Phoenix can be built" state="todo" id="dac8156d-e123-4105-bec2-e1be1be4b53c">
       <p><code>guix install elixir-phoenix</code> works as expected.</p
 
 >
     </x-h3>
   </x-h2>
 
-  <x-h2 name="Message">
+  <x-h2 name="Message" id="45d233f6-8b75-4b22-95ea-e41217f3cd32">
 
   </x-h2>
 </x-h1>
