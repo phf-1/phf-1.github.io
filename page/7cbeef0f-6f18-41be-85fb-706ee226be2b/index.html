@@ -67,7 +67,7 @@
   <x-abstract>Here we attempt to build a build system in <a href="https://guix.gnu.org/">Guix</a> for Elixir.</x-abstract>
 
   <x-h2 name="Objective" id="3cf92627-4a43-431c-971d-94e39dfec233">
-	<p>The objective is to implement a <a href="https://guix.gnu.org/manual/en/html_node/Build-Systems.html">Guix build system</a> for Elixir packages. Success is achieved if, given a correct <a href="https://guix.gnu.org/manual/en/guix.html#Defining-Packages">Guix package definition</a> for any package <code>pkg</code> on <a href="https://hex.pm/">Hex</a>, we have <code>guix install elixir-pkg</code> working as expected.</p>
+    <p>The objective is to implement a <a href="https://guix.gnu.org/manual/en/html_node/Build-Systems.html">Guix build system</a> for Elixir packages. Success is achieved if, given a correct <a href="https://guix.gnu.org/manual/en/guix.html#Defining-Packages">Guix package definition</a> for any package <code>pkg</code> on <a href="https://hex.pm/">Hex</a>, we have <code>guix install elixir-pkg</code> working as expected.</p>
   </x-h2>
 
   <x-h2 name="Result" state="todo" id="f5f91dac-81a8-4e3b-834c-1a80e8ff2cf9">
@@ -79,45 +79,45 @@
   </x-h2>
 
   <x-h2 name="Context" id="29dc6545-9f00-4942-bd35-11aa5e49bd6f">
-	<x-h3 name="Elixir build system" state="done" id="f2fc4a39-95c4-4f68-b64c-73cd73d77270">
-	  <ul>
-		<li>The Elixir build system is called <code>mix</code>.</li>
-		<li><code>mix</code> is an executable installed along with an <a href="https://elixir-lang.org/docs.html">Elixir installation</a>.</li>
-		<li>One of the functions of <code>mix</code> is to build an <a href="https://en.wikipedia.org/wiki/Object_code">object code</a> executable by the <a href="https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)">EVM</a> from <a href="https://hexdocs.pm/mix/1.17.2/Mix.html" id="d1789991-6e9d-4a02-a1ab-edb26da5be51">Elixir projects</a>.</li>
-		<li>This function is implemented by the <code>mix compile</code> command.</li>
-		<li>Another function is to test an Elixir project.</li>
-		<li>This function is implemented by the <code>mix test</code> command.</li>
-	  </ul>
-	</x-h3>
+    <x-h3 name="Elixir build system" state="done" id="f2fc4a39-95c4-4f68-b64c-73cd73d77270">
+      <ul>
+        <li>The Elixir build system is called <code>mix</code>.</li>
+        <li><code>mix</code> is an executable installed along with an <a href="https://elixir-lang.org/docs.html">Elixir installation</a>.</li>
+        <li>One of the functions of <code>mix</code> is to build an <a href="https://en.wikipedia.org/wiki/Object_code">object code</a> executable by the <a href="https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)">EVM</a> from <a href="https://hexdocs.pm/mix/1.17.2/Mix.html" id="d1789991-6e9d-4a02-a1ab-edb26da5be51">Elixir projects</a>.</li>
+        <li>This function is implemented by the <code>mix compile</code> command.</li>
+        <li>Another function is to test an Elixir project.</li>
+        <li>This function is implemented by the <code>mix test</code> command.</li>
+      </ul>
+    </x-h3>
 
-	<x-h3 name="Elixir package manager" state="done" id="d3ad1f83-aa2b-4d3e-bff2-08bd9371c647">
-	  <ul>
-		<li>Hex is the <q>package manager for the Erlang ecosystem</q>.</li>
-		<li>A package is an <a href="#d1789991-6e9d-4a02-a1ab-edb26da5be51">Elixir project</a> <a href="https://hex.pm/docs/publish#example-mixexs-file">published</a> on <a href="https://hex.pm/">hex.pm</a>.</li>
-	  </ul>
-	</x-h3>
+    <x-h3 name="Elixir package manager" state="done" id="d3ad1f83-aa2b-4d3e-bff2-08bd9371c647">
+      <ul>
+        <li>Hex is the <q>package manager for the Erlang ecosystem</q>.</li>
+        <li>A package is an <a href="#d1789991-6e9d-4a02-a1ab-edb26da5be51">Elixir project</a> <a href="https://hex.pm/docs/publish#example-mixexs-file">published</a> on <a href="https://hex.pm/">hex.pm</a>.</li>
+      </ul>
+    </x-h3>
 
-	<x-h3 name="Elixir packages may depend on an Erlang packages" id="b6811d91-f44a-406a-a459-af9948fc3c4d" state="done">
-	  <p><code>phoenix 1.7</code> depends on <code>telemetry 1.2.1</code>.</p>
-	  <p><code>telemetry</code> is an Erlang package:</p>
-	  <x-blockcode>
+    <x-h3 name="Elixir packages may depend on an Erlang packages" id="b6811d91-f44a-406a-a459-af9948fc3c4d" state="done">
+      <p><code>phoenix 1.7</code> depends on <code>telemetry 1.2.1</code>.</p>
+      <p><code>telemetry</code> is an Erlang package:</p>
+      <x-blockcode>
 $ mix deps | rg telemetry
 * telemetry 1.2.1 (Hex package) (rebar3)
   locked at 1.2.1 (telemetry) dad9ce9d
-	  </x-blockcode>
-	</x-h3>
+      </x-blockcode>
+    </x-h3>
 
-	<x-h3 name="An Erlang build system is necessary" state="done" id="7e35bbc7-e47c-4860-9026-90f6d0fb0dbf">
-	  <p>Since Elixir packages may <a href="#b6811d91-f44a-406a-a459-af9948fc3c4d">depend</a> on Erlang packages, an Erlang build system is necessary to implement the Elixir build system.</p>
-	</x-h3>
+    <x-h3 name="An Erlang build system is necessary" state="done" id="7e35bbc7-e47c-4860-9026-90f6d0fb0dbf">
+      <p>Since Elixir packages may <a href="#b6811d91-f44a-406a-a459-af9948fc3c4d">depend</a> on Erlang packages, an Erlang build system is necessary to implement the Elixir build system.</p>
+    </x-h3>
 
-	<x-h3 name="A Guix build system for Erlang" state="done" id="89fd3981-3f46-4d89-b026-2ba7acd6fe24">
-	  <p>See: <a href="https://phfrohring.com/page/f099c7ad-1b70-4ae3-9cfa-4063ef8cef36/">Guix and Erlang Build System</a></p>
-	</x-h3>
+    <x-h3 name="A Guix build system for Erlang" state="done" id="89fd3981-3f46-4d89-b026-2ba7acd6fe24">
+      <p>See: <a href="https://phfrohring.com/page/f099c7ad-1b70-4ae3-9cfa-4063ef8cef36/">Guix and Erlang Build System</a></p>
+    </x-h3>
 
-	<x-h3 name="Elixir project" state="done" id="aff127d2-321b-4d15-ad24-9ff0b100e3c6">
-	  <p>A test Elixir project that depends on the Erlang telemetry package has been built: <a href="https://github.com/phf-1/phf-1.github.io/raw/main/page/7cbeef0f-6f18-41be-85fb-706ee226be2b/data/guix_and_elixir_1/_build/test_project.tar.gz">test_project.tar.gz</a>.</p>
-	  <x-blockcode>
+    <x-h3 name="Elixir project" state="done" id="aff127d2-321b-4d15-ad24-9ff0b100e3c6">
+      <p>A test Elixir project that depends on the Erlang telemetry package has been built: <a href="https://github.com/phf-1/phf-1.github.io/raw/main/page/7cbeef0f-6f18-41be-85fb-706ee226be2b/data/guix_and_elixir_1/_build/test_project.tar.gz">test_project.tar.gz</a>.</p>
+      <x-blockcode>
 test_project$ iex -S mix
 ===> Analyzing applications...
 ===> Compiling telemetry
@@ -141,45 +141,45 @@ Generated test_project app
 .
 Finished in 0.01 seconds (0.00s async, 0.01s sync)
 1 test, 0 failures
-	  </x-blockcode>
+      </x-blockcode>
 
-	  <ul>
-		<li>We built this project using:
-		  <ol>
-			<li><code>mix new test_project</code></li>
-			<li><code>{:telemetry, "~> 1.2"}</code> is added to <code>mix.exs</code></li>
-			<li>Add enough code to show that Elixir uses the Telemetry package.</li>
-		  </ol>
-		</li>
-	  </ul>
-	</x-h3>
+      <ul>
+        <li>We built this project using:
+          <ol>
+            <li><code>mix new test_project</code></li>
+            <li><code>{:telemetry, "~> 1.2"}</code> is added to <code>mix.exs</code></li>
+            <li>Add enough code to show that Elixir uses the Telemetry package.</li>
+          </ol>
+        </li>
+      </ul>
+    </x-h3>
 
-	<x-h3 name="Guix package definition" state="done" id="01c07020-5a4f-4f82-8907-2b2d0a616e96">
-	  <p>A Guix package definition has been built for the test project. If this builds, then at least one Elixir package may depend on an Erlang package.</p>
-	  <x-blockcode>
+    <x-h3 name="Guix package definition" state="done" id="01c07020-5a4f-4f82-8907-2b2d0a616e96">
+      <p>A Guix package definition has been built for the test project. If this builds, then at least one Elixir package may depend on an Erlang package.</p>
+      <x-blockcode>
 (use-modules (guix packages)
-			 (guix download)
-			 (guix build-system mix)
-			 (guix build-system rebar)
-			 (guix gexp)
-			 ((guix licenses) #:prefix license:))
+             (guix download)
+             (guix build-system mix)
+             (guix build-system rebar)
+             (guix gexp)
+             ((guix licenses) #:prefix license:))
 
 (define erlang-telemetry
   (package
-	(name "erlang-telemetry")
-	(version "1.2.1")
-	(source
-	 (origin
-	   (method url-fetch)
-	   (uri (hexpm-uri "telemetry" version))
-	   (sha256
-		(base32 "1mgyx9zw92g6w8fp9pblm3b0bghwxwwcbslrixq23ipzisfwxnfs"))))
-	(build-system rebar-build-system)
-	(synopsis "Dynamic dispatching library for metrics and instrumentation")
-	(description
-	 "Dynamic dispatching library for metrics and instrumentation.")
-	(home-page "https://hexdocs.pm/telemetry/")
-	(license license:asl2.0)))
+    (name "erlang-telemetry")
+    (version "1.2.1")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (hexpm-uri "telemetry" version))
+       (sha256
+        (base32 "1mgyx9zw92g6w8fp9pblm3b0bghwxwwcbslrixq23ipzisfwxnfs"))))
+    (build-system rebar-build-system)
+    (synopsis "Dynamic dispatching library for metrics and instrumentation")
+    (description
+     "Dynamic dispatching library for metrics and instrumentation.")
+    (home-page "https://hexdocs.pm/telemetry/")
+    (license license:asl2.0)))
 
 (package
   (name "elixir-test-project")
@@ -191,12 +191,12 @@ Finished in 0.01 seconds (0.00s async, 0.01s sync)
   (description "Test package.")
   (home-page "https://example.com")
   (license #f))
-	  </x-blockcode>
-	</x-h3>
+      </x-blockcode>
+    </x-h3>
 
-	<x-h3 name="The build fails" state="done" id="882c32f2-086f-40fd-9b9c-ea13ebed5133">
-	  <p>As <a href="https://issues.guix.gnu.org/67877">expected</a>, the build fails:</p>
-	  <x-blockcode>
+    <x-h3 name="The build fails" state="done" id="882c32f2-086f-40fd-9b9c-ea13ebed5133">
+      <p>As <a href="https://issues.guix.gnu.org/67877">expected</a>, the build fails:</p>
+      <x-blockcode>
 $ guix build -K -f test-package.scm
 …
 ** (Mix) Could not start application telemetry: could not find application file: telemetry.app
@@ -205,26 +205,26 @@ error: in phase 'check': uncaught exception:
 phase `check' failed after 0.6 seconds
 command "mix" "do" "compile" "--no-deps-check" "--no-prune-code-paths" "+" "test" "--no-deps-check" failed with status 1
 …
-	  </x-blockcode>
-	</x-h3>
+      </x-blockcode>
+    </x-h3>
 
-	<x-h3 name="Analysis" state="done" id="03401fdc-d97e-4fa6-a836-9e3ef8613e6e">
-	  <ul>
-		<li>The build directory has been kept.
-		  <ul>
-			<li><code>/tmp/guix-build-elixir-test-project-0.drv-3</code></li>
-		  </ul>
-		</li>
-		<li>The telemetry package exists in the environment.
-		  <ul>
-			<li>Looking at <code>$BUILD_DIR/environment-variables</code>, we find:
-			  <ul>
-				<li><code>/gnu/store/…-erlang-telemetry-1.2.1/*</code></li>
-			  </ul>
-			</li>
-		  </ul>
-		</li>
-	  </ul>
+    <x-h3 name="Analysis" state="done" id="03401fdc-d97e-4fa6-a836-9e3ef8613e6e">
+      <ul>
+        <li>The build directory has been kept.
+          <ul>
+            <li><code>/tmp/guix-build-elixir-test-project-0.drv-3</code></li>
+          </ul>
+        </li>
+        <li>The telemetry package exists in the environment.
+          <ul>
+            <li>Looking at <code>$BUILD_DIR/environment-variables</code>, we find:
+              <ul>
+                <li><code>/gnu/store/…-erlang-telemetry-1.2.1/*</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
 
 <p>The telemetry app exists:</p>
 <x-blockcode>
@@ -241,107 +241,107 @@ $ tree /gnu/store/…-erlang-telemetry-1.2.1/
 │                   ├── telemetry_sup.beam
 │                   └── telemetry_test.beam
 └── share
-	└── doc
-		└── erlang-telemetry-1.2.1
-			└── LICENSE
+    └── doc
+        └── erlang-telemetry-1.2.1
+            └── LICENSE
 </x-blockcode>
 
-	  <p>So, <code>mix</code> should be told to look at:</p>
-	  <p><code>/gnu/store/…-erlang-telemetry-1.2.1/lib/erlang/lib/</code></p>
-	</x-h3>
+      <p>So, <code>mix</code> should be told to look at:</p>
+      <p><code>/gnu/store/…-erlang-telemetry-1.2.1/lib/erlang/lib/</code></p>
+    </x-h3>
 
-	<x-h3 name="ERL_LIBS" state="done" id="779d564b-5b72-4956-89ad-277b8324ab48">
-	  <p>The EVM searches for library directories provided by the OS
-	  using <a href="https://www.erlang.org/doc/apps/kernel/code.html#module-code-path"><code>ERL_LIBS</code></a>
-	  variable. For instance:</p>
+    <x-h3 name="ERL_LIBS" state="done" id="779d564b-5b72-4956-89ad-277b8324ab48">
+      <p>The EVM searches for library directories provided by the OS
+      using <a href="https://www.erlang.org/doc/apps/kernel/code.html#module-code-path"><code>ERL_LIBS</code></a>
+      variable. For instance:</p>
 
-	  <x-blockcode>
+      <x-blockcode>
 ERL_LIBS=/gnu/store/…-erlang-telemetry-1.2.1/lib/erlang/lib
-	  </x-blockcode>
+      </x-blockcode>
 
-	  <p>would make the telemetry application available to Elixir. This means that the build systems would have gathered all Erlang dependencies specified in the package <code>inputs</code> to add them to <code>ERL_LIBS</code>.</p>
-	</x-h3>
+      <p>would make the telemetry application available to Elixir. This means that the build systems would have gathered all Erlang dependencies specified in the package <code>inputs</code> to add them to <code>ERL_LIBS</code>.</p>
+    </x-h3>
 
-	<x-h3 name="The build succeeds" state="done" id="50c6ddd7-5bfc-4ea5-a882-60a7305b81d0">
-		<p>It builds successfully:</p>
-		<x-blockcode>
+    <x-h3 name="The build succeeds" state="done" id="50c6ddd7-5bfc-4ea5-a882-60a7305b81d0">
+        <p>It builds successfully:</p>
+        <x-blockcode>
 $ guix build -K -f src/test-package.scm
 […]
 /gnu/store/fks61451l1wx2gbwzfrd4a7knfyi5m14-elixir-test-project-0
-		</x-blockcode>
+        </x-blockcode>
 
-		<p>It is the result of this modification of <code>test-package.scm</code> thanks to Hartmut:</p>
-		<x-blockcode>
+        <p>It is the result of this modification of <code>test-package.scm</code> thanks to Hartmut:</p>
+        <x-blockcode>
 (arguments
  `(#:modules ((guix build mix-build-system)
-			  (guix build utils)
-			  (ice-9 match))
+              (guix build utils)
+              (ice-9 match))
    #:phases
    (modify-phases %standard-phases
-	 (add-before 'build 'collect-erlang-packages
-	   (lambda* (#:key inputs #:allow-other-keys)
-		 (let* ((erlang-dependencies
-				 (filter (match-lambda
-						  ((label . _) (string-prefix? "erlang-" label)))
-						 inputs))
-				(erl-libs
-				 (string-join
-				  (map (match-lambda
-						((_ . dir)
-						 (pk( string-append
-							  dir "/lib/erlang/lib"))))
-					   erlang-dependencies)
-				  ":")))
-		   (setenv "ERL_LIBS" erl-libs)))))))
-		</x-blockcode>
+     (add-before 'build 'collect-erlang-packages
+       (lambda* (#:key inputs #:allow-other-keys)
+         (let* ((erlang-dependencies
+                 (filter (match-lambda
+                          ((label . _) (string-prefix? "erlang-" label)))
+                         inputs))
+                (erl-libs
+                 (string-join
+                  (map (match-lambda
+                        ((_ . dir)
+                         (pk( string-append
+                              dir "/lib/erlang/lib"))))
+                       erlang-dependencies)
+                  ":")))
+           (setenv "ERL_LIBS" erl-libs)))))))
+        </x-blockcode>
 
-		<p>This piece of code searches for Erlang dependencies in the <code>inputs</code> field of the package and adds the relevant directories to <code>ERL_LIBS</code> so that necessary applications are found at runtime by the EVM.</p>
-	</x-h3>
+        <p>This piece of code searches for Erlang dependencies in the <code>inputs</code> field of the package and adds the relevant directories to <code>ERL_LIBS</code> so that necessary applications are found at runtime by the EVM.</p>
+    </x-h3>
 
-	<x-h3 state="done" name="A plan" id="0001951c-7b53-49e8-926d-d3817569815a">
-		<p>Since:</p>
-		<ul>
-			<li>We know that using <code>ERL_LIBS</code> may work.</li>
-			<li>We know that Python uses a similar mechanism with <code>PYTHONPATH</code>.</li>
-		</ul>
-		<p>Then:</p>
-		<ul>
-			<li>We study how Python manages its dependencies.</li>
-			<li>We try to apply this knowledge to Elixir.</li>
-		</ul>
-	</x-h3>
+    <x-h3 state="done" name="A plan" id="0001951c-7b53-49e8-926d-d3817569815a">
+        <p>Since:</p>
+        <ul>
+            <li>We know that using <code>ERL_LIBS</code> may work.</li>
+            <li>We know that Python uses a similar mechanism with <code>PYTHONPATH</code>.</li>
+        </ul>
+        <p>Then:</p>
+        <ul>
+            <li>We study how Python manages its dependencies.</li>
+            <li>We try to apply this knowledge to Elixir.</li>
+        </ul>
+    </x-h3>
 
-	<x-h3 name="How GUIX_PYTHONPATH is used" state="done" id="31e7c374-b009-43d5-81d9-a08261e4ffcc">
-	  <p>Counting on the analogy <code>GUIX_ERL_LIBS ~ GUIX_PYTHONPATH</code>, let's find how the value of <code>GUIX_PYTHONPATH</code> is used ; hoping to use <code>GUIX_ERL_LIBS</code> similarly. We have:</p>
-	  <x-blockquote author="Unknown" source="Guix Manual" url="https://guix.gnu.org/manual/en/guix.html#Build-Systems">
-		<p><code>python-build-system</code></p>
-		<p>…</p>
+    <x-h3 name="How GUIX_PYTHONPATH is used" state="done" id="31e7c374-b009-43d5-81d9-a08261e4ffcc">
+      <p>Counting on the analogy <code>GUIX_ERL_LIBS ~ GUIX_PYTHONPATH</code>, let's find how the value of <code>GUIX_PYTHONPATH</code> is used ; hoping to use <code>GUIX_ERL_LIBS</code> similarly. We have:</p>
+      <x-blockquote author="Unknown" source="Guix Manual" url="https://guix.gnu.org/manual/en/guix.html#Build-Systems">
+        <p><code>python-build-system</code></p>
+        <p>…</p>
 <p>For packages that install stand-alone Python programs under <code>bin/</code>, it takes care of wrapping these programs so that their <code>GUIX_PYTHONPATH</code> environment variable points to all the Python libraries they depend on.</p>
-	  </x-blockquote>
+      </x-blockquote>
 
-	  <p>In <code>gnu/packages/python.scm</code>, we find:</p>
-	  <x-blockcode>
+      <p>In <code>gnu/packages/python.scm</code>, we find:</p>
+      <x-blockcode>
 (define* (customize-site version)
   "Generate a install-sitecustomize.py phase, using VERSION."
   `(lambda* (#:key native-inputs inputs outputs #:allow-other-keys)
-	 (let* ((out (assoc-ref outputs "out"))
-			(site-packages (string-append
-							out "/lib/python"
-							,(version-major+minor version)
-							"/site-packages"))
-			(sitecustomize.py (assoc-ref (or native-inputs inputs)
-										 "sitecustomize.py"))
-			(dest (string-append site-packages "/sitecustomize.py")))
-	   (mkdir-p site-packages)
-	   (copy-file sitecustomize.py dest)
-	   ;; Set the correct permissions on the installed file, else the byte
-	   ;; compilation phase fails with a permission denied error.
-	   (chmod dest #o644))))
-	  </x-blockcode>
+     (let* ((out (assoc-ref outputs "out"))
+            (site-packages (string-append
+                            out "/lib/python"
+                            ,(version-major+minor version)
+                            "/site-packages"))
+            (sitecustomize.py (assoc-ref (or native-inputs inputs)
+                                         "sitecustomize.py"))
+            (dest (string-append site-packages "/sitecustomize.py")))
+       (mkdir-p site-packages)
+       (copy-file sitecustomize.py dest)
+       ;; Set the correct permissions on the installed file, else the byte
+       ;; compilation phase fails with a permission denied error.
+       (chmod dest #o644))))
+      </x-blockcode>
 
-	  <p>In <code>gnu/packages/aux-files/python/sitecustomize.py</code>, we find:</p>
-	  <x-blockquote author="Guix" source="sitecustomize.py" url="https://git.savannah.gnu.org/cgit/guix.git/tree/gnu/packages/aux-files/python/sitecustomize.py">
-		  <pre>
+      <p>In <code>gnu/packages/aux-files/python/sitecustomize.py</code>, we find:</p>
+      <x-blockquote author="Guix" source="sitecustomize.py" url="https://git.savannah.gnu.org/cgit/guix.git/tree/gnu/packages/aux-files/python/sitecustomize.py">
+          <pre>
 # Site-specific customization for Guix.
 #
 # The program below honors the GUIX_PYTHONPATH environment variable to
@@ -350,134 +350,134 @@ $ guix build -K -f src/test-package.scm
 # considered, a Python package must be installed under the
 # 'lib/pythonX.Y/site-packages' directory, where X and Y are the major and
 # minor version numbers of the Python interpreter.
-		  </pre>
-	  </x-blockquote>
+          </pre>
+      </x-blockquote>
 
-	  <p>The code looks for the value of the environment variable <code>GUIX_PYTHONPATH</code>. This variable may be viewed as the set of transitive Python dependencies of the current package. Each dependency then made available to the Python runtime during <a href="https://docs.python.org/3/library/site.html">initialization</a>.</p>
-	</x-h3>
+      <p>The code looks for the value of the environment variable <code>GUIX_PYTHONPATH</code>. This variable may be viewed as the set of transitive Python dependencies of the current package. Each dependency then made available to the Python runtime during <a href="https://docs.python.org/3/library/site.html">initialization</a>.</p>
+    </x-h3>
 
-	<x-h3 name="How GUIX_PYTHONPATH value is built" state="done" id="6849a964-b4f8-41c5-9b6e-ea8158c7e070">
-	  <p>Counting on the analogy <code>GUIX_ERL_LIBS ~ GUIX_PYTHONPATH</code>, let's find how the value of <code>GUIX_PYTHONPATH</code> is computed ; hoping to apply a similar computation to <code>GUIX_ERL_LIBS</code>. In <code>guix/gnu/packages/python.scm</code>, we find:</p>
-	  <x-blockcode>
+    <x-h3 name="How GUIX_PYTHONPATH value is built" state="done" id="6849a964-b4f8-41c5-9b6e-ea8158c7e070">
+      <p>Counting on the analogy <code>GUIX_ERL_LIBS ~ GUIX_PYTHONPATH</code>, let's find how the value of <code>GUIX_PYTHONPATH</code> is computed ; hoping to apply a similar computation to <code>GUIX_ERL_LIBS</code>. In <code>guix/gnu/packages/python.scm</code>, we find:</p>
+      <x-blockcode>
 (define-module (gnu packages python)
   ;; …
   #:export (customize-site
-			guix-pythonpath-search-path))
+            guix-pythonpath-search-path))
 
 ;; …
 
 (define (guix-pythonpath-search-path version)
   "Generate a GUIX_PYTHONPATH search path specification, using VERSION."
   (search-path-specification (variable "GUIX_PYTHONPATH")
-							 (files (list (string-append
-										   "lib/python"
-										   (version-major+minor version)
-										   "/site-packages")))))
+                             (files (list (string-append
+                                           "lib/python"
+                                           (version-major+minor version)
+                                           "/site-packages")))))
 
 ;; …
 
 (define-public python-3.10
   (package
-	;; …
-	(native-search-paths
-	 (list (guix-pythonpath-search-path version)
-		   ;; Used to locate tzdata by the zoneinfo module introduced in
-		   ;; Python 3.9.
-		   (search-path-specification
-			(variable "PYTHONTZPATH")
-			(files (list "share/zoneinfo")))))))
-	  </x-blockcode>
-	</x-h3>
+    ;; …
+    (native-search-paths
+     (list (guix-pythonpath-search-path version)
+           ;; Used to locate tzdata by the zoneinfo module introduced in
+           ;; Python 3.9.
+           (search-path-specification
+            (variable "PYTHONTZPATH")
+            (files (list "share/zoneinfo")))))))
+      </x-blockcode>
+    </x-h3>
 
-	<x-h3 state="done" name="How Python manages its dependencies" id="3c49e3f7-5961-4316-94f7-e506271db9bc">
-		<ol>
-			<li>The <a href="https://git.savannah.gnu.org/cgit/guix.git/tree/gnu/packages/python.scm"><code>python-3.10</code></a> package defines the <code>GUIX_PYTHONPATH</code> environment variable so that it lists all the Python dependencies in the environment (<a href="https://guix.gnu.org/manual/en/html_node/Search-Paths.html">Guix doc</a>).</li>
-			<li>Python initialization is modified using <code>sitecustomize.py</code> so that all dependencies represented by <code>GUIX_PYTHONPATH</code> are available to the Python runtime.</li>
-		</ol>
-	</x-h3>
+    <x-h3 state="done" name="How Python manages its dependencies" id="3c49e3f7-5961-4316-94f7-e506271db9bc">
+        <ol>
+            <li>The <a href="https://git.savannah.gnu.org/cgit/guix.git/tree/gnu/packages/python.scm"><code>python-3.10</code></a> package defines the <code>GUIX_PYTHONPATH</code> environment variable so that it lists all the Python dependencies in the environment (<a href="https://guix.gnu.org/manual/en/html_node/Search-Paths.html">Guix doc</a>).</li>
+            <li>Python initialization is modified using <code>sitecustomize.py</code> so that all dependencies represented by <code>GUIX_PYTHONPATH</code> are available to the Python runtime.</li>
+        </ol>
+    </x-h3>
 
-	<x-h3 state="done" name="How to make libraries available to the EVM" id="cff24e24-683e-4747-8b4b-e53df92b2937">
-		<p>To make Erlang/Elixir libraries — <i>i.e.</i> <a href="https://www.erlang.org/doc/system/design_principles.html#applications">applications</a> — available to the EVM, their directories must be added to the code path. To add them to the code path, they may be listed using the <code>ERL_LIBS</code> environment variable.</p>
+    <x-h3 state="done" name="How to make libraries available to the EVM" id="cff24e24-683e-4747-8b4b-e53df92b2937">
+        <p>To make Erlang/Elixir libraries — <i>i.e.</i> <a href="https://www.erlang.org/doc/system/design_principles.html#applications">applications</a> — available to the EVM, their directories must be added to the code path. To add them to the code path, they may be listed using the <code>ERL_LIBS</code> environment variable.</p>
 
-		<x-blockquote author="Ericsson AB" source="Erlang documentation" url="https://www.erlang.org/doc/system/system_principles#code-loading-strategy">
-			<p>
-				The code module contains a number of functions for modifying and querying the search path.
-			</p>
-		</x-blockquote>
+        <x-blockquote author="Ericsson AB" source="Erlang documentation" url="https://www.erlang.org/doc/system/system_principles#code-loading-strategy">
+            <p>
+                The code module contains a number of functions for modifying and querying the search path.
+            </p>
+        </x-blockquote>
 
-		<x-blockquote author="Ericsson AB" source="Erlang documentation" url="https://www.erlang.org/doc/apps/kernel/code">
-			<p>
-				In interactive mode, which is default, only the modules needed by the
-				runtime system are loaded during system startup. Other code is
-				dynamically loaded when first referenced. When a call to a function
-				in a certain module is made, and that module is not loaded, the code
-				server searches for and tries to load that module.
-			</p>
-		</x-blockquote>
+        <x-blockquote author="Ericsson AB" source="Erlang documentation" url="https://www.erlang.org/doc/apps/kernel/code">
+            <p>
+                In interactive mode, which is default, only the modules needed by the
+                runtime system are loaded during system startup. Other code is
+                dynamically loaded when first referenced. When a call to a function
+                in a certain module is made, and that module is not loaded, the code
+                server searches for and tries to load that module.
+            </p>
+        </x-blockquote>
 
-		<x-blockquote author="Ericsson AB" source="Erlang documentation" url="https://www.erlang.org/doc/apps/kernel/code">
-			<p>
-				In interactive mode, the code server maintains a code path,
-				consisting of a list of directories, which it searches sequentially
-				when trying to load a module.
-			</p>
-		</x-blockquote>
+        <x-blockquote author="Ericsson AB" source="Erlang documentation" url="https://www.erlang.org/doc/apps/kernel/code">
+            <p>
+                In interactive mode, the code server maintains a code path,
+                consisting of a list of directories, which it searches sequentially
+                when trying to load a module.
+            </p>
+        </x-blockquote>
 
-		<x-blockquote author="Ericsson AB" source="Erlang documentation" url="https://www.erlang.org/doc/apps/kernel/code">
-			<p>
-				Environment variable ERL_LIBS (defined in the operating system) can
-				be used to define more library directories to be handled in the same
-				way as the standard OTP library directory described above, except
-				that directories without an ebin directory are ignored.
-			</p>
-		</x-blockquote>
+        <x-blockquote author="Ericsson AB" source="Erlang documentation" url="https://www.erlang.org/doc/apps/kernel/code">
+            <p>
+                Environment variable ERL_LIBS (defined in the operating system) can
+                be used to define more library directories to be handled in the same
+                way as the standard OTP library directory described above, except
+                that directories without an ebin directory are ignored.
+            </p>
+        </x-blockquote>
 
-		<x-blockquote author="Ericsson AB" source="Erlang documentation" url="https://www.erlang.org/doc/apps/kernel/code">
-			<p>
-				All application directories found in the additional directories
-				appear before the standard OTP applications, except for the Kernel
-				and STDLIB applications, which are placed before any additional
-				applications. In other words, modules found in any of the additional
-				library directories override modules with the same name in OTP,
-				except for modules in Kernel and STDLIB.
-			</p>
-		</x-blockquote>
-	</x-h3>
+        <x-blockquote author="Ericsson AB" source="Erlang documentation" url="https://www.erlang.org/doc/apps/kernel/code">
+            <p>
+                All application directories found in the additional directories
+                appear before the standard OTP applications, except for the Kernel
+                and STDLIB applications, which are placed before any additional
+                applications. In other words, modules found in any of the additional
+                library directories override modules with the same name in OTP,
+                except for modules in Kernel and STDLIB.
+            </p>
+        </x-blockquote>
+    </x-h3>
 
-	<x-h3 state="doing" name="How Elixir/Erlang manage dependencies" id="e5de323a-3fa4-4006-a1d6-a2eff3931c4d">
-		<p>Any EVM application packaged with Guix — compiled from Elixir or Erlang — can use Elixir or Erlang dependencies, if:</p>
-		<ol>
-			<li>The Erlang package defines the <code>GUIX_ERL_LIBS</code> environment variable so that it lists all the Erlang and Elixir dependencies in the environment.
-				<ul>
-					<li>Like Python, we use a <code>search-path-specification</code>.</li>
-				</ul>
-			</li>
-			<li><code>erl</code> is <a href="https://guix.gnu.org/manual/en/html_node/Build-Utilities.html#Wrappers">wrapped</a> so that <code>ERL_LIBS = GUIX_ERL_LIBS</code>.
-				<ul>
-					<li>An Erlang runtime system is started with command <code>erl</code> <a href="https://www.erlang.org/doc/system/system_principles#starting-the-system">(doc)</a>.</li>
-				</ul>
-			</li>
-			<li>The above steps are true for Elixir, except that instead of <code>erl</code>, we have:
-				<ul>
-					<li><code>elixir</code> is wrapped so that <code>ERL_LIBS = GUIX_ERL_LIBS</code>.</li>
-					<li><code>iex</code> is wrapped so that <code>ERL_LIBS = GUIX_ERL_LIBS</code>.</li>
-				</ul>
-			</li>
-			<li>Elixir and Erlang packages dependencies must be declared as <a href="https://guix.gnu.org/manual/en/html_node/package-Reference.html">propagated inputs</a>.
-				<ol>
-					<li><code>GUIX_ERL_LIBS</code> is built using the <a href="https://guix.gnu.org/en/manual/devel/en/guix.html#Search-Paths">Search Paths</a> capabilities of Guix.</li>
-					<li>For a dependency to be found by the Search Paths capabilities of Guix, it must exist in the environment.</li>
-					<li>For a dependency to exist in the environment, it must be a propagated input.</li>
-				</ol>
-			</li>
-		</ol>
-	</x-h3>
+    <x-h3 state="doing" name="How Elixir/Erlang manage dependencies" id="e5de323a-3fa4-4006-a1d6-a2eff3931c4d">
+        <p>Any EVM application packaged with Guix — compiled from Elixir or Erlang — can use Elixir or Erlang dependencies, if:</p>
+        <ol>
+            <li>The Erlang package defines the <code>GUIX_ERL_LIBS</code> environment variable so that it lists all the Erlang and Elixir dependencies in the environment.
+                <ul>
+                    <li>Like Python, we use a <code>search-path-specification</code>.</li>
+                </ul>
+            </li>
+            <li><code>erl</code> is <a href="https://guix.gnu.org/manual/en/html_node/Build-Utilities.html#Wrappers">wrapped</a> so that <code>ERL_LIBS = GUIX_ERL_LIBS</code>.
+                <ul>
+                    <li>An Erlang runtime system is started with command <code>erl</code> <a href="https://www.erlang.org/doc/system/system_principles#starting-the-system">(doc)</a>.</li>
+                </ul>
+            </li>
+            <li>The above steps are true for Elixir, except that instead of <code>erl</code>, we have:
+                <ul>
+                    <li><code>elixir</code> is wrapped so that <code>ERL_LIBS = GUIX_ERL_LIBS</code>.</li>
+                    <li><code>iex</code> is wrapped so that <code>ERL_LIBS = GUIX_ERL_LIBS</code>.</li>
+                </ul>
+            </li>
+            <li>Elixir and Erlang packages dependencies must be declared as <a href="https://guix.gnu.org/manual/en/html_node/package-Reference.html">propagated inputs</a>.
+                <ol>
+                    <li><code>GUIX_ERL_LIBS</code> is built using the <a href="https://guix.gnu.org/en/manual/devel/en/guix.html#Search-Paths">Search Paths</a> capabilities of Guix.</li>
+                    <li>For a dependency to be found by the Search Paths capabilities of Guix, it must exist in the environment.</li>
+                    <li>For a dependency to exist in the environment, it must be a propagated input.</li>
+                </ol>
+            </li>
+        </ol>
+    </x-h3>
 
-	<x-h3 name="Phoenix can be built" state="todo" id="dac8156d-e123-4105-bec2-e1be1be4b53c">
-	  <p><code>guix install elixir-phoenix</code> works as expected.</p
+    <x-h3 name="Phoenix can be built" state="todo" id="dac8156d-e123-4105-bec2-e1be1be4b53c">
+      <p><code>guix install elixir-phoenix</code> works as expected.</p
 
 >
-	</x-h3>
+    </x-h3>
   </x-h2>
 
   <x-h2 name="Message" id="45d233f6-8b75-4b22-95ea-e41217f3cd32">
