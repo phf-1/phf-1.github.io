@@ -237,7 +237,7 @@ main {
 #bg-image {
   position: relative;
   display: block;
-  overflow-y: clip;
+  overflow-y: hidden;
   aspect-ratio: 16 / 9;
   top: 0;
   left: 0;
