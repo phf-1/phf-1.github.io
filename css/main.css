@@ -106,7 +106,7 @@
   --x-h6-font-size: var(--section-font-size);
   --x-h6-font-family: "Sans";
   --x-h6-color: var(--heading);
-  --x-cartridge-margin: var(--sep-margin);
+  --x-cartridge-margin: var(--sep-margin) auto;
   --x-cartridge-bg-color: var(--cartridge-bg);
   --x-cartridge-border-color: var(--annotation);
   --x-cartridge-annotation-color: var(--annotation);
