@@ -74,11 +74,11 @@
 
       <x-h3 name="Message type" id="3d91efe5-cc0d-4d78-a987-fe308f37fa50">
           <x-definition>
-              <p>Describes a Message type that this Actor may process. It is formed by an objective and a context.</p>
+              <p>Describes a message type that this Actor may process. It is formed by an objective and a context.</p>
           </x-definition>
 
           <x-h4 name="Objective" id="b8674ce2-cecd-4212-84d8-3c75d84c14ee">
-              <p>Describes the objective supposed to be satisfied by this actor after receiving <code>Message(context)</code>.</p>
+              <p>Describes the objective supposed to be satisfied by this Actor after receiving <code>Message(context)</code>.</p>
           </x-h4>
 
           <x-h4 name="Context" id="6dec90d7-42a2-496c-96dc-925bf3665e8a">
@@ -90,7 +90,7 @@
   <x-h2 name="Computation" id="caeb236c-1c6a-43bc-8d20-b40e39ee2c5e">
       <x-definition>
           <p>
-          This section can be understood as a set of on-going — possibly concurrent —
+          This section can be understood as a set of ongoing — possibly concurrent —
           computations. Each of them represents the computation associated with a
           received message.
           </p>
@@ -102,7 +102,7 @@
           </p>
 
           <p>
-              <em>Enriching</em> the context may be done by any mean possible. In the context of the Actor model, it means:
+              <em>Enriching</em> the context may be done by any means possible. In the context of the Actor model, it means:
           </p>
           <ul>
               <li>Computing from available state.</li>
@@ -114,7 +114,7 @@
       <x-h3 name="A message" id="fd37bfbc-d141-4c88-abc6-7d5fed064594">
           <x-h4 name="Objective" id="930a050e-74ba-42bd-9aac-1b93147b76db">
               <x-definition>
-                  <p>Describes the objective associated with this message. This section is optional if the message type belong to this Actor's interface.</p>
+                  <p>Describes the objective associated with this message. This section is optional if the message type belongs to this Actor's interface.</p>
               </x-definition>
           </x-h4>
 
@@ -128,7 +128,7 @@
               <x-definition>
                   <p>
                       Describes the context associated with this message that may be
-                      used by this actor to satisfy the objective. For instance, it
+                      used by this Actor to satisfy the objective. For instance, it
                       may include the sender address so that a result may be sent
                       back to it.
                   </p>
@@ -139,13 +139,13 @@
 
   <x-h2 name="State" id="59652480-5a9a-4e27-a99f-4c854d2e8bc2">
       <x-definition>
-          <p>Describes whatever this Actor <em>knows</em>, for instance: the adress of an other actor.</p>
+          <p>Describes whatever this Actor <em>knows</em>, for instance: the address of another actor.</p>
       </x-definition>
   </x-h2>
 
   <x-h2 name="Mailbox" id="a152d91c-c2e4-4def-83fd-fc9836f9c044">
       <x-definition>
-          <p>This section stores the messages received by the Actor and that are to be processed.</p>
+          <p>This section stores the messages received by the Actor that are to be processed.</p>
       </x-definition>
   </x-h2>
 
