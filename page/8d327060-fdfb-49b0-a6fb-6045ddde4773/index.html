@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- This Source Code Form is subject to the terms of the Mozilla Public
+		 - License, v. 2.0. If a copy of the MPL was not distributed with this
+		 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Analysis Of ActorScript." />
+    <title>Pierre-Henry Fröhring's Website</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://phfrohring.com/" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      __CSS__
+    </style>
+    <script defer type="module" src="/js/main.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <picture id="bg-image">
+        <source srcset="data/bg.webp" type="image/webp" />
+        <source srcset="data/bg.jpg" type="image/jpeg" />
+        <source srcset="data/bg.svg" type="image/svg+xml" />
+        <img
+          id="bg-image-img"
+          src="data/bg.jpg"
+          onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
+          alt="Illustration"
+        />
+      </picture>
+      <div id="container">
+        <div id="content">
+          <div id="topbar">
+            <nav class="actions">
+              <button id="toggle_toc_btn" class="button">TOC</button>
+              <button id="toggle_qa" class="button">SHOW</button>
+            </nav>
+            <nav class="navbar" id="navbar">
+              <a class="button" href="/">home</a>
+            </nav>
+            <x-toc></x-toc>
+          </div>
+
+          <x-h1 name="ActorScript Analysis" id="dfc6f0fe-803b-481b-bdaa-8fb0ac82558a">
+		<!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
+		<!-- :ID: 8d327060-fdfb-49b0-a6fb-6045ddde4773 -->
+
+		<x-abstract>The publication of Carl Hewitt: <q>ActorScript</q> is analysed in terms of questions and answers.</x-abstract>
+
+		<x-h2 name="Objective" id="79646ae1-d251-48a9-9795-0270716a0470">
+				<p>
+						The objective is to analyse the publication of Carl Hewitt: <q>ActorScript</q> is analysed in terms of questions and answers. Being able to answer these questions should prove a basic grasp of the introduced ideas.
+				</p>
+		</x-h2>
+
+		<x-h2 name="Result" id="9f32ba35-280d-40c8-a034-663450597f36">
+        <x-qa>
+            <x-q id="11eb70df-50d5-4918-b01b-a5594062f8c4">
+                <p>Expressions evaluate to …</p>
+            </x-q>
+            <x-a id="fb369853-46c2-4e21-ad46-63096f894f61">
+                <p>Expressions evaluate to Actors</p>
+            </x-a>
+        </x-qa>
+
+        <x-qa>
+            <x-q id="b49b86ca-53fd-4060-b387-fe11e3e3f9a6">
+                <p>Types are ….</p>
+            </x-q>
+            <x-a id="e9064d23-7a60-40ec-9a42-688e20e287a7">
+                <p>Types are Actors.</p>
+            </x-a>
+        </x-qa>
+
+        <x-qa>
+            <x-q id="f67814f5-0b03-4faa-8342-67cdb05c4065">
+                <p>What does this mean? <code>x:Integer≡3▮</code></p>
+            </x-q>
+            <x-a id="734d11b3-afe0-4476-ac39-33089c93f698">
+                <p>It defines the identifier x to be of type Integer with value 3.</p>
+            </x-a>
+        </x-qa>
+
+        <x-qa>
+            <x-q id="3857e8ab-2950-4e1d-be32-5cfa0c70b066">
+                <p>What is a Interfaces for a procedure?</p>
+            </x-q>
+            <x-a id="bd9cf2a6-7fee-4394-9e55-801191a4ccb3">
+                <p>A procedure interface is used to specify the types of messages that a procedure Actor can receive. For instance:</p>
+                <p><code>Interface IntegerToInteger {[Integer]↦ Integer}▮</code> means that an actor implements the interface <code>IntegerToInteger</code> if, given an integer it returns an integer.</p>
+            </x-a>
+        </x-qa>
+
+        <x-qa>
+            <x-q id="65eda46e-a210-4b25-997f-3b4bf58f1b14">
+                <p>What does this mean?</p>
+                <x-blockcode>
+                    Double ≡ Actor implements IntegerToIntegerAndVectorToVector using
+                    [n:Integer]→ n+n¶ // integer addition
+                    [v:Vector]→ v+v §▮ // vector addition
+                </x-blockcode>
+            </x-q>
+            <x-a id="84166fa1-71b3-4709-a71d-de014dded66a">
+                <p>
+                    It means that <code>Double</code> is an Actor that implements
+                    the interface <code>IntegerToIntegerAndVectorToVector</code>. The interface is
+                    implemented since to an integer <code>n</code> it returns
+                    <code>n+n</code> that is an integer and similarly for a
+                    vector.
+                </p>
+            </x-a>
+        </x-qa>
+
+        <x-qa>
+            <x-q id="aaf60bca-c3da-47a7-80be-8b662cf404f7">
+                <p>Given: <code> Square∎[x:Integer]:Integer ≡ x*x▮</code>, what does this mean: <code>Square∎[2+1]</code>?</p>
+            </x-q>
+            <x-a id="3f5eef4c-8d42-463d-8c9f-dd166bdd6b68">
+                <p>It means that the actor <code>Square</code> receives <code>3</code> which evaluates to <code>9</code>.</p>
+            </x-a>
+        </x-qa>
+
+        <x-qa>
+            <x-q id="1c799eba-e1b8-47e6-9917-472121b9c0e4">
+                <p>What does this mean?</p>
+                <figure>
+                    <img src="data/SimpleAccount.png" alt="SimpleAccount Actor">
+                    <figcaption>SimpleAccount Actor</figcaption>
+                </figure>
+            </x-q>
+            <x-a id="f179f8c1-7bcf-4c19-8b22-daf6ecbf76c3">
+                <ol>
+                    <li>e : Euro</li>
+                    <li>sa :≡ SimpleAccount[e] : Actor</li>
+                    <li>sa∎getBalance[] = e</li>
+                    <li>sa∎deposit[10]</li>
+                    <li>sa∎getBalance[] = e+10</li>
+                    <li>highlighted code is a continuation. By linearizing computation, a continuation prevents default concurrency and consequently variable data races are impossible.</li>
+                </ol>
+            </x-a>
+        </x-qa>
+
+        <x-qa>
+            <x-q id="29614c7c-ac12-479f-b6ce-1e33e46d5f78">
+                <p>What does this mean? <code>⦷Factorial∎[1000]+⦷Fibonacci∎[2000]▮</code></p>
+            </x-q>
+            <x-a id="38f2a52d-2ff7-40db-b825-c7b4f60f6db2">
+                <p>
+                    It means that concurrent execution of Factorial∎[1000] and Fibonacci∎[2000] both
+                    of which must complete execution. This does not require that
+                    the executions of Factorial∎[1000] and Fibonacci∎[2000] actually overlap in time.
+                </p>
+            </x-a>
+        </x-qa>
+		</x-h2>
+
+		<x-h2 name="Context" id="d469b4ad-7637-4828-982f-034fefa67f4b">
+
+		</x-h2>
+</x-h1>
+
+
+          <hr />
+
+          <footer>
+            <p xmlns:cc="http://creativecommons.org/ns#">
+              This work by
+              <a
+                rel="cc:attributionURL dct:creator"
+                property="cc:attributionName"
+                href="https://phfrohring.com"
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
+              is licensed under
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
+                target="_blank"
+                rel="license noopener noreferrer"
+                style="display: inline-block"
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -38,6 +38,12 @@
 
 /* css/main.css */
 :root {
+  --c-pink-50: #fce4ec;
+  --c-pink-900: #880e4f;
+  --c-red-50: #ffebee;
+  --c-red-900: #b71c1c;
+  --c-orange-50: #fff3e0;
+  --c-orange-900: #e65100;
   --font-size: 18px;
   --title-font-size: 2rem;
   --section-font-size: 1.1rem;
@@ -53,14 +59,14 @@
   --abstract-border: #4a148c;
   --example-bg: #eceff1;
   --example-border: #263238;
-  --definition-bg: #fbe9e7;
-  --definition-border: #bf360c;
-  --quote-bg: #fff3e0;
-  --quote-border: #e65100;
+  --definition-bg: var(--c-orange-50);
+  --definition-border: var(--c-orange-900);
+  --quote-bg: var(--c-orange-50);
+  --quote-border: var(--c-orange-900);
   --aside-border: #1b5e20;
   --aside-bg: #e8f5e9;
-  --objective-bg: var(--definition-bg);
-  --objective-border: var(--definition-border);
+  --objective-bg: var(--c-red-50);
+  --objective-border: var(--c-red-900);
   --result-bg: var(--example-bg);
   --result-border: var(--example-border);
   --method-bg: var(--algorithm-bg);
@@ -82,7 +88,7 @@
   --annotation: #777;
   --button-hover: #fffff0;
   --p-margin-bottom: calc(var(--line-height) * 1em);
-  --sep-margin: 4rem;
+  --sep-margin: 2rem;
   --img-shadow: 2px 2px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   --border: 1px solid var(--annotation);
   --x-keyword-color: var(--main-bg);
@@ -106,7 +112,7 @@
   --x-h6-font-size: var(--section-font-size);
   --x-h6-font-family: "Sans";
   --x-h6-color: var(--heading);
-  --x-cartridge-margin: var(--sep-margin) auto;
+  --x-cartridge-margin: 3rem auto;
   --x-cartridge-bg-color: var(--cartridge-bg);
   --x-cartridge-border-color: var(--annotation);
   --x-cartridge-annotation-color: var(--annotation);
@@ -204,6 +210,8 @@ html {
   text-align: start;
   font-feature-settings: "kern" 1;
   font-kerning: normal;
+  -moz-tab-size: 1rem;
+  tab-size: 1rem;
 }
 body {
   visibility: hidden;
@@ -272,6 +280,7 @@ main {
 }
 #topbar .actions {
   display: flex;
+  column-gap: var(--p-margin-bottom);
 }
 .button {
   font-family: "Mono" !important;

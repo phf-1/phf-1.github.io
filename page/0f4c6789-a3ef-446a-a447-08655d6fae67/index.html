@@ -6,7 +6,7 @@
 		 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Allegories." />
+    <meta name="description" content="Analysis Of Laws for Communicating Parallel Processes." />
     <title>Pierre-Henry Fröhring's Website</title>
     <link
       rel="apple-touch-icon"
@@ -59,43 +59,92 @@
             <x-toc></x-toc>
           </div>
 
-          <x-h1 name="Allegories" id="36e9f9a4-6c79-40aa-bd19-5ea2287c6e8b">
+          <x-h1 name="Actor" id="53ffed3c-8fcd-4543-9792-8290da41c597">
+  <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
+  <!-- :ID: 0f4c6789-a3ef-446a-a447-08655d6fae67 -->
 
-  <x-h2 name="The Rising Sea" id="6ba53bc9-96ff-4c54-b617-90507ce93ae2">
-	<p>The unknown thing to be known appeared to me as some stretch of earth or hard marl, resisting penetration… the sea advances insensibly in silence, nothing seems to happen, nothing moves, the water is so far off you hardly hear it… yet it finally surrounds the resistant substance.</p>
+  <x-abstract>The definition of an <em>Actor</em> is refined.</x-abstract>
+
+  <x-h2 name="Objective" id="4c2f3ed1-5219-4d42-a937-ea228c719e32">
+    <x-definition>
+      <p>An objective describes <strong>necessary</strong> conditions that an object should satisfy for the objective to be reached.</p>
+    </x-definition>
+
+    <x-example>
+      <p>The objective is to implement a function <x-math>f~: \N \to \N</x-math> such that <x-math>f(i) ≡ 2 \times i</x-math> in Python and in C.</p>
+    </x-example>
   </x-h2>
 
-  <x-h2 name="A Tale Of Two Bridges" id="5d19731e-1656-458a-b5bd-846a5adebf58">
-	<p>Two old engineers were talking of their lives and boasting of their greatest projects. One of the engineers explained how he had designed the largest bridge ever made.</p>
+  <x-h2 name="Result" id="9d42547a-52d3-4068-8929-64f6aced9ddb">
+    <x-definition>
+      <p>An result is an object that has been built <strong>so far</strong> to reach the objective.</p>
+    </x-definition>
 
-	<p><q>We built it across a river gorge,</q> he told his friend. <q>It was wide and deep. We spent two years studying the land, and choosing designs. Then we hired the best people and designed the bridge, which took another five years. We contracted the largest engineering firms to build the structures, the towers, the tollbooths, and the roads that would connect the bridge to the main highways. Under the road level we had trains, and a special path for cyclists. That bridge represented years of my life.</q></p>
+    <x-example>
+      <p>A Python implementation:</p>
 
-	<p>The second man reflected for a while, then spoke. <q>One evening me and a friend threw a rope across a gorge,</q> he said.  <q>Just a rope, tied to two trees. There were two villages, one at each side. At first, people pulled packages across that rope with a pulley and string. Then someone pulled across a second rope, and built a foot walk. It was dangerous, but the kids loved it. A group of men then rebuilt that, made it solid, and women started to cross, everyday, with their produce. A market grew up on one side of the bridge, and slowly that became a large town, since there was a lot of space for houses. The rope bridge got replaced with a wooden bridge, to allow horses and carts to cross. Then the town built a real stone bridge, with metal beams. Later, they replaced the stone part with steel, and today there's a suspension bridge standing in that same spot.</q></p>
+<x-blockcode>
+def f(x):
+    return x * 2
+</x-blockcode>
 
-	<p>The first engineer was silent. <q>Funny thing,</q> he said, <q>my bridge was demolished not long after it was built. Turns out it was built in the wrong place and no-one wanted to use it. Some bastard had thrown a rope across the gorge, a few miles further downstream, and that's where everyone went.</q></p>
+      <p>A C implementation: <x-todo></x-todo></p>
+      <x-blockcode>
+#include &lt;limits.h&gt;
+
+int a = &lt;something&gt;;
+int x = &lt;something&gt;;
+// There may be a need to check for -1 for two's complement machines.
+// If one number is -1 and another is INT_MIN, multiplying them we get abs(INT_MIN) which is 1 higher than INT_MAX
+if (a == -1 && x == INT_MIN) // `a * x` can overflow
+if (x == -1 && a == INT_MIN) // `a * x` (or `a / x`) can overflow
+// general case
+if (x != 0 && a &gt; INT_MAX / x) // `a * x` would overflow
+if (x != 0 && a &lt; INT_MIN / x) // `a * x` would underflow
+      </x-blockcode>
+    </x-example>
   </x-h2>
 
-  <x-h2 name="How To Draw A Owl" id="ad0389f2-1153-42f5-a278-441b387c41ad">
-	<figure>
-	  <img src="data/owl_2.jpg" alt="How To Draw An Owl">
-	  <figcaption>Method 1</figcaption>
-	</figure>
+  <x-h2 name="State" id="bbe1ae94-1477-410b-b8c1-8361b52ee157">
+    <x-definition>
+      <p>Arbitrary computations <strong>encapsulated</strong> by the actor that are used to — among other things — produce the result.</p>
+    </x-definition>
 
-	<figure>
-	  <img src="data/owl_1.jpg" alt="How To Draw An Owl">
-	  <figcaption>Method 2</figcaption>
-	</figure>
+    <x-example>
+      <p>The result may be a <i>PDF</i> file that needs a compilation step from encapsulated source files. So, when the result should be produced, the actor may perform an computation <i>e.g.</i> <code>make pdf</code>.</p>
+    </x-example>
   </x-h2>
 
-  <x-h2 name="The Five Years Old Child" id="905d006f-46d0-448a-93d4-26b193111613">
-	<p>The best way I know to eliminate errors is to imagine that there is a curious child sitting next to us. Every time we write an assertion, the child asks: Why?</p>
+  <x-h2 name="Context" id="3e6de89d-6f5b-4cc9-b7cc-bfdecbe9a719">
+    <x-definition>
+      <p>The context is a record of the <strong>steps</strong> taken by the actor in order to reach its objective. It is encapsulated. A <strong>step</strong> defines at least an objective and a result. A step may be in one of several states:</p>
+      <ol>
+        <li><x-todo></x-todo> Means « yet to be done ».</li>
+        <li><x-doing></x-doing> Means « a result is being built ».</li>
+        <li><x-waiting></x-waiting> Means « waiting for an other actor response ».</li>
+        <li><x-done></x-done> Means « a result has been built and it satisfies the objective ». (Often omitted to prevent noise.)</li>
+        <li><x-failed></x-failed> Means « a result — if any — has been built and it does not satisfy the objective ».</li>
+      </ol>
+    </x-definition>
+
+    <x-example>
+      <x-h3 name="K&R has be assimilated." state="todo" id="f8a88fa8-4a00-4aa3-b369-fe0e0052ea0b">
+        <a href="https://example.com">A result.</a>
+      </x-h3>
+    </x-example>
   </x-h2>
 
-  <x-h2 name="The Bed Of Procustes" id="f72c7936-bf1f-4244-bb2c-8285eb284f6d">
-	<p>Procrustes had a stronghold on Mount Korydallos at Erineus, on the sacred way between Athens and Eleusis.</p>
-	<p>There he had a bed, in which he invited every passer-by to spend the night, and where he set to work on them with his smith's hammer, to stretch them to fit. In later tellings, if the guest proved too tall, Procrustes would amputate the excess length; if the guest was too short Procrustes would stretch them until they died; nobody ever fit the bed exactly.</p>
-  </x-h2>
+  <x-h2 name="Message" id="85ee9844-d746-4d6f-9d53-838f570fcb5d">
+    <x-definition>
+       <p>A message is an arbitrary immutable piece of data that the actor may process whenever it can — like reading an email from a mailbox.</p>
+    </x-definition>
 
+    <x-example>
+      <x-h3 name="A message" id="4cad8998-9956-4d8d-8719-f6cf023f474c">
+        <p>content</p>
+      </x-h3>
+    </x-example>
+  </x-h2>
 </x-h1>
 
 

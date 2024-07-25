@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- This Source Code Form is subject to the terms of the Mozilla Public
+		 - License, v. 2.0. If a copy of the MPL was not distributed with this
+		 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="An Example Of Actor." />
+    <title>Pierre-Henry Fröhring's Website</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://phfrohring.com/" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      __CSS__
+    </style>
+    <script defer type="module" src="/js/main.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <picture id="bg-image">
+        <source srcset="data/bg.webp" type="image/webp" />
+        <source srcset="data/bg.jpg" type="image/jpeg" />
+        <source srcset="data/bg.svg" type="image/svg+xml" />
+        <img
+          id="bg-image-img"
+          src="data/bg.jpg"
+          onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
+          alt="Illustration"
+        />
+      </picture>
+      <div id="container">
+        <div id="content">
+          <div id="topbar">
+            <nav class="actions">
+              <button id="toggle_toc_btn" class="button">TOC</button>
+              <button id="toggle_qa" class="button">SHOW</button>
+            </nav>
+            <nav class="navbar" id="navbar">
+              <a class="button" href="/">home</a>
+            </nav>
+            <x-toc></x-toc>
+          </div>
+
+          <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
+<x-h1 name="Actor" id="c6c92a94-9130-4755-b71f-d773d884d8f2">
+
+  <x-abstract>Describes how this Actor may be used.</x-abstract>
+
+  <x-h2 name="Interface" id="cc05cd49-880c-4292-81d1-f0d8545f3c7a">
+      <x-definition>
+          <p>This section describes messages that this Actor may process. It can be understood as a set of <em>if …, then: …</em> statements. For instance:</p>
+          <ul>
+              <li>If I receive a message <code>Message(context)</code>, then: I will <strong>try</strong> to satisfy <em>this</em> objective using the context <code>context</code>.</li>
+          </ul>
+      </x-definition>
+
+      <x-h3 name="Message type" id="3d91efe5-cc0d-4d78-a987-fe308f37fa50">
+          <x-definition>
+              <p>Describes a Message type that this Actor may process. It is formed by an objective and a context.</p>
+          </x-definition>
+
+          <x-h4 name="Objective" id="b8674ce2-cecd-4212-84d8-3c75d84c14ee">
+              <p>Describes the objective supposed to be satisfied by this actor after receiving <code>Message(context)</code>.</p>
+          </x-h4>
+
+          <x-h4 name="Context" id="6dec90d7-42a2-496c-96dc-925bf3665e8a">
+              <p>Describes the <code>context</code> that is required for this Actor to — maybe — satisfy the objective.</p>
+          </x-h4>
+      </x-h3>
+  </x-h2>
+
+  <x-h2 name="Computation" id="caeb236c-1c6a-43bc-8d20-b40e39ee2c5e">
+      <x-definition>
+          <p>
+          This section can be understood as a set of on-going — possibly concurrent —
+          computations. Each of them represents the computation associated with a
+          received message.
+          </p>
+
+          <p>
+              To build a computation, a message is moved from the mailbox to this
+              section. <em>Computing</em> means enriching the context of the message up to the point of being able to infer a result — <i>i.e.</i> an
+              instance of some type — that satisfies the objective.
+          </p>
+
+          <p>
+              <em>Enriching</em> the context may be done by any mean possible. In the context of the Actor model, it means:
+          </p>
+          <ul>
+              <li>Computing from available state.</li>
+              <li>Sending messages to other actors or even itself.</li>
+              <li>Creating other actors.</li>
+          </ul>
+      </x-definition>
+
+      <x-h3 name="A message" id="fd37bfbc-d141-4c88-abc6-7d5fed064594">
+          <x-h4 name="Objective" id="930a050e-74ba-42bd-9aac-1b93147b76db">
+              <x-definition>
+                  <p>Describes the objective associated with this message. This section is optional if the message type belong to this Actor's interface.</p>
+              </x-definition>
+          </x-h4>
+
+          <x-h4 name="Result" id="6a0059bc-7c4e-4d91-9c6b-f60a55366d57">
+              <x-definition>
+                  <p>This section stores the result so far, if any. The result may or may not satisfy the objective.</p>
+              </x-definition>
+          </x-h4>
+
+          <x-h4 name="Context" id="9146e649-bcd2-4533-8503-08d94ffed894">
+              <x-definition>
+                  <p>
+                      Describes the context associated with this message that may be
+                      used by this actor to satisfy the objective. For instance, it
+                      may include the sender address so that a result may be sent
+                      back to it.
+                  </p>
+              </x-definition>
+          </x-h4>
+      </x-h3>
+  </x-h2>
+
+  <x-h2 name="State" id="59652480-5a9a-4e27-a99f-4c854d2e8bc2">
+      <x-definition>
+          <p>Describes whatever this Actor <em>knows</em>, for instance: the adress of an other actor.</p>
+      </x-definition>
+  </x-h2>
+
+  <x-h2 name="Mailbox" id="a152d91c-c2e4-4def-83fd-fc9836f9c044">
+      <x-definition>
+          <p>This section stores the messages received by the Actor and that are to be processed.</p>
+      </x-definition>
+  </x-h2>
+
+  <x-h2 name="History" id="14668eb6-a5d1-48f6-8d91-2a0bf6214560">
+      <x-definition>
+          <p>This section stores past computations for future reference.</p>
+      </x-definition>
+  </x-h2>
+</x-h1>
+
+
+          <hr />
+
+          <footer>
+            <p xmlns:cc="http://creativecommons.org/ns#">
+              This work by
+              <a
+                rel="cc:attributionURL dct:creator"
+                property="cc:attributionName"
+                href="https://phfrohring.com"
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
+              is licensed under
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
+                target="_blank"
+                rel="license noopener noreferrer"
+                style="display: inline-block"
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
