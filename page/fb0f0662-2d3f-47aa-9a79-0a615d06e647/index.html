@@ -36,12 +36,12 @@
   <body>
     <main>
       <picture id="bg-image">
-        <source srcset="data/bg.webp" type="image/webp" />
-        <source srcset="data/bg.jpg" type="image/jpeg" />
-        <source srcset="data/bg.svg" type="image/svg+xml" />
+        <source srcset="bg.webp" type="image/webp" />
+        <source srcset="bg.jpg" type="image/jpeg" />
+        <source srcset="bg.svg" type="image/svg+xml" />
         <img
           id="bg-image-img"
-          src="data/bg.jpg"
+          src="bg.jpg"
           onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
           alt="Illustration"
         />
@@ -59,45 +59,114 @@
             <x-toc></x-toc>
           </div>
 
-          <x-h1 name="Refine the Actor definition" id="68b606c8-ab4c-4354-9078-c2e4f07157ef">
-		<!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
-		<!-- :ID: fb0f0662-2d3f-47aa-9a79-0a615d06e647 -->
+          <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
+<x-h1 name="Refine the Actor definition" id="d6a95183-2250-442b-b9c5-4e3da56d8b85">
 
-		<x-abstract>Resources are accumulutaed in order to refine the definition of an <em>Actor</em> as introduced by Carl Hewitt in the <q>Actor Model</q>. The definition is refined untill pratically usable for routine tasks.</x-abstract>
+		<x-abstract>Describes how this Actor may be used.</x-abstract>
 
-		<x-h2 name="Objective" id="0816eef6-c3ae-4ea2-9b85-a249b960307b">
-				<p>The objective is to refine the definition of an <em>Actor</em> introduced by Carl Hewitt.</p>
+		<x-h2 name="Interface" id="35342b68-2bcd-4e9a-8008-bed21c77e894">
+				<ul>
+						<li><a href="/page/0f4c6789-a3ef-446a-a447-08655d6fae67#a051917c-751a-4b5c-9699-c26ac97cdb6b">Analyse</a></li>
+				</ul>
+
+				<x-h3 name="Introduce" id="e0a73c9f-f2ff-4f72-be8d-0e7a982ca82a">
+						<x-objective>
+								<p>
+										Given the available analysis, introduce a given idea.
+								</p>
+						</x-objective>
+				</x-h3>
+
+				<x-h3 name="Test" id="ba17a39e-9136-4d9c-8973-68ce79cd6ada">
+						<x-objective>
+								<p>
+										Given an introduced idea, test it.
+								</p>
+						</x-objective>						
+				</x-h3>
 		</x-h2>
 
-		<x-h2 name="Result" id="36c3b013-8219-40f1-9900-a53099d078bf">
-				<p><a href="/page/101e3f53-f9e2-465a-a0e3-d0685b8e4f21/">Actor</a></p>
-		</x-h2>
-
-		<x-h2 name="Context" id="6514db93-4878-4bb0-a37a-078a65575109">
-				<x-h3 name="Resources" id="cc323694-f77b-404a-af97-ca0b2ef4547d">
-						<ol>
-								<li><a href="/page/420c363e-fe07-450b-9cb6-96893174123d">Actor Model of Computation</a></li>
-								<li><a href="/page/0f4c6789-a3ef-446a-a447-08655d6fae67">Laws for Communicating Parallel Processes</a></li>
-								<li><a href="/page/8d327060-fdfb-49b0-a6fb-6045ddde4773">ActorScript</a></li>
+		<x-h2 name="Computation" id="a1653367-700b-4ad0-bc16-752d927a9621">
+				<x-h3 name="Analyse" id="8337c707-fee3-4e33-b4aa-dd57eebfa8c7">
+						<ul>
 								<li><a href="/page/c72653e0-79ca-45c7-9774-4cc99bf8b22c">Everything you wanted to know about the Actor Model</a></li>
-								<li><x-todo></x-todo>A Universal Modular ACTOR Formalism for Artificial Intelligence </li>
-								<li><x-todo></x-todo>Actors and continuous functionals</li>
-								<li><x-todo></x-todo>The incremental garbage collection of processes</li>
-								<li><x-todo></x-todo>Foundations of Actor Semantics</li>
-								<li><x-todo></x-todo>The repeated demise of logic programming and why it will be reincarnated</li>
-								<li><x-todo></x-todo>What is Computation? Actor Model versus Turing's Model</li>
-								<li><x-todo></x-todo>ACTORS: A Model of Concurrent Computation in Distributed Systems</li>
-								<li><x-todo></x-todo>A foundation for Actor computation</li>
-								<li><x-todo></x-todo>From objects to actors: study of a limited symbiosis in smalltalk-80</li>
-								<li><x-todo></x-todo>Synchronous, asynchronous, and causally ordered communication</li>
-								<li><x-todo></x-todo>Analyzing the Roles of Descriptions and Actions in Open Systems</li>
-								<li><x-todo></x-todo>https://www.youtube.com/watch?v=7erJ1DV_Tlo</li>
-								<li><x-todo></x-todo>A Proof Procedure Using Connection Graphs</li>
-								<li><x-todo></x-todo>Time, Clocks, and Orderings of Events in a Distributed System</li>
-								<li><x-todo></x-todo>A Basis for a Mathematical Theory of Computation</li>
-								<li><x-todo></x-todo>The Inheritance Anomaly: Ten Years Later</li>
-								<li><x-todo></x-todo><a href="https://getakka.net/articles/intro/what-problems-does-actor-model-solve.html">What Problems Does the Actor Model Solve?</a></li>
-						</ol>
+						</ul>
+				</x-h3>
+		</x-h2>
+
+		<x-h2 name="State" id="227f9cb0-070b-4ef4-a78b-3e1c122b26b8">
+				<ol>
+						<li>Examples of actors
+								<ol>
+										<li><a href="/page/101e3f53-f9e2-465a-a0e3-d0685b8e4f21">An Example Of Actor</a></li>
+								</ol>
+						</li>
+
+						<li>Analysis
+								<ol>
+										<li><a href="/page/420c363e-fe07-450b-9cb6-96893174123d">Actor Model of Computation</a></li>
+										<li><a href="/page/df5994ea-0c8c-4d18-9ec3-3446b24b6ac6">Hewitt, Meijer and Szyperski: The Actor Model</a></li>
+										<li><a href="/page/0f4c6789-a3ef-446a-a447-08655d6fae67">Laws for Communicating Parallel Processes</a></li>										
+								</ol>
+						</li>
+				</ol>
+		</x-h2>
+
+		<x-h2 name="Mailbox" id="3cd83fae-10c9-42e6-b89b-df3f4a03b624">
+				<x-h3 name="Analyse" id="bf53685c-7ea5-4363-b6ab-1706c750fce9">
+						<x-context>
+								<ol>
+										<li><a href="/page/8d327060-fdfb-49b0-a6fb-6045ddde4773">ActorScript</a></li>
+										<li><x-todo></x-todo>A Universal Modular ACTOR Formalism for Artificial Intelligence </li>
+										<li><x-todo></x-todo>Actors and continuous functionals</li>
+										<li><x-todo></x-todo>The incremental garbage collection of processes</li>
+										<li><x-todo></x-todo>Foundations of Actor Semantics</li>
+										<li><x-todo></x-todo>The repeated demise of logic programming and why it will be reincarnated</li>
+										<li><x-todo></x-todo>What is Computation? Actor Model versus Turing's Model</li>
+										<li><x-todo></x-todo>ACTORS: A Model of Concurrent Computation in Distributed Systems</li>
+										<li><x-todo></x-todo>A foundation for Actor computation</li>
+										<li><x-todo></x-todo>From objects to actors: study of a limited symbiosis in smalltalk-80</li>
+										<li><x-todo></x-todo>Synchronous, asynchronous, and causally ordered communication</li>
+										<li><x-todo></x-todo>Analyzing the Roles of Descriptions and Actions in Open Systems</li>
+										<li><x-todo></x-todo>A Proof Procedure Using Connection Graphs</li>
+										<li><x-todo></x-todo>Time, Clocks, and Orderings of Events in a Distributed System</li>
+										<li><x-todo></x-todo>A Basis for a Mathematical Theory of Computation</li>
+										<li><x-todo></x-todo>The Inheritance Anomaly: Ten Years Later</li>
+										<li><x-todo></x-todo><a href="https://getakka.net/articles/intro/what-problems-does-actor-model-solve.html">What Problems Does the Actor Model Solve?</a></li>
+								</ol>
+						</x-context>
+				</x-h3>
+		</x-h2>
+
+		<x-h2 name="History" id="84495524-2df9-43f2-a7ee-ea31c3ccb762">
+				<x-h3 name="Analyse" id="eb59c5b3-6459-4df7-b78f-29a6166d18c9">
+						<x-result>
+								<a href="/page/420c363e-fe07-450b-9cb6-96893174123d">Actor Model of Computation</a>
+						</x-result>
+				</x-h3>
+
+				<x-h3 name="Introduce" id="e2f8756d-64a1-4bb4-8ca1-d889bfa75a78">
+						<x-result>
+								<p><a href="/page/101e3f53-f9e2-465a-a0e3-d0685b8e4f21">An Example Of Actor</a></p>
+						</x-result>
+				</x-h3>
+
+				<x-h3 name="Analyse" id="511176e5-d808-4c19-ac46-8d5bc9f7bc1a">
+						<x-result>
+								<p><a href="/page/df5994ea-0c8c-4d18-9ec3-3446b24b6ac6">Hewitt, Meijer and Szyperski: The Actor Model</a></p>
+						</x-result>
+				</x-h3>
+
+				<x-h3 name="Analyse" id="3fb7ff17-2a21-4d44-81be-447cbe9bc1ff">
+						<x-result>
+								<p><a href="/page/0f4c6789-a3ef-446a-a447-08655d6fae67">Laws for Communicating Parallel Processes</a></p>
+						</x-result>
+				</x-h3>
+
+				<x-h3 name="Test" id="9588d0b4-7290-497f-a3fa-62c14e825304">
+						<x-result>
+								<p><a href="/page/4ccb9b46-4a7e-4cdc-afc5-cce043e00fc4">Modelling Chess using the Actor Model</a></p>								
+						</x-result>
 				</x-h3>
 		</x-h2>
 </x-h1>

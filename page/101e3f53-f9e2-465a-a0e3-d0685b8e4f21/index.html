@@ -36,12 +36,12 @@
   <body>
     <main>
       <picture id="bg-image">
-        <source srcset="data/bg.webp" type="image/webp" />
-        <source srcset="data/bg.jpg" type="image/jpeg" />
-        <source srcset="data/bg.svg" type="image/svg+xml" />
+        <source srcset="bg.webp" type="image/webp" />
+        <source srcset="bg.jpg" type="image/jpeg" />
+        <source srcset="bg.svg" type="image/svg+xml" />
         <img
           id="bg-image-img"
-          src="data/bg.jpg"
+          src="bg.jpg"
           onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
           alt="Illustration"
         />
@@ -65,15 +65,15 @@
   <x-abstract>Describes how this Actor may be used.</x-abstract>
 
   <x-h2 name="Interface" id="cc05cd49-880c-4292-81d1-f0d8545f3c7a">
-      <x-definition>
+      <x-definition term="Interface" id="51270f78-fc76-4609-b52a-ea0f3aa54275">
           <p>This section describes messages that this Actor may process. It can be understood as a set of <em>if …, then: …</em> statements. For instance:</p>
           <ul>
               <li>If I receive a message <code>Message(context)</code>, then: I will <strong>try</strong> to satisfy <em>this</em> objective using the context <code>context</code>.</li>
           </ul>
       </x-definition>
 
-      <x-h3 name="Message type" id="3d91efe5-cc0d-4d78-a987-fe308f37fa50">
-          <x-definition>
+      <x-h3 name="Message" id="3d91efe5-cc0d-4d78-a987-fe308f37fa50">
+          <x-definition term="Message" id="36e53690-1576-4b38-a25d-d5f316923c1c">
               <p>Describes a message type that this Actor may process. It is formed by an objective and a context.</p>
           </x-definition>
 
@@ -88,7 +88,7 @@
   </x-h2>
 
   <x-h2 name="Computation" id="caeb236c-1c6a-43bc-8d20-b40e39ee2c5e">
-      <x-definition>
+      <x-definition term="Computation" id="ddbd3072-d865-4c58-b9e2-702bb9be93f4">
           <p>
           This section can be understood as a set of ongoing — possibly concurrent —
           computations. Each of them represents the computation associated with a
@@ -113,19 +113,19 @@
 
       <x-h3 name="A message" id="fd37bfbc-d141-4c88-abc6-7d5fed064594">
           <x-h4 name="Objective" id="930a050e-74ba-42bd-9aac-1b93147b76db">
-              <x-definition>
+              <x-definition term="Objective" id="e7a5b4f4-3c34-4a2d-8ca2-7e76f2d71ea3">
                   <p>Describes the objective associated with this message. This section is optional if the message type belongs to this Actor's interface.</p>
               </x-definition>
           </x-h4>
 
           <x-h4 name="Result" id="6a0059bc-7c4e-4d91-9c6b-f60a55366d57">
-              <x-definition>
+              <x-definition term="Result" id="a2aa4ec2-a210-4579-8e1e-39502929c3de">
                   <p>This section stores the result so far, if any. The result may or may not satisfy the objective.</p>
               </x-definition>
           </x-h4>
 
           <x-h4 name="Context" id="9146e649-bcd2-4533-8503-08d94ffed894">
-              <x-definition>
+              <x-definition term="Context" id="aa4612e0-f555-4e9e-9458-07961e872f30">
                   <p>
                       Describes the context associated with this message that may be
                       used by this Actor to satisfy the objective. For instance, it
@@ -138,19 +138,19 @@
   </x-h2>
 
   <x-h2 name="State" id="59652480-5a9a-4e27-a99f-4c854d2e8bc2">
-      <x-definition>
+      <x-definition term="State" id="4092d53c-7f00-4aef-a386-31464994c219">
           <p>Describes whatever this Actor <em>knows</em>, for instance: the address of another actor.</p>
       </x-definition>
   </x-h2>
 
   <x-h2 name="Mailbox" id="a152d91c-c2e4-4def-83fd-fc9836f9c044">
-      <x-definition>
+      <x-definition term="Mailbox" id="3a6105f4-a66a-45b0-9a6c-3205ac30bb31">
           <p>This section stores the messages received by the Actor that are to be processed.</p>
       </x-definition>
   </x-h2>
 
   <x-h2 name="History" id="14668eb6-a5d1-48f6-8d91-2a0bf6214560">
-      <x-definition>
+      <x-definition term="History" id="06f091d4-d117-41b2-89a9-3d3e5af6fa64">
           <p>This section stores past computations for future reference.</p>
       </x-definition>
   </x-h2>

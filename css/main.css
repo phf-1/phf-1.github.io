@@ -40,6 +40,10 @@
 :root {
   --c-pink-50: #fce4ec;
   --c-pink-900: #880e4f;
+  --c-gray-50: #FAFAFA;
+  --c-gray-900: #212121;
+  --c-blue-gray-50: #ECEFF1;
+  --c-blue-gray-900: #263238;
   --c-red-50: #ffebee;
   --c-red-900: #b71c1c;
   --c-orange-50: #fff3e0;
@@ -61,8 +65,8 @@
   --example-border: #263238;
   --definition-bg: var(--c-orange-50);
   --definition-border: var(--c-orange-900);
-  --quote-bg: var(--c-orange-50);
-  --quote-border: var(--c-orange-900);
+  --quote-bg: var(--c-blue-gray-50);
+  --quote-border: var(--c-blue-gray-900);
   --aside-border: #1b5e20;
   --aside-bg: #e8f5e9;
   --objective-bg: var(--c-red-50);
@@ -120,13 +124,13 @@
   --x-blockquote-color: var(--main-text);
   --x-blockquote-bg-color: var(--quote-bg);
   --x-blockquote-annotation-color: var(--annotation);
-  --x-question-border-color: var(--quote-border);
+  --x-question-bg-color: var(--c-orange-50);
+  --x-question-border-color: var(--c-orange-900);
   --x-question-color: var(--main-text);
-  --x-question-bg-color: var(--quote-bg);
   --x-question-annotation-color: var(--annotation);
-  --x-answer-border-color: var(--quote-border);
+  --x-answer-bg-color: var(--c-gray-50);
+  --x-answer-border-color: var(--c-gray-900);
   --x-answer-color: var(--main-text);
-  --x-answer-bg-color: var(--quote-bg);
   --x-answer-annotation-color: var(--annotation);
   --x-note-border-color: var(--note-border);
   --x-note-color: var(--main-text);

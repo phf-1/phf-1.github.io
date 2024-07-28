@@ -36,12 +36,12 @@
   <body>
     <main>
       <picture id="bg-image">
-        <source srcset="data/bg.webp" type="image/webp" />
-        <source srcset="data/bg.jpg" type="image/jpeg" />
-        <source srcset="data/bg.svg" type="image/svg+xml" />
+        <source srcset="bg.webp" type="image/webp" />
+        <source srcset="bg.jpg" type="image/jpeg" />
+        <source srcset="bg.svg" type="image/svg+xml" />
         <img
           id="bg-image-img"
-          src="data/bg.jpg"
+          src="bg.jpg"
           onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
           alt="Illustration"
         />
@@ -154,9 +154,15 @@
 
         <hr />
 
-        <x-definition>A definition.</x-definition>
+        <x-definition term="Term" id="5d0b3990-6c05-413c-846d-723335b3b6ca">
+						<p>A definition.</p>
+				</x-definition>
 
-        <x-example>A example.</x-example>
+        <x-example>
+						<p>
+								A example.
+						</p>
+				</x-example>
 
         <hr />
 

@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- This Source Code Form is subject to the terms of the Mozilla Public
+		 - License, v. 2.0. If a copy of the MPL was not distributed with this
+		 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Analysis Of Hewitt, Meijer and Szyperski: The Actor Model." />
+    <title>Pierre-Henry Fröhring's Website</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://phfrohring.com/" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      __CSS__
+    </style>
+    <script defer type="module" src="/js/main.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <picture id="bg-image">
+        <source srcset="bg.webp" type="image/webp" />
+        <source srcset="bg.jpg" type="image/jpeg" />
+        <source srcset="bg.svg" type="image/svg+xml" />
+        <img
+          id="bg-image-img"
+          src="bg.jpg"
+          onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
+          alt="Illustration"
+        />
+      </picture>
+      <div id="container">
+        <div id="content">
+          <div id="topbar">
+            <nav class="actions">
+              <button id="toggle_toc_btn" class="button">TOC</button>
+              <button id="toggle_qa" class="button">SHOW</button>
+            </nav>
+            <nav class="navbar" id="navbar">
+              <a class="button" href="/">home</a>
+            </nav>
+            <x-toc></x-toc>
+          </div>
+
+          <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
+<x-h1 name="Hewitt, Meijer and Szyperski: The Actor Model" id="3b6c9d06-9ca4-41d1-9255-b720c617608e">
+
+    <x-abstract>
+        The video <q>Hewitt, Meijer and Szyperski: The Actor Model</q> is analysed in
+        terms of questions and answers. Being able to answer these questions is a first
+        step toward understanding the subject.
+    </x-abstract>
+
+    <x-h2 name="Interface" id="9ca405a4-7ae8-44bd-9614-4c1e0201e853">
+        <ul>
+            <li><a href="/page/0f4c6789-a3ef-446a-a447-08655d6fae67#a051917c-751a-4b5c-9699-c26ac97cdb6b">Analyse</a></li>
+            <li><a href="/page/0f4c6789-a3ef-446a-a447-08655d6fae67#be31a366-5968-47f5-9938-26eb8f0e079c">Test</a></li>
+        </ul>
+    </x-h2>
+
+    <x-h2 name="Computation" id="498830ee-8315-45d8-87c5-9f2945c5f672">
+
+    </x-h2>
+
+    <x-h2 name="State" id="4bb6381f-3847-4ee6-ac65-f50c1bf352a9">
+        <x-h3 name="QA" id="3a100064-86fb-4639-85ea-7f90b2e3365f">
+            <x-qa>
+                <x-q id="486ddf89-abae-4a47-919c-aa5233ba932b">
+                    <p>What is an Actor?</p>
+                </x-q>
+                <x-a id="5821809d-a012-4663-9877-27b782a5bb8e">
+                    <ol>
+                        <li>An Actor is the fundamental unit of computation.</li>
+                        <li>It embodies three things:
+                            <ul>
+                                <li>Processing</li>
+                                <li>Storage</li>
+                                <li>Communication</li>
+                            </ul>
+                        </li>
+                        <li>It has at least one address to which messages can be sent.</li>
+                        <li>Different Actors may share the same address.</li>
+                        <li>When an Actor receives a message, it can:
+                            <ul>
+                                <li>create more actors</li>
+                                <li>send messages to other actors using addresses it knows about</li>
+                                <li>decide what it is going to do with the next message it receives</li>
+                            </ul>
+                        </li>
+                        <li>Messages are processed one at a time even if in practice, they may be processed in parallel.</li>
+                    </ol>
+                </x-a>
+            </x-qa>
+
+            <x-qa>
+                <x-q id="1378b762-b7fa-4b73-938c-91d709ff7b7d">
+                    <p>What is an Actor Model?</p>
+                </x-q>
+                <x-a id="1da8d6ac-d808-43d0-ad47-62ee9ce1a88a">
+                    <ol>
+                        <li>An Actor Model is a system of Actors.</li>
+                    </ol>
+                </x-a>
+            </x-qa>
+
+            <x-qa>
+                <x-q id="23072280-9995-4a8a-9ab7-e852692e54a8">
+                    <p>What is a <q>Future</q>?</p>
+                </x-q>
+                <x-a id="4396fae2-5176-4c6d-b124-56baa6e90418">
+                    <x-blockquote author="Dale Schumacher" source="It's Actors All The Way Down" url="http://www.dalnefre.com/wp/2012/03/futures-and-capabilities/">
+                        <p>A future is an Actor. It behaves like so: it is basically a storage cell that can be written to only once, but read from multiple times. If a read occurs before the write, the read-reply is delayed until the write provides a value. This effectively suspends readers until the write occurs. Note, however, that there is no blocking in an actor system. The asynchronous reply to a read request is simply deferred until a value is available.</p>
+                    </x-blockquote>
+                </x-a>
+            </x-qa>
+
+            <x-qa>
+                <x-q id="30da2fa9-afa3-472e-bf5f-bd5239908ec5">
+                    <ul>
+                        <li>If an Actor sends a message to itself, then: will it deadlock?</li>
+                        <li><i>i.e.</i> can it wait for a message to be sent by itself?</li>
+                    </ul>
+                </x-q>
+                <x-a id="b9629724-95de-4061-8e5f-b874a5ced9b9">
+                    <ol>
+                        <li>An Actor may use a Future to avoid deadlocks.</li>
+                        <li>If it needs a result computed by itself, it can create a future.</li>
+                        <li>The future represents the result of that computation.</li>
+                        <li>So:
+                            <ol>
+                                <li>The current computation reaches a point where it needs a result computed by itself.</li>
+                                <li>A future that represents this result is built.</li>
+                                <li>The computation waits for the result.</li>
+                                <li>When the result is available, the computation continues.</li>
+                            </ol>
+                        </li>
+                        <li>There is no deadlock.</li>
+                    </ol>
+                </x-a>
+            </x-qa>
+
+            <x-qa>
+                <x-q id="51f8bbe5-dd96-45b6-afa8-875919959f99">
+                    <p>Can packets be dropped?</p>
+                </x-q>
+                <x-a id="b54edd29-e438-434a-896d-32471659bbb5">
+                    <ol>
+                        <li>Communication is best effort.</li>
+                        <li>Messages are delivered at most once.</li>
+                        <li>If a<sub>0</sub> sends a message m to a<sub>1</sub> and a<sub>0</sub> does not receive an ACK, then: a<sub>0</sub> may resend m to a<sub>1</sub>.</li>
+                        <li>It means that messages must be persisted in some way.</li>
+                    </ol>
+                </x-a>
+            </x-qa>
+
+            <x-qa>
+                <x-q id="a1cc0489-1c42-41e3-b7c8-0180cd3237d8">
+                    <p>What is non-determinism?</p>
+                </x-q>
+                <x-a id="06430578-5220-428a-8785-548d99ba0450">
+                    <ol>
+                        <li>It is the order of events obtained by means of probabilities like flipping a coin: it cannot be predicted.</li>
+                    </ol>
+                </x-a>
+            </x-qa>
+
+            <x-qa>
+                <x-q id="9e798e0e-00a6-40b1-b6a3-4907ac38f823">
+                    <p>What is indeterminacy?</p>
+                </x-q>
+                <x-a id="8d0409a2-f3f9-4e96-8654-9ebdeac6203c">
+                    <ol>
+                        <li>It is the order of events obtained by the way things worked out in the system: it cannot be predicted.</li>
+                    </ol>
+                </x-a>
+            </x-qa>
+
+            <x-qa>
+                <x-q id="d1ac0b90-8e76-4cba-a847-c8568a70b968">
+                    <p>What is an interrupt?</p>
+                </x-q>
+                <x-a id="bb2241ef-634b-4494-a9a5-3289bbd0dd15">
+                    <x-blockquote author="Unknown" source="OSDev.org Wiki" url="https://wiki.osdev.org/Interrupts">
+                        <p>
+                            Interrupts are signals from a device, such as a keyboard or a hard drive, to the CPU, telling
+                            it to immediately stop whatever it is currently doing and do something else. For example, a
+                            keyboard controller can send an interrupt when a character key was pressed.</p>
+
+                        <p>
+                            Then the OS can display the character on screen immediately, even if the CPU was doing
+                            something completely unrelated before, and return to what it was doing afterwards. When a
+                            specific interrupt arises, the CPU looks up an entry for that specific interrupt from
+
+                            the
+                            Interrupt Descriptor Table, then the CPU calls the code for the Interrupt Service Routine
+                            (ISR) at the address pointed to by that entry.</p>
+                    </x-blockquote>
+                </x-a>
+            </x-qa>
+
+            <x-qa>
+                <x-q id="a0cb682d-e79a-4708-bf30-093449f39632">
+                    <p>Can we do non-deterministic computing?</p>
+                </x-q>
+                <x-a id="df2d3c84-ea60-4517-8668-72c2d208dc1b">
+                    <ol>
+                        <li>There are non-deterministic models.</li>
+                        <li>There is a Turing Machine which can transition to multiple states for a given symbol and state combination. The computation can then proceed simultaneously along different paths and decide among them later.</li>
+                        <li>It is known as a Non-Deterministic Turing Machine (NDTM).</li>
+                    </ol>
+                </x-a>
+            </x-qa>
+
+        </x-h3>
+
+    </x-h2>
+</x-h1>
+
+
+          <hr />
+
+          <footer>
+            <p xmlns:cc="http://creativecommons.org/ns#">
+              This work by
+              <a
+                rel="cc:attributionURL dct:creator"
+                property="cc:attributionName"
+                href="https://phfrohring.com"
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
+              is licensed under
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
+                target="_blank"
+                rel="license noopener noreferrer"
+                style="display: inline-block"
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

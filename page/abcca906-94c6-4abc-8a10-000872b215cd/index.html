@@ -36,12 +36,12 @@
   <body>
     <main>
       <picture id="bg-image">
-        <source srcset="data/bg.webp" type="image/webp" />
-        <source srcset="data/bg.jpg" type="image/jpeg" />
-        <source srcset="data/bg.svg" type="image/svg+xml" />
+        <source srcset="bg.webp" type="image/webp" />
+        <source srcset="bg.jpg" type="image/jpeg" />
+        <source srcset="bg.svg" type="image/svg+xml" />
         <img
           id="bg-image-img"
-          src="data/bg.jpg"
+          src="bg.jpg"
           onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
           alt="Illustration"
         />
