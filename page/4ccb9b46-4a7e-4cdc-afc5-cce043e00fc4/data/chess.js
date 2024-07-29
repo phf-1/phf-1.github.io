@@ -4,468 +4,666 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-const error = function (msg) {
-  throw new Error(msg);
+/*
+ * is(x,type) : Boolean
+ */
+const is = (x, type) => {
+    if (Array.isArray(type)) {
+        const [op, ...types] = type;
+        if (op === "or") {
+            return types.some((type) => is(x, type));
+        } else {
+            error(`Unexpected type ${type}`);
+        }
+    } else if (type === null) {
+        return x === null;
+    } else if (type === "string") {
+        return typeof x === "string";
+    } else if (type === "nat") {
+        return Number.isInteger(x) && x >= 0;
+    } else if (type === "HTMLCanvas") {
+        return x instanceof Node && x.tagName === "CANVAS";
+    } else if (type === "canvas") {
+        return x instanceof CanvasRenderingContext2D;
+    } else if (typeof x === "object") {
+        return x instanceof type;
+    } else {
+        return false;
+    }
 };
 
-const Piece = class extends EventTarget {
-  constructor(square, team) {
-    super();
-    this.#square = square;
-    this.#teams.includes(team) || error(`Unexpected team. team = ${team}`);
-    this.#team = team;
-    square.add_piece(this);
-    this.draw();
-  }
+/*
+ * error(msg) throws an error with message msg ; it is a convenience function.
+ */
+const error = function (msg) {
+    is(msg, "string") || error(`msg is not a string. msg = ${msg}`);
+    throw new Error(msg);
+};
 
-  // Public
-  draw() {
-    error(`Not Implemented`);
-  }
+/*
+ * check(x,type, pred) : Void
+ */
+const check = (x, type, pred = (x) => true) => {
+    is(x, type) || error(`x has not the type ${type}. x = ${x}`);
+    pred(x) || error(`x does not verify pred. x = ${x}`);
+};
 
-  team() {
-    return this.#team;
-  }
-
-  square(next_square = null) {
-    if (next_square === null) {
-      return this.#square;
-    } else {
-      this.#square = next_square;
+/*
+ * dir : Direction models a direction w.r.t. a square on the board: up, right, …
+ */
+const Direction = class {
+    constructor(val) {
+        check(val, "string");
+        this.#val = val;
     }
-  }
 
-  move(square) {
-    error(`Not Implemented.`);
-  }
-
-  color() {
-    if (this.#team === "black") {
-      return this.#color_dark;
-    } else {
-      return this.#color_light;
+    val() {
+        return this.#val;
     }
-  }
 
-  // Private
-  #square;
-  #teams = ["black", "white"];
-  #team;
-  #color_light = "#fffff8";
-  #color_dark = "#000006";
+    toString() {
+        return `${this.constructor.name}
+  val = ${this.#val}
+`;
+    }
+
+    #val;
+};
+
+/*
+ * directions models all the possible directions.
+ */
+const top = new Direction("top");
+const top_right = new Direction("top_right");
+const right = new Direction("right");
+const bottom_right = new Direction("bottom_right");
+const bottom = new Direction("bottom");
+const bottom_left = new Direction("bottom_left");
+const left = new Direction("left");
+const top_left = new Direction("top_left");
+const directions = [top, top_right, right, bottom_right, bottom, bottom_left, left, top_left];
+
+/*
+ * team : Team models a team i.e. black or white.
+ */
+const Team = class {
+    constructor(val) {
+        check(val, "string");
+        this.#val = val;
+    }
+
+    val() {
+        return this.#val;
+    }
+
+    toString() {
+        return `${this.constructor.name}
+  val = ${this.#val}
+`;
+    }
+
+    #val;
+};
+
+/*
+ * teams models all the possible teams.
+ */
+const black = new Team("black");
+const white = new Team("white");
+const teams = [black, white];
+
+/*
+ * coord : Coord ≡ (Top, Left) models the coordinates of a square on the board starting from the top left square.
+ *
+ * |-------|-------|--
+ * | (0,0) | (0,1) | …
+ * |-------|-------|--
+ * | (1,0) | (1,1) | …
+ * |-------|-------|--
+ * | …     | …     | …
+ *
+ * Top ≡ Nat
+ * Left ≡ Nat
+ */
+const Coord = class {
+    constructor(top, left) {
+        check(top, "nat");
+        this.#top = top;
+        check(left, "nat");
+        this.#left = left;
+    }
+
+    top() {
+        return this.#top;
+    }
+
+    left() {
+        return this.#left;
+    }
+
+    toString() {
+        return `${this.constructor.name}
+  top = ${this.#top}
+  left = ${this.#left}
+`;
+    }
+
+    #top;
+
+    #left;
+};
+
+/*
+ * pos : Pos ≡ (Top, Left) models the coordinates of pixel starting from the top left pixel.
+ */
+const Pos = class {
+    constructor(top, left) {
+        check(top, "nat");
+        this.#top = top;
+        check(left, "nat");
+        this.#left = left;
+    }
+
+    top() {
+        return this.#top;
+    }
+
+    left() {
+        return this.#left;
+    }
+
+    toString() {
+        return `${this.constructor.name}
+  top = ${this.#top}
+  left = ${this.#left}
+`;
+    }
+
+    #top;
+
+    #left;
+};
+
+/*
+ * square : Square models a square on the board.
+ *
+ * A square manages a piece of a canvas.
+ * It is represented on the canvas as a square of a given width and position.
+ * It has a given color.
+ * It can be occupied by at most one piece.
+ * It has neighbors, at most one per direction.
+ */
+const Square = class {
+    constructor(canvas, pos, width, color) {
+        check(canvas, "canvas");
+        this.#canvas = canvas;
+
+        check(pos, Pos);
+        this.#pos = pos;
+
+        check(width, "nat");
+        this.#width = width;
+
+        check(color, "string");
+        this.#color = color;
+
+        this.#piece = null; // : Piece | Null.
+
+        this.#neighbors = {}; // : Square | Null; dir : Direction.
+
+        this.#draw();
+    }
+
+    canvas() {
+        return this.#canvas;
+    }
+
+    pos() {
+        return this.#pos;
+    }
+
+    width() {
+        return this.#width;
+    }
+
+    color() {
+        return this.#color;
+    }
+
+    neighbors() {
+        return this.#neighbors;
+    }
+
+    piece() {
+        return this.#piece;
+    }
+
+    add_neighbor(dir, square) {
+        check(dir, Direction);
+        check(square, ["or", Square, null]);
+        this.#neighbors[dir] = square;
+    }
+
+    get_neighbor(dir) {
+        check(dir, Direction);
+        return this.#neighbors[dir];
+    }
+
+    add_piece(piece) {
+        check(piece, Piece);
+        this.#piece = piece;
+        this.#draw();
+    }
+
+    remove_piece() {
+        const piece = this.#piece;
+        this.#piece = null;
+        this.#draw();
+        return piece;
+    }
+
+    is_empty() {
+        return !this.#piece;
+    }
+
+    toString() {
+        return ```${this.constructor.name}(
+  canvas = ${this.#canvas},
+  pos = ${this.#pos},
+  width = ${this.#width},
+  color = ${this.#color},
+  piece = ${this.#piece},
+  neighbors = ${this.#neighbors}
+)
+```;
+    }
+
+    #canvas;
+
+    #width;
+
+    #pos;
+
+    #color;
+
+    #neighbors;
+
+    #piece;
+
+    #draw() {
+        const canvas = this.#canvas;
+        const pos = this.#pos;
+        const width = this.#width;
+        canvas.fillStyle = this.#color;
+        canvas.fillRect(pos.left(), pos.top(), width, width);
+        if (!this.is_empty()) {
+            this.#piece.pixels()(this.#canvas, this.#pos, this.#width);
+        }
+    }
+};
+
+/*
+ * piece : Piece models an abstract piece on the board.
+ *
+ * An abstract piece acts like all chess pieces ; provided appropriate
+ * restrictions. In other words, a particular chess piece — e.g. a pawn — is an
+ * abstract piece with a constraint behaviour — e.g. it may move only to one of a few
+ * valid squares.
+ *
+ * It has a square.
+ * It has a team.
+ * It has a representation as a set of pixels.
+ * It has a color.
+ */
+const Piece = class {
+    constructor(square, team) {
+        check(square, Square);
+        this.#square = square;
+
+        check(team, Team);
+        this.#team = team;
+
+        this.#color = this.#team === black ? "#000006" : "#fffff8";
+
+        this.#pixels = (canvas, pos, width) => {
+            check(canvas, "canvas");
+            check(pos, Pos);
+            check(width, "nat");
+            const top = pos.top();
+            const left = pos.left();
+            canvas.fillStyle = this.color();
+            canvas.beginPath();
+            canvas.arc((left + (left + width)) / 2, (top + (top + width)) / 2, width * 0.9, 0, Math.PI * 2);
+            canvas.closePath();
+            canvas.fill();
+        };
+
+        square.add_piece(this);
+    }
+
+    square() {
+        return this.#square;
+    }
+
+    team() {
+        return this.#team;
+    }
+
+    pixels() {
+        return this.#pixels;
+    }
+
+    move(square) {
+        check(square, Square);
+        this.#square.remove_piece();
+        square.remove_piece();
+        this.#square = square;
+        square.add_piece(this);
+    }
+
+    color() {
+        return this.#color;
+    }
+
+    toString() {
+        return `${this.constructor.name}
+  square = ${this.#square}
+  color = ${this.#color}
+  team = ${this.#team}
+  pixels = ${this.#pixels}
+`;
+    }
+
+    #square;
+
+    #color;
+
+    #team;
+
+    #pixels;
 };
 
 const Pawn = class extends Piece {
-  // Public
-  draw() {
-    const pixels = (ctx, top, left, width) => {
-      ctx.fillStyle = this.color();
-
-      // Draw the base
-      ctx.beginPath();
-      ctx.rect(left + width * 0.3, top + width * 0.8, width * 0.4, width * 0.2);
-      ctx.closePath();
-      ctx.fill();
-
-      // Draw the body
-      ctx.beginPath();
-      ctx.arc(left + width / 2, top + width * 0.6, width * 0.2, 0, Math.PI * 2);
-      ctx.closePath();
-      ctx.fill();
-
-      // Draw the head
-      ctx.beginPath();
-      ctx.arc(
-        left + width / 2,
-        top + width * 0.3,
-        width * 0.15,
-        0,
-        Math.PI * 2,
-      );
-      ctx.closePath();
-      ctx.fill();
-    };
-    this.square().draw(pixels);
-  }
-
-  move(square) {
-    const dir = this.#find_direction(square);
-    this.#move(dir);
-  }
-
-  // Private
-  #dirs_white = ["top_left", "top", "top_right"];
-
-  #dirs_black = ["bottom_left", "bottom", "bottom_right"];
-
-  #find_direction(square) {
-    const my_square = this.square();
-    const dirs = this.team() === "black" ? this.#dirs_black : this.#dirs_white;
-    for (const dir of dirs) {
-      if (my_square.get_neighbor(dir) === square) {
-        return dir;
-      }
-    }
-    error(`No direction found to square. square = ${square}`);
-  }
-
-  #move(dir) {
-    const square = this.square();
-    const next_square = square.get_neighbor(dir);
-    next_square !== null || error(`There is no next square.`);
-    const dirs_vertical = ["top", "bottom"];
-    const dirs_diag = ["top_left", "top_right", "bottom_left", "bottom_right"];
-    if (dirs_vertical.includes(dir)) {
-      if (!next_square.is_empty()) {
-        error(`The next square is not empty.`);
-      }
+    constructor(square, team) {
+        super(square, team);
+        const dirs_white = [top_left, top, top_right];
+        const dirs_black = [bottom_left, bottom, bottom_right];
+        this.#dirs = team === black ? dirs_black : dirs_white;
     }
 
-    if (dirs_diag.includes(dir)) {
-      if (next_square.is_empty()) {
-        error(`The next square is empty.`);
-      }
-      const next_piece = next_square.get_piece();
-      if (next_piece.team() === this.team()) {
-        error(`The next piece is in my team.`);
-      }
+    pixels() {
+        return (canvas, pos, width) => {
+            check(canvas, "canvas");
+            check(pos, Pos);
+            check(width, "nat");
+            const top = pos.top();
+            const left = pos.left();
+
+            canvas.fillStyle = this.color();
+
+            // Draw the base
+            canvas.beginPath();
+            canvas.rect(left + width * 0.3, top + width * 0.8, width * 0.4, width * 0.2);
+            canvas.closePath();
+            canvas.fill();
+
+            // Draw the body
+            canvas.beginPath();
+            canvas.arc(left + width / 2, top + width * 0.6, width * 0.2, 0, Math.PI * 2);
+            canvas.closePath();
+            canvas.fill();
+
+            // Draw the head
+            canvas.beginPath();
+            canvas.arc(left + width / 2, top + width * 0.3, width * 0.15, 0, Math.PI * 2);
+            canvas.closePath();
+            canvas.fill();
+        };
     }
 
-    next_square.remove_piece();
-    square.remove_piece();
-    this.square(next_square);
-    next_square.add_piece(this);
-    this.draw();
-  }
+    move(square) {
+        check(square, Square);
+
+        // The square is authorized or it is an error.
+        const my_square = this.square();
+        let dir = null;
+        for (const a_dir of this.#dirs) {
+            if (my_square.get_neighbor(a_dir) === square) {
+                dir = a_dir;
+                break;
+            }
+        }
+        is(dir, Direction) || error(`No direction found to square. square = ${square}`);
+
+        if ([top, bottom].includes(dir)) {
+            square.is_empty() || error(`The next square is not empty.`);
+        } else if ([top_left, top_right, bottom_left, bottom_right].includes(dir)) {
+            !square.is_empty() || error(`The next square is empty.`);
+            const next_piece = square.piece();
+            next_piece.team() !== this.team() || error(`The next piece is in my team.`);
+        }
+
+        // The square is authorized, move to it.
+        super.move(square);
+    }
+
+    #dirs;
 };
 
 const King = class extends Piece {
-  // Public
-  draw() {
-    const pixels = (ctx, top, left, width) => {
-      ctx.fillStyle = this.color();
-      ctx.strokeStyle = this.color();
-
-      // Draw the base
-      ctx.beginPath();
-      ctx.rect(left + width * 0.3, top + width * 0.8, width * 0.4, width * 0.2);
-      ctx.closePath();
-      ctx.fill();
-
-      // Draw the body
-      ctx.beginPath();
-      ctx.arc(
-        left + width / 2,
-        top + width * 0.5,
-        width * 0.25,
-        0,
-        Math.PI * 2,
-      );
-      ctx.closePath();
-      ctx.fill();
-
-      // Draw the cross
-      // Vertical line
-      ctx.beginPath();
-      ctx.moveTo(left + width / 2, top + width * 0.05);
-      ctx.lineTo(left + width / 2, top + width * 0.25);
-      ctx.stroke();
-
-      // Horizontal line
-      ctx.beginPath();
-      ctx.moveTo(left + width * 0.45, top + width * 0.15);
-      ctx.lineTo(left + width * 0.55, top + width * 0.15);
-      ctx.stroke();
-
-      // Draw the head
-      ctx.beginPath();
-      ctx.arc(
-        left + width / 2,
-        top + width * 0.35,
-        width * 0.1,
-        0,
-        Math.PI * 2,
-      );
-      ctx.closePath();
-      ctx.fill();
-    };
-    this.square().draw(pixels);
-  }
-
-  move(square) {
-    const dir = this.#find_direction(square);
-    this.#move(dir);
-  }
-
-  // Private
-  #dirs = [
-    "top_left",
-    "top",
-    "top_right",
-    "bottom_left",
-    "bottom",
-    "bottom_right",
-  ];
-
-  #find_direction(square) {
-    const my_square = this.square();
-    const dirs = this.#dirs;
-    for (const dir of dirs) {
-      if (my_square.get_neighbor(dir) === square) {
-        return dir;
-      }
+    constructor(square, team) {
+        super(square, team);
+        this.#dirs = [top_left, top, top_right, bottom_left, bottom, bottom_right];
     }
-    error(`No direction found to square. square = ${square}`);
-  }
 
-  #move(dir) {
-    const square = this.square();
-    const next_square = square.get_neighbor(dir);
-    if (!next_square.is_empty()) {
-      const piece = next_square.get_piece();
-      if (piece.team() === this.team()) {
-        error(`next piece is in my team`);
-      }
+    pixels() {
+        return (canvas, pos, width) => {
+            check(canvas, "canvas");
+            check(pos, Pos);
+            check(width, "nat");
+            const top = pos.top();
+            const left = pos.left();
+
+            canvas.fillStyle = this.color();
+            canvas.strokeStyle = this.color();
+
+            // Draw the base
+            canvas.beginPath();
+            canvas.rect(left + width * 0.3, top + width * 0.8, width * 0.4, width * 0.2);
+            canvas.closePath();
+            canvas.fill();
+
+            // Draw the body
+            canvas.beginPath();
+            canvas.arc(left + width / 2, top + width * 0.5, width * 0.25, 0, Math.PI * 2);
+            canvas.closePath();
+            canvas.fill();
+
+            // Draw the cross
+            // Vertical line
+            canvas.beginPath();
+            canvas.moveTo(left + width / 2, top + width * 0.05);
+            canvas.lineTo(left + width / 2, top + width * 0.25);
+            canvas.stroke();
+
+            // Horizontal line
+            canvas.beginPath();
+            canvas.moveTo(left + width * 0.45, top + width * 0.15);
+            canvas.lineTo(left + width * 0.55, top + width * 0.15);
+            canvas.stroke();
+
+            // Draw the head
+            canvas.beginPath();
+            canvas.arc(left + width / 2, top + width * 0.35, width * 0.1, 0, Math.PI * 2);
+            canvas.closePath();
+            canvas.fill();
+        };
     }
-    next_square.remove_piece();
-    square.remove_piece();
-    this.square(next_square);
-    next_square.add_piece(this);
-    this.draw();
-  }
-};
 
-const Square = class {
-  constructor(ctx, top, left, width, color) {
-    this.#ctx = ctx;
-    this.#pos = [top, left];
-    this.#width = width;
-    this.#color = color;
-    this.#draw_square();
-    this.#piece = null;
-  }
+    move(square) {
+        check(square, Square);
+        const my_square = this.square();
+        let dir = null;
+        for (const a_dir of this.#dirs) {
+            if (my_square.get_neighbor(a_dir) === square) {
+                dir = a_dir;
+                break;
+            }
+        }
+        is(dir, Direction) || error(`No direction found to square. square = ${square}`);
 
-  // Public
+        if (!square.is_empty()) {
+            const piece = square.piece();
+            piece.team() !== this.team() || error(`next piece is in my team`);
+        }
 
-  draw(pixels = null) {
-    if (pixels === null) {
-      this.#draw_square();
-    } else {
-      this.#draw_over_square(pixels);
+        this.#is_safe(square) || error(`Square is not safe.`);
+
+        super.move(square);
     }
-  }
 
-  pos() {
-    return this.#pos;
-  }
+    #is_safe(square) {
+        return true;
+    }
 
-  color() {
-    return this.#color;
-  }
-
-  add_neighbor(dir, square) {
-    this.#dirs.includes(dir) || error(`dir is not valid. dir = ${dir}`);
-    this.#neighbors[dir] = square;
-  }
-
-  get_neighbors() {
-    return this.#neighbors;
-  }
-
-  get_neighbor(dir) {
-    this.#dirs.includes(dir) || error(`dir is not valid. dir = ${dir}`);
-    return this.#neighbors[dir];
-  }
-
-  add_piece(piece) {
-    this.#piece === null || error("this.#piece !== null");
-    this.#piece = piece;
-  }
-
-  remove_piece() {
-    const piece = this.#piece;
-    this.#piece = null;
-    this.draw();
-    return piece;
-  }
-
-  get_piece() {
-    return this.#piece;
-  }
-
-  is_empty() {
-    return !this.#piece;
-  }
-
-  // Private
-  #ctx;
-
-  #width;
-
-  #pos;
-
-  #color;
-
-  #neighbors = {};
-
-  #dirs = [
-    "top",
-    "top_right",
-    "right",
-    "bottom_right",
-    "bottom",
-    "bottom_left",
-    "left",
-    "top_left",
-  ];
-
-  #piece;
-
-  #draw_square() {
-    const ctx = this.#ctx;
-    const [top, left] = this.#pos;
-    const width = this.#width;
-    ctx.fillStyle = this.#color;
-    ctx.fillRect(left, top, width, width);
-  }
-
-  #draw_over_square(pixels) {
-    this.#draw_square();
-    const ctx = this.#ctx;
-    const [top, left] = this.#pos;
-    const width = this.#width;
-    pixels(ctx, top, left, width);
-  }
+    #dirs;
 };
 
 const Board = class {
-  constructor(canvas) {
-    const width = canvas.width;
-    const height = canvas.height;
-    width === height || error("width !== height");
-    width % 8 === 0 || error("width % 8 !== 0");
-    const square_len = width / 8;
-    const indexes = Array.from({ length: 8 }, (item, index) => index);
-    this.#indexes = indexes;
-    const ctx = canvas.getContext("2d");
-    this.#squares = [];
-    this.#pieces = [];
-    this.#build_space(ctx, indexes, square_len);
-    this.#pawns();
-    this.#kings();
-  }
-
-  // Public
-  move(start, end) {
-    const start_piece = this.#coord_to_piece(start);
-    const end_square = this.#coord_to_square(end);
-    start_piece.move(end_square);
-  }
-
-  // Private
-  #squares;
-
-  #pieces;
-
-  #indexes;
-
-  #pawns() {
-    const add_pawn = (square, team) => {
-      const piece = new Pawn(square, team);
-      this.#pieces.push(piece);
-    };
-
-    this.#squares[1].forEach((square) => {
-      add_pawn(square, "black");
-    });
-
-    this.#squares[6].forEach((square) => {
-      add_pawn(square, "white");
-    });
-  }
-
-  #kings() {
-    const add_king = (square, team) => {
-      const piece = new King(square, team);
-      this.#pieces.push(piece);
-    };
-    add_king(this.#squares[0][4], "black");
-    add_king(this.#squares[7][4], "white");
-  }
-
-  #choose_color(row, col) {
-    const light = "#BCAAA4";
-    const dark = "#6D4C41";
-    if (row % 2 == 0 && col % 2 == 0) {
-      return light;
-    } else if (row % 2 == 0 && col % 2 == 1) {
-      return dark;
-    } else if (row % 2 == 1 && col % 2 == 0) {
-      return dark;
-    } else {
-      return light;
+    constructor(canvas) {
+        check(canvas, "HTMLCanvas");
+        const width = canvas.width;
+        const height = canvas.height;
+        width === height || error("width !== height");
+        width % 8 === 0 || error("width % 8 !== 0");
+        const square_len = width / 8;
+        const indexes = Array.from({ length: 8 }, (item, index) => index);
+        this.#indexes = indexes;
+        this.#squares = [];
+        this.#pieces = [];
+        this.#build_space(canvas.getContext("2d"), indexes, square_len);
+        this.#pawns();
+        this.#kings();
     }
-  }
 
-  #build_space(ctx, indexes, square_len) {
-    indexes.forEach((row) => {
-      this.#squares.push([]);
-      indexes.forEach((col) => {
-        const top = row * square_len;
-        const left = col * square_len;
-        const color = this.#choose_color(row, col);
-        const square = new Square(ctx, top, left, square_len, color);
-        this.#squares[row][col] = square;
-      });
-    });
+    move(start, end) {
+        const start_piece = this.#coord_to_piece(start);
+        const end_square = this.#coord_to_square(end);
+        start_piece.move(end_square);
+    }
 
-    indexes.forEach((row) => {
-      indexes.forEach((col) => {
-        const squares = this.#squares;
-        const square = squares[row][col];
-        const neighbors = {
-          top: (squares[row - 1] && squares[row - 1][col]) || null,
-          top_right: (squares[row - 1] && squares[row - 1][col + 1]) || null,
-          right: (squares[row] && squares[row][col + 1]) || null,
-          bottom_right: (squares[row + 1] && squares[row + 1][col + 1]) || null,
-          bottom: (squares[row + 1] && squares[row + 1][col]) || null,
-          bottom_left: (squares[row + 1] && squares[row + 1][col - 1]) || null,
-          left: (squares[row - 1] && squares[row - 1][col - 1]) || null,
-          top_left: (squares[row - 1] && squares[row - 1][col - 1]) || null,
+    #squares;
+
+    #pieces;
+
+    #indexes;
+
+    #pawns() {
+        const add_pawn = (square, team) => {
+            const piece = new Pawn(square, team);
+            this.#pieces.push(piece);
         };
-        Object.entries(neighbors).forEach(([dir, neighbor]) => {
-          square.add_neighbor(dir, neighbor);
+
+        this.#squares[1].forEach((square) => {
+            add_pawn(square, black);
         });
-      });
-    });
-  }
 
-  #coord_to_square(coord) {
-    const [top, left] = coord;
-    const indexes = this.#indexes;
-    indexes.includes(top) || error(`Unexpected top. top = ${top}`);
-    indexes.includes(left) || error(`Unexpected left. left = ${left}`);
-    const square = this.#squares[top][left];
-    return square;
-  }
+        this.#squares[6].forEach((square) => {
+            add_pawn(square, white);
+        });
+    }
 
-  #coord_to_piece(coord) {
-    const square = this.#coord_to_square(coord);
-    const piece = square.get_piece();
-    piece !== null || error(`No piece at coord. coord = (${coord})`);
-    return piece;
-  }
+    #kings() {
+        const add_king = (square, team) => {
+            const piece = new King(square, team);
+            this.#pieces.push(piece);
+        };
+        add_king(this.#squares[0][4], black);
+        add_king(this.#squares[7][4], white);
+    }
+
+    #choose_color(row, col) {
+        const light = "#BCAAA4";
+        const dark = "#6D4C41";
+        if (row % 2 == 0 && col % 2 == 0) {
+            return light;
+        } else if (row % 2 == 0 && col % 2 == 1) {
+            return dark;
+        } else if (row % 2 == 1 && col % 2 == 0) {
+            return dark;
+        } else {
+            return light;
+        }
+    }
+
+    #build_space(canvas, indexes, square_len) {
+        indexes.forEach((row) => {
+            this.#squares.push([]);
+            indexes.forEach((col) => {
+                const top = row * square_len;
+                const left = col * square_len;
+                const color = this.#choose_color(row, col);
+                const square = new Square(canvas, new Pos(top, left), square_len, color);
+                this.#squares[row][col] = square;
+            });
+        });
+
+        indexes.forEach((row) => {
+            indexes.forEach((col) => {
+                const squares = this.#squares;
+                const square = squares[row][col];
+                const neighbors = [
+                    [top, (squares[row - 1] && squares[row - 1][col]) || null],
+                    [top_right, (squares[row - 1] && squares[row - 1][col + 1]) || null],
+                    [right, (squares[row] && squares[row][col + 1]) || null],
+                    [bottom_right, (squares[row + 1] && squares[row + 1][col + 1]) || null],
+                    [bottom, (squares[row + 1] && squares[row + 1][col]) || null],
+                    [bottom_left, (squares[row + 1] && squares[row + 1][col - 1]) || null],
+                    [left, (squares[row - 1] && squares[row - 1][col - 1]) || null],
+                    [top_left, (squares[row - 1] && squares[row - 1][col - 1]) || null],
+                ];
+                neighbors.forEach(([dir, neighbor]) => {
+                    square.add_neighbor(dir, neighbor);
+                });
+            });
+        });
+    }
+
+    #coord_to_square(coord) {
+        const [top, left] = coord;
+        const indexes = this.#indexes;
+        indexes.includes(top) || error(`Unexpected top. top = ${top}`);
+        indexes.includes(left) || error(`Unexpected left. left = ${left}`);
+        const square = this.#squares[top][left];
+        return square;
+    }
+
+    #coord_to_piece(coord) {
+        const square = this.#coord_to_square(coord);
+        const piece = square.piece();
+        piece !== null || error(`No piece at coord. coord = (${coord})`);
+        return piece;
+    }
 };
 
 const start = function () {
-  const canvas = document.getElementById("chess");
-  const board = new Board(canvas);
-  setTimeout(() => {
-    board.move([1, 4], [2, 4]);
-  }, 1000);
-  setTimeout(() => {
-    board.move([0, 4], [1, 4]);
-  }, 2000);
+    const canvas = document.getElementById("chess");
+    const board = new Board(canvas);
+    const moves = [
+        [
+            [1, 4],
+            [2, 4],
+        ],
+        [
+            [0, 4],
+            [1, 4],
+        ],
+    ];
+    let time = 0;
+    moves.forEach(([start, end]) => {
+        time += 1000;
+        setTimeout(() => board.move(start, end), time);
+    });
 };
 
 start();
