@@ -69,10 +69,16 @@
 		</x-h2>
 
 		<x-h2 name="Result" id="7f205211-e623-446b-84e1-9dd0a4e39a66">
-				<canvas id="chess" width="640" height="640" style="margin: auto; border: 1px solid gray; padding: 2px; border-radius: 2px;display: block;">
+				<canvas id="chess" width="640" height="640" style="border: 1px solid gray; padding: 2px; border-radius: 2px;display: block;">
 						An alternative text describing what your canvas displays.
 				</canvas>
 				<script defer type="module" src="data/chess.js"></script>
+        <div class="actions" style="margin: 1rem 0;display:flex;gap: 1rem;">
+						<button onclick="window.chess.init()" class="button">init</button>
+						<button onclick="window.chess.attacked_square()" class="button">attacked square</button>
+						<button onclick="window.chess.pinned()" class="button">pinned</button>
+				</div>
+				<pre id="msg" style="border: 1px solid currentColor; padding:2px; min-height: 1rem;"></pre>
 		</x-h2>
 
 		<x-h2 name="Method" id="a6357b65-8ff1-4149-ab28-1d6658ea632f">
