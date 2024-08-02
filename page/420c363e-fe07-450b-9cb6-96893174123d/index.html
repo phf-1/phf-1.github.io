@@ -60,397 +60,399 @@
           </div>
 
           <x-h1 name="Actor Model of Computation Analysis" id="15e05b49-30a5-4b27-b2d5-bcfce5ba4352">
-    <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
-    <!-- :ID: 420c363e-fe07-450b-9cb6-96893174123d -->
+  <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
+  <!-- :ID: 420c363e-fe07-450b-9cb6-96893174123d -->
 
-    <x-abstract>The publication of Carl Hewitt: <q>Actor Model of Computation: Scalable Robust Information Systems</q> is analysed in terms of questions and answers. Being able to answer these questions is a first step toward understanding the subject.</x-abstract>
+  <x-abstract>The publication of Carl Hewitt: <q>Actor Model of Computation: Scalable Robust Information Systems</q> is analysed in terms of questions and answers. Being able to answer these questions is a first step toward understanding the subject.</x-abstract>
 
-    <x-h2 name="Objective" id="d413dbb1-2f92-472d-8954-9f0c3214ae1b">
-        <p>
-            The objective is to analyse the publication of Carl Hewitt: <q>Actor Model of Computation: Scalable Robust Information Systems</q> in terms of questions and answers. Being able to answer these questions is a first step toward understanding the subject.
-        </p>
-    </x-h2>
+  <x-h2 name="Objective" id="d413dbb1-2f92-472d-8954-9f0c3214ae1b">
+    <p>
+      The objective is to analyse the publication of Carl Hewitt: <q>Actor Model of Computation: Scalable Robust Information Systems</q> in terms of questions and answers. Being able to answer these questions is a first step toward understanding the subject.
+    </p>
+  </x-h2>
 
-    <x-h2 name="Result" id="d41a8093-6196-4e54-8fb9-637b1979f8fc">
-        <x-h3 name="Central hypothesis" id="93decd2b-32d7-4b8c-9b55-cad247b39df4">
-            <x-qa>
-                <x-q id="6ccac1a8-dd59-4d45-9c31-445444deb3eb">
-                    <p>What is the Actor Model central hypothesis?</p>
-                </x-q>
-                <x-a id="ae146cb6-9b2c-4fd7-b4b6-0c27ca4036c5">
-                    <p>All physically possible computation can be directly implemented using Actors.</p>
-                </x-a>
-            </x-qa>
+  <x-h2 name="Result" id="d41a8093-6196-4e54-8fb9-637b1979f8fc">
+    <x-h3 name="Central hypothesis" id="93decd2b-32d7-4b8c-9b55-cad247b39df4">
+      <x-qa>
+        <x-q id="6ccac1a8-dd59-4d45-9c31-445444deb3eb">
+          <p>What is the Actor Model central hypothesis?</p>
+        </x-q>
+        <x-a id="ae146cb6-9b2c-4fd7-b4b6-0c27ca4036c5">
+          <p>All physically possible computation can be directly implemented using Actors.</p>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="649bfdfb-e385-4aa1-89cf-c8a082ae11f6">
-                    <p>What sets the Actor Model fundamentaly apart from previous models?</p>
-                </x-q>
-                <x-a id="e9869be1-607e-4d58-9f08-483eecfc9df7">
-                    <p>Unlike previous models of computation, the Actor Model was inspired by physical laws.</p>
-                </x-a>
-            </x-qa>
-        </x-h3>
+      <x-qa>
+        <x-q id="649bfdfb-e385-4aa1-89cf-c8a082ae11f6">
+          <p>What sets the Actor Model fundamentaly apart from previous models?</p>
+        </x-q>
+        <x-a id="e9869be1-607e-4d58-9f08-483eecfc9df7">
+          <p>Unlike previous models of computation, the Actor Model was inspired by physical laws.</p>
+        </x-a>
+      </x-qa>
+    </x-h3>
 
-        <x-h3 name="About Actors" id="515c302a-a2e1-420a-b88a-c2783cb93088">
-            <x-qa>
-                <x-q id="48b63e67-2592-4115-a29f-8aa6af96ef07">
-                    <p>What is an Actor?</p>
-                </x-q>
-                <x-a id="a0e3a5e5-c5ff-4e0d-acd5-ba77f1c502fd">
-                    <p>An Actor is a physical device with the following properties:</p>
-                    <ul>
-                        <li>It has an address.</li>
-                        <li>It can perform computations.</li>
-                        <li>It can send messages to addresses of Actors it knows about.</li>
-                        <li>It can designate how to handle the next message it receives.</li>
-                        <li>It can create new Actors.</li>
-                        <li>It can concurrently perform the above operations.</li>
-                    </ul>
-                </x-a>
-            </x-qa>
+    <x-h3 name="About Actors" id="515c302a-a2e1-420a-b88a-c2783cb93088">
+      <x-qa>
+        <x-q id="48b63e67-2592-4115-a29f-8aa6af96ef07">
+          <p>What is an Actor?</p>
+        </x-q>
+        <x-a id="a0e3a5e5-c5ff-4e0d-acd5-ba77f1c502fd">
+					<x-definition term="Actor" id="1ac96cf2-dfa0-4732-b5ad-0b7e6dbc4459">
+            <p>An Actor is a physical device with the following properties:</p>
+            <ul>
+              <li>It has an address.</li>
+              <li>It can perform computations.</li>
+              <li>It can send messages to addresses of Actors it knows about.</li>
+              <li>It can designate how to handle the next message it receives.</li>
+              <li>It can create new Actors.</li>
+              <li>It can concurrently perform the above operations.</li>
+            </ul>									  
+					</x-definition>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="222019e1-1a4e-4b23-a2f3-fc04d5b05f8e">
-                    <p>What does <q>concurrently</q> means in the above context?</p>
-                </x-q>
-                <x-a id="d12eb141-ce0a-4433-aeb8-2c5521a0d99a">
-                    <p>It means that the actor has the ability to perform multiple
-                        actions at the same time, or in overlapping periods, without waiting
-                        for one action to complete before starting another.</p>
-                </x-a>
-            </x-qa>
+      <x-qa>
+        <x-q id="222019e1-1a4e-4b23-a2f3-fc04d5b05f8e">
+          <p>What does <q>concurrently</q> means in the above context?</p>
+        </x-q>
+        <x-a id="d12eb141-ce0a-4433-aeb8-2c5521a0d99a">
+          <p>It means that the actor has the ability to perform multiple
+            actions at the same time, or in overlapping periods, without waiting
+            for one action to complete before starting another.</p>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="ddcc1d08-43a2-4281-a9c4-79f2cbd10e7a">
-                    <p>An Actor can only communicate with another Actor to which it has ….</p>
-                </x-q>
-                <x-a id="f812af9c-b3e0-4617-8e8a-d4e10616fbbd">
-                    <p>An Actor can only communicate with another Actor to which it has an address. Addresses can be implemented in a variety of ways:</p>
-                    <ul>
-                        <li>direct physical attachment</li>
-                        <li>memory or disk addresses</li>
-                        <li>network addresses</li>
-                        <li>email addresses</li>
-                    </ul>
-                </x-a>
-            </x-qa>
+      <x-qa>
+        <x-q id="ddcc1d08-43a2-4281-a9c4-79f2cbd10e7a">
+          <p>An Actor can only communicate with another Actor to which it has ….</p>
+        </x-q>
+        <x-a id="f812af9c-b3e0-4617-8e8a-d4e10616fbbd">
+          <p>An Actor can only communicate with another Actor to which it has an address. Addresses can be implemented in a variety of ways:</p>
+          <ul>
+            <li>direct physical attachment</li>
+            <li>memory or disk addresses</li>
+            <li>network addresses</li>
+            <li>email addresses</li>
+          </ul>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="54a474be-6f3c-410b-8eaf-c50d2a4d6ddd">
-                    <p>The Actor Model is characterized by …</p>
-                </x-q>
-                <x-a id="8fa62ce9-0922-4629-852d-89c7074a2e7a">
-                    <p>The Actor Model is characterized by inherent concurrency of computation
-                        within and among Actors, dynamic creation of Actors, inclusion of Actor
-                        addresses in messages, and interaction only through direct asynchronous
-                        message passing with no restriction on message reception order.</p>
-                </x-a>
-            </x-qa>
+      <x-qa>
+        <x-q id="54a474be-6f3c-410b-8eaf-c50d2a4d6ddd">
+          <p>The Actor Model is characterized by …</p>
+        </x-q>
+        <x-a id="8fa62ce9-0922-4629-852d-89c7074a2e7a">
+          <p>The Actor Model is characterized by inherent concurrency of computation
+            within and among Actors, dynamic creation of Actors, inclusion of Actor
+            addresses in messages, and interaction only through direct asynchronous
+            message passing with no restriction on message reception order.</p>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="500f3c18-a790-4dad-b155-9045dd8141de">
-                    <p>What is the foundation of system communication?</p>
-                </x-q>
-                <x-a id="7e82068c-0218-411f-afba-9872c0ad3d62">
-                    <p>Message passing using types.</p>
-                    <ul>
-                        <li>Messages are the unit of communication.
-                            <ul>
-                                <li>The type of a <code>message</code> must be a subtype of <code>Message</code>.</li>
-                            </ul>
-                        </li>
-                        <li>Types enable secure communication with any Actor.</li>
-                    </ul>
-                </x-a>
-            </x-qa>
-            <x-qa>
-                <x-q id="122b4364-a51d-43c7-8431-0ef90cb64b3c">
-                    <p>What is the <q>activation order</q> relating two events?</p>
-                </x-q>
-                <x-a id="5e425058-0cb5-4914-8dfb-ce89c9bec145">
-                    <p>
-                        The activation order (⇝) is a fundamental order that models one event
-                        activating another (there is energy flow from an event to an event which
-                        it activates). The activation order is discrete:
-                    </p>
+      <x-qa>
+        <x-q id="500f3c18-a790-4dad-b155-9045dd8141de">
+          <p>What is the foundation of system communication?</p>
+        </x-q>
+        <x-a id="7e82068c-0218-411f-afba-9872c0ad3d62">
+          <p>Message passing using types.</p>
+          <ul>
+            <li>Messages are the unit of communication.
+              <ul>
+                <li>The type of a <code>message</code> must be a subtype of <code>Message</code>.</li>
+              </ul>
+            </li>
+            <li>Types enable secure communication with any Actor.</li>
+          </ul>
+        </x-a>
+      </x-qa>
+      <x-qa>
+        <x-q id="122b4364-a51d-43c7-8431-0ef90cb64b3c">
+          <p>What is the <q>activation order</q> relating two events?</p>
+        </x-q>
+        <x-a id="5e425058-0cb5-4914-8dfb-ce89c9bec145">
+          <p>
+            The activation order (⇝) is a fundamental order that models one event
+            activating another (there is energy flow from an event to an event which
+            it activates). The activation order is discrete:
+          </p>
 
-                    <p>∀[e1,e2 ∈ Events]→ Finite[{e ∈ Events | e1⇝e⇝e2}]</p>
+          <p>∀[e1,e2 ∈ Events]→ Finite[{e ∈ Events | e1⇝e⇝e2}]</p>
 
-                    <p>
-                        There are two kinds of events involved in the activation order: reception
-                        and transmission. Reception events can activate transmission events and
-                        transmission events can activate reception events.
-                    </p>
-                </x-a>
-            </x-qa>
+          <p>
+            There are two kinds of events involved in the activation order: reception
+            and transmission. Reception events can activate transmission events and
+            transmission events can activate reception events.
+          </p>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="32cbf788-9a6f-401a-b72b-59960f1671f7">
-                    <p>What is a serialized Actor?</p>
-                </x-q>
-                <x-a id="a541e182-e920-43fd-9e01-6ee05298bb8e">
-                    <p> An Actor is serialized if it processes messages one at a time in a specific order, rather than concurrently.</p>
-                </x-a>
-            </x-qa>
+      <x-qa>
+        <x-q id="32cbf788-9a6f-401a-b72b-59960f1671f7">
+          <p>What is a serialized Actor?</p>
+        </x-q>
+        <x-a id="a541e182-e920-43fd-9e01-6ee05298bb8e">
+          <p> An Actor is serialized if it processes messages one at a time in a specific order, rather than concurrently.</p>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="6f5f381c-764a-4516-b8d8-c0ce7789e386">
-                    <p>What is the <q>reception order</q> of a serialized Actor?</p>
-                </x-q>
-                <x-a id="68949a8e-2d7d-41c9-b4bf-4e4c37bcb89b">
-                    <p>The reception order of a serialized Actor <x-math>x</x-math> models the (total) order of events in which a message is received at <x-math>x</x-math>.</p>
+      <x-qa>
+        <x-q id="6f5f381c-764a-4516-b8d8-c0ce7789e386">
+          <p>What is the <q>reception order</q> of a serialized Actor?</p>
+        </x-q>
+        <x-a id="68949a8e-2d7d-41c9-b4bf-4e4c37bcb89b">
+          <p>The reception order of a serialized Actor <x-math>x</x-math> models the (total) order of events in which a message is received at <x-math>x</x-math>.</p>
 
-                    <x-blockmath>
-                        \forall r_1, r_2 \in \text{ReceptionEvent} \rightarrow \text{Finite}(\{ r \in \text{ReceptionEvent}~|~r_1 \rightarrow_x r \rightarrow_x r_2 \})
-                    </x-blockmath>
+          <x-blockmath>
+            \forall r_1, r_2 \in \text{ReceptionEvent} \rightarrow \text{Finite}(\{ r \in \text{ReceptionEvent}~|~r_1 \rightarrow_x r \rightarrow_x r_2 \})
+          </x-blockmath>
 
-                </x-a>
-            </x-qa>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="0c46aff7-da89-49b1-99cf-43541b7a7d1f">
-                    <p>What is the <q>combined order</q>?</p>
-                </x-q>
-                <x-a id="649f64a6-62a6-43bc-858d-cb7bb7ec2b3b">
-                    <p>The combined order (denoted by ↷) is defined to be the transitive closure of the activation order and the reception orders of all Actors.</p>
-                </x-a>
-            </x-qa>
+      <x-qa>
+        <x-q id="0c46aff7-da89-49b1-99cf-43541b7a7d1f">
+          <p>What is the <q>combined order</q>?</p>
+        </x-q>
+        <x-a id="649f64a6-62a6-43bc-858d-cb7bb7ec2b3b">
+          <p>The combined order (denoted by ↷) is defined to be the transitive closure of the activation order and the reception orders of all Actors.</p>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="d3c5e28c-ef5e-4dc9-bbda-a4111c270a92">
-                    <p>Is the combined order discrete?</p>
-                </x-q>
-                <x-a id="e417ec96-85a8-4d50-aa96-e06f0d77b1a0">
-                    <p>No. The resolution of the problem is to take discreteness of the combined
-                        order as an axiom of the Actor model:</p>
-                    <p>∀[e1,e2 ∈ Events]→ Finite[{e ∈ Events | e1↷e↷e2}]</p>
-                </x-a>
-            </x-qa>
-        </x-h3>
+      <x-qa>
+        <x-q id="d3c5e28c-ef5e-4dc9-bbda-a4111c270a92">
+          <p>Is the combined order discrete?</p>
+        </x-q>
+        <x-a id="e417ec96-85a8-4d50-aa96-e06f0d77b1a0">
+          <p>No. The resolution of the problem is to take discreteness of the combined
+            order as an axiom of the Actor model:</p>
+          <p>∀[e1,e2 ∈ Events]→ Finite[{e ∈ Events | e1↷e↷e2}]</p>
+        </x-a>
+      </x-qa>
+    </x-h3>
 
-        <x-h3 name="Direct communication and asynchrony" id="13a09900-39e5-4884-a179-9bac87c42228">
-            <x-qa>
-                <x-q id="6d920e90-708e-434f-af2d-14fc05884c68">
-                    <p>The Actor Model is based on …</p>
-                </x-q>
-                <x-a id="292318e9-4516-42bf-bd39-287af7662c69">
-                    <p>The Actor Model is based on one-way asynchronous communication. Once a message has been sent, it is the responsibility of the receiver.</p>
-                    <p>Messages in the Actor Model are decoupled from the sender and are delivered by the system on a best efforts basis.</p>
-                </x-a>
-            </x-qa>
-        </x-h3>
+    <x-h3 name="Direct communication and asynchrony" id="13a09900-39e5-4884-a179-9bac87c42228">
+      <x-qa>
+        <x-q id="6d920e90-708e-434f-af2d-14fc05884c68">
+          <p>The Actor Model is based on …</p>
+        </x-q>
+        <x-a id="292318e9-4516-42bf-bd39-287af7662c69">
+          <p>The Actor Model is based on one-way asynchronous communication. Once a message has been sent, it is the responsibility of the receiver.</p>
+          <p>Messages in the Actor Model are decoupled from the sender and are delivered by the system on a best efforts basis.</p>
+        </x-a>
+      </x-qa>
+    </x-h3>
 
-        <x-h3 name="Indeterminacy and Quasi-commutativity" id="f557cc69-f6ad-42e0-9954-a22ec47cea2c">
-            <x-qa>
-                <x-q id="a1954eb9-ef9c-4265-82db-0e5a68d8106a">
-                    <p>Why does the Actor Model supports indeterminacy?</p>
-                </x-q>
-                <x-a id="3901e4d2-f49f-49ec-94f3-bdfe5d8a9fbf">
-                    <p>The Actor Model supports indeterminacy because the reception order of messages can affect future behavior.</p>
-                    <p>Operations are said to be quasi-commutative to the extent that it doesn’t matter in which order they occur. To the extent possible, quasi-commutativity is used to reduce indeterminacy.</p>
-                </x-a>
-            </x-qa>
+    <x-h3 name="Indeterminacy and Quasi-commutativity" id="f557cc69-f6ad-42e0-9954-a22ec47cea2c">
+      <x-qa>
+        <x-q id="a1954eb9-ef9c-4265-82db-0e5a68d8106a">
+          <p>Why does the Actor Model supports indeterminacy?</p>
+        </x-q>
+        <x-a id="3901e4d2-f49f-49ec-94f3-bdfe5d8a9fbf">
+          <p>The Actor Model supports indeterminacy because the reception order of messages can affect future behavior.</p>
+          <p>Operations are said to be quasi-commutative to the extent that it doesn’t matter in which order they occur. To the extent possible, quasi-commutativity is used to reduce indeterminacy.</p>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="821d9e90-8a7e-4dfa-9bac-93dcc5a2c34a">
-                    <p>Give an example of quasi-commutativity.</p>
-                </x-q>
-                <x-a id="2dcbd61f-bba3-4f48-86de-383c570ddc3e">
-                    <x-blockcode>
-                        // account is a kind of Actor.
-                        account :≡ Account(amount ≔ 6)
+      <x-qa>
+        <x-q id="821d9e90-8a7e-4dfa-9bac-93dcc5a2c34a">
+          <p>Give an example of quasi-commutativity.</p>
+        </x-q>
+        <x-a id="2dcbd61f-bba3-4f48-86de-383c570ddc3e">
+          <x-blockcode>
+            // account is a kind of Actor.
+            account :≡ Account(amount ≔ 6)
 
-                        // account receives two messages: withdraw(1) and
-                        // withdraw(2) in no particular order.
-                        do:
-                        ∥ account.withdraw(1)
-                        ∥ account.withdraw(2)
+            // account receives two messages: withdraw(1) and
+            // withdraw(2) in no particular order.
+            do:
+            ∥ account.withdraw(1)
+            ∥ account.withdraw(2)
 
-                        // Executed after the above boths messages have been proessed.
-                        balance ≔ account.getBalance()
+            // Executed after the above boths messages have been proessed.
+            balance ≔ account.getBalance()
 
-                        // Always true.
-                        balance = 3
-                    </x-blockcode>
-                </x-a>
-            </x-qa>
-        </x-h3>
+            // Always true.
+            balance = 3
+          </x-blockcode>
+        </x-a>
+      </x-qa>
+    </x-h3>
 
-        <x-h3 name="Locality and Security" id="656f6272-c09f-41a7-b7a8-542bfc38f7c6">
-            <x-qa>
-                <x-q id="ecb6c2d7-5f04-4c3b-8aff-9d6a95d14787">
-                    <p>Locality and security mean that …</p>
-                </x-q>
-                <x-a id="65f41a0c-ddc5-4c0f-ac0f-d85aeab7db5b">
-                    <p>Locality and security mean that in processing a message: an Actor can send
-                        messages only to addresses for which it has information by the following
-                        means:</p>
-                    <ul>
-                        <li>that it receives in the message</li>
-                        <li>that it already had before it received the message</li>
-                        <li>that it creates while processing the message.</li>
-                    </ul>
-                </x-a>
-            </x-qa>
+    <x-h3 name="Locality and Security" id="656f6272-c09f-41a7-b7a8-542bfc38f7c6">
+      <x-qa>
+        <x-q id="ecb6c2d7-5f04-4c3b-8aff-9d6a95d14787">
+          <p>Locality and security mean that …</p>
+        </x-q>
+        <x-a id="65f41a0c-ddc5-4c0f-ac0f-d85aeab7db5b">
+          <p>Locality and security mean that in processing a message: an Actor can send
+            messages only to addresses for which it has information by the following
+            means:</p>
+          <ul>
+            <li>that it receives in the message</li>
+            <li>that it already had before it received the message</li>
+            <li>that it creates while processing the message.</li>
+          </ul>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="b464579d-ea90-472f-ad34-41aa2fef780f">
-                    <p>The security of Actors can be protected in the following ways:</p>
-                </x-q>
-                <x-a id="635418ce-f816-4874-8fd3-603e76d0a52b">
-                    <ul>
-                        <li>hardwiring in which Actors are physically connected</li>
-                        <li>every-word-tagged memory.</li>
-                        <li>virtual machines as in Java virtual machine, Common Language Runtime, etc.</li>
-                        <li>signing and/or encryption of Actors and their addresses</li>
-                    </ul>
-                </x-a>
-            </x-qa>
-        </x-h3>
+      <x-qa>
+        <x-q id="b464579d-ea90-472f-ad34-41aa2fef780f">
+          <p>The security of Actors can be protected in the following ways:</p>
+        </x-q>
+        <x-a id="635418ce-f816-4874-8fd3-603e76d0a52b">
+          <ul>
+            <li>hardwiring in which Actors are physically connected</li>
+            <li>every-word-tagged memory.</li>
+            <li>virtual machines as in Java virtual machine, Common Language Runtime, etc.</li>
+            <li>signing and/or encryption of Actors and their addresses</li>
+          </ul>
+        </x-a>
+      </x-qa>
+    </x-h3>
 
-        <x-h3 name="Extension versus Specialization" id="0b8c41f7-6824-470e-87a7-b789b929f97d">
-            <x-qa>
-                <x-q id="af876792-4db3-4163-8250-c8d9da7fa8d5">
-                    <p>What is type specialization?</p>
-                </x-q>
-                <x-a id="f6c83e18-f436-4fc5-a015-e05382878571">
-                    <p>Type specialization: If type t1 is a subtype of type t2, then instances of
-                        t1 have all of the properties that are provable from the definition of
-                        type t2</p>
-                </x-a>
-            </x-qa>
+    <x-h3 name="Extension versus Specialization" id="0b8c41f7-6824-470e-87a7-b789b929f97d">
+      <x-qa>
+        <x-q id="af876792-4db3-4163-8250-c8d9da7fa8d5">
+          <p>What is type specialization?</p>
+        </x-q>
+        <x-a id="f6c83e18-f436-4fc5-a015-e05382878571">
+          <p>Type specialization: If type t1 is a subtype of type t2, then instances of
+            t1 have all of the properties that are provable from the definition of
+            type t2</p>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="ab54a860-d3de-4f68-91fc-7c5a0434fb10">
-                    <p>What is type extension?</p>
-                </x-q>
-                <x-a id="5e3ad448-0042-4ce3-9f3e-51d6d9e96dcc">
-                    <p>Type extension: A type can be extended to have additional (perhaps
-                        incompatible) properties from the type that it extends. An extension
-                        type can make use of the implementation of the type that it extends.
-                        Type extension is commonly used to extend operating system software
-                        as well as applications.</p>
-                </x-a>
-            </x-qa>
+      <x-qa>
+        <x-q id="ab54a860-d3de-4f68-91fc-7c5a0434fb10">
+          <p>What is type extension?</p>
+        </x-q>
+        <x-a id="5e3ad448-0042-4ce3-9f3e-51d6d9e96dcc">
+          <p>Type extension: A type can be extended to have additional (perhaps
+            incompatible) properties from the type that it extends. An extension
+            type can make use of the implementation of the type that it extends.
+            Type extension is commonly used to extend operating system software
+            as well as applications.</p>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="b4749fc9-7c1b-48f3-a119-aa534706bdb2">
-                    <p>What is the principle of Actor induction?</p>
-                </x-q>
-                <x-a id="20764bc6-076e-4e17-9549-401f812bff2d">
-                    <ol>
-                        <li><code>x : Actor</code> and <code>p(x)</code> is true.</li>
-                        <li><code>p(x)</code> is true when it receives a message.</li>
-                        <li><code>p(x)</code> is true when it receives the next message.</li>
-                        <li>then: <code>p(x)</code> is always true.</li>
-                    </ol>
-                </x-a>
-            </x-qa>
-        </x-h3>
+      <x-qa>
+        <x-q id="b4749fc9-7c1b-48f3-a119-aa534706bdb2">
+          <p>What is the principle of Actor induction?</p>
+        </x-q>
+        <x-a id="20764bc6-076e-4e17-9549-401f812bff2d">
+          <ol>
+            <li><code>x : Actor</code> and <code>p(x)</code> is true.</li>
+            <li><code>p(x)</code> is true when it receives a message.</li>
+            <li><code>p(x)</code> is true when it receives the next message.</li>
+            <li>then: <code>p(x)</code> is always true.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+    </x-h3>
 
-        <x-h3 name="Information Integration Principles" id="bd13f8d4-774b-467b-8878-49a8819c925c">
-            <x-qa>
-                <x-q id="37b9bbef-dd4d-41ee-b969-ed43f0fae612">
-                    <p>In practice integrated information is ….</p>
-                </x-q>
-                <x-a id="6b8ecfcc-48fe-46af-b58e-73bc2733f814">
-                    <p>In practice integrated information is invariably inconsistent. An information system must provide means for processing information and carefully recording its provenance including  arguments (including arguments about arguments) for and against propositions.</p>
-                </x-a>
-            </x-qa>
-        </x-h3>
+    <x-h3 name="Information Integration Principles" id="bd13f8d4-774b-467b-8878-49a8819c925c">
+      <x-qa>
+        <x-q id="37b9bbef-dd4d-41ee-b969-ed43f0fae612">
+          <p>In practice integrated information is ….</p>
+        </x-q>
+        <x-a id="6b8ecfcc-48fe-46af-b58e-73bc2733f814">
+          <p>In practice integrated information is invariably inconsistent. An information system must provide means for processing information and carefully recording its provenance including  arguments (including arguments about arguments) for and against propositions.</p>
+        </x-a>
+      </x-qa>
+    </x-h3>
 
-        <x-h3 name="About Information Systems" id="153e9081-11d1-4c73-8007-f2ff2af9af58">
-            <x-qa>
-                <x-q id="b669db16-844d-4174-b596-251899279ac1">
-                    <p>What is meant by <q>Information Integration</q>?</p>
-                </x-q>
-                <x-a id="1cfa1525-1dd1-402c-bb82-2b64b93fba2e">
-                    <p>
-                        It means that given an information system, these principles will
-                        be observed:
-                    </p>
-                    <ul>
-                        <li>Persistence. Information is collected and indexed.</li>
-                        <li>Concurrency: Work proceeds interactively and concurrently, overlapping in time.</li>
-                        <li>Quasi-commutativity: Information can be used regardless of whether it initiates new work or become relevant to ongoing work.</li>
-                        <li>Sponsorship: Sponsors provide resources for computation, i.e., processing, storage, and communications.</li>
-                        <li>Pluralism: Information is heterogeneous, overlapping and often inconsistent. There is no central arbiter of truth.</li>
-                        <li>Provenance: The provenance of information is carefully tracked and recorded.</li>
-                    </ul>
-                </x-a>
-            </x-qa>
+    <x-h3 name="About Information Systems" id="153e9081-11d1-4c73-8007-f2ff2af9af58">
+      <x-qa>
+        <x-q id="b669db16-844d-4174-b596-251899279ac1">
+          <p>What is meant by <q>Information Integration</q>?</p>
+        </x-q>
+        <x-a id="1cfa1525-1dd1-402c-bb82-2b64b93fba2e">
+          <p>
+            It means that given an information system, these principles will
+            be observed:
+          </p>
+          <ul>
+            <li>Persistence. Information is collected and indexed.</li>
+            <li>Concurrency: Work proceeds interactively and concurrently, overlapping in time.</li>
+            <li>Quasi-commutativity: Information can be used regardless of whether it initiates new work or become relevant to ongoing work.</li>
+            <li>Sponsorship: Sponsors provide resources for computation, i.e., processing, storage, and communications.</li>
+            <li>Pluralism: Information is heterogeneous, overlapping and often inconsistent. There is no central arbiter of truth.</li>
+            <li>Provenance: The provenance of information is carefully tracked and recorded.</li>
+          </ul>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="1868cb9a-5301-431e-84af-9879bfd4afe5">
-                    <p>What is the Actor Model intended to provide?</p>
-                </x-q>
-                <x-a id="242bc6b3-e75a-4eae-ab3b-278fa644063c">
-                    <p>The Actor Model is intended to provide a foundation for inconsistency robust information integration.</p>
-                </x-a>
-            </x-qa>
+      <x-qa>
+        <x-q id="1868cb9a-5301-431e-84af-9879bfd4afe5">
+          <p>What is the Actor Model intended to provide?</p>
+        </x-q>
+        <x-a id="242bc6b3-e75a-4eae-ab3b-278fa644063c">
+          <p>The Actor Model is intended to provide a foundation for inconsistency robust information integration.</p>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="9681094b-b49a-4de0-b482-34f25759c130">
-                    <p>An inference system is <q>inconsistent</q> if: …</p>
-                </x-q>
-                <x-a id="32661fb2-cf5d-44e1-bb7f-bc7c73996f88">
-                    <p>
-                        An inference system is inconsistent when it is possible to derive
-                        both a proposition and its negation.
-                    </p>
-                </x-a>
-            </x-qa>
+      <x-qa>
+        <x-q id="9681094b-b49a-4de0-b482-34f25759c130">
+          <p>An inference system is <q>inconsistent</q> if: …</p>
+        </x-q>
+        <x-a id="32661fb2-cf5d-44e1-bb7f-bc7c73996f88">
+          <p>
+            An inference system is inconsistent when it is possible to derive
+            both a proposition and its negation.
+          </p>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="88a409e9-37ff-42f9-bd47-f8e0fe6009f6">
-                    <p>A contradiction is manifest when …</p>
-                </x-q>
-                <x-a id="b51cb632-159f-4ec1-87df-8927bca99168">
-                    <p>A contradiction is manifest when both a proposition and its
-                        negation are asserted even if by different parties, e.g., New
-                        York Times said “Snowden is a whistleblower.”, but NSA said
-                        “Snowden is not a whistleblower.”</p>
-                </x-a>
-            </x-qa>
+      <x-qa>
+        <x-q id="88a409e9-37ff-42f9-bd47-f8e0fe6009f6">
+          <p>A contradiction is manifest when …</p>
+        </x-q>
+        <x-a id="b51cb632-159f-4ec1-87df-8927bca99168">
+          <p>A contradiction is manifest when both a proposition and its
+            negation are asserted even if by different parties, e.g., New
+            York Times said “Snowden is a whistleblower.”, but NSA said
+            “Snowden is not a whistleblower.”</p>
+        </x-a>
+      </x-qa>
 
-            <x-qa>
-                <x-q id="2270f2cb-ace5-4632-b3ef-162ae5af5a61">
-                    <p>What is <q>Inconsistency robustness</q>?</p>
-                </x-q>
-                <x-a id="f5732a3b-f703-4ad3-bd74-fe4c975453e7">
-                    <p>Inconsistency robustness is information system performance in the face of continual pervasive inconsistencies</p>
-                </x-a>
-            </x-qa>
-        </x-h3>
+      <x-qa>
+        <x-q id="2270f2cb-ace5-4632-b3ef-162ae5af5a61">
+          <p>What is <q>Inconsistency robustness</q>?</p>
+        </x-q>
+        <x-a id="f5732a3b-f703-4ad3-bd74-fe4c975453e7">
+          <p>Inconsistency robustness is information system performance in the face of continual pervasive inconsistencies</p>
+        </x-a>
+      </x-qa>
+    </x-h3>
 
-        <x-h3 name="Robustness in Runtime Failures" id="fe4e0226-b570-41ac-ada2-36ae00415763">
-            <x-qa>
-                <x-q id="494a9d91-b887-4250-84cb-5a45970cf109">
-                    <p>Robustness is based on the following principle:</p>
-                </x-q>
-                <x-a id="164b6586-6be7-4ca1-ba69-bc91bc606572">
-                    <p>Runtime failures are always a possibility in Actor systems and are dealt with
-                        by runtime infrastructures. Message acknowledgement, reception, and
-                        responsei cannot be guaranteed although best efforts are made. Consequences
-                        are cleaned up on a best-effort basis.</p>
-                    <p>Robustness is based on the following principle:
-                        If an Actor is sent a request, then the continuation will be one of the following
-                        two mutually exclusive possibilities:</p>
-                    <ul>
-                        <li>to respond with the response received from the Actor sent the request</li>
-                        <li>to throw a Messaging exception</li>
-                    </ul>
-                </x-a>
-            </x-qa>
-        </x-h3>
-    </x-h2>
+    <x-h3 name="Robustness in Runtime Failures" id="fe4e0226-b570-41ac-ada2-36ae00415763">
+      <x-qa>
+        <x-q id="494a9d91-b887-4250-84cb-5a45970cf109">
+          <p>Robustness is based on the following principle:</p>
+        </x-q>
+        <x-a id="164b6586-6be7-4ca1-ba69-bc91bc606572">
+          <p>Runtime failures are always a possibility in Actor systems and are dealt with
+            by runtime infrastructures. Message acknowledgement, reception, and
+            responsei cannot be guaranteed although best efforts are made. Consequences
+            are cleaned up on a best-effort basis.</p>
+          <p>Robustness is based on the following principle:
+            If an Actor is sent a request, then the continuation will be one of the following
+            two mutually exclusive possibilities:</p>
+          <ul>
+            <li>to respond with the response received from the Actor sent the request</li>
+            <li>to throw a Messaging exception</li>
+          </ul>
+        </x-a>
+      </x-qa>
+    </x-h3>
+  </x-h2>
 
-    <x-h2 name="Context" id="89101f7c-f85d-4c6f-9311-4e6f153151fb">
-        <ul>
-            <li><a href="data/pub-1.pdf">publication</a></li>
-        </ul>
-    </x-h2>
+  <x-h2 name="Context" id="89101f7c-f85d-4c6f-9311-4e6f153151fb">
+    <ul>
+      <li><a href="data/pub-1.pdf">publication</a></li>
+    </ul>
+  </x-h2>
 </x-h1>
 
 

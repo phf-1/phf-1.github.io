@@ -4,7 +4,9 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
+
 const ACK = Symbol("ACK");
+
 
 /*
  * …
@@ -12,6 +14,7 @@ const ACK = Symbol("ACK");
  * …
  */
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
 
 /*
  * is(x,type) : Boolean
@@ -47,6 +50,7 @@ function is(x, type) {
     }
 }
 
+
 /*
  * error(msg) throws an error with message msg ; it is a convenience function.
  */
@@ -54,6 +58,7 @@ function error(msg) {
     is(msg, "String") || error(`msg is not a string. msg = ${msg}`);
     throw new Error(msg);
 }
+
 
 /*
  * check(x,type, pred) : Void
@@ -63,10 +68,12 @@ function check(x, type, pred = (x) => true) {
     pred(x) || error(`x does not verify pred. x = ${x}`);
 }
 
+
 /*
  * A Struct s is a read only data structure with properties.
  */
 class Struct {}
+
 
 /*
  * A Message msg represents content to be delivered to some address.
@@ -94,6 +101,7 @@ class Message extends Struct {
     }
 }
 
+
 /*
  * dir : Direction models a direction w.r.t. a square on the board: up, right, …
  */
@@ -115,6 +123,7 @@ class Direction extends Struct {
     }
 }
 
+
 /*
  * directions models all the possible directions.
  */
@@ -127,6 +136,7 @@ const bottom_left = new Direction("bottom_left");
 const left = new Direction("left");
 const top_left = new Direction("top_left");
 const directions = [top, top_right, right, bottom_right, bottom, bottom_left, left, top_left];
+
 
 /*
  * team : Team models a team i.e. black or white.
@@ -149,12 +159,14 @@ class Team extends Struct {
     }
 }
 
+
 /*
  * teams models all the possible teams.
  */
 const black = new Team("black");
 const white = new Team("white");
 const teams = [black, white];
+
 
 /*
  * coord : Coord ≡ (Top, Left) models the coordinates of a square on the board starting from the top left square.
@@ -194,6 +206,7 @@ class Coord extends Struct {
     }
 }
 
+
 /*
  * pos : Pos ≡ (Top, Left) models the coordinates of pixel starting from the top left pixel.
  */
@@ -222,6 +235,7 @@ class Pos extends Struct {
     }
 }
 
+
 /*
  * send(message) delivers message.content to message.address
  *
@@ -237,7 +251,6 @@ class Pos extends Struct {
  *
  */
 async function send(message) {
-    console.log(`send(message=${message})`);
     try {
         const result = await message.address.behaviour(message.content);
         if (result === undefined) {
@@ -249,6 +262,7 @@ async function send(message) {
         return error;
     }
 }
+
 
 /*
  * An Actor represents the fundamental unit of computation i.e. a thing is modelled
@@ -331,6 +345,72 @@ class Actor {
     }
 }
 
+
+class Images extends Actor {
+    #images;
+    #of
+
+    constructor() {
+        super()
+        this.#images = null
+        this.#of = (name) => {
+            if (is(this.#images, "Null")) {
+                error(`You must call init() first.`)
+            }
+            else {
+                this.#of = (name) => {
+                    return this.#images[name];
+                }
+                return this.of(name)
+            }
+        }
+    }
+
+    async init() {
+        this.#images = await this.#fetch_images()
+    }
+
+    of(name) {
+        return this.#of(name)
+    }
+
+    async #fetch_images() {
+        let images = [
+            "black_bishop",
+            "black_king",
+            "black_knight",
+            "black_pawn",
+            "black_queen",
+            "black_rook",
+            "white_bishop",
+            "white_king",
+            "white_knight",
+            "white_pawn",
+            "white_queen",
+            "white_rook",
+        ]
+
+        images = images.map((name) => {
+            return new Promise((resolve, reject) => {
+                const img = new Image()
+                img.src = `data/${name}.svg`
+                img.onload = () => resolve([name, img])
+                img.onerror = () => reject(`image ${name} has not been fetched.`)
+            })
+        });
+
+        return Promise.all(images)
+            .catch((err) => error(err))
+            .then((values) => Object.fromEntries(values))
+    }
+
+}
+
+
+const images = new Images()
+await images.init()
+
+
 /*
  * square : Square models a square on the board.
  *
@@ -384,6 +464,12 @@ class Square extends Actor {
         return this.#pos;
     }
 
+    coord() {
+        const pos = this.#pos;
+        const width = this.#width;
+        return new Coord(pos.top / width, pos.left / width)
+    }
+
     width() {
         return this.#width;
     }
@@ -433,8 +519,16 @@ class Square extends Actor {
         return piece;
     }
 
+    draw() {
+        this.#draw();
+    }
+
     safe() {
         this.#draw(true);
+    }
+
+    target() {
+        this.#draw("target");
     }
 
     unsafe() {
@@ -464,6 +558,13 @@ class Square extends Actor {
 
         if (safe === null) {
             // continue
+        } else if (safe === "target") {
+            this.#paints.push(
+                () => {
+                    canvas.fillStyle = "#90CAF9";
+                    canvas.fillRect(left, top, width, width)
+                }
+            )            
         } else if (safe) {
             this.#paints.push(
                 () => {
@@ -479,11 +580,9 @@ class Square extends Actor {
                 }
             )
         }
-        if (! this.is_empty()) {
-            this.#paints.push(() => {
-                !this.is_empty() && canvas.drawImage(this.#piece.image(), left, top, width, width)
-            })
-        }
+        this.#paints.push(() => {
+            !this.is_empty() && canvas.drawImage(this.#piece.image(), left, top, width, width)
+        })
         window.requestAnimationFrame(() => {
             this.#paint()
         })
@@ -552,38 +651,6 @@ class Piece extends Actor {
     }
 }
 
-async function fetch_images() {
-    let images = [
-        "black_bishop",
-        "black_king",
-        "black_knight",
-        "black_pawn",
-        "black_queen",
-        "black_rook",
-        "white_bishop",
-        "white_king",
-        "white_knight",
-        "white_pawn",
-        "white_queen",
-        "white_rook",
-    ]
-
-    images = images.map((name) => {
-        return new Promise((resolve, reject) => {
-            const img = new Image()
-            img.src = `data/${name}.svg`
-            img.onload = () => resolve([name, img])
-            img.onerror = () => reject(`image ${name} has not been fetched.`)
-        })
-    });
-
-    return Promise.all(images)
-        .catch((err) => error(err))
-        .then((values) => Object.fromEntries(values))
-}
-
-const images = await fetch_images()
-
 
 class Pawn extends Piece {
     #dirs;
@@ -595,7 +662,7 @@ class Pawn extends Piece {
         const dirs_white = [top_left, top, top_right];
         const dirs_black = [bottom_left, bottom, bottom_right];
         this.#dirs = team === black ? dirs_black : dirs_white;
-        this.#image = images[team === black ? "black_pawn" : "white_pawn"];
+        this.#image = images.of(team === black ? "black_pawn" : "white_pawn");
         this.#first_move = true;
     }
 
@@ -639,6 +706,7 @@ class Probe extends Actor {
     #dir;
     #team;
     #type;
+
     constructor(square, dir, team, piece_type) {
         super();
         check(square, Square);
@@ -700,7 +768,7 @@ class King extends Piece {
     constructor(square, team) {
         super(square, team);
         this.#dirs = [top_left, top, top_right, bottom_left, bottom, bottom_right];
-        this.#image = images[team === black ? "black_king" : "white_king"];
+        this.#image = images.of(team === black ? "black_king" : "white_king");
     }
 
     toString() {
@@ -728,7 +796,14 @@ class King extends Piece {
             piece.team() !== this.team() || error(`next piece is in my team`);
         }
 
-        this.#is_safe(square) || error(`Square is not safe.`);
+        if (! this.#is_safe(square)) {            
+            const coord = square.coord()
+            const msg = `I cannot move to square, because it is threatened.
+The threatened square is located at: ${coord}.
+`
+            square.target()
+            error(msg);
+        }
 
         super.move(square);
     }
@@ -747,7 +822,8 @@ class King extends Piece {
             square.remove_piece();
             const new_piece = new piece_type(piece_square, this.team());
             piece_square.add_piece(new_piece);
-            error(`I am not safe.`);
+            const msg = `Piece cannot be move from its square, else: I would be threatened.`
+            error(msg);
         }
     }
 
@@ -774,10 +850,7 @@ class Bishop extends Piece {
 
     constructor(square, team) {
         super(square, team);
-        const dirs_white = [top_left, top, top_right];
-        const dirs_black = [bottom_left, bottom, bottom_right];
-        this.#dirs = team === black ? dirs_black : dirs_white;
-        this.#image = images[team === black ? "black_bishop" : "white_bishop"];
+        this.#image = images.of(team === black ? "black_bishop" : "white_bishop");
     }
 
     toString() {
@@ -787,32 +860,6 @@ class Bishop extends Piece {
     image() {
         return this.#image;
     }
-
-    move(square) {
-        check(square, Square);
-
-        // The square is authorized or it is an error.
-        const my_square = this.square();
-        let dir = null;
-        for (const a_dir of this.#dirs) {
-            if (my_square.get_neighbor(a_dir) === square) {
-                dir = a_dir;
-                break;
-            }
-        }
-        is(dir, Direction) || error(`No direction found to square. square = ${square}`);
-
-        if ([top, bottom].includes(dir)) {
-            square.is_empty() || error(`The next square is not empty.`);
-        } else if ([top_left, top_right, bottom_left, bottom_right].includes(dir)) {
-            !square.is_empty() || error(`The next square is empty.`);
-            const next_piece = square.piece();
-            next_piece.team() !== this.team() || error(`The next piece is in my team.`);
-        }
-
-        // The square is authorized, move to it.
-        super.move(square);
-    }
 }
 
 class Rook extends Piece {
@@ -821,10 +868,7 @@ class Rook extends Piece {
 
     constructor(square, team) {
         super(square, team);
-        const dirs_white = [top_left, top, top_right];
-        const dirs_black = [bottom_left, bottom, bottom_right];
-        this.#dirs = team === black ? dirs_black : dirs_white;
-        this.#image = images[team === black ? "black_rook" : "white_rook"];
+        this.#image = images.of(team === black ? "black_rook" : "white_rook");
     }
 
     toString() {
@@ -846,10 +890,7 @@ class Knight extends Piece {
 
     constructor(square, team) {
         super(square, team);
-        const dirs_white = [top_left, top, top_right];
-        const dirs_black = [bottom_left, bottom, bottom_right];
-        this.#dirs = team === black ? dirs_black : dirs_white;
-        this.#image = images[team === black ? "black_knight" : "white_knight"];
+        this.#image = images.of(team === black ? "black_knight" : "white_knight");
     }
 
     toString() {
@@ -871,10 +912,7 @@ class Queen extends Piece {
 
     constructor(square, team) {
         super(square, team);
-        const dirs_white = [top_left, top, top_right];
-        const dirs_black = [bottom_left, bottom, bottom_right];
-        this.#dirs = team === black ? dirs_black : dirs_white;
-        this.#image = images[team === black ? "black_queen" : "white_queen"];
+        this.#image = images.of(team === black ? "black_queen" : "white_queen");
     }
 
     toString() {
@@ -919,10 +957,11 @@ class Board extends Actor {
     }
 
     move(start, end) {
+        this.#draw()
         const end_square = this.#coord_to_square(end);
         const start_piece = this.#coord_to_piece(start);
         const king = this.#turn === black ? this.#black_king : this.#white_king;
-        start_piece.team() === this.#turn || error(`It is ${this.#turn.val()} turn.`);
+        start_piece.team() === this.#turn || error(`It is ${this.#turn.val} turn.`);
         start_piece instanceof King ? start_piece.move(end_square) : king.move_piece(start_piece, end_square);
         this.#turn = this.#turn === white ? black : white;
     }
@@ -1055,6 +1094,15 @@ class Board extends Actor {
         piece !== null || error(`No piece at coord. coord = (${coord})`);
         return piece;
     }
+
+    #draw() {
+        const indexes = this.#indexes
+        indexes.forEach((row) => {
+            indexes.forEach((col) => {
+                this.#squares[row][col].draw();
+            });
+        })        
+    }
 }
 
 function build() {
@@ -1072,6 +1120,20 @@ function build() {
 
     init();
 
+    const play = (moves) => {
+        let time = 0;
+        moves.forEach(([start, end]) => {
+            time += 1000;
+            setTimeout(() => {
+                try {
+                    board.move(start, end);
+                } catch (error) {
+                    msg.innerText = error.message;
+                }
+            }, time);
+        })
+    }
+
     return {
         init: () => init(),
         attacked_square: () => {
@@ -1081,25 +1143,23 @@ function build() {
                     [5, 4],
                 ],
                 [
-                    [0, 3],
-                    [3, 7],
+                    [1, 3],
+                    [2, 3],
+                ],
+                [
+                    [6, 3],
+                    [5, 3],
+                ],
+                [
+                    [0, 2],
+                    [4, 6],
                 ],
                 [
                     [7, 4],
                     [6, 4],
                 ],
             ];
-            let time = 0;
-            moves.forEach(([start, end]) => {
-                time += 1000;
-                setTimeout(() => {
-                    try {
-                        board.move(start, end);
-                    } catch (error) {
-                        msg.innerText = error.message;
-                    }
-                }, time);
-            });
+            play(moves);
         },
         pinned: () => {
             const moves = [
@@ -1107,6 +1167,14 @@ function build() {
                     [6, 4],
                     [5, 4],
                 ],
+                [
+                    [1, 4],
+                    [2, 4],
+                ],
+                [
+                    [6, 3],
+                    [5, 3],
+                ],                
                 [
                     [0, 3],
                     [4, 7],
@@ -1116,17 +1184,7 @@ function build() {
                     [5, 5],
                 ],
             ];
-            let time = 0;
-            moves.forEach(([start, end]) => {
-                time += 1000;
-                setTimeout(() => {
-                    try {
-                        board.move(start, end);
-                    } catch (error) {
-                        msg.innerText = error.message;
-                    }
-                }, time);
-            });
+            play(moves)
         },
     };
 }
