@@ -99,7 +99,7 @@ class Message {
 
 async function send(message) {
   try {
-    const result = await message.address.behaviour(message.content);
+    const result = await message.address.behaviour(message);
     if (result == undefined) {
       return ACK;
     } else {
@@ -111,6 +111,21 @@ async function send(message) {
 }
     </x-blockcode>
   </x-h2>
+
+  <x-h2 name="Experiment" id="779f60e9-4a4d-41e5-a2c3-41f82b58b4b3">
+    <p>In order to illustrate the implementation, we use it to model a client performing a deposit on its account.</p>
+    <x-blockcode>
+const account = new Account(0);
+const client = new Client(100, account);
+client.deposit(60)
+    </x-blockcode>
+    <script defer type="module" src="data/experiment.js"></script>
+    <div class="actions" style="margin: 1rem 0;display:flex;gap: 1rem;">
+      <button onclick="window.experiment.run()" class="button">run</button>
+    </div>
+    <pre id="msg" style="border: 1px solid currentColor; padding:2px; min-height: 1rem;">Logs</pre>
+    <p>Implementation: <a href="https://github.com/phf-1/phf-1.github.io/blob/main/page/0572b568-982c-4372-9e6c-e0b3c78e6baf/data/experiment.js">GitHub</a>.</p>
+  </x-h2>  
 
   <x-h2 name="Method" id="8e5577c8-af0d-4a7f-9c7b-36cdba03224f">
     <x-h3 name="Context" id="bf5287dd-a17e-45c0-91da-e80497dff941">
@@ -227,7 +242,7 @@ class Hello {
       <x-blockcode>
 async function send(message) {
   try {
-    const result = await message.address.behaviour(message.content);
+    const result = await message.address.behaviour(message);
     if (result == undefined) {
       return ACK;
     } else {
@@ -274,16 +289,6 @@ async hello() {
     </x-h3>
   </x-h2>
 
-  <x-h2 name="Experiment" id="779f60e9-4a4d-41e5-a2c3-41f82b58b4b3">
-    <p>In order to illustrat our implementation, we implement a client and its account performing a transaction.</p>
-    <script defer type="module" src="data/experiment.js"></script>
-    <div class="actions" style="margin: 1rem 0;display:flex;gap: 1rem;">
-      <button onclick="window.experiment.run()" class="button">run</button>
-    </div>
-    <pre id="msg" style="border: 1px solid currentColor; padding:2px; min-height: 1rem;">Logs</pre>
-    <p>Implementation: <a href="https://github.com/phf-1/phf-1.github.io/blob/main/page/0572b568-982c-4372-9e6c-e0b3c78e6baf/data/experiment.js">GitHub</a>.</p>
-  </x-h2>
-
   <x-h2 name="Discussion" id="ac9ae391-94fe-4bc3-9d7b-be5dd4cba892">
     <ul>
       <li>The JavaScript runtime is <a href="https://developer.mozilla.org/en-US/docs/Glossary/Main_thread">single threaded</a> by default.</li>
@@ -294,7 +299,14 @@ async hello() {
   </x-h2>
 
   <x-h2 name="Conclusion" id="eecea7d8-f6d7-44b1-87e6-5ad524176e98">
-
+    <ul>
+      <li>A JavaScript implementation candidate has been given to illustrate how actors work.</li>
+      <li>This implementation is enough for simple programs.</li>
+      <li>Building this implementation shows limitations of the JavaScript runtime and similar single threaded runtimes.</li>
+      <li>The need for a special purpose runtime like one provided by the <a
+      href="https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)">EVM</a> is clear since it gives an answer to
+      this central question: how to map actors to isolated processes?</li>
+    </ul>
   </x-h2>
 
   <x-h2 name="Reference" id="eecea7d8-f6d7-44b1-87e6-5ad524176e98">

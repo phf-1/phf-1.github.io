@@ -1123,7 +1123,7 @@ function build() {
     const play = (moves) => {
         let time = 0;
         moves.forEach(([start, end]) => {
-            time += 1000;
+            time += 2000;
             setTimeout(() => {
                 try {
                     board.move(start, end);

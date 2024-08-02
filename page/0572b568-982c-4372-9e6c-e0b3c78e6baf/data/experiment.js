@@ -4,6 +4,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
+const ACK = "ack"
 
 function error(msg) {
     is(msg, "String") || error(`msg is not a string. msg = ${msg}`);
@@ -67,9 +68,11 @@ class Message extends Struct {
     }
 }
 
+class Deposit extends Message {}
+
 async function send(message) {
     try {
-        const result = await message.address.behaviour(message.content);
+        const result = await message.address.behaviour(message);
         if (result === undefined) {
             return ACK;
         } else {
@@ -112,6 +115,12 @@ class Account extends Actor {
         this.publish_msg(`${this} has just received ${amount}€.`)
     }
 
+    async behaviour(message) {
+        if (message instanceof Deposit) {
+            this.deposit(message.content)
+        }
+    }
+
     toString() {
         return `Account(amount=${this.#amount})`
     }
@@ -129,12 +138,16 @@ class Client extends Actor {
         this.publish_msg(`${this} has been created.`)
     }
 
-    deposit(amount) {
+    async deposit(amount) {
         check(amount, "Nat")
         if (amount <= this.#cash) {
             this.#cash -= amount;
             this.publish_msg(`${this} has just made a deposit of ${amount}€.`)
-            this.#account.deposit(amount)
+            const msg = new Deposit(this.#account, amount)
+            const reply = await send(msg)
+            if (reply !== ACK) {
+                throw reply
+            }
         }
         else {
             error(`I cannot transfert more cash to my account than I have.`)

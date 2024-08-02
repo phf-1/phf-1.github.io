@@ -62,247 +62,243 @@
           <!-- :TYPE: 549b4898-7f0e-414b-b977-a79c4e02f078 -->
 <x-h1 name="Modelling Chess using the Actor Model" id="ab7700e6-f25e-402e-8256-bb9bb5b97d0d">
 
-    <x-abstract>
+  <x-abstract>
     Enough of a chess game is implemented to experiment with Actor Model
-    ideas. Pinned pieces and threatened squares are detected. Implementation of
-    these situations is discussed — particularly how the topology of the
-    network of Actors helps the computations — and what it means for an object <code>x</code> to be an Actor.
-    </x-abstract>
+    ideas. Pinned pieces and threatened squares are detected. The implementation of
+    these situations is discussed, particularly how the topology of the network of
+    Actors aids computations, and what it means for an object <code>x</code> to be an Actor.
+  </x-abstract>
 
-    <x-h2 name="Objective" id="83b412fa-f152-4968-a819-95c469b547db">
-        <p>
-           The objective is to implement a chess game, just enough to test <a
-           href="/page/fb0f0662-2d3f-47aa-9a79-0a615d06e647">Actor Model</a> ideas. Besides showing proper chess
-           board, we are interested in implementing two cases:x
-            <ul>
-                <li>Detecting that a piece is <q><a href="https://en.wikipedia.org/wiki/Pin_(chess)#:~:text=In%20chess%2C%20a%20pin%20is,pin%20is%20described%20as%20pinned.">pinned</a></q>.</li>
-                <li>Preventing the king from moving to a threatened square.</li>
-            </ul>
-        </p>
-    </x-h2>
+  <x-h2 name="Objective" id="83b412fa-f152-4968-a819-95c469b547db">
+    <p>
+      The objective is to implement a chess game, just enough to test <a
+                                                                        href="/page/fb0f0662-2d3f-47aa-9a79-0a615d06e647">Actor Model</a> ideas. Besides showing proper chess
+      board, we are interested in implementing two cases:
+      <ul>
+        <li>Detecting that a piece is <q><a href="https://en.wikipedia.org/wiki/Pin_(chess)#:~:text=In%20chess%2C%20a%20pin%20is,pin%20is%20described%20as%20pinned.">pinned</a></q>.</li>
+        <li>Preventing the king from moving to a threatened square.</li>
+      </ul>
+    </p>
+  </x-h2>
 
-    <x-h2 name="Result" id="7f205211-e623-446b-84e1-9dd0a4e39a66">
-        <ul>
-            <li>A click on <code>INIT</code> then <code>ATTACKED SQUARE</code> shows that the white king cannot move up because the target square is threatened by a black bishop.</li>
-            <li>A click on <code>INIT</code> then <code>PINNED</code> shows that the white king cannot move up because the target square is threatened by the queen.</li>
-            <li>The code is available <a href="https://github.com/phf-1/phf-1.github.io/blob/main/page/4ccb9b46-4a7e-4cdc-afc5-cce043e00fc4/data/chess.js">here</a>.</li>
-        </ul>
+  <x-h2 name="Result" id="7f205211-e623-446b-84e1-9dd0a4e39a66">
+    <ul>
+      <li>A click on <code>INIT</code> then <code>ATTACKED SQUARE</code> shows that the white king cannot move up because the target square is threatened by a black bishop.</li>
+      <li>A click on <code>INIT</code> then <code>PINNED</code> shows that the white king cannot move up because the target square is threatened by the queen.</li>
+    </ul>
 
-        <canvas id="chess" width="640" height="640" style="border: 1px solid gray; padding: 2px; border-radius: 2px;display: block;">
+    <canvas id="chess" width="400" height="400" style="border: 1px solid gray; padding: 2px; border-radius: 2px;display: block;">
       An alternative text describing what your canvas displays.
-        </canvas>
-        <script defer type="module" src="data/chess.js"></script>
-        <div class="actions" style="margin: 1rem 0;display:flex;gap: 1rem;">
-            <button onclick="window.chess.init()" class="button">init</button>
-            <button onclick="window.chess.attacked_square()" class="button">attacked square</button>
-            <button onclick="window.chess.pinned()" class="button">pinned</button>
-        </div>
-        <pre id="msg" style="border: 1px solid currentColor; padding:2px; min-height: 1rem;"></pre>
-    </x-h2>
+    </canvas>
+    <script defer type="module" src="data/chess.js"></script>
+    <div class="actions" style="margin: 1rem 0;display:flex;gap: 1rem;">
+      <button onclick="window.chess.init()" class="button">init</button>
+      <button onclick="window.chess.attacked_square()" class="button">attacked square</button>
+      <button onclick="window.chess.pinned()" class="button">pinned</button>
+    </div>
+    <pre id="msg" style="border: 1px solid currentColor; padding:2px; min-height: 1rem;"></pre>
 
-    <x-h2 name="Method" id="a6357b65-8ff1-4149-ab28-1d6658ea632f">
-        <x-h3 name="Actor model interpretation" id="3a651cf5-cb72-4b61-9cbc-7a27eb4a57aa">
-            <p>When the browser accesses this page at:</p>
-            <x-blockcode>
-https://phfrohring.com/page/4ccb9b46-4a7e-4cdc-afc5-cce043e00fc4
-            </x-blockcode>
-            <p>It sends a message using the HTTP protocol requesting this Web page. The Web page contains this code:</p>
-            <x-blockcode>
-&lt;script defer type="module" src="data/chess.js"&gt;&lt;/script&gt;
-            </x-blockcode>
+    <ul>
+      <li>Green squares indicate squares that may represent threats to a king but have been verified not to.</li>
+      <li>Red squares indicate squares that may represent threats to a king and have been verified to do so.</li>
+      <li>A blue square indicate a square that may be moved to.</li>      
+<li>The implementation is available here: <a href="https://github.com/phf-1/phf-1.github.io/blob/main/page/4ccb9b46-4a7e-4cdc-afc5-cce043e00fc4/data/chess.js">GitHub</a>.</li>
+    </ul>
+  </x-h2>
 
-            <p>which may be interpreted as sending a message to the Web server requesting for the file <code>data/chess.js</code> and then sending a message to itself requesting to evaluate the associated JavaScript code.</p>
+  <x-h2 name="Method" id="a6357b65-8ff1-4149-ab28-1d6658ea632f">
+    <x-h3 name="Context" id="85f99743-8e15-4b2e-a01a-55c90333f33c">
+      <ul>
+        <li><a href="/page/0572b568-982c-4372-9e6c-e0b3c78e6baf">JavaScript Actor</a></li>
+      </ul>
+    </x-h3>
 
-            <p>Evaluating the code means executing <code>window.chess = build();</code> which may be interpreted by the browser as: <q>I should handle the message <code>build</code> and store the result in <code>window.chess</code></q>. Re-interpreting the code in terms of actors and message passing does not require much effort.</p>
-        </x-h3>
-
-        <x-h3 name="Board" id="92d9a0a6-1d99-4308-95a3-f0465c363340">
-            <p>The board is an Actor. <a href="https://youtu.be/-4Yp3j_jk8Q?si=jCycuTUtrdh_m3vp">Thinking above the code</a>, its implementation is:</p>
-            <x-blockcode>
+    <x-h3 name="Board" id="92d9a0a6-1d99-4308-95a3-f0465c363340">
+      <p>The board is an Actor. <a href="https://youtu.be/-4Yp3j_jk8Q?si=jCycuTUtrdh_m3vp">Thinking above the code</a>, its implementation is:</p>
+      <x-blockcode>
 class Board extends Actor {
-    /*
-     * State
-     *
-     * Store the squares.
-     * Store the kings.
-     * Store the turn.
-     */
+  /*
+   * State
+   *
+   * Store the squares.
+   * Store the kings.
+   * Store the turn.
+   */
 
-    /*
-     * Constructor
-     *
-     * Given:
-     *   - a HTML Canvas
-     *
-     * Build the board.
-     * Place all pieces.
-     * It is the white team's turn.
-     */
+  /*
+   * Constructor
+   *
+   * Given:
+   *   - a HTML Canvas
+   *
+   * Build the board.
+   * Place all pieces.
+   * It is the white team's turn.
+   */
 
-    /*
-     * Interface
-     *
-     * move:
-     *   Given:
-     *     - a start position
-     *     - an end position
-     *
-     *   If possible, move the piece from the start position to the end position.
-     *   else: throw an error.
-     */
+  /*
+   * Interface
+   *
+   * move:
+   *   Given:
+   *     - a start position
+   *     - an end position
+   *
+   *   If possible, move the piece from the start position to the end position.
+   *   else: throw an error.
+   */
 }
-            </x-blockcode>
-        </x-h3>
+      </x-blockcode>
+    </x-h3>
 
-        <x-h3 name="Square" id="bd4d6a22-de6b-4a74-8b4f-e4856d3db30a">
-            <p>A square is an Actor. Thinking above the code, its implementation is:</p>
-            <x-blockcode>
+    <x-h3 name="Square" id="bd4d6a22-de6b-4a74-8b4f-e4856d3db30a">
+      <p>A square is an Actor. Thinking above the code, its implementation is:</p>
+      <x-blockcode>
 class Square extends Actor {
-    /*
-     * State
-     *
-     * Store its canvas.
-     * Store its color.
-     * Store its neighbors.
-     * Store its piece.
-     * Store its position.
-     * Store its width.
-     */
+  /*
+   * State
+   *
+   * Store its canvas.
+   * Store its color.
+   * Store its neighbors.
+   * Store its piece.
+   * Store its position.
+   * Store its width.
+   */
 
-    /*
-     * Constructor
-     *
-     * Given:
-     *   - a canvas
-     *   - a position
-     *   - a width
-     *   - a color
-     *
-     * Initialize its state and draw the square on the canvas.
-     */
+  /*
+   * Constructor
+   *
+   * Given:
+   *   - a canvas
+   *   - a position
+   *   - a width
+   *   - a color
+   *
+   * Initialize its state and draw the square on the canvas.
+   */
 
-    /*
-     * Interface
-     *
-     * various accessors: canvas, position, …
-     *
-     * is_empty:
-     *   replies a boolean that tells if it is occupied by a piece or not.
-     *
-     * add_neighbor:
-     *   Given:
-     *     - a direction
-     *     - a square
-     *
-     *   Add the square as a neighbor in the given position.
-     *
-     * …
-     */
+  /*
+   * Interface
+   *
+   * various accessors: canvas, position, …
+   *
+   * is_empty:
+   *   replies a boolean that tells if it is occupied by a piece or not.
+   *
+   * add_neighbor:
+   *   Given:
+   *     - a direction
+   *     - a square
+   *
+   *   Add the square as a neighbor in the given position.
+   *
+   * …
+   */
 }
-            </x-blockcode>
-        </x-h3>
+      </x-blockcode>
+    </x-h3>
 
-        <x-h3 name="Network of squares" id="d3d3a960-1914-4dc2-9e7c-c770a4f8e11c">
-            <p>Each square has neighbors. For a given direction <code>dir</code> — <i>e.g.</i> <code>top</code> — the
-            neighbor of a square <code>s</code> is given by <code>s.get_neighbor(dir) ≡ s'</code>. Given that
-            <code>s</code> has for neighbor <code>s'</code>, we have: <code>s'</code> has for neighbor
-            <code>s</code>. So, from <code>s</code> at the top left corner of the board, a network of neighboring
-            squares can be built:</p>
+    <x-h3 name="Network of squares" id="d3d3a960-1914-4dc2-9e7c-c770a4f8e11c">
+      <p>Each square has neighbors. For a given direction <code>dir</code> (e.g., <code>top</code>), the neighbor of a
+      square <code>s</code> is given by <code>s.get_neighbor(dir) ≡ s'</code>. Given that <code>s</code> has a neighbor
+        <code>s'</code>, we can infer that <code>s'</code> also has a neighbor <code>s</code>. Starting from
+        <code>s</code> at the top left corner of the board, we can construct a network of neighboring squares:</p>
 
-            <figure>
-                <img src="data/network_1.svg" alt="Network of squares">
-                <figcaption>Network of squares</figcaption>
-            </figure>
+      <figure>
+        <img src="data/network_1.svg" alt="Network of squares">
+        <figcaption>Network of squares</figcaption>
+      </figure>
 
-            <p>If given two neighbors <code>s</code> and <code>s'</code>, we represent their relations by one
-            edge. Doing so step by step gives rise to the network of squares that represent the chess board:</p>
+      <p>If we consider two neighbors, <code>s</code> and <code>s'</code>, we represent their relationship with an
+      edge. By doing this step by step, we create the network of squares that represents the chessboard:</p>
 
-            <figure>
-                <img src="data/network_2.svg" alt="Network of squares">
-                <figcaption>Complete network of squares</figcaption>
-            </figure>
-        </x-h3>
+      <figure>
+        <img src="data/network_2.svg" alt="Network of squares">
+        <figcaption>Complete network of squares</figcaption>
+      </figure>
+    </x-h3>
 
-        <x-h3 name="Network of squares and pieces" id="2007ccbe-794d-45ba-b43b-c7b733bc48c8">
-            <p>A square may be occupied by at most one piece. A piece may occupy at most one square. So, we may add the pieces to the network of squares.</p>
+    <x-h3 name="Network of squares and pieces" id="2007ccbe-794d-45ba-b43b-c7b733bc48c8">
+      <p>A square may be occupied by at most one piece. A piece may occupy at most one square. So, we may add the pieces to the network of squares.</p>
 
-            <figure>
-                <img src="data/piece_square.svg" alt="Piece and square network">
-                <figcaption>Piece and square network</figcaption>
-            </figure>
+      <figure>
+        <img src="data/piece_square.svg" alt="Piece and square network">
+        <figcaption>Piece and square network</figcaption>
+      </figure>
 
-            <p>We just superpose the piece and the square to represent this relation.</p>
+      <p>We just superpose the piece and the square to represent this relation.</p>
 
-            <figure>
-                <img src="data/piece_over_square.svg" alt="Piece and square network">
-                <figcaption>Piece and square network</figcaption>
-            </figure>
-        </x-h3>
+      <figure>
+        <img src="data/piece_over_square.svg" alt="Piece and square network">
+        <figcaption>Piece and square network</figcaption>
+      </figure>
+    </x-h3>
 
-        <x-h3 name="Threatened squares" id="0760f03b-b539-4499-86e0-52e1be0122d7">
-            <p>Assume that we have the board configuration below. From the point of view of the black king, the white bishop is a threat.</p>
-            <figure>
-                <img src="data/bishop_1.svg" alt="Bishop configuration">
-                <figcaption>Bishop configuration</figcaption>
-            </figure>
+    <x-h3 name="Threatened squares" id="0760f03b-b539-4499-86e0-52e1be0122d7">
+      <p>Assume that we have the board configuration below. From the point of view of the black king, the white bishop is a threat.</p>
+      <figure>
+        <img src="data/bishop_1.svg" alt="Bishop configuration">
+        <figcaption>Bishop configuration</figcaption>
+      </figure>
 
-            <p>How to detect the threat of the black king? By sending probes.</p>
-        </x-h3>
+      <p>How to detect the threat of the black king? By sending probes.</p>
+    </x-h3>
 
-        <x-h3 name="Probe" id="604d2913-bab8-4433-83ac-96cee2856917">
-            <p>A probe is an Actor. Its <q>above the code</q> description is:</p>
-            <x-blockcode>
+    <x-h3 name="Probe" id="604d2913-bab8-4433-83ac-96cee2856917">
+      <p>A probe is an Actor. Its <q>above the code</q> description is:</p>
+      <x-blockcode>
 class Probe extends Actor {
-    /*
-     * State
-     *
-     * It has a square.
-     * It has a direction.
-     * It detects pieces of a given team.
-     * It detects pieces of a given type (bishop, rook, or queen).
-     */
+  /*
+   * State
+   *
+   * It has a square.
+   * It has a direction.
+   * It detects pieces of a given team.
+   * It detects pieces of a given type (bishop, rook, or queen).
+   */
 
-    /*
-     * Constructor
-     *
-     * Its state is initialized.
-     */
+  /*
+   * Constructor
+   *
+   * Its state is initialized.
+   */
 
-    /*
-     * Interface
-     *
-     * start:
-     *   next_square is the next square in the given
-     *   direction from this probe square.
-     *
-     *   next_piece is the piece on the next square if any.
-     *
-     *   If the next square is empty, then: this square is safe
-     *   and the probe can move to the next square and start again.
-     *
-     *   If there is a next piece and it is from the given type and
-     *   is on the opposite team, then: throw an exception and die.
-     *
-     *   In any other case, the probe dies.
-     *
-     */
+  /*
+   * Interface
+   *
+   * start:
+   *   next_square is the next square in the given
+   *   direction from this probe square.
+   *
+   *   next_piece is the piece on the next square if any.
+   *
+   *   If the next square is empty, then: this square is safe
+   *   and the probe can move to the next square and start again.
+   *
+   *   If there is a next piece and it is from the given type and
+   *   is on the opposite team, then: throw an exception and die.
+   *
+   *   In any other case, the probe dies.
+   *
+   */
 
-    /*
-     * Private
-     */
-    #move(square) {
-        this.#square = square;
-        return this.start();
-    }
+  /*
+   * Private
+   */
+   #move(square) {
+     this.#square = square;
+     return this.start();
+  }
 }
-            </x-blockcode>
-        </x-h3>
+      </x-blockcode>
+    </x-h3>
 
-        <x-h3 name="Detecting threaten squares" id="5e426654-7ef0-4b43-830d-40f878169cc5">
-            <p>To detect if a square is threatened by a bishop, it is enough to know that a bishop of the adversary team
-            has a direct view of the given square. Before moving, the king builds four probes like so (in pseudo-code):</p>
+    <x-h3 name="Detecting threatened squares" id="5e426654-7ef0-4b43-830d-40f878169cc5">
+      <p>To detect if a square is threatened by a bishop, it is enough to know that a bishop of the adversary team
+        has a direct view of the given square. Before moving, the king builds four probes like so (in pseudo-code):</p>
 
-            <x-blockcode>
+      <x-blockcode>
 move(square) {
   …
   opposite_team : Team
@@ -312,44 +308,75 @@ move(square) {
   directions.forEach((dir) => bishop_probe(dir).start())
   …
 }
-            </x-blockcode>
+      </x-blockcode>
 
-            <p>Each probe is started at about the same time and travels — eventually in parallel — along the given
-            direction searching for a bishop of the opposite team. When one is found, it raises an exception signaling
-            that a threat has been detected. Using pictures, it looks like this:</p>
+      <p>Each probe starts simultaneously and travels, maybe in parallel, along the specified direction, searching
+      for a bishop from the opposing team. When a bishop is found, the probe raises an exception to signal that a threat
+      has been detected. Visually, it appears like this:</p>
 
-            <figure>
-                <img src="data/probe_1.svg" alt="Looking for a bishop">
-                <figcaption>A probe is created looking at the top right direction</figcaption>
-            </figure>
+      <figure>
+        <img src="data/probe_1.svg" alt="Looking for a bishop">
+        <figcaption>A probe is created looking at the top right direction</figcaption>
+      </figure>
 
-            <figure>
-                <img src="data/probe_2.svg" alt="Looking for a bishop">
-                <figcaption>The probe moved to the next safe square</figcaption>
-            </figure>
+      <figure>
+        <img src="data/probe_2.svg" alt="Looking for a bishop">
+        <figcaption>The probe moved to the next safe square</figcaption>
+      </figure>
 
-            <figure>
-                <img src="data/probe_3.svg" alt="Looking for a bishop">
-                <figcaption>Since it found a bishop of the opposite team, it died.</figcaption>
-            </figure>
-        </x-h3>
-    </x-h2>
+      <figure>
+        <img src="data/probe_3.svg" alt="Looking for a bishop">
+        <figcaption>Since it found a bishop of the opposite team, it died.</figcaption>
+      </figure>
+    </x-h3>
+  </x-h2>
 
-    <x-h2 name="Discussion" id="a31be05e-3fa6-45d4-8edf-0dfafa48dccd">
-        <ul>
-            <li>Chess games </li>
-        </ul>
+  <x-h2 name="Discussion" id="a31be05e-3fa6-45d4-8edf-0dfafa48dccd">
+    <x-h3 name="Actor model interpretation" id="3a651cf5-cb72-4b61-9cbc-7a27eb4a57aa">
+      <p>Reinterpreting the code in terms of actors and message passing requires minimal effort. For instance, when the
+      browser accesses this page at:</p>
 
+      <x-blockcode>
+    https://phfrohring.com/page/4ccb9b46-4a7e-4cdc-afc5-cce043e00fc4
+      </x-blockcode>
+      <p>It sends an HTTP protocol message requesting this web page. The web page contains the following code:</p>
+      <x-blockcode>
+    &lt;script defer type="module" src="data/chess.js"&gt;&lt;/script&gt;
+      </x-blockcode>
 
-    </x-h2>
+      <p>This code can be interpreted as follows: the browser sends a message to the web server, requesting the file <code>data/chess.js</code>. Subsequently, it sends a message to itself, requesting the evaluation of the associated JavaScript code.</p>
 
-    <x-h2 name="Conclusion" id="739fe25d-bd46-4ebc-a766-3ff35c68c36d">
+      <p>When evaluating the code, the browser executes <code>window.chess = build();</code>. This execution can be understood as follows: the browser handles the message <code>build</code> and stores the result in <code>window.chess</code>.</p>
+    </x-h3>
 
-    </x-h2>
+    <x-h3 name="Superposition and parallelism" id="b790fd4d-5ae3-45e0-971f-660f45acc928">
+      <ol>
+        <li>When detecting a threat, the king dispatches probes.</li>
+        <li>Each probe acts as an independent actor.</li>
+        <li>Any two probes can execute in parallel.</li>
+        <li>All probes use the graph structure in a read-only manner to traverse from their original square. They are
+        superimposed on the graph and do not interfere with each other.</li>
+        <li>If it were possible to allocate a process to each actor, this code would naturally benefit from parallelism
+        without requiring any additional adjustments.</li>
+      </ol>
+    </x-h3>
+  </x-h2>
 
-    <x-h2 name="Reference" id="ce2f8a2b-d013-4aef-be97-c296318daaa7">
+  <x-h2 name="Conclusion" id="739fe25d-bd46-4ebc-a766-3ff35c68c36d">
+    <p>To conclude, this project demonstrates several principles of the Actor Model using a partial implementation of a
+       chess game as an illustration.</p>
 
-    </x-h2>
+    <p>By focusing on key functionalities such as detecting pinned pieces and preventing illegal moves, it highlights
+       how the Actor Model can be applied to solve problems using simple rules in a few lines of code and, most
+       importantly, the <em>shape</em> of the network of actors.</p>
+
+    <p>The superposition of actors and their non-interference offers significant potential for optimization through
+       parallelism: the code could be parallelized by a runtime without any modification while preserving its
+       straightforward semantics.</p>
+
+    <p>Looking ahead, implementing this model using a more suitable runtime, like the EVM, would be valuable to confirm
+       these initial findings and intuitions.</p>
+  </x-h2>
 </x-h1>
 
 
