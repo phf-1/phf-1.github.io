@@ -82,7 +82,7 @@ async function send(message) {
 
 class Actor {
 		#subscribers;
-		
+
 		constructor() {
 				this.#subscribers = [];
 		}
@@ -126,14 +126,14 @@ class Client extends Actor {
         super()
         this.#cash = cash;
 				this.#account = account;
-				this.publish_msg(`${this} has been created.`)				
+				this.publish_msg(`${this} has been created.`)
     }
 
     deposit(amount) {
 				check(amount, "Nat")
         if (amount <= this.#cash) {
 						this.#cash -= amount;
-						this.publish_msg(`${this} has just made a deposit of ${amount}€.`)						
+						this.publish_msg(`${this} has just made a deposit of ${amount}€.`)
 						this.#account.deposit(amount)
 				}
 				else {
@@ -142,7 +142,7 @@ class Client extends Actor {
     }
 		toString() {
 				return `Client(cash=${this.#cash})`
-		}		
+		}
 }
 
 
@@ -173,7 +173,7 @@ function run() {
 		tui.observe(account)
 		const client = new Client(100, account);
 		tui.log(`${client} has been created.`)
-		tui.log(`${client} has the account: ${account}.`)		
+		tui.log(`${client} has the account: ${account}.`)
 		tui.observe(client)
 		client.deposit(60)
 }
