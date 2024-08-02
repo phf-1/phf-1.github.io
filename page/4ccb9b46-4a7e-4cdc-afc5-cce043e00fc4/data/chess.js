@@ -4,14 +4,14 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
+const ACK = Symbol("ACK");
 
 /*
  * …
  * await delay(5000); // wait for 5s
  * …
  */
-const delay = ms => new Promise(res => setTimeout(res, ms));
-
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 /*
  * is(x,type) : Boolean
@@ -64,22 +64,54 @@ function check(x, type, pred = (x) => true) {
 }
 
 /*
+ * A Struct s is a read only data structure with properties.
+ */
+class Struct {}
+
+/*
+ * A Message msg represents content to be delivered to some address.
+ */
+class Message extends Struct {
+    #address;
+    #content;
+
+    constructor(address, content) {
+        super();
+        this.#address = address;
+        this.#content = content;
+    }
+
+    get address() {
+        return this.#address;
+    }
+
+    get content() {
+        return this.#content;
+    }
+
+    toString() {
+        return `Struct.Message(address=${this.#address} content=${this.#content})`;
+    }
+}
+
+/*
  * dir : Direction models a direction w.r.t. a square on the board: up, right, …
  */
-class Direction {
+class Direction extends Struct {
     #val;
 
     constructor(val) {
+        super();
         check(val, "String");
         this.#val = val;
     }
 
-    val() {
+    get val() {
         return this.#val;
     }
 
     toString() {
-        return `Direction(val=${this.#val})`;
+        return `Struct.Direction(val=${this.#val})`;
     }
 }
 
@@ -99,20 +131,21 @@ const directions = [top, top_right, right, bottom_right, bottom, bottom_left, le
 /*
  * team : Team models a team i.e. black or white.
  */
-class Team {
+class Team extends Struct {
     #val;
 
     constructor(val) {
+        super();
         check(val, "String");
         this.#val = val;
     }
 
-    val() {
+    get val() {
         return this.#val;
     }
 
     toString() {
-        return `Team(val=${this.#val})`;
+        return `Struct.Team(val=${this.#val})`;
     }
 }
 
@@ -136,55 +169,165 @@ const teams = [black, white];
  * Top ≡ Nat
  * Left ≡ Nat
  */
-class Coord {
+class Coord extends Struct {
     #top;
     #left;
 
     constructor(top, left) {
+        super();
         check(top, "Nat");
         this.#top = top;
         check(left, "Nat");
         this.#left = left;
     }
 
-    top() {
+    get top() {
         return this.#top;
     }
 
-    left() {
+    get left() {
         return this.#left;
     }
 
     toString() {
-        return `Coord(top=${this.#top}, left=${this.#left})`;
+        return `Struct.Coord(top=${this.#top} left=${this.#left})`;
     }
 }
 
 /*
  * pos : Pos ≡ (Top, Left) models the coordinates of pixel starting from the top left pixel.
  */
-class Pos {
+class Pos extends Struct {
     #top;
-
     #left;
 
     constructor(top, left) {
+        super();
         check(top, "Nat");
         this.#top = top;
         check(left, "Nat");
         this.#left = left;
     }
 
-    top() {
+    get top() {
         return this.#top;
     }
 
-    left() {
+    get left() {
         return this.#left;
     }
 
     toString() {
-        return `Pos(top=${this.#top}, left=${this.#left})`;
+        return `Struct.Pos(top=${this.#top} left=${this.#left})`;
+    }
+}
+
+/*
+ * send(message) delivers message.content to message.address
+ *
+ * await send(message) : ACK | Error | Any
+ *
+ * ACK means that the message has been received but nothing has been returned.
+ *
+ * Error means that the message has been received but the receiving actor could not
+ * proceed and returned an error instead of the expected result, if any.
+ *
+ * Any means that the message has been received and the receiving actor proceeded
+ * with the message and returned a result.
+ *
+ */
+async function send(message) {
+    console.log(`send(message=${message})`);
+    try {
+        const result = await message.address.behaviour(message.content);
+        if (result === undefined) {
+            return ACK;
+        } else {
+            return result;
+        }
+    } catch (error) {
+        return error;
+    }
+}
+
+/*
+ * An Actor represents the fundamental unit of computation i.e. a thing is modelled
+ * by an actor. It has a state, a behaviour -- i.e. λ(state, message) → state' -- and
+ * communication -- i.e. it can send messages.
+ */
+class Actor {
+    /*
+     * State
+     *
+     * The internal data of the Actor known to itself only.
+     *
+     * #var_1;
+     * ...
+     *
+     */
+
+    /*
+     * Constructor
+     *
+     * A function that introduces a new actor and initialiazes its state.
+     *
+     */
+    constructor(/* init values */) {
+        // State is initialized.
+        // this.#var_1 = init_value
+        // ...
+    }
+
+    /*
+     * Interface
+     *
+     * If a client c has an address of an Actor a, then: it can call a.hello().
+     * hello implementation runs in c computational context. hello is necessary to
+     * hide implementation details especially ansychronous mechanichs from calling
+     * clients. For instance, an asynchronous implementation of hello may look like:
+     *
+     * a:
+     *   async hello() {
+     *     return await send(new Hello(this))
+     *   }
+     *
+     * It involves a choice: using an asynchronous call or not.
+     *
+     * In case of an asynchronous call, it involves the creation of the appropriate
+     * message and its sending.
+     *
+     * In case of a synchronous call, the implementation looks like:
+     *
+     * a:
+     *   hello() {
+     *     return "world"
+     *   }
+     *
+     * If the client assumes an asynchronous implementation by default -- i.e. await
+     * a.func(...) --, then: the client code is robust to the async/synch choice of
+     * implementation since the client code would workd in both cases, which is not
+     * true if the client assumes a synchronous implementation.
+     *
+     * In other words, the client should call an actor interface using await keyword.
+     */
+
+    /*
+     * Behaviour
+     *
+     * Defines how the actor reacts to asynchronous messages. A side effects of the
+     * behaviour may be that messages are sent and actors are created.
+     *
+     */
+    async behaviour(message) {
+        /*
+         * The client may wait for the answer:
+         * if (message isinstanceof Hello) { return "world"; }
+         *
+         * The client should not wait for an answer:
+         * if (message isinstanceof Params) { this.do_things(); }
+         *
+         */
+        error(`Unexpected message ${message}.`);
     }
 }
 
@@ -197,37 +340,17 @@ class Pos {
  * It can be occupied by at most one piece.
  * It has neighbors, at most one per direction.
  */
-class Square {
+class Square extends Actor {
     #canvas;
-
-    #width;
-
-    #pos;
-
     #color;
-
     #neighbors;
-
     #piece;
-
-    #draw() {
-        const canvas = this.#canvas;
-        const pos = this.#pos;
-        const width = this.#width;
-        const top = pos.top();
-        const left = pos.left();
-        canvas.fillStyle = this.#color;
-        canvas.fillRect(left, top, width, width);
-        if (!this.is_empty()) {
-            const image = new Image();
-            image.src = `data/${this.#piece.image()}`;
-            image.onload = () => {
-                canvas.drawImage(image, left, top, width, width);
-            };
-        }
-    }
+    #pos;
+    #width;
+    #paints;
 
     constructor(canvas, pos, width, color) {
+        super();
         check(canvas, "Canvas");
         this.#canvas = canvas;
 
@@ -244,7 +367,13 @@ class Square {
 
         this.#neighbors = new Map();
 
+        this.#paints = [];
+
         this.#draw();
+    }
+
+    toString() {
+        return `Actor.Square(pos=${this.#pos} width=${this.#width} color=${this.#color})`;
     }
 
     canvas() {
@@ -305,29 +434,62 @@ class Square {
     }
 
     safe() {
-        const canvas = this.#canvas;
-        const pos = this.#pos;
-        const width = this.#width;
-        const top = pos.top();
-        const left = pos.left();
-        canvas.fillStyle = "green";
-        canvas.fillRect(left, top, width, width);        
+        this.#draw(true);
     }
 
     unsafe() {
+        this.#draw(false);
+    }
+
+    #paint() {
+        let paint = this.#paints.shift()
+        while (paint) {
+            paint()
+            paint = this.#paints.shift()
+        }
+    }
+
+    #draw(safe = null) {
         const canvas = this.#canvas;
         const pos = this.#pos;
         const width = this.#width;
-        const top = pos.top();
-        const left = pos.left();
-        canvas.fillStyle = "red";
-        canvas.fillRect(left, top, width, width);                
-    }
+        const top = pos.top;
+        const left = pos.left;
+        this.#paints.push(
+            () => {
+                canvas.fillStyle = this.#color
+                canvas.fillRect(left, top, width, width)
+            }
+        )
 
-    toString() {
-        return `Square(pos=${this.#pos}, width=${this.#width}, color=${this.#color})`;
+        if (safe === null) {
+            // continue
+        } else if (safe) {
+            this.#paints.push(
+                () => {
+                    canvas.fillStyle = "#C5E1A5";
+                    canvas.fillRect(left, top, width, width)
+                }
+            )
+        } else {
+            this.#paints.push(
+                () => {
+                    canvas.fillStyle = "#EF9A9A80";
+                    canvas.fillRect(left, top, width, width)
+                }
+            )
+        }
+        if (! this.is_empty()) {
+            this.#paints.push(() => {
+                !this.is_empty() && canvas.drawImage(this.#piece.image(), left, top, width, width)
+            })
+        }
+        window.requestAnimationFrame(() => {
+            this.#paint()
+        })
     }
 }
+
 
 /*
  * piece : Piece models an abstract piece on the board.
@@ -342,16 +504,14 @@ class Square {
  * It has a representation as a set of pixels.
  * It has a color.
  */
-class Piece {
+class Piece extends Actor {
     #square;
-
     #color;
-
     #team;
-
     #image;
 
     constructor(square, team) {
+        super();
         check(square, Square);
         this.#square = square;
 
@@ -361,6 +521,10 @@ class Piece {
         this.#color = this.#team === black ? "#000006" : "#fffff8";
 
         this.#image = `white_pawn.svg`;
+    }
+
+    toString() {
+        return `Actor.Piece(team=${this.#team})`;
     }
 
     square() {
@@ -386,23 +550,57 @@ class Piece {
     color() {
         return this.#color;
     }
-
-    toString() {
-        return `Piece(team=${this.#team})`;
-    }
 }
+
+async function fetch_images() {
+    let images = [
+        "black_bishop",
+        "black_king",
+        "black_knight",
+        "black_pawn",
+        "black_queen",
+        "black_rook",
+        "white_bishop",
+        "white_king",
+        "white_knight",
+        "white_pawn",
+        "white_queen",
+        "white_rook",
+    ]
+
+    images = images.map((name) => {
+        return new Promise((resolve, reject) => {
+            const img = new Image()
+            img.src = `data/${name}.svg`
+            img.onload = () => resolve([name, img])
+            img.onerror = () => reject(`image ${name} has not been fetched.`)
+        })
+    });
+
+    return Promise.all(images)
+        .catch((err) => error(err))
+        .then((values) => Object.fromEntries(values))
+}
+
+const images = await fetch_images()
+
 
 class Pawn extends Piece {
     #dirs;
     #image;
     #first_move;
+
     constructor(square, team) {
         super(square, team);
         const dirs_white = [top_left, top, top_right];
         const dirs_black = [bottom_left, bottom, bottom_right];
         this.#dirs = team === black ? dirs_black : dirs_white;
-        this.#image = team === black ? "black_pawn.svg" : "white_pawn.svg";
+        this.#image = images[team === black ? "black_pawn" : "white_pawn"];
         this.#first_move = true;
+    }
+
+    toString() {
+        return `Actor.Piece.Pawn(team=${this.team()})`;
     }
 
     image() {
@@ -411,7 +609,7 @@ class Pawn extends Piece {
 
     move(square) {
         check(square, Square);
-        
+
         // The square is authorized or it is an error.
         const my_square = this.square();
         let dir = null;
@@ -434,18 +632,15 @@ class Pawn extends Piece {
         // The square is authorized, move to it.
         super.move(square);
     }
-
-    toString() {
-        return `Pawn(team=${this.team()})`;
-    }
 }
 
-class Probe {
+class Probe extends Actor {
     #square;
     #dir;
     #team;
-    #piece_type;
+    #type;
     constructor(square, dir, team, piece_type) {
+        super();
         check(square, Square);
         check(dir, Direction);
         check(team, Team);
@@ -453,25 +648,28 @@ class Probe {
         this.#square = square;
         this.#dir = dir;
         this.#team = team;
-        this.#piece_type = piece_type;
+        this.#type = piece_type;
+    }
+
+    toString() {
+        return `Actor.Probe(square=${this.#square} dir=${this.#dir} team=${this.#team} type=${this.#type})`;
     }
 
     start() {
         const next_square = this.#square.get_neighbor(this.#dir);
         const next_piece = next_square && next_square.piece();
         if (next_square && !next_piece) {
-            next_square.safe()
+            next_square.safe();
             return this.#next(next_square);
         }
-        if (next_square && next_piece.team() === this.#team && is(next_piece, this.#piece_type)) {
-            next_square.unsafe()
+        if (next_square && next_piece.team() === this.#team && is(next_piece, this.#type)) {
+            next_square.unsafe();
             return next_square;
         }
         return null;
     }
 
     #next(square) {
-        
         this.#square = square;
         return this.start();
     }
@@ -497,13 +695,16 @@ class QueenProbe extends Probe {
 
 class King extends Piece {
     #dirs;
-
     #image;
 
     constructor(square, team) {
         super(square, team);
         this.#dirs = [top_left, top, top_right, bottom_left, bottom, bottom_right];
-        this.#image = team === black ? "black_king.svg" : "white_king.svg";
+        this.#image = images[team === black ? "black_king" : "white_king"];
+    }
+
+    toString() {
+        return `Actor.Piece.King(team=${this.team()})`;
     }
 
     image() {
@@ -532,6 +733,24 @@ class King extends Piece {
         super.move(square);
     }
 
+    move_piece(piece, square) {
+        check(piece, Piece);
+        if (piece === this) {
+            this.move(square);
+            return
+        }
+        this.team() === piece.team() || error(`I cannot move a piece not in my team.`);
+        const piece_type = Object.getPrototypeOf(piece).constructor;
+        const piece_square = piece.square();
+        piece.move(square);
+        if (! this.is_safe()) {
+            square.remove_piece();
+            const new_piece = new piece_type(piece_square, this.team());
+            piece_square.add_piece(new_piece);
+            error(`I am not safe.`);
+        }
+    }
+
     is_safe() {
         return this.#is_safe(this.square());
     }
@@ -545,26 +764,12 @@ class King extends Piece {
         const queen_probes = directions.map((dir) => new QueenProbe(square, dir, other_team));
         const probes = queen_probes.concat(bishop_probes.concat(rook_probes));
         const threats = probes.map((probe) => probe.start());
-        threats.forEach((threat) => {
-            if (is(threat, Square)) {
-                error(`target square is threaten by piece on square.
-target square: ${square.toString()}
-piece: ${threat.piece().toString()}
-square: ${threat.toString()}
-`);
-            }
-        });
-        return true;
-    }
-
-    toString() {
-        return `King(team=${this.team()})`;
+        return !threats.some((threat) => is(threat, Square));
     }
 }
 
 class Bishop extends Piece {
     #dirs;
-
     #image;
 
     constructor(square, team) {
@@ -572,7 +777,11 @@ class Bishop extends Piece {
         const dirs_white = [top_left, top, top_right];
         const dirs_black = [bottom_left, bottom, bottom_right];
         this.#dirs = team === black ? dirs_black : dirs_white;
-        this.#image = team === black ? "black_bishop.svg" : "white_bishop.svg";
+        this.#image = images[team === black ? "black_bishop" : "white_bishop"];
+    }
+
+    toString() {
+        return `Actor.Piece.Bishop(team=${this.team()})`;
     }
 
     image() {
@@ -604,15 +813,10 @@ class Bishop extends Piece {
         // The square is authorized, move to it.
         super.move(square);
     }
-
-    toString() {
-        return `Bishop(team=${this.team()})`;
-    }
 }
 
 class Rook extends Piece {
     #dirs;
-
     #image;
 
     constructor(square, team) {
@@ -620,7 +824,11 @@ class Rook extends Piece {
         const dirs_white = [top_left, top, top_right];
         const dirs_black = [bottom_left, bottom, bottom_right];
         this.#dirs = team === black ? dirs_black : dirs_white;
-        this.#image = team === black ? "black_rook.svg" : "white_rook.svg";
+        this.#image = images[team === black ? "black_rook" : "white_rook"];
+    }
+
+    toString() {
+        return `Actor.Piece.Rook(team=${this.team()})`;
     }
 
     image() {
@@ -629,16 +837,11 @@ class Rook extends Piece {
 
     move(square) {
         error(`Not implemented`);
-    }
-
-    toString() {
-        return `Rook(team=${this.team()})`;
     }
 }
 
 class Knight extends Piece {
     #dirs;
-
     #image;
 
     constructor(square, team) {
@@ -646,7 +849,11 @@ class Knight extends Piece {
         const dirs_white = [top_left, top, top_right];
         const dirs_black = [bottom_left, bottom, bottom_right];
         this.#dirs = team === black ? dirs_black : dirs_white;
-        this.#image = team === black ? "black_knight.svg" : "white_knight.svg";
+        this.#image = images[team === black ? "black_knight" : "white_knight"];
+    }
+
+    toString() {
+        return `Actor.Piece.Knight(team=${this.team()})`;
     }
 
     image() {
@@ -656,15 +863,10 @@ class Knight extends Piece {
     move(square) {
         error(`Not implemented`);
     }
-
-    toString() {
-        return `Knight(team=${this.team()})`;
-    }
 }
 
 class Queen extends Piece {
     #dirs;
-
     #image;
 
     constructor(square, team) {
@@ -672,28 +874,58 @@ class Queen extends Piece {
         const dirs_white = [top_left, top, top_right];
         const dirs_black = [bottom_left, bottom, bottom_right];
         this.#dirs = team === black ? dirs_black : dirs_white;
-        this.#image = team === black ? "black_queen.svg" : "white_queen.svg";
+        this.#image = images[team === black ? "black_queen" : "white_queen"];
+    }
+
+    toString() {
+        return `Actor.Piece.Queen(team=${this.team()})`;
     }
 
     image() {
         return this.#image;
     }
-
-    toString() {
-        return `Queen(team=${this.team()})`;
-    }
 }
 
-class Board {
+class Board extends Actor {
     #squares;
-
     #black_king;
-
     #white_king;
-
     #indexes;
-
     #turn;
+
+    constructor(canvas) {
+        super();
+        check(canvas, "HTMLCanvas");
+        const width = canvas.width;
+        const height = canvas.height;
+        width === height || error("width !== height");
+        width % 8 === 0 || error("width % 8 !== 0");
+        const square_len = width / 8;
+        const indexes = Array.from({ length: 8 }, (item, index) => index);
+        this.#indexes = indexes;
+        this.#squares = [];
+        this.#build_space(canvas.getContext("2d"), indexes, square_len);
+        this.#pawns();
+        this.#kings();
+        this.#bishops();
+        this.#queens();
+        this.#rooks();
+        this.#knights();
+        this.#turn = white;
+    }
+
+    toString() {
+        return `Actor.Board(squares=${this.#squares} black_king=${this.#black_king} white_king=${this.#white_king} indexes=${this.#indexes} turn=${this.#turn})`;
+    }
+
+    move(start, end) {
+        const end_square = this.#coord_to_square(end);
+        const start_piece = this.#coord_to_piece(start);
+        const king = this.#turn === black ? this.#black_king : this.#white_king;
+        start_piece.team() === this.#turn || error(`It is ${this.#turn.val()} turn.`);
+        start_piece instanceof King ? start_piece.move(end_square) : king.move_piece(start_piece, end_square);
+        this.#turn = this.#turn === white ? black : white;
+    }
 
     #pawns() {
         const add_pawn = (square, team) => {
@@ -823,56 +1055,23 @@ class Board {
         piece !== null || error(`No piece at coord. coord = (${coord})`);
         return piece;
     }
-
-    constructor(canvas) {
-        check(canvas, "HTMLCanvas");
-        const width = canvas.width;
-        const height = canvas.height;
-        width === height || error("width !== height");
-        width % 8 === 0 || error("width % 8 !== 0");
-        const square_len = width / 8;
-        const indexes = Array.from({ length: 8 }, (item, index) => index);
-        this.#indexes = indexes;
-        this.#squares = [];
-        this.#build_space(canvas.getContext("2d"), indexes, square_len);
-        this.#pawns();
-        this.#kings();
-        this.#bishops();
-        this.#queens();
-        this.#rooks();
-        this.#knights();
-        this.#turn = white;
-    }
-
-    move(start, end) {
-        const start_piece = this.#coord_to_piece(start);
-        start_piece.team() === this.#turn || error(`It is ${this.#turn.val()} turn.`);
-        const end_square = this.#coord_to_square(end);
-        start_piece.move(end_square);
-        if (this.#turn === black) {
-            this.#black_king.is_safe() || error(`Black king is not safe.`);
-        } else {
-            this.#white_king.is_safe() || error(`White king is not safe.`);
-        }
-        this.#turn = this.#turn === white ? black : white;
-    }
 }
 
 function build() {
-    let canvas
-    let board
-    let msg
+    let canvas;
+    let board;
+    let msg;
     const init = function () {
         canvas = document.getElementById("chess");
-        const context = canvas.getContext('2d');
-        context.clearRect(0, 0, canvas.width, canvas.height);        
+        const context = canvas.getContext("2d");
+        context.clearRect(0, 0, canvas.width, canvas.height);
         board = new Board(canvas);
-        msg = document.getElementById("msg")
-        msg.innerText = ""
-    }
+        msg = document.getElementById("msg");
+        msg.innerText = "";
+    };
 
-    init()
-    
+    init();
+
     return {
         init: () => init(),
         attacked_square: () => {
@@ -888,19 +1087,19 @@ function build() {
                 [
                     [7, 4],
                     [6, 4],
-                ],                                
+                ],
             ];
             let time = 0;
             moves.forEach(([start, end]) => {
                 time += 1000;
                 setTimeout(() => {
                     try {
-                        board.move(start, end);   
-                    } catch(error) {
-                        msg.innerText = error.message
+                        board.move(start, end);
+                    } catch (error) {
+                        msg.innerText = error.message;
                     }
                 }, time);
-            });            
+            });
         },
         pinned: () => {
             const moves = [
@@ -922,14 +1121,14 @@ function build() {
                 time += 1000;
                 setTimeout(() => {
                     try {
-                        board.move(start, end);   
-                    } catch(error) {
-                        msg.innerText = error.message
+                        board.move(start, end);
+                    } catch (error) {
+                        msg.innerText = error.message;
                     }
                 }, time);
-            });            
-        }        
-    }
+            });
+        },
+    };
 }
 
 window.chess = build();
