@@ -603,6 +603,9 @@ x-abstract *:last-child {
   }
 }
 @media (max-width: 800px) {
+  :root {
+    --x-abstract-max-width: 100%;
+  }
   body {
     margin: 0;
     font-size: 16px;
@@ -612,9 +615,6 @@ x-abstract *:last-child {
   }
   #topbar {
     margin-bottom: 2rem;
-  }
-  .cartridge.abstract {
-    max-width: 80%;
   }
   aside {
     display: none;

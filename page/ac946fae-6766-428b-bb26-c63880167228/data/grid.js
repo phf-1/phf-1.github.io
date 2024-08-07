@@ -252,8 +252,9 @@ class Nodes {
  * It may be preferable to avoid using the global scope using new p5(function(p) { p.setup = ...; p.draw = ...; })
  */
 
-const width = 400
-const canvas = new Canvas(width, width, "p5")
+const p5_id = "p5"
+const width = document.getElementById(p5_id).offsetWidth;
+const canvas = new Canvas(width, width, p5_id)
 const colors = new Colors()
 const node_color = colors.color("gray-500").hex
 const nodes = new Nodes(new Pos(width/2,width/2), width*3/4, node_color, 10)
