@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- This Source Code Form is subject to the terms of the Mozilla Public
+		 - License, v. 2.0. If a copy of the MPL was not distributed with this
+		 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Analysis of the publication: The Incremental Garbage Collection of Processes." />
+    <title>Pierre-Henry Fröhring's Website</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://phfrohring.com/" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      __CSS__
+    </style>
+    <script defer type="module" src="/js/main.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <picture id="bg-image">
+        <source srcset="bg.webp" type="image/webp" />
+        <source srcset="bg.jpg" type="image/jpeg" />
+        <source srcset="bg.svg" type="image/svg+xml" />
+        <img
+          id="bg-image-img"
+          src="bg.jpg"
+          onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
+          alt="Illustration"
+        />
+      </picture>
+      <div id="container">
+        <div id="content">
+          <div id="topbar">
+            <nav class="actions">
+              <button id="toggle_toc_btn" class="button">TOC</button>
+              <button id="toggle_qa" class="button">SHOW</button>
+            </nav>
+            <nav class="navbar" id="navbar">
+              <a class="button" href="/">home</a>
+            </nav>
+            <x-toc></x-toc>
+          </div>
+
+          <!-- :TYPE: dbf45859-7a1a-4939-9cdb-4f6306168323 -->
+<x-h1 name="The Incremental Garbage Collection of Processes" id="59571900-c50c-4336-bd91-ff3bf8ce9bb0">
+
+  <x-abstract>Abstract.</x-abstract>
+
+  <x-h2 name="Objective" id="44831224-9d88-44db-b0b3-f432123e2c41">
+    <p>The objective is to analyse the publication of Carl Hewitt: <q>The Incremental Garbage Collection of Processes</q> in terms of questions and answers. Compare the ideas to the ones already analyse in <q><a href="/page/fb0f0662-2d3f-47aa-9a79-0a615d06e647">analysis of publications</a></q> and avoid to add duplicated ones.</p>
+  </x-h2>
+
+  <x-h2 name="Result" id="668f30f8-4b37-4c92-9208-445a849647a6">
+    <x-qa>
+      <x-q id="32c1a148-2d1b-426b-b31e-ef986eb816bf">
+        <p>What is the <q>Church-Rosser</q> theorem ?</p>
+      </x-q>
+      <x-a id="e1f63a43-c92e-4baf-9b4c-e092841b1266">
+        <ol>
+          <li>See: <a href="https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem">Church–Rosser theorem</a></li>
+        </ol>
+      </x-a>
+    </x-qa>
+
+    <x-qa>
+      <x-q id="0e8f63ee-48ff-40e2-bbca-2ca89a2f3b94">
+        <p>What is a <q>Future</q>?</p>
+      </x-q>
+      <x-a id="5a596768-8671-4088-8c77-b0c512cccbaf">
+        <p>The evaluator does this by creating and returning for each subexpresslon a f uture, which is a promise to
+          deliver the value of that subexpression at some later time, if it has a value. Each future can evaluate its
+          subexpression independently and concurrently with other futures because it is created with its own evaluator
+          process, which is dedicated to evaluating its subexpression. When the value of a future is needed explicitly,
+          e.g. by the primitive function <q>+</q> , the evaluator of the subexpression may or may not be complete. If it
+          Is complete, the future’s value is immediately available; if not, the requesting process is forced to wait
+          until the evaluation of the subexpression is done.</p>
+      </x-a>
+    </x-qa>
+
+  </x-h2>
+
+  <x-h2 name="Experiment" id="12bce192-24e2-484a-be7f-ad21c9c54454">
+
+  </x-h2>
+
+  <x-h2 name="Method" id="5a5aa6d3-947e-4cff-958e-998e94a50346">
+
+  </x-h2>
+
+  <x-h2 name="Discussion" id="67d0d808-132a-45b9-a63d-afaa41a06268">
+
+  </x-h2>
+
+  <x-h2 name="Conclusion" id="41e7bfeb-eb02-4fd9-8e78-d37e103933e5">
+
+  </x-h2>
+
+  <x-h2 name="Reference" id="9598d58e-9bb6-4b06-b69b-bb7abd372c3b">
+
+  </x-h2>
+</x-h1>
+
+
+          <hr />
+
+          <footer>
+            <p xmlns:cc="http://creativecommons.org/ns#">
+              This work by
+              <a
+                rel="cc:attributionURL dct:creator"
+                property="cc:attributionName"
+                href="https://phfrohring.com"
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
+              is licensed under
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
+                target="_blank"
+                rel="license noopener noreferrer"
+                style="display: inline-block"
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

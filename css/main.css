@@ -40,25 +40,29 @@
 :root {
   --c-pink-50: #fce4ec;
   --c-pink-900: #880e4f;
+  --c-green-50: #f1f8e9;
+  --c-green-900: #33691e;
   --c-gray-50: #fafafa;
   --c-gray-900: #212121;
+  --c-blue-50: #e3f2fd;
+  --c-blue-900: #0d47a1;
   --c-blue-gray-50: #eceff1;
   --c-blue-gray-900: #263238;
   --c-red-50: #ffebee;
   --c-red-900: #b71c1c;
   --c-orange-50: #fff3e0;
   --c-orange-900: #e65100;
+  --c-bg: #fffff8;
+  --c-text: #111111;
   --font-size: 18px;
   --title-font-size: 2rem;
   --section-font-size: 1.1rem;
-  --main-bg: #fffff8;
-  --main-text: #111111;
-  --heading: #b71c1c;
+  --heading: var(--c-red-900);
   --mark: #ffccbc;
-  --algorithm-bg: #e3f2fd;
-  --algorithm-border: #0d47a1;
-  --note-bg: #f1f8e9;
-  --note-border: #33691e;
+  --algorithm-bg: var(--c-blue-50);
+  --algorithm-border: var(--c-blue-900);
+  --note-bg: var(--c-green-50);
+  --note-border: var(--c-green-900);
   --abstract-bg: #f3e5f5;
   --abstract-border: #4a148c;
   --example-bg: #eceff1;
@@ -77,17 +81,17 @@
   --method-border: var(--algorithm-border);
   --math-bg: var(--algorithm-bg);
   --math-border: var(--algorithm-border);
-  --context-bg: #f1f8e9;
-  --context-border: #33691e;
+  --context-bg: var(--c-green-50);
+  --context-border: var(--c-green-900);
   --link: #007acc;
   --code: #ddd;
   --hr: #ddd;
   --radius: 2px;
-  --kw-todo: var(--heading);
-  --kw-doing: var(--quote-border);
+  --kw-todo: var(--c-red-900);
+  --kw-doing: var(--c-orange-900);
   --kw-waiting: var(--kw-doing);
-  --kw-done: var(--aside-border);
-  --kw-failed: var(--main-text);
+  --kw-done: var(--c-green-900);
+  --kw-failed: var(--c-text);
   --line-height: 1.5;
   --annotation: #777;
   --button-hover: #fffff0;
@@ -95,7 +99,7 @@
   --sep-margin: 2rem;
   --img-shadow: 2px 2px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   --border: 1px solid var(--annotation);
-  --x-keyword-color: var(--main-bg);
+  --x-keyword-color: var(--c-bg);
   --x-h1-font-size: var(--title-font-size);
   --x-h1-margin: 10vh;
   --x-h1-font-family: "Sans";
@@ -121,66 +125,66 @@
   --x-cartridge-border-color: var(--annotation);
   --x-cartridge-annotation-color: var(--annotation);
   --x-blockquote-border-color: var(--quote-border);
-  --x-blockquote-color: var(--main-text);
+  --x-blockquote-color: var(--c-text);
   --x-blockquote-bg-color: var(--quote-bg);
   --x-blockquote-annotation-color: var(--annotation);
   --x-question-bg-color: var(--c-orange-50);
   --x-question-border-color: var(--c-orange-900);
-  --x-question-color: var(--main-text);
+  --x-question-color: var(--c-text);
   --x-question-annotation-color: var(--annotation);
   --x-answer-bg-color: var(--c-gray-50);
   --x-answer-border-color: var(--c-gray-900);
-  --x-answer-color: var(--main-text);
+  --x-answer-color: var(--c-text);
   --x-answer-annotation-color: var(--annotation);
   --x-note-border-color: var(--note-border);
-  --x-note-color: var(--main-text);
+  --x-note-color: var(--c-text);
   --x-note-margin: var(--sep-margin);
   --x-note-bg-color: var(--note-bg);
   --x-note-annotation-color: var(--annotation);
   --x-objective-border-color: var(--objective-border);
-  --x-objective-color: var(--main-text);
+  --x-objective-color: var(--c-text);
   --x-objective-margin: var(--sep-margin);
   --x-objective-bg-color: var(--objective-bg);
   --x-objective-annotation-color: var(--annotation);
   --x-result-border-color: var(--result-border);
-  --x-result-color: var(--main-text);
+  --x-result-color: var(--c-text);
   --x-result-margin: var(--sep-margin);
   --x-result-bg-color: var(--result-bg);
   --x-result-annotation-color: var(--annotation);
   --x-method-border-color: var(--method-border);
-  --x-method-color: var(--main-text);
+  --x-method-color: var(--c-text);
   --x-method-margin: var(--sep-margin);
   --x-method-bg-color: var(--method-bg);
   --x-method-annotation-color: var(--annotation);
   --x-context-border-color: var(--context-border);
-  --x-context-color: var(--main-text);
+  --x-context-color: var(--c-text);
   --x-context-margin: var(--sep-margin);
   --x-context-bg-color: var(--context-bg);
   --x-context-annotation-color: var(--annotation);
   --x-algorithm-border-color: var(--algorithm-border);
-  --x-algorithm-color: var(--main-text);
+  --x-algorithm-color: var(--c-text);
   --x-algorithm-margin: var(--sep-margin);
   --x-algorithm-bg-color: var(--algorithm-bg);
   --x-algorithm-annotation-color: var(--annotation);
   --x-definition-border-color: var(--definition-border);
-  --x-definition-color: var(--main-text);
+  --x-definition-color: var(--c-text);
   --x-definition-margin: var(--sep-margin);
   --x-definition-bg-color: var(--definition-bg);
   --x-definition-annotation-color: var(--annotation);
   --x-example-border-color: var(--example-border);
-  --x-example-color: var(--main-text);
+  --x-example-color: var(--c-text);
   --x-example-margin: var(--sep-margin);
   --x-example-bg-color: var(--example-bg);
   --x-example-annotation-color: var(--annotation);
   --x-blockmath-border-color: var(--algorithm-border);
-  --x-blockmath-color: var(--main-text);
+  --x-blockmath-color: var(--c-text);
   --x-blockmath-margin: var(--sep-margin);
   --x-blockmath-bg-color: var(--algorithm-bg);
   --x-blockmath-annotation-color: var(--annotation);
   --x-abstract-bg-color: var(--abstract-bg);
   --x-abstract-border-color: var(--abstract-border);
   --x-abstract-annotation-color: var(--annotation);
-  --x-keyword-bg-color: var(--main-text);
+  --x-keyword-bg-color: var(--c-text);
   --x-todo-bg-color: var(--kw-todo);
   --x-doing-bg-color: var(--kw-doing);
   --x-waiting-bg-color: var(--kw-waiting);
@@ -188,11 +192,11 @@
   --x-done-bg-color: var(--kw-done);
   --x-link-color: var(--link);
   --x-button-border: var(--annotation);
-  --x-button-color: var(--main-text);
+  --x-button-color: var(--c-text);
   --x-button-bg-color-hover: var(--button-hover);
   --x-button-box-shadow: var(--img-shadow);
   --x-toc-before: var(--heading);
-  --x-toc-bg: var(--main-bg);
+  --x-toc-bg: var(--c-bg);
   --x-toc-border: var(--border);
   --x-toc-radius: var(--radius);
   --x-toc-heading-highlight-bg: var(--algorithm-bg);
@@ -206,8 +210,8 @@
 }
 html {
   font-family: "Serif";
-  color: var(--main-text);
-  background: var(--main-bg);
+  color: var(--c-text);
+  background: var(--c-bg);
   font-size: 18px;
   line-height: var(--line-height);
   text-rendering: optimizeLegibility;
@@ -240,7 +244,7 @@ main {
   border: var(--border);
   padding: 0 1.5rem 1rem 1.5rem;
   margin-bottom: 33vh;
-  background-color: var(--main-bg);
+  background-color: var(--c-bg);
   box-shadow: var(--img-shadow);
 }
 #container #content img {
@@ -275,7 +279,7 @@ main {
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: var(--main-bg);
+  background-color: var(--c-bg);
   display: flex;
   justify-content: space-between;
   padding: 1rem 0;
@@ -295,7 +299,7 @@ main {
   text-transform: uppercase;
   border: var(--border);
   padding: 1em;
-  color: var(--main-text);
+  color: var(--c-text);
   font-weight: lighter;
   font-family: "Sans";
   background-color: inherit;
@@ -339,7 +343,7 @@ main {
   max-width: 40ch;
   max-height: 80vh;
   overflow-y: auto;
-  background-color: var(--main-bg);
+  background-color: var(--c-bg);
   flex-shrink: 0;
   border: var(--border);
   border-radius: var(--radius);
@@ -394,7 +398,7 @@ main {
 footer {
   text-align: center;
   font-size: 0.875rem;
-  color: var(--main-text);
+  color: var(--c-text);
   margin-top: 2rem;
 }
 p {
@@ -534,7 +538,7 @@ aside {
   border-left: 3px solid var(--aside-border);
   border-radius: var(--radius);
   font-size: 0.875em;
-  color: var(--main-text);
+  color: var(--c-text);
   margin-left: 1em;
 }
 aside p {
@@ -557,7 +561,7 @@ x-abstract *:last-child {
 }
 .theorem .actions {
   display: flex;
-  justify-content: end;
+  justify-content: left;
 }
 .theorem .button {
   background-color: aqua;

@@ -121,53 +121,55 @@
             </x-qa>
 
             <x-qa>
-                <x-q id="23072280-9995-4a8a-9ab7-e852692e54a8">
-                    <p>What is a <q>Future</q>?</p>
-                </x-q>
-                <x-a id="4396fae2-5176-4c6d-b124-56baa6e90418">
-                    <x-blockquote author="Dale Schumacher" source="It's Actors All The Way Down" url="http://www.dalnefre.com/wp/2012/03/futures-and-capabilities/">
-                        <p>A future is an Actor. It behaves like so: it is basically a storage cell that can be written to only once, but read from multiple times. If a read occurs before the write, the read-reply is delayed until the write provides a value. This effectively suspends readers until the write occurs. Note, however, that there is no blocking in an actor system. The asynchronous reply to a read request is simply deferred until a value is available.</p>
-                    </x-blockquote>
-                </x-a>
+              <x-q id="23072280-9995-4a8a-9ab7-e852692e54a8">
+                <p>What is a <q>Future</q>?</p>
+              </x-q>
+              <x-a id="4396fae2-5176-4c6d-b124-56baa6e90418">
+								<x-definition term="Future" id="f6c23ced-2029-412e-89c8-68f584d50a41">
+									<x-blockquote author="Dale Schumacher" source="It's Actors All The Way Down" url="http://www.dalnefre.com/wp/2012/03/futures-and-capabilities/">
+                    <p>A future is an Actor. It behaves like so: it is basically a storage cell that can be written to only once, but read from multiple times. If a read occurs before the write, the read-reply is delayed until the write provides a value. This effectively suspends readers until the write occurs. Note, however, that there is no blocking in an actor system. The asynchronous reply to a read request is simply deferred until a value is available.</p>
+                  </x-blockquote>									  
+								</x-definition>
+              </x-a>
             </x-qa>
 
             <x-qa>
-                <x-q id="30da2fa9-afa3-472e-bf5f-bd5239908ec5">
-                    <ul>
-                        <li>If an Actor sends a message to itself, then: will it deadlock?</li>
-                        <li><i>i.e.</i> can it wait for a message to be sent by itself?</li>
-                    </ul>
-                </x-q>
-                <x-a id="b9629724-95de-4061-8e5f-b874a5ced9b9">
+              <x-q id="30da2fa9-afa3-472e-bf5f-bd5239908ec5">
+                <ul>
+                  <li>If an Actor sends a message to itself, then: will it deadlock?</li>
+                  <li><i>i.e.</i> can it wait for a message to be sent by itself?</li>
+                </ul>
+              </x-q>
+              <x-a id="b9629724-95de-4061-8e5f-b874a5ced9b9">
+                <ol>
+                  <li>An Actor may use a Future to avoid deadlocks.</li>
+                  <li>If it needs a result computed by itself, it can create a future.</li>
+                  <li>The future represents the result of that computation.</li>
+                  <li>So:
                     <ol>
-                        <li>An Actor may use a Future to avoid deadlocks.</li>
-                        <li>If it needs a result computed by itself, it can create a future.</li>
-                        <li>The future represents the result of that computation.</li>
-                        <li>So:
-                            <ol>
-                                <li>The current computation reaches a point where it needs a result computed by itself.</li>
-                                <li>A future that represents this result is built.</li>
-                                <li>The computation waits for the result.</li>
-                                <li>When the result is available, the computation continues.</li>
-                            </ol>
-                        </li>
-                        <li>There is no deadlock.</li>
+                      <li>The current computation reaches a point where it needs a result computed by itself.</li>
+                      <li>A future that represents this result is built.</li>
+                      <li>The computation waits for the result.</li>
+                      <li>When the result is available, the computation continues.</li>
                     </ol>
-                </x-a>
+                  </li>
+                  <li>There is no deadlock.</li>
+                </ol>
+              </x-a>
             </x-qa>
 
             <x-qa>
-                <x-q id="51f8bbe5-dd96-45b6-afa8-875919959f99">
-                    <p>Can packets be dropped?</p>
-                </x-q>
-                <x-a id="b54edd29-e438-434a-896d-32471659bbb5">
-                    <ol>
-                        <li>Communication is best effort.</li>
-                        <li>Messages are delivered at most once.</li>
-                        <li>If a<sub>0</sub> sends a message m to a<sub>1</sub> and a<sub>0</sub> does not receive an ACK, then: a<sub>0</sub> may resend m to a<sub>1</sub>.</li>
-                        <li>It means that messages must be persisted in some way.</li>
-                    </ol>
-                </x-a>
+              <x-q id="51f8bbe5-dd96-45b6-afa8-875919959f99">
+                <p>Can packets be dropped?</p>
+              </x-q>
+              <x-a id="b54edd29-e438-434a-896d-32471659bbb5">
+                <ol>
+                  <li>Communication is best effort.</li>
+                  <li>Messages are delivered at most once.</li>
+                  <li>If a<sub>0</sub> sends a message m to a<sub>1</sub> and a<sub>0</sub> does not receive an ACK, then: a<sub>0</sub> may resend m to a<sub>1</sub>.</li>
+                  <li>It means that messages must be persisted in some way.</li>
+                </ol>
+              </x-a>
             </x-qa>
 
             <x-qa>

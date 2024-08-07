@@ -32,6 +32,7 @@
       #bg-image-img {
 	top: -44%;
 }
+
     </style>
     <script defer type="module" src="/js/main.min.js"></script>
   </head>
@@ -75,11 +76,17 @@
 
   </x-h2>
 
-  <x-h2 name="State" id="96e46f9e-635b-42a8-94d8-110e12f7530b">
+  <x-h2 name="Experiment" state="todo" id="13792b8e-e68e-4e83-abf0-da9a8e55522e">
+    <p>Since <a href="https://hex.pm/packages/phoenix">phoenix</a> depends on Erlang packages and is one of the most popular Elixir package, we test our implementation using:</p>
 
+    <x-blockcode>
+guix shell --container --network elixir elixir-phoenix
+mix phx.new --no-ector hello
+mix phx.server
+    </x-blockcode>
   </x-h2>
 
-  <x-h2 name="Context" id="29dc6545-9f00-4942-bd35-11aa5e49bd6f">
+  <x-h2 name="Method" id="96e46f9e-635b-42a8-94d8-110e12f7530b">
     <x-h3 name="Elixir build system" state="done" id="f2fc4a39-95c4-4f68-b64c-73cd73d77270">
       <ul>
         <li>The Elixir build system is called <code>mix</code>.</li>
@@ -299,17 +306,25 @@ $ guix build -K -f src/test-package.scm
         <p>This piece of code searches for Erlang dependencies in the <code>inputs</code> field of the package and adds the relevant directories to <code>ERL_LIBS</code> so that necessary applications are found at runtime by the EVM.</p>
     </x-h3>
 
-    <x-h3 state="done" name="A plan" id="0001951c-7b53-49e8-926d-d3817569815a">
-        <p>Since:</p>
-        <ul>
-            <li>We know that using <code>ERL_LIBS</code> may work.</li>
-            <li>We know that Python uses a similar mechanism with <code>PYTHONPATH</code>.</li>
-        </ul>
-        <p>Then:</p>
-        <ul>
-            <li>We study how Python manages its dependencies.</li>
-            <li>We try to apply this knowledge to Elixir.</li>
-        </ul>
+    <x-h3 state="done" name="Plans" id="0001951c-7b53-49e8-926d-d3817569815a">
+      <p>Moving forward, at least two plans may be followed: using <code>ERL_LIBS</code> or patching the <a href="https://www.erlang.org/doc/apps/kernel/app"><em>Application Resource File</em></a>. We choose to follow the <a href="#53d766c1-88b1-4fed-a691-0396d797b0b6">ERL_LIBS</a> plan in this article and the <em>Application Resource File</em> plan in an <a href="/page/d76a3c45-886e-4b3e-bf2f-bf2a9c6d1a74">other article</a>.</p>
+    </x-h3>
+
+    <x-h3 state="done" name="Application resource file plan" id="f00c98d2-a00c-4824-a9de-aeb81b8e5137">
+      <p>See: <a href="/page/d76a3c45-886e-4b3e-bf2f-bf2a9c6d1a74">Application resource file plan</a>.</p>
+    </x-h3>
+
+    <x-h3 state="done" name="ERL_LIBS plan" id="53d766c1-88b1-4fed-a691-0396d797b0b6">
+      <p>Since:</p>
+      <ul>
+        <li>We know that using <code>ERL_LIBS</code> may work.</li>
+        <li>We know that Python uses a similar mechanism with <code>PYTHONPATH</code>.</li>
+      </ul>
+      <p>Then:</p>
+      <ul>
+        <li>We study how Python manages its dependencies.</li>
+        <li>We try to apply this knowledge to Elixir.</li>
+      </ul>
     </x-h3>
 
     <x-h3 name="How GUIX_PYTHONPATH is used" state="done" id="31e7c374-b009-43d5-81d9-a08261e4ffcc">
@@ -481,7 +496,11 @@ $ guix build -K -f src/test-package.scm
     </x-h3>
   </x-h2>
 
-  <x-h2 name="Message" id="45d233f6-8b75-4b22-95ea-e41217f3cd32">
+  <x-h2 name="Discussion" id="29dc6545-9f00-4942-bd35-11aa5e49bd6f">
+
+  </x-h2>
+
+  <x-h2 name="Conclusion" id="45d233f6-8b75-4b22-95ea-e41217f3cd32">
 
   </x-h2>
 </x-h1>

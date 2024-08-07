@@ -64,466 +64,467 @@
 
 		<x-abstract>The publication <q>Laws for Communicating Parallel Processes</q> is analysed in terms of questions and answers so that being able to answer the questions ensure a consolidated understanding of the subject.</x-abstract>
 
-		<x-h2 name="Interface" id="b42b73da-b60a-485b-96e0-6e9b39d2e3b9">
-				<x-h3 name="Analyse" id="a051917c-751a-4b5c-9699-c26ac97cdb6b">
-						<x-objective>
-								<p>Resources specified in the context — <i>i.e.</i> a publication — is analysed in terms of questions and answers so that being able to answer the questions ensure a consolidated understanding of the subject.</p>
-						</x-objective>
-				</x-h3>
-
-				<x-h3 name="Test" id="be31a366-5968-47f5-9938-26eb8f0e079c">
-						<x-objective>
-								<p>Measure the knowledge of the client on the subject.</p>
-						</x-objective>
-
-						<x-context>
-								<p>An actor address.</p>
-						</x-context>
-				</x-h3>
+		<x-h2 name="Objective" id="8a3933c1-cb0b-4cf6-a20e-b1ff1eef2bf5">
+		  
 		</x-h2>
 
-		<x-h2 name="Computation" id="05954a81-b3c1-4dd8-aaba-cd372afce921">
+		<x-h2 name="Result" id="11201e8f-7e8a-432c-94bf-1bb69d9b47ed">
+			<x-h3 name="Actor Model" id="72f90a52-9f66-4aba-abe0-c7df1e67a467">
+				<x-qa>
+					<x-q id="daab7a27-6e38-4dfe-a52b-2a1850fabde2">
+						<p>What is an Actor?</p>
+					</x-q>
+					<x-a id="448733a0-7b7d-4dd6-bef3-4df961ceda14">
+						<p>See: <a href="/page/420c363e-fe07-450b-9cb6-96893174123d#48b63e67-2592-4115-a29f-8aa6af96ef07">Actor definition</a>.</p>
+					</x-a>
+				</x-qa>
 
+				<x-qa>
+					<x-q id="2a778538-e55c-45c5-b2fd-985cc373176a">
+						<p>What is an <q>Actor Model</q>?</p>
+					</x-q>
+					<x-a id="20a8643e-fcc9-49f4-abde-27be49882ba6">
+						<p>An Actor Model is the modelling of a computation using a network of actors sending messages to each others.</p>
+					</x-a>
+				</x-qa>
+			</x-h3>
+
+			<x-h3 name="Actor Computation" id="fc2efb56-a8bf-4ecf-9977-613377201ace">
+
+				<x-qa>
+					<x-q id="92694465-50a7-408e-bd9a-525fd7be7e9f">
+						<p>What is an <em>Event</em>?</p>
+					</x-q>
+					<x-a id="ebb4a28e-4b4d-45c3-9fef-86d54ebe89aa">
+						<x-definition term="Event" id="0cd880a8-133b-4234-b524-528b2389c5db">
+						  <p>An event is the receipt of a message by an actor in a given actor model.</p>
+							<p>Given an event e, the associated message is: message(e).</p>
+							<p>The actor that received this message is: target(e).</p>
+						</x-definition>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="966ce633-9eab-48d3-860c-4c0642f88217">
+						<p>What does <q>e2 has been activated by e1</q> means?</p>
+					</x-q>
+					<x-a id="ece19ab2-eb3e-4481-8d3f-2e426818bf14">
+						<p>It means that target(e1) emitted a message message(e2) that has been received by target(e2) as a consequence of processing message(e1).</p>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="a8ef6ba4-f0de-43ff-9285-55ad1034675a">
+						<ul>
+							<li>e1,e2 : Event</li>
+							<li>What means: there is a causal relation between e1 and e2?</li>
+						</ul>
+					</x-q>
+					<x-a id="be3fcab4-cdac-4ba5-965e-90d046b09156">
+						<p>It means that: if one event must happen before another, we say that the first event causally precedes the second. For instance:</p>
+						<ul>
+							<li>If e2 cannot happen if e1 did not happen, then e1 causally precedes e2.</li>
+							<li>e1 may happen and e2 may not happen.</li>
+						</ul>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="90281e79-1094-4743-a128-9d527e42d6f5">
+						<p>How is a computation modelled?</p>
+					</x-q>
+					<x-a id="3c380f14-9d85-455a-a542-a48ffe11de6c">
+						<p>As a set of events causally related.</p>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="ead81fd4-09d5-4b39-ab1c-cccf9fe812c2">
+						<p>How is a serial computation modelled?</p>
+					</x-q>
+					<x-a id="e69de1ba-0507-4c0d-bc80-d675993a9a44">
+						<p>As a set of events causally related. The graph of events is linear <i>i.e.</i> for any three events a, b, and c there is a path is the graph such that: a *→ b *→ c.</p>
+						<p>In other words, the set of events is totally ordered.</p>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="e9a951da-cb5a-4b9f-b838-53ba38ddfbf0">
+						<p>How is a parallel computation modelled?</p>
+					</x-q>
+					<x-a id="8ab875dd-31dc-42f3-acb0-9743207e15d6">
+						<p>As a set of events causally related. The graph of events is not linear <i>i.e.</i> it is possible to find two events a and b such that no causal links exist between a and b.</p>
+						<p>In other words, the set of events is partially ordered.</p>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="d982262a-291d-4ab6-8ccb-fe01e46e0014">
+						<p>What is a strict partial order on a set?</p>
+					</x-q>
+					<x-a id="bea00ae9-ce5b-45b8-84d3-433745a6af85">
+						<ol>
+							<li>A strict partial order on a set S is a predicate ≺ such that:</li>
+							<li>There is no x ∈ S such that x ≺ x.</li>
+							<li>If x ≺ y, then: y ≺ x is false.</li>
+							<li>If x ≺ y and y ≺ z, then: If x ≺ z.</li>
+							<li>There may be pairs (x,y) : (S,S) such that neither x ≺ y or y ≺ x is defined.</li>
+						</ol>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="f7589363-40f6-46f9-bb8a-e0d7dd638942">
+						<p>What is an <em>actor computation</em>?</p>
+					</x-q>
+					<x-a id="ec5e4640-085e-46d8-a2d2-03f2c7c6e2cb">
+						<x-definition term="Actor Computation" id="1ca9326d-d949-425e-b0cd-f2c084dfbf54">
+						  <p>A pair (ε, →) where ε is a set of events and → is a strict partial order on ε.</p>
+						</x-definition>
+					</x-a>
+				</x-qa>
+			</x-h3>
+
+			<x-h3 name="Actor and Serial Computations" id="49c5711b-8481-4350-96b8-378c11817969">
+				<x-qa>
+					<x-q id="f202f3a6-2323-41e5-be8b-b422b4000f9f">
+						<p>What <q>ε is complete</q> means?</p>
+					</x-q>
+					<x-a id="9831336a-7a9e-4e91-97a5-0597833024a7">
+						<p>
+							It means that: if an event E in ε causes a message to be sent,
+							there exists an event E' in e in which that message was
+							received; i.e. every event which was activated has occurred
+						</p>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="b1f01cc5-65f8-491b-911d-20b8d540fc79">
+						<p>What « e1,e2 : ε, e1 and e2 are concurrent » means?</p>
+					</x-q>
+					<x-a id="68ccf9e8-72ec-4746-85db-6474f0ad9542">
+						<p>It means that neither e1 → e2 nor e2 → e1 is defined.</p>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="34ce450b-3ddb-4a5d-920a-8657c45768e1">
+						<p>What « e1,e2 : ε, e1 precedes e2 » means?</p>
+					</x-q>
+					<x-a id="a0345f9b-6fdf-4b89-8f16-e5576b67a3ae">
+						<p>It means that e1 → e2.</p>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="158dca36-4f38-44c0-af23-0d2f3e646e64">
+						<p>How is ε built?</p>
+					</x-q>
+					<x-a id="abff5d5f-ab2d-4fc1-bbad-099e809e17d3">
+						<p>ε is built from a postulated single event that precedes all others: ⊥.</p>
+						<p>All other events are inductively built from ⊥.</p>
+						<p>We posit that for any two events e1 and ek, the number of events in between is finite.</p>
+						<p>We posit that the number of successors of any event is finite.</p>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="dee2baa2-fed5-4300-8684-282bccc92b1e">
+						<p>Prove that: for all actor computation, there is an equivalent serial computation.</p>
+					</x-q>
+					<x-a id="58c8db9e-d2a6-478e-b931-071ae9db559a">
+						<p>Given an actor computation, there is a monotonic injective map from (ε,→) to into (ℕ, <).</p>
+					</x-a>
+				</x-qa>
+			</x-h3>
+
+			<x-h3 name="Sub Orders" id="fe1e9599-da0a-4fdf-96e3-af4495a858fb">
+
+				<x-qa>
+					<x-q id="1a62fc3a-1dcc-4806-9a3e-716e3b119a35">
+						<p>What is the <q>Activation Sub Order</q>?</p>
+					</x-q>
+					<x-a id="a50fa55f-b9aa-4bf8-8c98-5c96d5b9485e">
+						<x-definition term="Activation Sub Order" id="ea08534e-1b11-4216-a152-fe74c69969b2">
+						<ol>
+							<li>If e1 activates e2, then: e1 precedes e2.</li>
+							<li>So, for a given actor, the activations relations form a tree.</li>
+							<li>This tree form a sub order of the actor computation.</li>
+							<li>It is called the <q>Activation Sub Order</q>.</li>
+						</ol>						  
+						</x-definition>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="776ceeda-5cb9-412b-80b0-040acf8337f5">
+						<p>What is the <q>Arrival Sub Order</q>?</p>
+					</x-q>
+					<x-a id="d46e6ff8-6a61-4c20-bf49-606f1e7adc9c">
+						<x-definition term="Arrival Sub Order" id="39923d21-89e6-4935-bd96-8250f8b6e738">
+<ol>
+							<li>All messages that are sent are eventually received by their targets.</li>
+							<li>We postulate an arbiter in front of every actor which allows only one message to be received at a time.</li>
+							<li>In terms of the precedes ordering on the events in a computation, this means that all events with the same target are totally ordered.</li>
+							<li>We call the	sub-relation defined by the restriction of the precedes relation to the set of events with a particular target actor the <q>arrival ordering</q> for that actor.</li>
+						</ol>						  
+						</x-definition>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="038bb1b0-8308-4a75-bdc5-ee9ff973e417">
+						<p>What is a <q>creation event</q>?</p>
+					</x-q>
+					<x-a id="3e52788e-fd55-4b4d-a25b-773d01193334">
+						<ol>
+							<li>Every actor is either one of a finite number of initial actors or is created during the course of a	computation.</li>
+							<li>Every created actor is created in a unique event called that actor's <q>creation event</q>.</li>
+							<li>Several actors may be created in a single event; the only restriction is that only a finite number may be created in any single event.</li>
+							<li>we require that an actor's creation event precede the first event in which it receives a message.</li>
+						</ol>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="78566db8-2fd9-4d25-bb97-f492ffd411bf">
+						<p>What is the <q>precursor suborder</q>?</p>
+					</x-q>
+					<x-a id="e53fc4b6-390a-4cb2-bbd6-5ed3c27f4df8">
+						<x-definition term="Precursor Sub Order" id="318fb110-2560-43f4-b46a-f4ee073d5c54">
+						<ol>
+							<li>For any event E in a computation, define precursor(E) to be:
+								<ol>
+									<li>the immediate predecessor of E in the arrival order of the target of E, if one exists ;</li>
+									<li>else: the creation event of the target of E, if one exists ;</li>
+									<li>else: ⊥.</li>
+								</ol>
+							</li>
+						</ol>						  
+						</x-definition>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+				  <x-q id="38007090-7065-44dc-885e-b771f26a4d0e">
+				    <ol>
+						  <li>What is a relation between the precursor sub order and the precursor relation?</li>
+							<li>What is the shape of the precursor sub order graph?</li>
+						</ol>
+				  </x-q>
+				  <x-a id="90c00b41-a547-4e5a-9606-eca27d453943">
+						<ol>
+							<li>The precursor suborder is then the transitive closure of the precursor relation and is a suborder of "→".</li>
+							<li>The	precursor suborder is a tree with ⊥ as its root.</li>
+						</ol>						
+				  </x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="adde824d-6aac-4d7e-9a7e-49e515af5868">
+						<p>What is the relation between: actor computations and activation and precursor suborders.</p>
+					</x-q>
+					<x-a id="034b83f4-c4ac-432d-bb86-d5ad4dfe5264">
+						<ol>
+							<li>The precedes order is precisely the transitive closure of the union of the activation and precursor suborders.</li>
+							<li>Thus, every actor computation is the transitive closure of the union of two finitary trees, and encodes the interplay of the two.</li>
+						</ol>
+					</x-a>
+				</x-qa>
+			</x-h3>
+
+			<x-h3 name="Induction" id="bbf9d2f9-2bb5-4832-a6e7-4d693361a125">
+				<x-qa>
+					<x-q id="304ee658-ea54-4c1e-974d-2cd2b5ffc2dc">
+						<p>What is <q>Actor Induction</q>?</p>
+					</x-q>
+					<x-a id="8371a953-20f4-4582-9289-1c5478eb4990">
+						<ol>
+							<li>
+								Actor induction is defined for all of the orders defined
+								above, and when faced with proving some property of an
+								actor computation, one chooses which one based on the
+								complexity of the interactions on which the property
+								depends.
+							</li>
+							<li>
+								Properties of programs without "side-effects" can usually
+								be proved using only "activation" induction, while
+								properties of isolated databases can usually be proved
+								using only "arrival" induction. Complex programs with
+								side-effects will require full-blown "precedes" induction.
+							</li>
+						</ol>
+
+						<x-definition term="Actor Induction" id="50e8582b-2e84-4cce-8c9f-03eb1d34524c">
+						  <p>"Precedes" induction states that if P(E) is true, and if
+								P(activator(E)) and P(precursor(E)) imply P(E), then P is
+								true of all events in the computation.</p>
+						</x-definition>
+					</x-a>
+				</x-qa>
+			</x-h3>
+
+			<x-h3 name="Fork-Join Synchronization" id="a7d2ee1d-18dd-444e-a867-edc68be8689c">
+				<x-qa>
+					<x-q id="bab4793c-2238-4d18-bb32-1a915b3746ed">
+						<p>How does the Actor Model manages Fork-Join Synchronization?</p>
+					</x-q>
+					<x-a id="d9ff6c7e-3cb6-4804-88b5-f6d7e0577cff">
+						<p>It is possible to implement a fork-join behaviour using the actor model.</p>
+						<ol>
+							<li>F, R, G1, G2 : Actor</li>
+							<li>F.compute("f(x)=h(g1(x),g2(x))", R)
+								<ol>
+									<li>F computes the value <code>f(x)</code> which is equal to <code>h(g1(x),g2(x))</code> and sends the result to R.</li>
+								</ol>
+							</li>
+							<li>F creates the actor H.</li>
+							<li>F sends a message to G1 requesting to compute <code>g1(x)</code> and to send the result to H.</li>
+							<li>F sends a message to G2 requesting to compute <code>g2(x)</code> and to send the result to H.</li>
+							<li>H waits for <code>g1(x)</code> and <code>g2(x)</code>.</li>
+							<li>After receiving the values, H computes the result and sends it to R.</li>
+						</ol>
+					</x-a>
+				</x-qa>
+			</x-h3>
+
+			<x-h3 name="Locality" id="59fc6ea8-f34b-4133-8d5f-c84ba94a125d">
+				<x-qa>
+					<x-q id="e9fa7826-c4f7-4ac2-b7bf-8154904a9749">
+						<p>How is information shared among actors?</p>
+					</x-q>
+					<x-a id="4f9eba62-52bb-464f-adac-dd15a4e0076c">
+						<ol>
+							<li>My message passing only.</li>
+							<li>The most fundamental form of knowledge which is conveyed by a message in an actor
+								computation is knowledge about the existence of another actor.</li>
+							<li>An actor cannot know an actor's name unless it was either created with that knowledge or
+								acquired it as a result of receiving a message. </li>
+						</ol>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="23691bae-79eb-425d-8fb4-d4afe21ef98c">
+						<p>What is the <q>local time axis</q> of an Actor?</p>
+					</x-q>
+					<x-a id="2c8d7bc3-b19a-44db-b0bf-5803671ec835">
+						<ol>
+							<li>The arbiter gives a strict order to received messages.</li>
+							<li>This order — local to the actor — is the time at the actor.</li>
+							<li>Picture a clock quadrant: each message received makes the second hand to move forward a given amount of angle.</li>
+							<li>We call the second hand axis of rotation the <q>local time axis at an actor</q>.</li>
+						</ol>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="c229714b-d55b-40a0-8348-e95f3e348f81">
+						<p>What is the <q>vector of acquaintances</q> of an Actor?</p>
+					</x-q>
+					<x-a id="fce2b1ec-728a-4957-8946-555cb82d8f0f">
+						<ol>
+							<li>Choose an event α along the local time axis of an actor.</li>
+							<li>List in order the addresses of all actors received up to α.</li>
+							<li>This list is called the <q>vector of acquaintances</q> of the actor at α.</li>
+						</ol>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="b8523833-7732-4a85-8733-df4da8f15dc0">
+						<p>What is a <q>participant</q>?</p>
+					</x-q>
+					<x-a id="fc7ce06c-eb3e-4d68-b690-d2b8628104e3">
+						<ol>
+							<li>e : Event</li>
+							<li>participant(e) is:
+								<ol>
+									<li>target(e)</li>
+									<li>∨ an acquaintance of target(e)</li>
+									<li>∨ an actor mentioned in the message(e)</li>
+									<li>∨ an actor created in e</li>
+								</ol>
+							</li>
+						</ol>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="8ea19c41-4adb-4cb9-8e8e-9ef57b955055">
+						<p>At creation, how big can be the vector of acquaintance of an Actor?</p>
+					</x-q>
+					<x-a id="24963237-aecc-4d45-bb19-85c11900813f">
+						<ol>
+							<li>The biggest vector of acquaintances contains:
+								<ol>
+									<li>its parents</li>
+									<li>acquaintances of its parents</li>
+									<li>its siblings</li>
+								</ol>
+							</li>
+						</ol>
+					</x-a>
+				</x-qa>
+			</x-h3>
+
+			<x-h3 name="Goal-Directed Activities" id="c43df2ab-b762-4a30-9389-0699c8e89117">
+				<x-qa>
+					<x-q id="b30e7b5b-77b1-40fc-ab97-83baaf037e35">
+						<p>Define a <q>request</q>?</p>
+					</x-q>
+					<x-a id="c131fb1d-bc41-4856-9862-c112bb16861d">
+						<ol>
+							<li>A request <code>r</code> is kind of Message</li>
+							<li><code>content :≡ content(r)</code></li>
+							<li><code>spec(content)</code> is the request itself.</li>
+							<li><code>dest(content)</code> is the address of the actor to receive the reply.</li>
+						</ol>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="7096080c-bbc0-443a-a854-521815914c6d">
+						<p>What is a reply?</p>
+					</x-q>
+					<x-a id="de345fab-392a-4ce5-aa81-679b27d78167">
+						<ol>
+							<li>A reply <code>r</code> is a kind of Message.</li>
+							<li><code>content(r)</code> should satisfy the associated request or explain why a satisfactory answer could not have been produced.</li>
+						</ol>
+					</x-a>
+				</x-qa>
+
+				<x-qa>
+					<x-q id="5dc4be04-db3c-48f5-8086-92b95addcc60">
+						<p>What is a <q>Goal Directed Activity</q>?</p>
+					</x-q>
+					<x-a id="107fb7f1-58ac-4658-a851-ac484398195f">
+						<ol>
+							<li>q : Request</li>
+							<li>r : Any reply to q</li>
+							<li>activity(q) :≡ the set of events which follow <code>q</code> in the partial order but precede <code>r</code></li>
+							<li>Informally, <code>activity(q)</code> is the set of events that contribute to <code>r</code></li>
+						</ol>
+					</x-a>
+				</x-qa>
+			</x-h3>		  
 		</x-h2>
 
-		<x-h2 name="State" id="00fba8ce-fd35-4947-b235-b04d26065381">
-				<x-h3 name="QA" id="e300d60c-f352-4269-bd48-261fcb4e4460">
-						<x-h4 name="Actor Model" id="72f90a52-9f66-4aba-abe0-c7df1e67a467">
-								<x-qa>
-										<x-q id="daab7a27-6e38-4dfe-a52b-2a1850fabde2">
-												<p>What is an Actor?</p>
-										</x-q>
-										<x-a id="448733a0-7b7d-4dd6-bef3-4df961ceda14">
-												<p>See: <a href="/page/420c363e-fe07-450b-9cb6-96893174123d#48b63e67-2592-4115-a29f-8aa6af96ef07">Actor definition</a>.</p>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="2a778538-e55c-45c5-b2fd-985cc373176a">
-												<p>What is an <q>Actor Model</q>?</p>
-										</x-q>
-										<x-a id="20a8643e-fcc9-49f4-abde-27be49882ba6">
-												<p>An Actor Model is the modelling of a computation using a network of actors sending messages to each others.</p>
-										</x-a>
-								</x-qa>
-						</x-h4>
-
-						<x-h4 name="Actor Computation" id="fc2efb56-a8bf-4ecf-9977-613377201ace">
-
-								<x-qa>
-										<x-q id="92694465-50a7-408e-bd9a-525fd7be7e9f">
-												<p>What is an <em>Event</em>?</p>
-										</x-q>
-										<x-a id="ebb4a28e-4b4d-45c3-9fef-86d54ebe89aa">
-												<p>An event is the receipt of a message by an actor in a given actor model.</p>
-												<p>Given an event e, the associated message is: message(e).</p>
-												<p>The actor that received this message is: target(e).</p>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="966ce633-9eab-48d3-860c-4c0642f88217">
-												<p>What does <q>e2 has been activated by e1</q> means?</p>
-										</x-q>
-										<x-a id="ece19ab2-eb3e-4481-8d3f-2e426818bf14">
-												<p>It means that target(e1) emitted a message message(e2) that has been received by target(e2) as a consequence of processing message(e1).</p>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="a8ef6ba4-f0de-43ff-9285-55ad1034675a">
-												<ul>
-														<li>e1,e2 : Event</li>
-														<li>What means: there is a causal relation between e1 and e2?</li>
-												</ul>
-										</x-q>
-										<x-a id="be3fcab4-cdac-4ba5-965e-90d046b09156">
-												<p>It means that: if one event must happen before another, we say that the first event causally precedes the second. For instance:</p>
-												<ul>
-														<li>If e2 cannot happen if e1 did not happen, then e1 causally precedes e2.</li>
-														<li>e1 may happen and e2 may not happen.</li>
-												</ul>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="90281e79-1094-4743-a128-9d527e42d6f5">
-												<p>How is a computation modelled?</p>
-										</x-q>
-										<x-a id="3c380f14-9d85-455a-a542-a48ffe11de6c">
-												<p>As a set of events causally related.</p>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="ead81fd4-09d5-4b39-ab1c-cccf9fe812c2">
-												<p>How is a serial computation modelled?</p>
-										</x-q>
-										<x-a id="e69de1ba-0507-4c0d-bc80-d675993a9a44">
-												<p>As a set of events causally related. The graph of events is linear <i>i.e.</i> for any three events a, b, and c there is a path is the graph such that: a *→ b *→ c.</p>
-												<p>In other words, the set of events is totally ordered.</p>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="e9a951da-cb5a-4b9f-b838-53ba38ddfbf0">
-												<p>How is a parallel computation modelled?</p>
-										</x-q>
-										<x-a id="8ab875dd-31dc-42f3-acb0-9743207e15d6">
-												<p>As a set of events causally related. The graph of events is not linear <i>i.e.</i> it is possible to find two events a and b such that no causal links exist between a and b.</p>
-												<p>In other words, the set of events is partially ordered.</p>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="d982262a-291d-4ab6-8ccb-fe01e46e0014">
-												<p>What is a strict partial order on a set?</p>
-										</x-q>
-										<x-a id="bea00ae9-ce5b-45b8-84d3-433745a6af85">
-												<ol>
-														<li>A strict partial order on a set S is a predicate ≺ such that:</li>
-														<li>There is no x ∈ S such that x ≺ x.</li>
-														<li>If x ≺ y, then: y ≺ x is false.</li>
-														<li>If x ≺ y and y ≺ z, then: If x ≺ z.</li>
-														<li>There may be pairs (x,y) : (S,S) such that neither x ≺ y or y ≺ x is defined.</li>
-												</ol>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="f7589363-40f6-46f9-bb8a-e0d7dd638942">
-												<p>What is an <em>actor computation</em>?</p>
-										</x-q>
-										<x-a id="ec5e4640-085e-46d8-a2d2-03f2c7c6e2cb">
-												<p>A pair (ε, →) where ε is a set of events and → is a strict partial order on ε.</p>
-										</x-a>
-								</x-qa>
-						</x-h4>
-
-						<x-h4 name="Actor and Serial Computations" id="49c5711b-8481-4350-96b8-378c11817969">
-								<x-qa>
-										<x-q id="f202f3a6-2323-41e5-be8b-b422b4000f9f">
-												<p>What <q>ε is complete</q> means?</p>
-										</x-q>
-										<x-a id="9831336a-7a9e-4e91-97a5-0597833024a7">
-												<p>
-														It means that: if an event E in ε causes a message to be sent,
-														there exists an event E' in e in which that message was
-														received; i.e. every event which was activated has occurred
-												</p>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="b1f01cc5-65f8-491b-911d-20b8d540fc79">
-												<p>What « e1,e2 : ε, e1 and e2 are concurrent » means?</p>
-										</x-q>
-										<x-a id="68ccf9e8-72ec-4746-85db-6474f0ad9542">
-												<p>It means that neither e1 → e2 nor e2 → e1 is defined.</p>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="34ce450b-3ddb-4a5d-920a-8657c45768e1">
-												<p>What « e1,e2 : ε, e1 precedes e2 » means?</p>
-										</x-q>
-										<x-a id="a0345f9b-6fdf-4b89-8f16-e5576b67a3ae">
-												<p>It means that e1 → e2.</p>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="158dca36-4f38-44c0-af23-0d2f3e646e64">
-												<p>How is ε built?</p>
-										</x-q>
-										<x-a id="abff5d5f-ab2d-4fc1-bbad-099e809e17d3">
-												<p>ε is built from a postulated single event that precedes all others: ⊥.</p>
-												<p>All other events are inductively built from ⊥.</p>
-												<p>We posit that for any two events e1 and ek, the number of events in between is finite.</p>
-												<p>We posit that the number of successors of any event is finite.</p>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="dee2baa2-fed5-4300-8684-282bccc92b1e">
-												<p>Prove that: for all actor computation, there is an equivalent serial computation.</p>
-										</x-q>
-										<x-a id="58c8db9e-d2a6-478e-b931-071ae9db559a">
-												<p>Given an actor computation, there is a monotonic injective map from (ε,→) to into (ℕ, <).</p>
-										</x-a>
-								</x-qa>
-						</x-h4>
-
-						<x-h4 name="Sub Orders" id="fe1e9599-da0a-4fdf-96e3-af4495a858fb">
-
-								<x-qa>
-										<x-q id="1a62fc3a-1dcc-4806-9a3e-716e3b119a35">
-												<p>What is the <q>Activation Sub Order</q>?</p>
-										</x-q>
-										<x-a id="a50fa55f-b9aa-4bf8-8c98-5c96d5b9485e">
-												<ol>
-														<li>If e1 activates e2, then: e1 precedes e2.</li>
-														<li>So, for a given actor, the activations relations form a tree.</li>
-														<li>This tree form a sub order of the actor computation.</li>
-														<li>It is called the <q>Activation Sub Order</q>.</li>
-												</ol>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="776ceeda-5cb9-412b-80b0-040acf8337f5">
-												<p>What is the <q>Arrival Sub Order</q>?</p>
-										</x-q>
-										<x-a id="d46e6ff8-6a61-4c20-bf49-606f1e7adc9c">
-												<ol>
-														<li>All messages that are sent are eventually received by their targets.</li>
-														<li>We postulate an arbiter in front of every actor which allows only one message to be received at a time.</li>
-														<li>In terms of the precedes ordering on the events in a computation, this means that all events with the same target are totally ordered.</li>
-														<li>We call the	sub-relation defined by the restriction of the precedes relation to the set of events with a particular target actor the <q>arrival ordering</q> for that actor.</li>
-												</ol>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="038bb1b0-8308-4a75-bdc5-ee9ff973e417">
-												<p>What is a <q>creation event</q>?</p>
-										</x-q>
-										<x-a id="3e52788e-fd55-4b4d-a25b-773d01193334">
-												<ol>
-														<li>Every actor is either one of a finite number of initial actors or is created during the course of a	computation.</li>
-														<li>Every created actor is created in a unique event called that actor's <q>creation event</q>.</li>
-														<li>Several actors may be created in a single event; the only restriction is that only a finite number may be created in any single event.</li>
-														<li>we require that an actor's creation event precede the first event in which it receives a message.</li>
-												</ol>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="78566db8-2fd9-4d25-bb97-f492ffd411bf">
-												<p>What is the <q>precursor suborder</q>?</p>
-										</x-q>
-										<x-a id="e53fc4b6-390a-4cb2-bbd6-5ed3c27f4df8">
-												<ol>
-														<li>For any event E in a computation, define precursor(E) to be:
-																<ol>
-																		<li>the immediate predecessor of E in the arrival order of the target of E, if one exists ;</li>
-																		<li>else: the creation event of the target of E, if one exists ;</li>
-																		<li>else: ⊥.</li>
-																</ol>
-														</li>
-														<li>The precursor suborder is then the transitive closure of the precursor relation and is a suborder of "→".</li>
-														<li>The	precursor suborder is a tree with ⊥ as its root.</li>
-												</ol>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="adde824d-6aac-4d7e-9a7e-49e515af5868">
-												<p>What is the relation between: actor computations and activation and precursor suborders.</p>
-										</x-q>
-										<x-a id="034b83f4-c4ac-432d-bb86-d5ad4dfe5264">
-												<ol>
-														<li>The precedes order is precisely the transitive closure of the union of the activation and precursor suborders.</li>
-														<li>Thus, every actor computation is the transitive closure of the union of two finitary trees, and encodes the interplay of the two.</li>
-												</ol>
-										</x-a>
-								</x-qa>
-						</x-h4>
-
-						<x-h4 name="Induction" id="bbf9d2f9-2bb5-4832-a6e7-4d693361a125">
-
-								<x-qa>
-										<x-q id="304ee658-ea54-4c1e-974d-2cd2b5ffc2dc">
-												<p>What is <q>Actor Induction</q>?</p>
-										</x-q>
-										<x-a id="8371a953-20f4-4582-9289-1c5478eb4990">
-												<ol>
-														<li>
-																Actor induction is defined for all of the orders defined
-																above, and when faced with proving some property of an
-																actor computation, one chooses which one based on the
-																complexity of the interactions on which the property
-																depends.
-														</li>
-														<li>
-																Properties of programs without "side-effects" can usually
-																be proved using only "activation" induction, while
-																properties of isolated databases can usually be proved
-																using only "arrival" induction. Complex programs with
-																side-effects will require full-blown "precedes" induction.
-														</li>
-														<li>
-																"Precedes" induction states that if P(E.) is true, and if
-																P(activator(E)) and P(precursor(E)) imply P(E), then P is
-																true of all events in the computation.
-														</li>
-												</ol>
-										</x-a>
-								</x-qa>
-						</x-h4>
-
-						<x-h4 name="Fork-Join Synchronization" id="a7d2ee1d-18dd-444e-a867-edc68be8689c">
-								<x-qa>
-										<x-q id="bab4793c-2238-4d18-bb32-1a915b3746ed">
-												<p>How does the Actor Model manages Fork-Join Synchronization?</p>
-										</x-q>
-										<x-a id="d9ff6c7e-3cb6-4804-88b5-f6d7e0577cff">
-												<p>It is possible to implement a fork-join behaviour using the actor model.</p>
-												<ol>
-														<li>F, R, G1, G2 : Actor</li>
-														<li>F.compute("f(x)=h(g1(x),g2(x))", R)
-																<ol>
-																		<li>F computes the value <code>f(x)</code> which is equal to <code>h(g1(x),g2(x))</code> and sends the result to R.</li>
-																</ol>
-														</li>
-														<li>F creates the actor H.</li>
-														<li>F sends a message to G1 requesting to compute <code>g1(x)</code> and to send the result to H.</li>
-														<li>F sends a message to G2 requesting to compute <code>g2(x)</code> and to send the result to H.</li>
-														<li>H waits for <code>g1(x)</code> and <code>g2(x)</code>.</li>
-														<li>After receiving the values, H computes the result and sends it to R.</li>
-												</ol>
-										</x-a>
-								</x-qa>
-						</x-h4>
-
-						<x-h4 name="Locality" id="59fc6ea8-f34b-4133-8d5f-c84ba94a125d">
-								<x-qa>
-										<x-q id="e9fa7826-c4f7-4ac2-b7bf-8154904a9749">
-												<p>How is information shared among actors?</p>
-										</x-q>
-										<x-a id="4f9eba62-52bb-464f-adac-dd15a4e0076c">
-												<ol>
-														<li>My message passing only.</li>
-														<li>The most fundamental form of knowledge which is conveyed by a message in an actor
-																computation is knowledge about the existence of another actor.</li>
-														<li>An actor cannot know an actor's name unless it was either created with that knowledge or
-																acquired it as a result of receiving a message. </li>
-												</ol>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="23691bae-79eb-425d-8fb4-d4afe21ef98c">
-												<p>What is the <q>local time axis</q> of an Actor?</p>
-										</x-q>
-										<x-a id="2c8d7bc3-b19a-44db-b0bf-5803671ec835">
-												<ol>
-														<li>The arbiter gives a strict order to received messages.</li>
-														<li>This order — local to the actor — is the time at the actor.</li>
-														<li>Picture a clock quadrant: each message received makes the second hand to move forward a given amount of angle.</li>
-														<li>We call the second hand axis of rotation the <q>local time axis at an actor</q>.</li>
-												</ol>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="c229714b-d55b-40a0-8348-e95f3e348f81">
-												<p>What is the <q>vector of acquaintances</q> of an Actor?</p>
-										</x-q>
-										<x-a id="fce2b1ec-728a-4957-8946-555cb82d8f0f">
-												<ol>
-														<li>Choose an event α along the local time axis of an actor.</li>
-														<li>List in order the addresses of all actors received up to α.</li>
-														<li>This list is called the <q>vector of acquaintances</q> of the actor at α.</li>
-												</ol>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="b8523833-7732-4a85-8733-df4da8f15dc0">
-												<p>What is a <q>participant</q>?</p>
-										</x-q>
-										<x-a id="fc7ce06c-eb3e-4d68-b690-d2b8628104e3">
-												<ol>
-														<li>e : Event</li>
-														<li>participant(e) is:
-																<ol>
-																		<li>target(e)</li>
-																		<li>∨ an acquaintance of target(e)</li>
-																		<li>∨ an actor mentioned in the message(e)</li>
-																		<li>∨ an actor created in e</li>
-																</ol>
-														</li>
-												</ol>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="8ea19c41-4adb-4cb9-8e8e-9ef57b955055">
-												<p>At creation, how big can be the vector of acquaintance of an Actor?</p>
-										</x-q>
-										<x-a id="24963237-aecc-4d45-bb19-85c11900813f">
-												<ol>
-														<li>The biggest vector of acquaintances contains:
-																<ol>
-																		<li>its parents</li>
-																		<li>acquaintances of its parents</li>
-																		<li>its siblings</li>
-																</ol>
-														</li>
-												</ol>
-										</x-a>
-								</x-qa>
-						</x-h4>
-
-						<x-h4 name="Goal-Directed Activities" id="c43df2ab-b762-4a30-9389-0699c8e89117">
-								<x-qa>
-										<x-q id="b30e7b5b-77b1-40fc-ab97-83baaf037e35">
-												<p>Define a <q>request</q>?</p>
-										</x-q>
-										<x-a id="c131fb1d-bc41-4856-9862-c112bb16861d">
-												<ol>
-														<li>A request <code>r</code> is kind of Message</li>
-														<li><code>content :≡ message(r)</code></li>
-														<li><code>spec(content)</code> is the request itself.</li>
-														<li><code>dest(content)</code> is the address of the actor to receive the reply.</li>
-												</ol>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="7096080c-bbc0-443a-a854-521815914c6d">
-												<p>What is a reply?</p>
-										</x-q>
-										<x-a id="de345fab-392a-4ce5-aa81-679b27d78167">
-												<ol>
-														<li>A reply <code>r</code> is a kind of Message.</li>
-														<li><code>message(r)</code> should satisfy the associated request or explain why a satisfactory answer could not have been produced.</li>
-												</ol>
-										</x-a>
-								</x-qa>
-
-								<x-qa>
-										<x-q id="5dc4be04-db3c-48f5-8086-92b95addcc60">
-												<p>What is a <q>Goal Directed Activity</q>?</p>
-										</x-q>
-										<x-a id="107fb7f1-58ac-4658-a851-ac484398195f">
-												<ol>
-														<li>q : Request</li>
-														<li>r : Any reply to q</li>
-														<li>activity(q) :≡ the set of events which follow <code>q</code> in the partial order but precede <code>r</code></li>
-														<li>Informally, <code>activity(q)</code> is the set of events that contribute to <code>r</code></li>
-												</ol>
-										</x-a>
-								</x-qa>
-						</x-h4>
-				</x-h3>
+		<x-h2 name="Method" id="7893e5b6-4d8a-4d7a-961e-13e149212a20">
+		  <ol>
+			  <li>The publication <a href="data/pub-2.pdf">publication</a> has been analyzed.</li>
+			</ol>
 		</x-h2>
 
-		<x-h2 name="Mailbox" id="625da5a6-f547-4dcb-bc3d-5131633940cf">
-
+		<x-h2 name="Discussion" id="82ad66f1-f2f7-43c6-98b2-e312142c1caf">
+		  
 		</x-h2>
 
-		<x-h2 name="History" id="53212e44-73da-428a-a9e7-a66b3ac0f123">
-				<x-h3 name="Analyse" id="8afc6fb8-a7d5-4370-90bb-87490b8e2866">
-						<x-result>
-								<a href="#e300d60c-f352-4269-bd48-261fcb4e4460">QA</a>
-						</x-result>
-
-						<x-context>
-								<p> <a href="data/pub-2.pdf">publication</a></p>
-						</x-context>
-				</x-h3>
+		<x-h2 name="Conclusion" id="481bfb4f-0fe4-41e2-82f2-3f3ca7304763">
+		  
 		</x-h2>
 </x-h1>
 

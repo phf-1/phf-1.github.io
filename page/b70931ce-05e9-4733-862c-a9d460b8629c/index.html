@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- This Source Code Form is subject to the terms of the Mozilla Public
+		 - License, v. 2.0. If a copy of the MPL was not distributed with this
+		 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Actor Model: definitions and theorems." />
+    <title>Pierre-Henry Fröhring's Website</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://phfrohring.com/" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      __CSS__
+    </style>
+    <script defer type="module" src="/js/main.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <picture id="bg-image">
+        <source srcset="bg.webp" type="image/webp" />
+        <source srcset="bg.jpg" type="image/jpeg" />
+        <source srcset="bg.svg" type="image/svg+xml" />
+        <img
+          id="bg-image-img"
+          src="bg.jpg"
+          onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
+          alt="Illustration"
+        />
+      </picture>
+      <div id="container">
+        <div id="content">
+          <div id="topbar">
+            <nav class="actions">
+              <button id="toggle_toc_btn" class="button">TOC</button>
+              <button id="toggle_qa" class="button">SHOW</button>
+            </nav>
+            <nav class="navbar" id="navbar">
+              <a class="button" href="/">home</a>
+            </nav>
+            <x-toc></x-toc>
+          </div>
+
+          <!-- :TYPE: dbf45859-7a1a-4939-9cdb-4f6306168323 -->
+<x-h1 name="Actor Model: definitions and theorems" id="853eec02-ec6b-43f9-b4c3-93cf3441dc94">
+
+  <x-abstract>Main definitions and theorems about the Actor Model are referenced.</x-abstract>
+
+  <x-h2 name="Objective" id="b3eb607c-b91f-4e26-b615-b1c104aa7082">
+    <ul>
+		  <li>Reference the main definitions and theorems of the Actor Model.</li>
+		</ul>
+
+  </x-h2>
+
+  <x-h2 name="Result" id="2aee29e4-5628-4e6d-bde1-1333c9e66269">
+    <ol>
+		  <li><a href="/page/420c363e-fe07-450b-9cb6-96893174123d/#1ac96cf2-dfa0-4732-b5ad-0b7e6dbc4459">Actor</a></li>
+			<li><a href="/page/8d327060-fdfb-49b0-a6fb-6045ddde4773/#db2503ab-0bbc-4d81-8cbd-b33523b1ed92">Procedure Interface</a></li>
+			<li><a href="/page/420c363e-fe07-450b-9cb6-96893174123d/#13dd3a58-4d9a-4dfe-a7cc-13a72f95c35e">Message</a></li>
+			<li><a href="/page/420c363e-fe07-450b-9cb6-96893174123d/#db94c9b0-d2f9-4b74-aeae-da01d6dc31cd">Concurrency</a></li>
+			<li><a href="/page/420c363e-fe07-450b-9cb6-96893174123d/#12cd35c8-bd10-49fe-9eaf-bc141d4c7df8">On one-way asynchronous communication</a></li>
+			<li><a href="/page/420c363e-fe07-450b-9cb6-96893174123d/#ffa7588c-362d-4694-a845-3cc54963335d">Indeterminacy</a></li>
+			<li><a href="/page/420c363e-fe07-450b-9cb6-96893174123d/#176f4608-72c6-40b6-b745-6ed58bf0a7de">Quasi commutativity</a></li>
+			<li><a href="/page/420c363e-fe07-450b-9cb6-96893174123d/#f6c23ced-2029-412e-89c8-68f584d50a41">Future</a></li>
+			<li><a href="/page/0f4c6789-a3ef-446a-a447-08655d6fae67/#0cd880a8-133b-4234-b524-528b2389c5db">Event</a></li>
+			<li><a href="/page/0f4c6789-a3ef-446a-a447-08655d6fae67/#1ca9326d-d949-425e-b0cd-f2c084dfbf54">Actor Computation</a></li>
+			<li><a href="/page/0f4c6789-a3ef-446a-a447-08655d6fae67/#ea08534e-1b11-4216-a152-fe74c69969b2">Activation Sub Order</a></li>
+			<li><a href="/page/0f4c6789-a3ef-446a-a447-08655d6fae67/#39923d21-89e6-4935-bd96-8250f8b6e738">Arrival Sub Order</a></li>
+			<li><a href="/page/0f4c6789-a3ef-446a-a447-08655d6fae67/#318fb110-2560-43f4-b46a-f4ee073d5c54">Precursor Sub Order</a></li>
+      <li><a href="/page/0f4c6789-a3ef-446a-a447-08655d6fae67/#50e8582b-2e84-4cce-8c9f-03eb1d34524c">Actor Induction</a></li>
+		</ol>
+  </x-h2>
+
+  <x-h2 name="Experiment" id="0fdc9888-6cfa-475f-9187-de8572978f0b">
+
+  </x-h2>
+
+  <x-h2 name="Method" id="b3e1a337-5cfa-4563-9046-a76914eb904c">
+		<ul>
+		  <li>Definitions and theorems have been extracted from the <a href="/page/fb0f0662-2d3f-47aa-9a79-0a615d06e647">analysis of publications</a> about the Actor Model.</li>
+		</ul>
+  </x-h2>
+
+  <x-h2 name="Discussion" id="22f23368-169f-46a8-89fd-e6a735598bdb">
+
+  </x-h2>
+
+  <x-h2 name="Conclusion" id="92ee7363-50fe-46e1-9fb3-62d5645d0151">
+
+  </x-h2>
+
+  <x-h2 name="Reference" id="e9a4b88a-2ea9-4dda-a799-0b60c53e45e6">
+
+  </x-h2>
+</x-h1>
+
+
+          <hr />
+
+          <footer>
+            <p xmlns:cc="http://creativecommons.org/ns#">
+              This work by
+              <a
+                rel="cc:attributionURL dct:creator"
+                property="cc:attributionName"
+                href="https://phfrohring.com"
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
+              is licensed under
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
+                target="_blank"
+                rel="license noopener noreferrer"
+                style="display: inline-block"
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

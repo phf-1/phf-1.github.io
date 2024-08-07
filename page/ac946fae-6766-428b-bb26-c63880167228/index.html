@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- This Source Code Form is subject to the terms of the Mozilla Public
+		 - License, v. 2.0. If a copy of the MPL was not distributed with this
+		 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Introducing P5.js" />
+    <title>Pierre-Henry Fröhring's Website</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://phfrohring.com/" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      __CSS__
+    </style>
+    <script defer type="module" src="/js/main.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <picture id="bg-image">
+        <source srcset="bg.webp" type="image/webp" />
+        <source srcset="bg.jpg" type="image/jpeg" />
+        <source srcset="bg.svg" type="image/svg+xml" />
+        <img
+          id="bg-image-img"
+          src="bg.jpg"
+          onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
+          alt="Illustration"
+        />
+      </picture>
+      <div id="container">
+        <div id="content">
+          <div id="topbar">
+            <nav class="actions">
+              <button id="toggle_toc_btn" class="button">TOC</button>
+              <button id="toggle_qa" class="button">SHOW</button>
+            </nav>
+            <nav class="navbar" id="navbar">
+              <a class="button" href="/">home</a>
+            </nav>
+            <x-toc></x-toc>
+          </div>
+
+          <!-- :TYPE: dbf45859-7a1a-4939-9cdb-4f6306168323 -->
+<x-h1 name="p5.js" id="7d4ec4d3-a22d-4adc-ab84-543db86d1bb7">
+
+  <x-abstract>This article explains how to integrate a <code>p5.js</code> animation into a web page. It includes a series of questions and answers to test readers' understanding of basic <code>p5.js</code> concepts. The accompanying animation demonstrates both the integration process and the concepts in action.</x-abstract>
+
+  <x-h2 name="Objective" id="69823225-9b3e-47fc-85b1-5d19c7383d81">
+    <p>The objective is to learn enough about P5.js to integrate simple animations into a web page.</p>
+  </x-h2>
+
+  <x-h2 name="Result" id="ed2d34bd-fadc-444b-bb93-7da25926c18e">
+    <ol>
+      <li> The section <a href="#671ebc34-fe9c-4b13-8069-fbdecbe47ed6">Experiment</a> demonstrates an integration of <code>p5.js</code> animation into this very web page.</li>
+      <li>The section <a href="#8ebb0b82-d944-43a6-9060-4b79dd6b0507">QA</a> tests the readers understanding of <code>p5.js</code> through a series of questions and answers.</li>
+    </ol>
+  </x-h2>
+
+  <x-h2 name="Experiment" id="671ebc34-fe9c-4b13-8069-fbdecbe47ed6">
+    <x-objective>
+      <p>The objective of the experiment is to display a grid of interconnected
+    nodes. An animation will demonstrate how <q>probes</q> propagate from one node to
+    another by sensing the neighbors of each node and choosing to jump to the next
+    node in a given direction.</p>      
+    </x-objective>
+
+    <x-result>
+      <p>A grid of nodes is displayed below. Three probes are started at the top left corner in red, each with a given direction.</p>
+    </x-result>
+
+    <div id="p5" style="margin: 2rem 0;">
+      <canvas></canvas>
+      <script defer src="data/p5.min.js"></script>
+      <script defer src="data/grid.js"></script>
+      <div class="actions" style="margin-top:1rem;display:flex;justify-content:left;"></div>
+    </div>
+  </x-h2>
+  
+  <x-h2 name="QA" id="8ebb0b82-d944-43a6-9060-4b79dd6b0507">
+    <x-qa>
+      <x-q id="f5303859-9ce3-42da-81e1-1815d7f47691">
+        <p>In a nutshell, how to use <code>p5</code>?</p>
+      </x-q>
+      <x-a id="2656c85e-f1c8-41da-8cb9-374033e640e9">
+        <p>We will examine this web page experiment and describe its main elements. Given this HTML:</p>
+        <x-blockcode>
+&lt;div id="p5" style="margin: 2rem 0;"&gt;
+  &lt;canvas&gt;&lt;/canvas&gt;
+  &lt;script defer src="data/p5.min.js"&gt;&lt;/script&gt;
+  &lt;script defer src="data/grid.js"&gt;&lt;/script&gt;
+  &lt;div class="actions" style="margin-top:1rem;display:flex;justify-content:left;"&gt;
+&lt;/div&gt;
+        </x-blockcode>
+
+        <p>we examine <code>grid.js</code>. It defines two functions:</p>
+        <x-blockcode>
+function setup() { /* … */ }
+function draw() { /* … */ }
+        </x-blockcode>        
+
+        <p>Using the Actor Model, we may interpret the code like so:</p>
+        <ol>
+          <li><code>setup()</code> is a message sent by <code>p5</code> to itself once.</li>
+          <li>When <code>p5</code> processes <code>setup()</code>, it executes the associated block of instructions —
+          i.e. <code>{ /* … */ }</code>.</li>
+          <li><code>draw()</code> is a message sent by <code>p5</code> to itself 60 times per second after <code>setup()</code> has been received and processed.</li>
+          <li>When <code>p5</code> processes <code>draw()</code>, it executes the associated block of instructions —
+          i.e. <code>{ /* … */ }</code>.</li>
+        </ol>
+
+        <p>Note that using <a href="https://p5js.org/reference/p5/p5/"><code>new p5(func)</a></code> where <code>func</code> is:</p>
+        <x-blockcode>
+const func = function(p) {
+    p.setup = function() { /* … */ }
+    p.draw = function() { /* … */ }          
+}
+        </x-blockcode>
+        <p>allows avoiding the use of the global scope.</p>
+        
+      </x-a>
+    </x-qa>
+
+    <x-qa>
+      <x-q id="a336b6c4-9a15-4729-9657-9e9d6c0a2240">
+        <p>How should this code be interpreted?</p>
+        <x-blockcode>
+function setup() {
+    createCanvas(600, 400)
+}
+
+function draw() {
+    background(135, 206, 235);
+    fill("yellow");
+    stroke("orange");
+    strokeWeight(20);
+    circle(550, 50, 100);
+}
+        </x-blockcode>
+      </x-q>
+      <x-a id="9a296675-30ef-40c1-9043-5a381efb937a">
+        <ol>
+          <li><code>setup()</code> is processed.
+            <ol>
+              <li>A canvas is built. It has a width of 600px and a height of 400px.</li>
+            </ol>
+          </li>
+          <li><code>draw()</code> is processed.
+            <ol>
+              <li>The background is painted in blue.</li>
+              <li>The next shape will be filled with yellow.</li>
+              <li>The stroke of the next shape will be orange.</li>
+              <li>The next shape stroke weight will be 20.</li>
+              <li>A circle with a center at (550, 50) and a diameter of 100 is drawn.</li>
+            </ol>
+          </li>
+        </ol>
+      </x-a>
+    </x-qa>
+    
+    <x-qa>
+      <x-q id="b3227670-46e9-4d47-912e-49f4b502945b">
+        <p>Given the block of instructions associated with <code>setup()</code> reproduced below, how should it be interpreted?</p>
+        <x-blockcode>
+function setup() {
+    canvas.draw()          
+    resetSketch()    
+}
+
+function resetSketch() {
+    const start_node = nodes.get(0,0);
+    probes = [
+        new Probe(start_node, colors.color("red-500"), right_dir),
+        new Probe(start_node, colors.color("blue-500"), bottom_right_dir),
+        new Probe(start_node, colors.color("green-500"), bottom_dir),  
+    ]
+    !isLooping() && loop()
+}
+
+class Canvas {
+    #width
+    #height
+    #canvas
+    #parent
+    #actions
+
+    constructor(width, height, canvas_id) {
+        this.#width = width
+        this.#height = height
+        this.#parent = document.getElementById(canvas_id)
+        this.#canvas = this.#parent.getElementsByTagName("canvas")[0]
+        this.#actions = this.#parent.getElementsByClassName("actions")[0]
+    }
+
+    get width() {
+        return this.#width
+    }
+
+    get height() {
+        return this.#height
+    }
+
+    draw() {
+        createCanvas(this.#width, this.#height, this.#canvas);
+        let button = createButton("reset");
+        button.elt.classList.add("button")
+        button.mousePressed(resetSketch);        
+        this.#actions.appendChild(button.elt)
+    }
+}
+        </x-blockcode>
+      </x-q>
+      <x-a id="231e5d2b-8220-430f-8b33-86af97ece8d1">
+        <ol>
+          <li><code>setup()</code> is processed.            
+            <ol>
+              <li><code>canvas.draw()</code> is processed.
+                <ol>
+                  <li>A <code>P5 Canvas</code> is created and will be rendered into the <code>canvas</code> in the DOM.</li>
+                  <li>A button is created such that when clicked, it resets the rendered animation.</li>
+                  <li>The button is placed in the <code>actions</code> bar.</li>
+                </ol>
+              </li>              
+              <li><code>resetSketch()</code> processed.
+                <ol>
+                  <li>Three probes are started from the top left node.</li>
+                  <li>Each probe has a given direction: right, bottom_right and bottom.</li>
+                  <li>If the <code>draw()</code> message is not received 60 times per second, then: make it so.</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </x-a>
+    </x-qa>
+
+    <x-qa>
+      <x-q id="e599a2dc-87eb-44a5-bd92-f4bfd1a145eb">
+        <p>Given the implementation of <code>draw()</code> below, how should it be interpreted?</p>
+        <x-blockcode>
+function draw() {
+    background(bg_color);
+    nodes.draw()
+    probes.forEach((probe) => probe.draw())
+    if (frameCount % 10 == 0) {
+        probes.forEach((probe) => probe.next())
+        !probes.some((probe) => probe.moving) && noLoop()
+    }
+}
+        </x-blockcode>        
+      </x-q>
+      <x-a id="05fffcf9-d492-4158-a489-f29fb4af544f">
+        <ol>
+          <li><code>draw()</code> is processed.
+            <ol>
+              <li>The background of the canvas is painted using color: <code>bg_color</code></li>
+              <li>Each node receives a <code>draw()</code> message, each causing the node to draw itself.</li>
+              <li>Each probe receives a <code>draw()</code> message, each causing the probe to draw itself.</li>              
+              <li>Every 10 frames:
+                <ol>
+                  <li>Each probe tries to reach the next node if any.</li>
+                  <li>If no probe can reach a next node, the animation stops.</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+        </ol>
+
+        <p>We observe that each frame is a superposition of drawn objects.</p>
+      </x-a>
+    </x-qa>
+  </x-h2>
+
+  
+  <x-h2 name="Discussion" id="bdcb2603-ef53-4151-9447-41d42d0ed2bf">
+    <ul>
+      <li>It would be preferable to avoid using the global scope.</li>
+      <li>It would be preferable to encapsulate the whole animation in a Web Component.</li>
+    </ul>
+  </x-h2>
+
+  <x-h2 name="Conclusion" id="faf5b4e0-5964-49d4-90a5-b4628aacfd5e">
+    <ul>
+      <li>An animation using <code>p5.js</code> has been integrated into this web page.</li>
+      <li>The basic components have been described and tested.</li>
+      <li>More challenging animation would require more elaborate code, which may be the subject of an other article.</li>
+    </ul>
+  </x-h2>
+
+  <x-h2 name="Reference" id="c9d9f645-c690-472b-a3a0-7257a0ada672">
+    <ul>
+      <li><a href="https://p5js.org/">p5.js</a></li>
+      <li> <a href="https://stackoverflow.com/questions/67285131/how-can-i-display-two-p5js-sketches-on-the-same-html-page">How can I display two p5js sketches on the same html page?</a></li>
+    </ul>
+  </x-h2>
+</x-h1>
+
+
+          <hr />
+
+          <footer>
+            <p xmlns:cc="http://creativecommons.org/ns#">
+              This work by
+              <a
+                rel="cc:attributionURL dct:creator"
+                property="cc:attributionName"
+                href="https://phfrohring.com"
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
+              is licensed under
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
+                target="_blank"
+                rel="license noopener noreferrer"
+                style="display: inline-block"
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

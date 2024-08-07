@@ -117,9 +117,11 @@
           <p>What does <q>concurrently</q> means in the above context?</p>
         </x-q>
         <x-a id="d12eb141-ce0a-4433-aeb8-2c5521a0d99a">
-          <p>It means that the actor has the ability to perform multiple
+          <x-definition term="Concurrency" id="db94c9b0-d2f9-4b74-aeae-da01d6dc31cd">
+					  <p>It means that the actor has the ability to perform multiple
             actions at the same time, or in overlapping periods, without waiting
             for one action to complete before starting another.</p>
+					</x-definition>
         </x-a>
       </x-qa>
 
@@ -155,6 +157,7 @@
           <p>What is the foundation of system communication?</p>
         </x-q>
         <x-a id="7e82068c-0218-411f-afba-9872c0ad3d62">
+					<x-definition term="Message" id="13dd3a58-4d9a-4dfe-a7cc-13a72f95c35e">
           <p>Message passing using types.</p>
           <ul>
             <li>Messages are the unit of communication.
@@ -163,7 +166,8 @@
               </ul>
             </li>
             <li>Types enable secure communication with any Actor.</li>
-          </ul>
+          </ul>					  
+					</x-definition>
         </x-a>
       </x-qa>
       <x-qa>
@@ -237,20 +241,34 @@
           <p>The Actor Model is based on …</p>
         </x-q>
         <x-a id="292318e9-4516-42bf-bd39-287af7662c69">
-          <p>The Actor Model is based on one-way asynchronous communication. Once a message has been sent, it is the responsibility of the receiver.</p>
-          <p>Messages in the Actor Model are decoupled from the sender and are delivered by the system on a best efforts basis.</p>
+          <x-definition term="One-way asynchronous communication" id="12cd35c8-bd10-49fe-9eaf-bc141d4c7df8">
+						<p>The Actor Model is based on one-way asynchronous communication. Once a message has been sent, it is the responsibility of the receiver.</p>
+						<p>Messages in the Actor Model are decoupled from the sender and are delivered by the system on a best efforts basis.</p>					  
+					</x-definition>
         </x-a>
       </x-qa>
     </x-h3>
 
     <x-h3 name="Indeterminacy and Quasi-commutativity" id="f557cc69-f6ad-42e0-9954-a22ec47cea2c">
+			<x-qa>
+			  <x-q id="eaf00bc4-ce48-4244-85b5-2bea583319e1">
+			    <p>What is indeterminacy?</p>
+			  </x-q>
+			  <x-a id="76a439fe-f570-4bfd-b685-b97689e590bc">
+          <x-definition term="Indeterminacy" id="ffa7588c-362d-4694-a845-3cc54963335d">
+					  <p>The Actor Model supports indeterminacy because the reception order of messages can affect future behavior.</p>					
+					</x-definition>
+			  </x-a>
+			</x-qa>
+
       <x-qa>
         <x-q id="a1954eb9-ef9c-4265-82db-0e5a68d8106a">
-          <p>Why does the Actor Model supports indeterminacy?</p>
+          <p>What is Quasi commutativity?</p>
         </x-q>
         <x-a id="3901e4d2-f49f-49ec-94f3-bdfe5d8a9fbf">
-          <p>The Actor Model supports indeterminacy because the reception order of messages can affect future behavior.</p>
-          <p>Operations are said to be quasi-commutative to the extent that it doesn’t matter in which order they occur. To the extent possible, quasi-commutativity is used to reduce indeterminacy.</p>
+          <x-definition term="Quasi commutativity" id="176f4608-72c6-40b6-b745-6ed58bf0a7de">
+					  <p>Operations are said to be quasi-commutative to the extent that it doesn’t matter in which order they occur. To the extent possible, quasi-commutativity is used to reduce indeterminacy.</p>
+					</x-definition>
         </x-a>
       </x-qa>
 
@@ -341,12 +359,14 @@
           <p>What is the principle of Actor induction?</p>
         </x-q>
         <x-a id="20764bc6-076e-4e17-9549-401f812bff2d">
-          <ol>
-            <li><code>x : Actor</code> and <code>p(x)</code> is true.</li>
-            <li><code>p(x)</code> is true when it receives a message.</li>
-            <li><code>p(x)</code> is true when it receives the next message.</li>
-            <li>then: <code>p(x)</code> is always true.</li>
-          </ol>
+					<x-definition term="Actor Induction" id="17918e91-3d8e-4903-bfa3-24d25e6d741c">
+					  <ol>
+							<li><code>x : Actor</code> and <code>p(x)</code> is true.</li>
+							<li><code>p(x)</code> is true when it receives a message.</li>
+							<li><code>p(x)</code> is true when it receives the next message.</li>
+							<li>then: <code>p(x)</code> is always true.</li>
+						</ol>
+					</x-definition>
         </x-a>
       </x-qa>
     </x-h3>

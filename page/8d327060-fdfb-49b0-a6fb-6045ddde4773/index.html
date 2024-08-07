@@ -101,11 +101,13 @@
 
         <x-qa>
             <x-q id="3857e8ab-2950-4e1d-be32-5cfa0c70b066">
-                <p>What is a Interfaces for a procedure?</p>
+                <p>What is an interface for a procedure?</p>
             </x-q>
             <x-a id="bd9cf2a6-7fee-4394-9e55-801191a4ccb3">
+							<x-definition term="Procedure Interface" id="db2503ab-0bbc-4d81-8cbd-b33523b1ed92">
                 <p>A procedure interface is used to specify the types of messages that a procedure Actor can receive. For instance:</p>
                 <p><code>Interface IntegerToInteger {[Integer]↦ Integer}▮</code> means that an actor implements the interface <code>IntegerToInteger</code> if, given an integer it returns an integer.</p>
+							</x-definition>
             </x-a>
         </x-qa>
 
@@ -172,9 +174,28 @@
         </x-qa>
 		</x-h2>
 
-		<x-h2 name="Context" id="d469b4ad-7637-4828-982f-034fefa67f4b">
+		<x-h2 name="Method" id="880bc79a-011d-4e4e-8953-951228938a05">
+		  <ol>
+			  <li>The publication: <a href="data/actor-script.pdf">ActorScript</a> by Carl Hewitt has been analysed.</li>
+			</ol>
 
 		</x-h2>
+
+		<x-h2 name="Discussion" id="c4da3144-0c99-4126-bb6d-8128509ab584">
+		  <ol>
+			  <li>There is no known actual implementation of <em>ActorScript</em>.</li>
+				<li>There is a video where Carl Hewitt says that there should be an updated version of the paper at some point because there are bugs. (<x-todo></x-todo> which video?)</li>
+			</ol>
+		</x-h2>
+
+		<x-h2 name="Conclusion" id="a7b88ccc-bfd2-46ee-9147-c6c517cc9151">
+<ul>
+    <li>There is no known practical programming language that implements the <em>Actor Model</em> as defined by Carl Hewitt.</li>
+    <li>A few approximate practical implementations exist, such as Akka and Erlang.</li>
+    <li>ActorScript may still be useful to some extent as a specification language.</li>
+</ul>
+		</x-h2>
+
 </x-h1>
 
 
