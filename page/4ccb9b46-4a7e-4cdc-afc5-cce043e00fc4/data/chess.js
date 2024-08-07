@@ -38,7 +38,7 @@ function is(x, type) {
     } else if (type === "Nat") {
         return Number.isInteger(x) && x >= 0;
     } else if (type === "HTMLCanvas") {
-        return x instanceof Node && x.tagName === "CANVAS";
+        return x.tagName === "CANVAS";
     } else if (type === "Canvas") {
         return x instanceof CanvasRenderingContext2D;
     } else if (type === "Type") {
