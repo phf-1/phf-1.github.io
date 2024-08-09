@@ -1,0 +1,25 @@
+(use-modules (rnrs io ports))
+
+(define compilation-exit-status (system* "erlc" "read_applications.erl"))
+(when (not (eq? compilation-exit-status 0))
+  (throw 'compilation-failed "erlc failed to compile read_applications.erl"))
+
+(define (read_applications application_resource_file)
+  (let* ((input+output (pipe))
+         (pid (spawn "erl" `("erl" "-noshell" "-s" "read_applications" "main" ,application_resource_file "-s" "init" "stop")
+                     #:output (cdr input+output)))
+         (output ""))
+    (waitpid pid)
+    (close-port (cdr input+output))
+    (set! output (get-string-all (car input+output)))
+    (close-port (car input+output))
+    output))
+
+(define (list-of-strings input)
+  (let* ((trimmed (string-trim-both input #\space))
+         (no-brackets (substring trimmed 1 (- (string-length trimmed) 2)))
+         (elements (string-split no-brackets #\,))
+         (result (map string-trim elements)))
+    result))
+
+(format #t "~s~%" (list-of-strings (read_applications "test_project.app")))
