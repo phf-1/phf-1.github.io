@@ -619,4 +619,8 @@ x-abstract *:last-child {
   aside {
     display: none;
   }
+  .button {
+    padding: 0.70rem;
+    font-size: 0.70rem;
+  }
 }
