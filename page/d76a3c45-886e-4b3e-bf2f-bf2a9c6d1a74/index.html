@@ -81,7 +81,35 @@
     <p>The experiment is identical to the <a href="/page/7cbeef0f-6f18-41be-85fb-706ee226be2b#13792b8e-e68e-4e83-abf0-da9a8e55522e">Guix and Elixir</a> article.</p>
   </x-h2>
 
-  <x-h2 name="Method" id="4c21d27c-7080-4d3e-9219-07262477f3b8">
+  <x-h2 name="Method" id="4c21d27c-7080-4d3e-9219-07262477f3b8">    
+    <x-h3 name="Refined Objective" id="fd39e942-ef20-48a1-8c38-76d99f8061d6">
+      <ol>
+        <li>If <code>elixir-pkg</code> is a Guix Elixir package such that:
+          <ol>
+            <li>it depends on a Guix Erlang package ;
+              <ul>
+                <li>There is an Erlang package in the <code>inputs</code> field of the package.</li>
+              </ul>
+            </li>
+            <li>it provides executables ;</li>
+            <li>it provides an application.</li>
+          </ol>
+        </li>
+        <li>then: <code>guix shell --container elixir elixir-pkg</code> should install the application and executables in
+        the environment.
+          <ul>
+            <li>If it provides an executable <code>executable</code>, then <code>$ executable</code> calls it.</li>
+            <li>If it provides a module <code>Mod</code>, then: <code>$ iex; $ {:module, Mod} = Code.ensure_loaded(Mod)</code></li>
+            <li>If it provides an application <code>App</code>, then: <code>$ iex; $ {:ok, _} = Application.ensure_all_started(App)</code></li>
+          </ul>
+        </li>
+      </ol>      
+    </x-h3>
+
+    <x-h3 name="test_project" id="0e886164-18f7-4c6d-9794-f32220ecbd24">
+      <p><code>test_project</code> is an Elixir application that depends on <code>telemetry</code>, an Erlang application. It provides an executable <code>test_project-bin</code> that calls the <code>telemetry</code> application and prints <code>"Success."</code></p>
+    </x-h3>
+
 
     <x-h3 name="Application Model" id="1ce81e78-10c2-4905-8f53-be6b4df872ed">
       <ol>
@@ -431,7 +459,7 @@ main([FileName]) ->
     </x-h3>
 
     <x-h3 state="todo" name="Guix integration" id="26fca9b0-94c8-44aa-9d0a-67c4a26e23b8">
-      <p>The mix build system has integrated the steps above. Compute the transitive closure of dependencies.</p>
+      <p>The mix build system has integrated the steps above. Compute the transitive closure of dependencies. See: <a href="https://erlang.org/documentation/doc-5.3/doc/getting_started/getting_started.html">.erlang start-up file</a></p>
     </x-h3>
 
   </x-h2>
