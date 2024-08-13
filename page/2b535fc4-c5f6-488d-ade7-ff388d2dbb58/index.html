@@ -6,7 +6,7 @@
 			 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Wielding Elixir." />
+    <meta name="description" content="Notes on: Programming Erlang." />
     <title>Pierre-Henry Fröhring's Website</title>
     <link
       rel="apple-touch-icon"
@@ -29,7 +29,7 @@
     <link rel="canonical" href="https://phfrohring.com/" />
     <link rel="stylesheet" href="/css/main.css" />
     <style>
-     __CSS__
+     
     </style>
     <script defer type="module" src="/js/main.min.js"></script>
   </head>
@@ -60,150 +60,139 @@
           </div>
 
           <!-- :TYPE: dbf45859-7a1a-4939-9cdb-4f6306168323 --> 
-<x-h1 name="Wielding Elixir" id="9b8a77ce-5745-4848-bf5c-aab38b795a36">
+<x-h1 name="Notes on: Programming Erlang" id="9b8a77ce-5745-4848-bf5c-aab38b795a36">
 
   <x-abstract> Enough concepts about Elixir are presented here so that one can forget
  them and quickly revisit them. Some concepts are illustrated through experiments,
  while most are presented in a <em>Q & A</em> format. </x-abstract>
 
   <x-h2 name="Objective" id="0935151e-6643-481a-8915-ced52c725431">
-    <p>The objective is to accumulate enough knowledge about Elixir so that one can forget it and quickly get back to it when needed.</p>
+    <p>The objective is to accumulate enough knowledge about Erlang so that one can forget it and quickly get back to it when needed.</p>
   </x-h2>
 
   <x-h2 name="Result" id="d352e954-a730-4604-a789-835035d2c2a6">
-    <x-qa>
-      <x-q id="fecdf50d-ac88-407f-9c84-2e1f45855698">
-        <p>Why Elixir?</p>
-      </x-q>
-      <x-a id="16fab7bb-d317-4648-9b50-6ac1056f420d">
-        <ol>
-          <li>To extend Erlang. See: <a href="https://www.youtube.com/watch?v=QXcedVc2LQM">What Elixir is about - José Valim - Erlang User Conference 2015</a></li>
-          <li>Why Erlang? Because things in the world happen in parallel and Erlang takes this aspect into account in a unique way. See: <a href="https://www.oreilly.com/library/view/programming-erlang-2nd/9781941222454/">Programming Erlang, 2nd Edition</a></li>
-        </ol>
-      </x-a>
-    </x-qa>
-
-    <x-qa>
-      <x-q id="a4184e3a-a8ce-4cef-9045-211bb9aeed9e">
-        <p>What makes Erlang unique?</p>
-      </x-q>
-      <x-a id="d4f3724c-973e-4395-961c-0324b5103ed1">
-        <ol>
-          <li>Erlang is unique because it models computation as a network or concurrent processes, mimicking things happening in parallel in the world.</li>
-        </ol>
-      </x-a>
-    </x-qa>
-
-    <x-qa>
-      <x-q id="750c59ec-2b3a-412d-9178-feb75f043013">
-        <p>What is a process?</p>
-      </x-q>
-      <x-a id="f44de626-1946-496d-9a9b-078486f150f5">
-        <p>A process is anything that for which these assertions are verified:
+    <x-h3 name="Concurrency" id="bcb23cdf-6db9-402c-b8e1-d730a96e5f33">
+      <x-qa>
+        <x-q id="a4184e3a-a8ce-4cef-9045-211bb9aeed9e">
+          <p>What makes Erlang unique?</p>
+        </x-q>
+        <x-a id="d4f3724c-973e-4395-961c-0324b5103ed1">
           <ol>
-            <li>it has addresses ;</li>
-            <li>sending a message to any of its addresses causes it to receive this message ;</li>
-            <li>it has a state ;</li>
-            <li>given a message and its state, it can perform computations ;</li>
-            <li>it can update its state ;</li>
-            <li>it can send messages to addresses it knows about (and thus other processes) ;</li>
-            <li>it can create other processes.</li>
+            <li>Erlang is unique because it models computation as a network or concurrent processes, mimicking things happening in parallel in the world.</li>
           </ol>
-        </p>
-      </x-a>
-    </x-qa>
+        </x-a>
+      </x-qa>
 
-    <x-qa>
-      <x-q id="a1b8522d-f760-4086-84c1-70243b7489f5">
-        <p>What is a Core?</p>
-      </x-q>
-      <x-a id="1fc55f5a-6cfa-483a-92b3-e57ae5aeda66">
-        <ol>
-          <li>In a computer, a Core is a physical piece of hardware that can execute machine code that implements an <a href="https://en.wikipedia.org/wiki/Instruction_set_architecture">ISA</a>.</li>
-        </ol>
-      </x-a>
-    </x-qa>
+      <x-qa>
+        <x-q id="750c59ec-2b3a-412d-9178-feb75f043013">
+          <p>What is a process?</p>
+        </x-q>
+        <x-a id="f44de626-1946-496d-9a9b-078486f150f5">
+          <p>A process is anything that for which these assertions are verified:
+            <ol>
+              <li>it has addresses ;</li>
+              <li>sending a message to any of its addresses causes it to receive this message ;</li>
+              <li>it has a state ;</li>
+              <li>given a message and its state, it can perform computations ;</li>
+              <li>it can update its state ;</li>
+              <li>it can send messages to addresses it knows about (and thus other processes) ;</li>
+              <li>it can create other processes.</li>
+            </ol>
+          </p>
+        </x-a>
+      </x-qa>
 
-    <x-qa>
-      <x-q id="54884d95-ab39-48f1-bc84-0e987141f03f">
-        <p>How does Erlang links processes and cores?</p>
-      </x-q>
-      <x-a id="58667088-11b2-4819-85b6-4d9de68d5005">
-        <ol>
-          <li>Programming in Erlang involves expressing computations in terms of processes interlinked by message passing.</li>
-          <li>Erlang provides a way to define these processes in its language, then maps the process instructions to machine code instructions, distributing them across the cores while maintaining the guarantees of the processes.</li>
-        </ol>
-      </x-a>
-    </x-qa>
+      <x-qa>
+        <x-q id="a1b8522d-f760-4086-84c1-70243b7489f5">
+          <p>What is a Core?</p>
+        </x-q>
+        <x-a id="1fc55f5a-6cfa-483a-92b3-e57ae5aeda66">
+          <ol>
+            <li>In a computer, a Core is a physical piece of hardware that can execute machine code that implements an <a href="https://en.wikipedia.org/wiki/Instruction_set_architecture">ISA</a>.</li>
+          </ol>
+        </x-a>
+      </x-qa>
 
-    <x-qa>
-      <x-q id="14b6d478-14b2-4eb3-a074-6143b8a5be4d">
-        <p>How to represent an actor computation?</p>
-      </x-q>
-      <x-a id="5b3bdc98-1bb3-42cc-85bc-0aba50efbb93">
-        <ol>
-          <li>As a function <x-math>\text{f} : \text{Message} \times{} \text{State} \rightarrow{} \text{State} \times{} \text{Message}</x-math></li>
-          <li>let <x-math>f(\text{message},\text{state}) = (\text{state'}, \text{message'})</x-math> means that the process updates its state from <x-math>\text{state}</x-math> to <x-math>\text{state'}</x-math> and sends the message <x-math>\text{message'}</x-math> as a consequence of being in the state <x-math>\text{state}</x-math> when receiving the message <x-math>\text{message}</x-math>.</li>
-        </ol>
-      </x-a>
-    </x-qa>
+      <x-qa>
+        <x-q id="54884d95-ab39-48f1-bc84-0e987141f03f">
+          <p>How does Erlang links processes and cores?</p>
+        </x-q>
+        <x-a id="58667088-11b2-4819-85b6-4d9de68d5005">
+          <ol>
+            <li>Programming in Erlang involves expressing computations in terms of processes interlinked by message passing.</li>
+            <li>Erlang provides a way to define these processes in its language, then maps the process instructions to machine code instructions, distributing them across the cores while maintaining the guarantees of the processes.</li>
+          </ol>
+        </x-a>
+      </x-qa>      
 
-    <x-qa>
-      <x-q id="5948a0ee-8a19-4bb5-82e2-af559e41c868">
-        <p>How to specify <x-math>f</x-math> in Erlang?</p>
-      </x-q>
-      <x-a id="62719f38-9ebc-4c01-acda-791fb10938e1">
-        <ol>
-          <li>By writing a <em>module</em> <i>i.e.</i> a text file in the Erlang language.</li>
-          <li>This file is compiled down to Erlang <a href="https://en.wikipedia.org/wiki/Bytecode">bytecode</a> and then to machine code where the actual computations occur on the hardware.</li>
-        </ol>
-      </x-a>
-    </x-qa>
+      <x-qa>
+        <x-q id="14b6d478-14b2-4eb3-a074-6143b8a5be4d">
+          <p>How to represent an actor computation?</p>
+        </x-q>
+        <x-a id="5b3bdc98-1bb3-42cc-85bc-0aba50efbb93">
+          <ol>
+            <li>As a function <x-math>\text{f} : \text{Message} \times{} \text{State} \rightarrow{} \text{State} \times{} \text{Message}</x-math></li>
+            <li>let <x-math>f(\text{message},\text{state}) = (\text{state'}, \text{message'})</x-math> means that the process updates its state from <x-math>\text{state}</x-math> to <x-math>\text{state'}</x-math> and sends the message <x-math>\text{message'}</x-math> as a consequence of being in the state <x-math>\text{state}</x-math> when receiving the message <x-math>\text{message}</x-math>.</li>
+          </ol>
+        </x-a>
+      </x-qa>
 
-    <x-qa>
-      <x-q id="034ccee3-bd36-49a1-b27d-b07a319a02e5">
-        <p>What is the BEAM?</p>
-      </x-q>
-      <x-a id="d1555fc7-4fdd-492f-a954-d57619a9b6d5">
-        <ul>
-          <li>The BEAM is a <a href="https://en.wikipedia.org/wiki/Virtual_machine">virtual machine</a> that executes BEAM bytecode.</li>
-          <li>A detailed description of the BEAM is given <a href="https://www.erlang.org/blog/a-brief-beam-primer/">here</a>.</li>
-          <li>The bytcode is described <a href="https://github.com/erlang/otp/blob/master/lib/compiler/src/genop.tab">here</a>.</li>
-        </ul>
-      </x-a>
-    </x-qa>    
-    
-    <x-qa>
-      <x-q id="eaf2ec13-7b9f-470a-aa93-1fad9577c377">
-        <p>How to build a process?</p>
-      </x-q>
-      <x-a id="b2359e69-b735-467e-b370-a5397ab4a7ff">
-        <ol>
-          <li>Write a module. For instance:
-            <x-blockcode lang="erlang">
+      <x-qa>
+        <x-q id="5948a0ee-8a19-4bb5-82e2-af559e41c868">
+          <p>How to specify <x-math>f</x-math> in Erlang?</p>
+        </x-q>
+        <x-a id="62719f38-9ebc-4c01-acda-791fb10938e1">
+          <ol>
+            <li>By writing a <em>module</em> <i>i.e.</i> a text file in the Erlang language.</li>
+            <li>This file is compiled down to Erlang <a href="https://en.wikipedia.org/wiki/Bytecode">bytecode</a> and then to machine code where the actual computations occur on the hardware.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="034ccee3-bd36-49a1-b27d-b07a319a02e5">
+          <p>What is the BEAM?</p>
+        </x-q>
+        <x-a id="d1555fc7-4fdd-492f-a954-d57619a9b6d5">
+          <ul>
+            <li>The BEAM is a <a href="https://en.wikipedia.org/wiki/Virtual_machine">virtual machine</a> that executes BEAM bytecode.</li>
+            <li>A detailed description of the BEAM is given <a href="https://www.erlang.org/blog/a-brief-beam-primer/">here</a>.</li>
+            <li>The bytcode is described <a href="https://github.com/erlang/otp/blob/master/lib/compiler/src/genop.tab">here</a>.</li>
+          </ul>
+        </x-a>
+      </x-qa>    
+      
+      <x-qa>
+        <x-q id="eaf2ec13-7b9f-470a-aa93-1fad9577c377">
+          <p>How to build a process?</p>
+        </x-q>
+        <x-a id="b2359e69-b735-467e-b370-a5397ab4a7ff">
+          <ol>
+            <li>Write a module. For instance:
+              <x-blockcode lang="erlang">
 -module(person).
 -export([init/1]).
 init(Name) -> … .
-            </x-blockcode>
-          </li>
-          <li>the expression:
-            <x-blockcode lang="erlang">
+              </x-blockcode>
+            </li>
+            <li>the expression:
+              <x-blockcode lang="erlang">
 Joe = spawn(person,init,["Joe"])
-            </x-blockcode>
+              </x-blockcode>
             builds a process which behaviour is specified by the module <code>person</code> and started using the person
             module public procedure <code>init</code> with the value <code>"Joe"</code></li>
-          <li>The expression:
-            <x-blockcode lang="erlang">
+            <li>The expression:
+              <x-blockcode lang="erlang">
 Joe
-            </x-blockcode>
+              </x-blockcode>
             is the address — <em>PID</em> in Erlang terms — of the associated process such that:
-            <x-blockcode lang="erlang">
+              <x-blockcode lang="erlang">
 Joe ! {self(), "Hello!"}
-            </x-blockcode lang="erlang">
+              </x-blockcode lang="erlang">
             sends the message <code>{self(), "Hello!"}</code> to <code>Joe</code> where <code>self()</code> is the PID of the current process sending the message. 
-          </li>
-          <li>For Joe to reply, the <code>person</code> module should be completed with:
-            <x-blockcode lang="erlang">
+            </li>
+            <li>For Joe to reply, the <code>person</code> module should be completed with:
+              <x-blockcode lang="erlang">
 -module(person).
 -export([init/1]).
 init(Name) -> 
@@ -211,60 +200,60 @@ init(Name) ->
     {From, Content} ->
       …
   end.
-            </x-blockcode>
+              </x-blockcode>
             which allows <code>Joe</code> match the address sent with <code>From</code> and the content with <code>Content</code>.
-          </li>
-        </ol>
-      </x-a>
-    </x-qa>
-    
-    <x-qa>
-      <x-q id="2cfdaf11-c298-422d-bf7a-400579fd1fe0">
-        <p>What is process concurrency?</p>
-      </x-q>
-      <x-a id="dfac886a-bf2d-4e00-8264-fdc086b115cf">
-        <p>Given <code>N</code> processes and <code>M</code> cores, distributing the processes accross the cores in order the optimize cores utilization is called <em>process concurrency</em>. At a given time <code>t</code> if processes <code>p1</code> and <code>p2</code> are executing in two different cores, then they execute in parallel at <code>t</code>.</p>
-      </x-a>
-    </x-qa>
+            </li>
+          </ol>
+        </x-a>
+      </x-qa>
+      
+      <x-qa>
+        <x-q id="2cfdaf11-c298-422d-bf7a-400579fd1fe0">
+          <p>What is process concurrency?</p>
+        </x-q>
+        <x-a id="dfac886a-bf2d-4e00-8264-fdc086b115cf">
+          <p>Given <code>N</code> processes and <code>M</code> cores, distributing the processes accross the cores in order the optimize cores utilization is called <em>process concurrency</em>. At a given time <code>t</code> if processes <code>p1</code> and <code>p2</code> are executing in two different cores, then they execute in parallel at <code>t</code>.</p>
+        </x-a>
+      </x-qa>
 
-    <x-qa>
-      <x-q id="d898c08f-cdbc-477b-9d45-70ef75ed2039">
-        <p>What are benefits of concurrency?</p>
-      </x-q>
-      <x-a id="ba52b0a0-d97a-40ed-b041-68bffa84065d">
-        <ul>
-          <li>Performance: if a program is implemented in terms of processes, then: it is easier to map it to many cores than a program written sequentially.</li>
-          <li>Scalability: more cores and memory means that processes are mapped automatically to a greater amount of resources.</li>
-          <li>Fault tolerance: if a process crash, it is hard to crash the whole network of processes since processes do not share memory.</li>
-          <li>Clarity: since things happen in parallel in the real world, it is easier to map things to processes executing concurrently.</li>
-        </ul>
-      </x-a>
-    </x-qa>
+      <x-qa>
+        <x-q id="d898c08f-cdbc-477b-9d45-70ef75ed2039">
+          <p>What are benefits of concurrency?</p>
+        </x-q>
+        <x-a id="ba52b0a0-d97a-40ed-b041-68bffa84065d">
+          <ul>
+            <li>Performance: if a program is implemented in terms of processes, then: it is easier to map it to many cores than a program written sequentially.</li>
+            <li>Scalability: more cores and memory means that processes are mapped automatically to a greater amount of resources.</li>
+            <li>Fault tolerance: if a process crash, it is hard to crash the whole network of processes since processes do not share memory.</li>
+            <li>Clarity: since things happen in parallel in the real world, it is easier to map things to processes executing concurrently.</li>
+          </ul>
+        </x-a>
+      </x-qa>
 
-    <x-qa>
-      <x-q id="d942d568-3529-44fc-9576-5a86d8b956d7">
-        <p>Is there a way to map a computation to a network of processes?</p>
-      </x-q>
-      <x-a id="1f6b494d-acb7-4315-862b-e52088f3febd">
-        <p>No. This process is inherently hard and cannot be automated.</p>
-      </x-a>
-    </x-qa>
+      <x-qa>
+        <x-q id="d942d568-3529-44fc-9576-5a86d8b956d7">
+          <p>Is there a way to map a computation to a network of processes?</p>
+        </x-q>
+        <x-a id="1f6b494d-acb7-4315-862b-e52088f3febd">
+          <p>No. This process is inherently hard and cannot be automated.</p>
+        </x-a>
+      </x-qa>
 
-    <x-qa>
-      <x-q id="7611cb51-ac8b-44d9-a12f-129638d2d6b6">
-        <p>Write a file server.</p>
-      </x-q>
-      <x-a id="adc1828f-fc02-4cba-aeb8-743a995a59db">
-        <p>Specification:</p>
-        <ol>
-          <li>Let <code>s = self()</code></li>
-          <li>A file server is a process <code>p = file_server:start(ADir)</code>.</li>         
-          <li><code>p ! {s, list_dir}</code> causes <code>s</code> to receive a list of files in <code>ADir</code>.</li>
-          <li> <code>p ! {s, {get_file, "a_file.txt"}}</code> causes <code>s</code> to receive the content of <code>"a_file.txt"</code> in <code>ADir</code>, if any.</li>
-        </ol>
+      <x-qa>
+        <x-q id="7611cb51-ac8b-44d9-a12f-129638d2d6b6">
+          <p>Write a file server.</p>
+        </x-q>
+        <x-a id="adc1828f-fc02-4cba-aeb8-743a995a59db">
+          <p>Specification:</p>
+          <ol>
+            <li>Let <code>s = self()</code></li>
+            <li>A file server is a process <code>p = file_server:start(ADir)</code>.</li>         
+            <li><code>p ! {s, list_dir}</code> causes <code>s</code> to receive a list of files in <code>ADir</code>.</li>
+            <li> <code>p ! {s, {get_file, "a_file.txt"}}</code> causes <code>s</code> to receive the content of <code>"a_file.txt"</code> in <code>ADir</code>, if any.</li>
+          </ol>
 
-        <p>Implementation:</p>
-        <x-blockcode lang="erlang">
+          <p>Implementation:</p>
+          <x-blockcode lang="erlang">
 -module(file_server).
 -export([start/1,loop/1]).
 start(Dir) -> spawn(file_server, loop, [Dir]).
@@ -276,30 +265,30 @@ loop(Dir) ->
       Client ! {self(), file:read_file(File)}
   end,
   loop(Dir).
-        </x-blockcode>
-      </x-a>
-    </x-qa>
+          </x-blockcode>
+        </x-a>
+      </x-qa>
 
-    <x-qa>
-      <x-q id="d80d2799-de54-4a83-a961-e9fa614b3531">
-        <p>Write a file server client.</p>
-      </x-q>
-      <x-a id="8e4da844-6c28-4e5c-b8c6-a4b485ea1cf2">
-        <p>Specification:</p>
-        <ol>
-          <li>Given a file server <code>fs</code>, a client may use <code>fs</code> sequentially. For instance:
-           <x-blockcode lang="erlang">
+      <x-qa>
+        <x-q id="d80d2799-de54-4a83-a961-e9fa614b3531">
+          <p>Write a file server client.</p>
+        </x-q>
+        <x-a id="8e4da844-6c28-4e5c-b8c6-a4b485ea1cf2">
+          <p>Specification:</p>
+          <ol>
+            <li>Given a file server <code>fs</code>, a client may use <code>fs</code> sequentially. For instance:
+              <x-blockcode lang="erlang">
 …
 FS = file_server:start(ADir).
 FileList = file_client:ls(FS)       
 …       
-            </x-blockcode>         
+              </x-blockcode>         
             without having to be aware of the communication protocol.
-          </li>
-        </ol>
+            </li>
+          </ol>
 
-        <p>Implementation:</p>
-           <x-blockcode lang="erlang">
+          <p>Implementation:</p>
+          <x-blockcode lang="erlang">
 -module(file_client).
 -export([ls/1]).
 ls(Server) ->
@@ -308,148 +297,152 @@ ls(Server) ->
     {Server, FileList} ->
       Filelist
   end.
-            </x-blockcode>         
-      </x-a>
-    </x-qa>
+          </x-blockcode>         
+        </x-a>
+      </x-qa>
+    </x-h3>
 
-    <x-qa>
-      <x-q id="3a3b89d0-2719-4322-8b70-2e53343a6c84">
-        <p>What does <code>X = Y</code> means in Erlang?</p>
-      </x-q>
-      <x-a id="7275ce68-1eb3-448f-ad19-59a5252c850e">
-        <ol>
-          <li>If <code>X</code> is un unbound variable, then: <code>X = 123</code> means that <code>X</code> refers to the value <code>123</code> after which it cannot be assigned an other value again.</li>
-          <li>More generally, it means evaluate <code>Y</code> and match it to <code>X</code>.</li>
-        </ol>
-      </x-a>
-    </x-qa>
+    <x-h3 name="Erlang language quick tour" id="4edb410d-866c-4b31-b8a1-5638c1e0ad72">
 
-    <x-qa>
-      <x-q id="86a016f8-e2f3-4c54-9920-6ae399796977">
-        <p>How does Joe write programs?</p>
-      </x-q>
-      <x-a id="d63c2303-8d9a-4c5e-ad08-7e8ad21ab508">
-        <x-blockquote author="Joe Armstrong" source="Programming Erlang, 2nd Edition" url="https://www.oreilly.com/library/view/programming-erlang-2nd/9781941222454/">
-<p>When I’m writing a program, my approach is to “write a bit” and then “test a bit.” I
+      <x-qa>
+        <x-q id="3a3b89d0-2719-4322-8b70-2e53343a6c84">
+          <p>What does <code>X = Y</code> means in Erlang?</p>
+        </x-q>
+        <x-a id="7275ce68-1eb3-448f-ad19-59a5252c850e">
+          <ol>
+            <li>If <code>X</code> is un unbound variable, then: <code>X = 123</code> means that <code>X</code> refers to the value <code>123</code> after which it cannot be assigned an other value again.</li>
+            <li>More generally, it means evaluate <code>Y</code> and match it to <code>X</code>.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="86a016f8-e2f3-4c54-9920-6ae399796977">
+          <p>How does Joe write programs?</p>
+        </x-q>
+        <x-a id="d63c2303-8d9a-4c5e-ad08-7e8ad21ab508">
+          <x-blockquote author="Joe Armstrong" source="Programming Erlang, 2nd Edition" url="https://www.oreilly.com/library/view/programming-erlang-2nd/9781941222454/">
+            <p>When I’m writing a program, my approach is to “write a bit” and then “test a bit.” I
 start with a small module with a few functions, and then I compile it and test it with
 a few commands in the shell. Once I’m happy with it, I write a few more functions,
 compile them, test them, and so on.</p>
-          
-          <p>Often I haven’t really decided what sort of data structures I’ll need in my program,
+            
+            <p>Often I haven’t really decided what sort of data structures I’ll need in my program,
 and as I run small examples, I can see whether the data structures I have chosen
 are appropriate.</p>
 
-          <p>I tend to “grow” programs rather than think them out completely before writing them.
+            <p>I tend to “grow” programs rather than think them out completely before writing them.
 This way I don’t tend to make large mistakes before I discover that things have gone
 wrong. Above all, it’s fun, I get immediate feedback, and I see whether my ideas work
 as soon as I have typed in the program.</p>
 
-          <p>Once I’ve figured out how to do something in the shell, I usually then go and write a
+            <p>Once I’ve figured out how to do something in the shell, I usually then go and write a
 makefile and some code that reproduces what I’ve learned in the shell.</p>          
-        </x-blockquote>
-      </x-a>
-    </x-qa>
+          </x-blockquote>
+        </x-a>
+      </x-qa>
 
-    <x-qa>
-      <x-q id="28285652-08ab-4fbd-b83d-276103fb6d35">
-        <p>Given an error, why its consequences are different depending on the sequential or concurrent nature of the program?</p>
-      </x-q>
-      <x-a id="300583ab-9fba-4e4f-81df-cc87888237a3">
-        <p>A concurrent program means many processes, maybe millions of them: an error localized to one process is not that important compared to an error in a sequential program where you have one process. In one case, an error will have a much harder time taking down the whole program than the other.</p>
-      </x-a>
-    </x-qa>
+      <x-qa>
+        <x-q id="28285652-08ab-4fbd-b83d-276103fb6d35">
+          <p>Given an error, why its consequences are different depending on the sequential or concurrent nature of the program?</p>
+        </x-q>
+        <x-a id="300583ab-9fba-4e4f-81df-cc87888237a3">
+          <p>A concurrent program means many processes, maybe millions of them: an error localized to one process is not that important compared to an error in a sequential program where you have one process. In one case, an error will have a much harder time taking down the whole program than the other.</p>
+        </x-a>
+      </x-qa>
 
-    <x-qa>
-      <x-q id="9672919d-f44e-4ca3-af0d-72ac65996218">
-        <p>Given a function call, what happens next?</p>
-      </x-q>
-      <x-a id="c140ba00-22a1-4050-a842-0b7342937c3c">
-        <p>One of these three outcomes:</p>
-        <ol>
-          <li>The function never returns.</li>
-          <li>The function returns.</li>
-          <li>An exception is raised.</li>
-        </ol>
-      </x-a>      
-    </x-qa>
+      <x-qa>
+        <x-q id="9672919d-f44e-4ca3-af0d-72ac65996218">
+          <p>Given a function call, what happens next?</p>
+        </x-q>
+        <x-a id="c140ba00-22a1-4050-a842-0b7342937c3c">
+          <p>One of these three outcomes:</p>
+          <ol>
+            <li>The function never returns.</li>
+            <li>The function returns.</li>
+            <li>An exception is raised.</li>
+          </ol>
+        </x-a>      
+      </x-qa>
 
-    <x-qa>
-      <x-q id="c08b4f20-d495-40cb-9fc0-2592c4d7863d">
-        <p>How to get rid of the first outcome?</p>
-      </x-q>
-      <x-a id="70c0c740-a366-42cf-9d6b-42a76727f9d3">
-        <p>The caller may set a timeout after which an exception is raised.</p>
-      </x-a>
-    </x-qa>
+      <x-qa>
+        <x-q id="c08b4f20-d495-40cb-9fc0-2592c4d7863d">
+          <p>How to get rid of the first outcome?</p>
+        </x-q>
+        <x-a id="70c0c740-a366-42cf-9d6b-42a76727f9d3">
+          <p>The caller may set a timeout after which an exception is raised.</p>
+        </x-a>
+      </x-qa>
 
-    <x-qa>
-      <x-q id="f5498ca1-222b-4a82-9497-6d2b9957270f">
-        <p>How to deal with exceptions?</p>
-      </x-q>
-      <x-a id="7a866009-7864-42df-a236-cd9204ff9d25">
-        <p>The caller must <em>do something</em> in case an exception is raised.</p>
-      </x-a>
-    </x-qa>
+      <x-qa>
+        <x-q id="f5498ca1-222b-4a82-9497-6d2b9957270f">
+          <p>How to deal with exceptions?</p>
+        </x-q>
+        <x-a id="7a866009-7864-42df-a236-cd9204ff9d25">
+          <p>The caller must <em>do something</em> in case an exception is raised.</p>
+        </x-a>
+      </x-qa>
 
-    <x-qa>
-      <x-q id="eab56631-78fe-40c0-a19b-48337a280e14">
-        <p>How should functions be called, protecting from errors?</p>
-      </x-q>
-      <x-a id="6c2c4068-edc9-4371-8d59-a98d8b848330">
-        <p>In a sequential program, it may look like so: for a client calling <code>f</code>, it may
+      <x-qa>
+        <x-q id="eab56631-78fe-40c0-a19b-48337a280e14">
+          <p>How should functions be called, protecting from errors?</p>
+        </x-q>
+        <x-a id="6c2c4068-edc9-4371-8d59-a98d8b848330">
+          <p>In a sequential program, it may look like so: for a client calling <code>f</code>, it may
         be conceptually equivalent to: <code>y = call(f, x, 5, error_handler)</code> which means: <q>call <code>f</code>
         on <code>x</code>. If it does not return under 5 seconds, raise a timeout exception. If an exception
-        <code>err</code> is raised, call <code>error_handler(err)</code>. Else: return the value and bind it to
-        <code>y</code></q>.</p>
+            <code>err</code> is raised, call <code>error_handler(err)</code>. Else: return the value and bind it to
+            <code>y</code></q>.</p>
 
-        <p>In a concurrent program, we just <em>let it crash</em>.</p>
-      </x-a>
-    </x-qa>
+          <p>In a concurrent program, we just <em>let it crash</em>.</p>
+        </x-a>
+      </x-qa>
 
-    <x-qa>
-      <x-q id="c739cfad-88ce-42f2-8294-43d7ffdfb8ee">
-        <p>What <q>Let It Crash</q> means?</p>
-      </x-q>
-      <x-a id="528b73ec-962d-455b-89f6-967f8b46dc22">
-        <ol>
-          <li>Fail as soon as possible.</li>
-          <li>Fail withe a meaningful message.</li>
-          <li>The message should be written to a persistent error log.</li>
-          <li>Only the programmer should see the error report, not the user.</li>
-          <li>You should describe the behavior of functions only for valid input arguments;</li>
-          <li>all other arguments will cause internal errors that are automatically detected;</li>
-          <li>You should never return values when a function is called with invalid arguments;</li>
-          <li>You should always raise an exception.</li>
-          <li>Assume that the caller will fix it.</li>
-        </ol>
-      </x-a>
-    </x-qa>
+      <x-qa>
+        <x-q id="c739cfad-88ce-42f2-8294-43d7ffdfb8ee">
+          <p>What <q>Let It Crash</q> means?</p>
+        </x-q>
+        <x-a id="528b73ec-962d-455b-89f6-967f8b46dc22">
+          <ol>
+            <li>Fail as soon as possible.</li>
+            <li>Fail withe a meaningful message.</li>
+            <li>The message should be written to a persistent error log.</li>
+            <li>Only the programmer should see the error report, not the user.</li>
+            <li>You should describe the behavior of functions only for valid input arguments;</li>
+            <li>all other arguments will cause internal errors that are automatically detected;</li>
+            <li>You should never return values when a function is called with invalid arguments;</li>
+            <li>You should always raise an exception.</li>
+            <li>Assume that the caller will fix it.</li>
+          </ol>
+        </x-a>
+      </x-qa>
 
-    <x-qa>
-      <x-q id="31a61185-3d3a-4f2f-a295-063e6d7b723f">
-        <p>How to explicitly raise exceptions?</p>
-      </x-q>
-      <x-a id="baa56a3f-d3e1-4beb-8bca-afb1f6533160">
-        <ol>
-          <li><code>exit(Why)</code></li>
-          <li><code>throw(Why)</code></li>
-          <li><code>error(Why)</code></li>
-        </ol>
-      </x-a>
-    </x-qa>
+      <x-qa>
+        <x-q id="31a61185-3d3a-4f2f-a295-063e6d7b723f">
+          <p>How to explicitly raise exceptions?</p>
+        </x-q>
+        <x-a id="baa56a3f-d3e1-4beb-8bca-afb1f6533160">
+          <ol>
+            <li><code>exit(Why)</code></li>
+            <li><code>throw(Why)</code></li>
+            <li><code>error(Why)</code></li>
+          </ol>
+        </x-a>
+      </x-qa>
 
-    <x-qa>
-      <x-q id="1d6c159d-3407-4a21-8340-a9e4ca6337d0">
-        <p>How to <q>catch</q> an error?</p>
-      </x-q>
-      <x-a id="590b0748-d996-44bd-ab36-ee2c6e1a99b9">
-        <p>catch all possible errors using this syntactic construct:</p>
-        <ol>
-          <li><code>try…catch…after…end</code></li>
-        </ol>
+      <x-qa>
+        <x-q id="1d6c159d-3407-4a21-8340-a9e4ca6337d0">
+          <p>How to <q>catch</q> an error?</p>
+        </x-q>
+        <x-a id="590b0748-d996-44bd-ab36-ee2c6e1a99b9">
+          <p>catch all possible errors using this syntactic construct:</p>
+          <ol>
+            <li><code>try…catch…after…end</code></li>
+          </ol>
 
-      </x-a>
-    </x-qa>
+        </x-a>
+      </x-qa>      
+    </x-h3>
 
     <x-h3 name="Real-World Concurrency" id="55f32d2d-b054-4540-ba95-32968e11f7a9">
       <x-qa>
@@ -782,9 +775,810 @@ keep_alive(Name, Fun) ->
         </x-a>
       </x-qa>
 
+      <x-qa>
+        <x-q id="e1fcf26a-90c7-48f9-b2e5-7a278dfa4386">
+          <p>How to build groups of processes that die together?</p>
+        </x-q>
+        <x-a id="3ab4138f-862e-4398-9cca-6d16b73b1694">
+          <ol>
+            <li>Just link them.</li>
+            <li>If one dies, then: it sends error signals are sent to its LinkSet.</li>
+            <li>If they are not system processes, then: they die too.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="cce50c05-a880-4706-b782-3ecb20225e48">
+          <p>How to prevent death propagation in a group of linked processes?</p>
+        </x-q>
+        <x-a id="696b0182-8e41-4432-bdf7-367cd2428df6">
+          <ol>
+            <li>If one process in the LinkedSet is a system process, then: it can trap exit signals.</li>
+            <li>Since it traps exit signals, it does not die and does not propagate death.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="890dcdac-d39a-4a8b-900c-d4f2eb548601">
+          <p>How to watch a process <code>PID</code> and react to its exit?</p>
+        </x-q>
+        <x-a id="a8c69c96-5dbd-484d-9fc6-a9c8a6799ecd">
+          <x-blockcode lang="erlang">
+on_exit(Pid, Fun) ->
+  spawn(fun() ->
+    Ref = monitor(process, Pid),
+      receive
+        {'DOWN', Ref, process, Pid, Why} ->
+          Fun(Why)
+      end
+  end).
+          </x-blockcode>
+
+        </x-a>
+      </x-qa>
+    </x-h3>
+
+
+    <x-h3 name="Distributed Programming" id="b56b768b-554d-4841-8108-27634f3debfb">
+      <x-qa>
+        <x-q id="3ba85d19-ead3-43d6-8e7e-11b252357020">
+          <p>What is an <em>Erlang node</em>?</p>
+        </x-q>
+        <x-a id="8a550d03-4bb1-4bf2-9ba0-3658ed484e2e">
+          <x-definition term="Erlang node" id="7eebcab9-145c-4f8f-9cdd-6bea03fbf6bc">
+            <p>It is a self-contained Erlang system containing a complete virtual machine with its own address space and
+            own set of processes.</p>            
+          </x-definition>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="c2358b43-323a-453a-b2d9-4256fd08f2e1">
+          <p>On which kind of network Erlang nodes may run?</p>
+        </x-q>
+        <x-a id="041d7d76-a466-4560-a9b5-cae73cb5e334">
+          <ol>
+            <li>Distributed Erlang applications run in a trusted environment</li>
+            <li>Since any node can perform any operation on any other Erlang node, a high degree of trust is involved.</li>
+            <li>Typically distributed Erlang applications will be run on clusters on the same LAN and behind a firewall,
+            though they can run in an open network.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="0de62b62-9f3f-48d3-8a2a-842584d2aec6">
+          <p>If security is at risk, on which kind of network can Erlang nodes be distributed?</p>
+        </x-q>
+        <x-a id="5d655284-c5ca-456c-9b56-e86140e5f7a6">
+          <ol>
+            <li>Socket-based distribution</li>
+            <li>Using TCP/IP sockets, we can write distributed applications that can run in an untrusted environment.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="042f492a-023e-486d-a0ff-6962a0b33660">
+          <p>How to transition from a concurrent program to a distributed program?</p>
+        </x-q>
+        <x-a id="d77dad5c-f758-49e9-a16f-151b9813f40a">
+          <ol>
+            <li>By using two new operations:</li>
+            <li>Start a new Erlang node.</li>
+            <li>Perform a remote procedure call on a remote Erlang node.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="5283b13a-ec91-4198-ae71-61a482fc3e3a">
+          <p>What are systematic steps involved in developping a distributed application.</p>
+        </x-q>
+        <x-a id="c33b070e-c19b-4945-b73e-dfeecddb1ee7">
+          <ol>
+            <li>Write and test a program in a regular nondistributed Erlang session</li>
+            <li>Test the program on two different Erlang nodes running on the same computer.</li>
+            <li>Test the program on two different Erlang nodes running on two physically separated computers either in
+            the same local area network or anywhere on the Internet.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+    </x-h3>
+
+    <x-h3 name="Interfacing Techniques" id="ee637bc2-f6e0-4550-89a6-0317de1f1c5d">
+      <x-qa>
+        <x-q id="d0bc48b9-0c2e-4e25-a95c-8d535903057e">
+          <p>Why is interfacing with other programs necessary?</p>
+        </x-q>
+        <x-a id="a0e40275-05cc-48ca-ba06-32162de0128f">
+          <ol>
+            <li>We might use C for efficiency.</li>
+            <li>we might want to integrate a library written in Java</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="03d7eeb6-fbca-4088-9ac9-2d11bc6a98a4">
+          <p>How to interface foreign language programs to Erlang?</p>
+        </x-q>
+        <x-a id="f987bfc0-45af-438e-b1db-1cd6882e9544">
+          <ol>
+            <li>By running the programs outside the Erlang virtual machine in an external operating system process.
+              <ul>
+                <li>If the foreign language code is incorrect, it will not crash the Erlang system.</li>
+                <li>Erlang controls the external process through a device called a port.</li>
+                <li>Erlang communicates with the external process through a byte-oriented communication channel.</li>
+                <li>Erlang is responsible for starting and stopping the external program.</li>
+                <li>Erlang can monitor and restart it if it crashes.</li>
+              </ul>
+            </li>
+            <li>running an OS command from within Erlang and capturing the result.</li>
+            <li>By running the foreign language code inside the Erlang virtual machine.
+              <ul>
+                <li>This involves linking the code with the code for the Erlang virtual machine.</li>
+                <li>This is the unsafe way of doing things. Errors in the foreign language code might crash the Erlang
+                    system.</li>
+                <li>Although it is unsafe, it is useful since it is more efficient than using an external
+                    process.</li>
+                <li>Linking code into the Erlang kernel can be used only for languages like C that produce native object
+                    code and can’t be used with languages like Java that have their own virtual machines.</li>
+              </ul>
+            </li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="a07d06b5-127a-4789-a828-30ba32d86b71">
+          <p>Describe the behaviour of a <em>port</em>.</p>
+        </x-q>
+        <x-a id="d862238f-a58f-4c45-bccd-6c6ea3eaf936">          
+          <ol>
+            <li>The process that created the port is called the <em>connected process</em>.</li>
+            <li>Erlang communicates with external programs through objects called ports.</li>
+            <li>If we send a message to a port, the message will be sent to the external program connected to the port.</li>
+            <li>Messages from the external program will appear as Erlang messages that come from the ports.</li>
+            <li>If the external program crashes, then an exit signal will be sent to the connected process.</li>
+            <li>If the connected process dies, then the external program will be killed.</li>
+            <li>All messages to the port must be tagged with the PID of the connected process.</li>
+            <li>All messages from the external program are sent to the connected processes.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+    </x-h3>
+
+    <x-h3 state="todo" name="Programming with Files" id="bcd44d8b-694e-40a3-978e-35f16b597aa2">
       
     </x-h3>
 
+    
+    <x-h3 state="todo" name="Programming with Sockets" id="b6e6854b-2b8a-4c14-9b32-42e848133177">
+      
+    </x-h3>
+
+    <x-h3 state="todo" name="Browsing with Websockets and Erlang" id="40db60eb-b41a-4b0d-ab59-7e0ad79ad804">
+      
+    </x-h3>
+
+    <x-h3 state="todo" name="Storing Data with ETS and DETS" id="3516f52e-846f-4520-9f33-7d76199811c6">
+      
+    </x-h3>
+
+    <x-h3 state="todo" name="Mnesia: The Erlang Database" id="41982ced-4516-4d3c-8d24-d96e8dabfc47">
+      
+    </x-h3>
+
+    
+    <x-h3 state="todo" name="Profiling, Debugging, and Tracing" id="c5746d12-b76d-4278-8e52-010e6812883d">
+      
+    </x-h3>
+
+    <x-h3 name="Introducing OTP" id="a217b7bd-5bab-44a6-9191-25f57e5212e3">
+      <x-qa>
+        <x-q id="99108bf3-8d08-4f1f-ab92-1f60e5937f59">
+          <p>What does OTP stands for?</p>
+        </x-q>
+        <x-a id="12a0af3a-8e3f-43e0-80ea-ca71e4016acb">
+          <p>Open Telecom Platform.</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="0795af0c-9afb-4f4b-bba1-ab02f1f38069">
+          <p>What is the central concept of OTP?</p>
+        </x-q>
+        <x-a id="2100ad83-0de0-4e9c-96aa-668eee76cde3">
+          <ol>
+            <li>OTP behavior.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="4c119a33-0e1c-4ebf-b93a-6f4e97d60c30">
+          <p>What is an OTP behavior?</p>
+        </x-q>
+        <x-a id="578dd322-4776-43b7-84be-bc32e9c954d0">
+          <x-definition term="OTP behavior" id="6d0a910c-9fa7-43e9-8b93-eb8db00a141e">
+            <ol>
+              <li>It is an application framework that is parameterized by a callback module.</li>
+              <li>properties such as fault tolerance, scalability, dynamic-code upgrade, and so on, can be provided by
+              the behavior itself.</li>
+              <li>In other words, the writer of the callback does not have to worry about things such as fault tolerance
+              because this is provided by the behavior.</li>
+            </ol>
+          </x-definition>
+        </x-a>        
+      </x-qa>
+
+      <x-qa>
+        <x-q id="14713a9f-6c9d-4abc-b137-6d0b76ac967c">
+          <p>What are a few necessities in building an abstraction?</p>
+        </x-q>
+        <x-a id="a7304d74-cea5-4413-b472-e41e27c69976">
+          <ol>
+            <li>An abstraction solves a problem.</li>
+            <li>To build an abstraction, we need to separate functional and nonfunctional parts of the problem.</li>
+            <li>Building an abstraction is a trial and error iterative process.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="0d291c90-1b07-4519-94a1-e6fb044d63f5">
+          <p>Write the most essential parts of a server.</p>
+        </x-q>
+        <x-a id="7b315c05-4de7-4f08-98ca-a2c4a072e576">
+          <p><strong>Specification</strong></p>
+          <ol>
+            <li>if:
+              <ol>
+                <li><code>init : State</code></li>
+                <li><code>handle : Message × State → Message × State</code></li>
+              </ol>
+            </li>
+            <li>then: <code>s ≡ Server(init,handle) : Server</code>
+              <ol>
+                <li>A server <code>s</code> is a process.</li>
+                <li>It has a state <code>state(s) : State</code>.</li>
+                <li>Given a message <code>m</code> with a content <code>content(m)</code>, it computes <code>handle(content,
+            state) = (state', m'): Message × State</code>
+                  <ol>
+                    <li>If possible, <code>m'</code> is sent back to the client.</li>
+                    <li>Its state is updated to <code>state'</code>.</li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+          </ol>
+
+          <p><strong>Implementation</strong></p>
+          <x-blockcode lang="erlang">
+-module(server1).
+-export([start/2, rpc/2]).
+            
+start(Name,Mod) ->
+  register(Name, spawn(fun() -> loop(Name, Mod, Mod:init()))).
+
+rpc(Name, Request) ->
+  Name ! {self(), Request},
+  receive
+    {Name, Response} -> Response
+  end.
+
+loop(Name, Mod, State) ->
+  receive
+    {From, Request} ->
+      {Response, State1} = Mod:handle(Request, State),
+      From ! {Name, Response},
+      loop(Name, Mod, State1)
+  end.
+          </x-blockcode>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="c0e18601-41fa-48e2-9bf7-7d2f09e46191">
+          <p>Use <code>server1</code> to implement a name server.</p>
+        </x-q>
+        <x-a id="609ae936-6fb7-471b-bf0b-8195c5fec10f">
+          <x-blockcode lang="erlang">
+-module(name_server).
+-export([init/0, add/2, find/1, handle/2]).
+-import(server1, [rpc/2]).
+
+%% client routines
+add(Name, Place) -> rpc(name_server, {add, Name, Place}).
+find(Name) -> rpc(name_server, {find, Name}).
+
+%% callback routines
+init() -> dict:new().
+handle({add, Name, Place}, Dict) -> {ok, dict:store(Name, Place, Dict)};
+handle({find, Name}, Dict) -> {dict:find(Name, Dict), Dict}.
+          </x-blockcode>
+
+          <p>Usage example:</p>
+          <x-blockcode>
+1> server1:start(name_server, name_server).
+true
+2> name_server:add(joe, "at home").
+ok
+3> name_server:find(joe).
+{ok,"at home"}
+          </x-blockcode>          
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="fd37b88d-3d4f-40b7-9ed0-80f21a903ccf">
+          <p>What is the gen_server callback structure?</p>
+        </x-q>
+        <x-a id="24a106eb-368c-4342-a12f-5cac8d24fa07">
+          
+          <ol>
+            <li>Any ≡ Request</li>
+            <li>Any ≡ Reply</li>
+            <li>Any ≡ Message</li>
+            <li>Any ≡ Reason</li>
+            <li>init : Any → State</li>
+            <li>handle_call : Request PID State → reply × Reply × State
+              <ul>
+                <li>synchronous calls</li>
+              </ul>
+            </li>
+            <li>handle_cast : Message State → noreply × State
+              <ul>
+                <li>asynchronous calls</li>
+              </ul>              
+            </li>
+            <li>handle_info : Message State → noreply × State
+              <ul>
+                <li>messages not sent with call or cast</li>
+              </ul>                            
+            </li>
+            <li>terminate : Reason State → ok</li>
+            <li>code_change : ??? → ???</li>                                                            
+          </ol>
+        </x-a>
+      </x-qa>
+
+
+    </x-h3>
+
+    <x-h3 name="Making a System with OTP" id="d19239cc-64f2-4a37-9760-912383e97622">
+
+      <x-qa>
+        <x-q id="7c9e5a51-599b-4c8d-9d22-00922a324752">
+          <p>Assume that a company want to sell prime numbers and areas, what are the main processes involved?</p>
+        </x-q>
+        <x-a id="68c8a774-8bf7-4b6b-931f-ccec415bf864">
+          <ol>
+            <li>A process that produces prime numbers.</li>
+            <li>A process that computes areas.</li>
+            <li>A supervisor to recover production when it crashes.</li>
+            <li>A logger that will persist error reports to fix production crashes.</li>
+            <li>Alarms to detect, for instance, overheating CPUs.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="6ab4a964-541f-4c70-b8b7-dc2b6ceb7cb0">
+          <p>How to deploy our software?</p>
+        </x-q>
+        <x-a id="8d3af659-c9b4-450d-bcab-e73a8cf0ec56">
+          <p>By packaging it into an OTP application.</p>
+        </x-a>
+      </x-qa>
+
+
+      <x-qa>
+        <x-q id="8d8d6d11-286e-4698-aeef-5e4d42c2c35d">
+          <p>What is an event? What to do with them?</p>
+        </x-q>
+        <x-a id="bdb88846-5429-468e-be55-0c52de8eddbf">
+          <ol>
+            <li>An event is a piece of data that is built when something notworthy happens.</li>
+            <li>When an event happens, one may just tell the world about it: <code>EventHandler ! {event, E}</code></li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="410b201c-5c2b-45e8-8a64-cbd6ce8226a2">
+          <p>What is meant by <q>very late binding</q>?</p>
+        </x-q>
+        <x-a id="e3ee3e07-1d18-49eb-983f-211de5de6665">
+          <ol>
+            <li>Given an event <code>evt</code>, the system may change its associated behavior at runtime.</li>
+            <li>In most programming language, the code that will get executed in reaction to <code>evt</code> is statically or dynamically linked.</li>
+            <li>Everything else being equal, if the code executed is represented by: <code>code(t, handler(evt))</code>
+            at a time <code>t</code>, then: <code>code(t, handler(evt)) = code(t+1, handler(evt))</code></li>
+            <li>In Erlang, it may not be the case.</li>
+            <li><code>code(t+1, handler(evt))</code> may have been <q>hot loaded</q> concurrently at time <code>t</code>.</li>
+            <li>In other words: the code associated with the processing of <code>evt</code> may be changed without stopping the system.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="30431052-c781-49ce-82d2-f891e94928e5">
+          <p>Why is it important to log errors?</p>
+        </x-q>
+        <x-a id="0ff34ec7-6784-4f4e-a006-85946460d72e">
+          <ol>
+            <li>You want your system to work as expected.</li>
+            <li>Things go wrong.</li>
+            <li>You want to fix the minimal amount of code to make it right.</li>
+            <li>Errors should give you enough insight into what went wrong to do exactly that.</li>
+            <li>Think of it as a medical doctor that uses symptoms to posit a diagnosis and finally offer an efficient cure.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="25f0827e-3599-4f43-808c-de0e8994c183">
+          <p>From how many point of view may the Erlang Logger be viewed?</p>
+        </x-q>
+        <x-a id="8fce5a9e-433d-4d4a-9e77-19873390edbc">
+          <ol>
+            <li><strong>Programmer</strong>: to log an error, which procedure to call?</li>
+            <li><strong>Configuration</strong>: where and how the error logger stores data?</li>
+            <li><strong>Report</strong>: how to analyse the errors?</li>                        
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="4a5f75af-32cc-4161-ad2f-ddf724af42de">
+          <p>What changes between dev and production systems regarding error logging?</p>
+        </x-q>
+        <x-a id="8ae2294b-a98d-4938-af27-d689de9a6d70">
+          <ol>
+            <li>If the system is started with <code>erl -boot start_clean</code> (<i>i.e.</i> dev mode), then: simple logging is done.</li>
+            <li>If the system is started with <code>erl -boot start_sasl</code> (<i>i.e.</i> prod mode), then: error logging is more involved..</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="e2f7a563-d445-4810-a60a-c307c40da79b">
+          <p>How to configure the logger?</p>
+        </x-q>
+        <x-a id="883d5acd-1074-41fb-95b6-177838351f7d">
+          <ol>
+            <li>Using a configuration file so that we do not need to remember configuration arguments when implementing the system.</li>            
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="fad9023f-a450-441a-934c-3a0f5c40bf1e">
+          <p>Where are errors reported in SASL mode by default?</p>
+        </x-q>
+        <x-a id="52fb60be-1ab9-4700-9072-67cb41ba6934">
+          <p>In the Erlang shell.</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="20e1488a-6375-410c-bfbe-5478dcf7c1ec">
+          <p>What kind of reports are produced?</p>
+        </x-q>
+        <x-a id="84e0fdad-8db3-4a5b-b771-6b42cb340b89">
+          <ol>
+            <li>Supervisor report</li>
+            <li>Progress report</li>
+            <li>Crash report</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="b4876708-37ed-4490-bd11-da13f27dbf07">
+          <p>What is the job of the supervisor?</p>
+        </x-q>
+        <x-a id="a6081063-c720-4055-b273-d075c2afb466">
+          <ol>
+            <li>The supervisor is a process that monitors a tree of processes.</li>
+            <li>It is the root of the tree.</li>
+            <li>When a process fail, it may restart it, depending on some configuration.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="47acbdc2-1aa5-4989-b1e3-35eb9513a884">
+          <p>What types of supervisor exist?</p>
+        </x-q>
+        <x-a id="e8dbd052-54d5-42d9-baa0-d2680233fb85">
+          <ol>
+            <li>one_for_one: If one process crashes, it is restarted.</li>
+            <li>one_for_all: If one process crashes, all are terminated and then restarted.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="8966add0-691e-4892-aa80-7ef288020584">
+          <p>What are <code>appname.app</code> and <code>appname_app.erl</code> files?</p>
+        </x-q>
+        <x-a id="1514ba95-3c10-4466-8b08-a6d9aa747dfa">
+          <ol>
+            <li>It describes an application is such a way that <code>erl</code> can start and stop the application:
+              <x-blockcode>
+$ erl -boot start_sasl
+1> application:load(appname)                
+2> application:start(appname)                
+3> application:stop(appname)                
+4> application:unload(appname)                
+              </x-blockcode>              
+            </li>
+          </ol>
+
+        </x-a>
+      </x-qa>
+    </x-h3>
+
+    <x-h3 name="Programming Idioms" id="78c7903f-3f9d-4d81-8999-6657be301918">
+      <x-qa>
+        <x-q id="29949cc7-f832-4d8e-aff3-e0534e82bde7">
+          <p>What is the Erlang view of the world?</p>
+        </x-q>
+        <x-a id="7757859b-c90e-4de3-97ba-4b1876a148c9">
+          <p>Erlang view of the world is that everything is a process and that processes can interact only by exchanging messages</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="5c8a3e58-4264-44ea-8509-6dd912466330">
+          <p>How to reduce complexity when interfacing with programs outside Erlang?</p>
+        </x-q>
+        <x-a id="d4c3d4c8-8a60-4d09-bcf8-53030ad74bcd">
+          <ol>
+            <li>By using <q>middle men</q>.</li>
+            <li>A Web server may receive <code>{get, Page}</code> and may reply with a String.</li>
+            <li>Exterior requests may take the form of HTTP for TCP connections.</li>
+            <li>Translating from HTTP requests to Erlang terms must be done somehow.</li>
+            <li>A middle man may take this job.</li>
+            <li>For each protocol, a middle man may execute the translation.</li>
+            <li>The server statys the same.</li>
+            <li>In other words, the middle man transforms an <code>N × M</code> problem into an <code>N + M</code> problem.</li>
+            <li><q>It's like a world where everybody speaks English (or Mandarin)—it's much easier to communicate.</q></li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="eeb50550-7456-4150-9916-352d632e8419">
+          <ol>
+            <li>Given <code>X = {Mod, p1, p2, …, pn}</code></li>
+            <li>What does <code>X:Func(A1, A2, …, An)</code> means?</li>
+            <li>Give an example.</li>
+          </ol>
+        </x-q>
+        <x-a id="8b28286f-e145-4970-9c3b-27afd29f0b7c">
+          <ol>
+            <li>It means <code>Mod:Func(A1, A2, …, An, X)</code></li>
+            <li>
+              Given:
+              <x-blockcode lang="erlang">
+-module(counter).
+-export([bump/2, read/1]).
+bump(n, {counter,k}) -> {counter, n + k}.
+read({counter, n}) -> n.                
+              </x-blockcode>
+
+              then:
+              <x-blockcode>
+$ erl
+1> c(counter)
+2> x = {counter, 2}
+3> x:read()
+2                
+              </x-blockcode>
+            </li>
+          </ol>
+        </x-a>        
+      </x-qa>
+
+      <x-qa>
+        <x-q id="2dfcde39-bbc4-4fa6-98c3-9ce52a43d117">
+          <ol>
+            <li>At time <code>t</code> a key/value store <code>kv_1</code> is chosen.</li>
+            <li>from <code>t</code> to <code>t+99</code>, code accumulates around <code>kv_1</code> using <code>API(kv_1)</code></li>
+
+            <li>At time <code>t+100</code> a key/value store <code>kv_2</code> replaces <code>kv_1</code>.</li>              
+            <li><code>API(kv_1) ≠ API(kv_2)</code></li>
+            <li>Consequence: everything breaks.</li>
+            <li>How to avoid this pitfall?</li>
+          </ol>
+        </x-q>
+        <x-a id="088ad433-ffac-4d02-9db2-8bf3026d20cc">
+          <ol>
+            <li>The <q>Adaptor Pattern</q>.</li>
+            <li>If <code>kv_adapter</code> is implemented using the adapter pattern, then: it may use different implementations to store the key/value pairs using the same interface.
+              <x-blockcode lang="erlang">
+-module(kv_adapter_test).
+-export([test/0]).
+-import(kv_adapter, [new/1, store/2, lookup/1]).
+test() ->
+  %% test the dict module
+  M0 = new(dict),
+  M1 = M0:store(key1, val1),
+  M2 = M1:store(key2, val2),
+  {ok, val1} = M2:lookup(key1),
+  {ok, val2} = M2:lookup(key2),
+  error = M2:lookup(nokey),
+  %% test the lists module
+  N0 = new(lists),
+  N1 = N0:store(key1, val1),
+  N2 = N1:store(key2, val2),
+  {ok, val1} = N2:lookup(key1),
+  {ok, val2} = N2:lookup(key2),
+  error = N2:lookup(nokey),
+  ok.
+              </x-blockcode>
+            </li>              
+            <li>Implementation:
+              <x-blockcode lang="erlang">
+-module(adapter_db1).
+-export([new/1, store/3, lookup/2]).
+
+new(dict) ->
+  {?MODULE, dict, dict:new()};
+
+new(lists) ->
+  {?MODULE, list, []}.
+
+                
+store(Key, Val, {_, dict, D}) ->
+  D1 = dict:store(Key, Val, D),
+  {?MODULE, dict, D1};
+                
+store(Key, Val, {_, list, L}) ->
+  L1 = lists:keystore(Key, 1, L, {Key,Val}),
+  {?MODULE, list, L1}.
+                
+lookup(Key, {_,dict,D}) ->
+  dict:find(Key, D);
+                
+lookup(Key, {_,list,L}) ->
+  case lists:keysearch(Key, 1, L) of
+    {value, {Key,Val}} -> {ok, Val};
+    false -> error
+  end.
+              </x-blockcode>
+            </li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="29b1c123-d64c-407e-b785-c1c63de720aa">
+          <p>What is <q>intentional programming</q>?</p>
+        </x-q>
+        <x-a id="1c89586a-4aa4-452a-96ef-66f354468c1c">
+          <ol>
+            <li>If the programmer can guess what the code does just by looking at the code, then: intentional programming has been correctly implemented.</li>
+            <li>For instance:
+              <x-blockcode lang="erlang">
+lookup(Key, Dict) -> {ok, Value} | not_found
+              </x-blockcode>      
+            </li>
+            <li>may be used to fetch a value, search a value and test if a key exists. Instead, better provide this API:
+              <x-blockcode lang="erlang">
+dict:fetch(Key, Dict) = Val | EXIT
+dict:search(Key, Dict) = {found, Val} | not_found.
+dict:is_key(Key, Dict) = Boolean
+              </x-blockcode>              
+            </li>
+          </ol>
+        </x-a>
+      </x-qa>
+    </x-h3>
+
+    <x-h3 name="Third-Party Programs" id="1a68793b-6e25-4236-b5a1-e59f93791bbe">
+      <x-qa>
+        <x-q id="9855a660-5f04-4f0e-96f1-12bdb369deea">
+          <p>How to use thrid-party programs?</p>
+        </x-q>
+        <x-a id="817b6ca5-3b63-4345-9ade-4e6e2a3c9c0c">
+          <p>Various solutions exist, one of them is <code>rebar</code>.</p>
+        </x-a>
+      </x-qa>
+
+    </x-h3>
+
+    <x-h3 name="Programming Multicore CPUs" id="e70f51ba-ad34-45e2-abbe-19c1526f8071">
+      <x-qa>
+        <x-q id="7f1752f6-21d0-4123-86fb-c8445fefeb88">
+          <p>Why is <q>shared state concurrency</q> a problem?</p>
+        </x-q>
+        <x-a id="b5057155-1f92-48fc-ab6c-72d80cc40095">
+          <ol>
+            <li>shared state concurrency implies <q>mutable state</q>.</li>
+            <li>mutable state means a region of memory that changes.</li>
+            <li>if multiple processes share state, then: they must coordinate writes to the shared state.</li>
+            <li>In particular, they cannot write to the same region of memory <em>at the same time</em>.</li>
+            <li>In order to prevent this situation to happen, <q>mutexes</q> have been introduced.</li>
+            <li>Mutexes behave like locks on a region of memory.</li>
+            <li>A process <code>p1</code> locks region <code>R</code> so that only <code>p1</code> can write to <code>R</code>.</li>
+            <li>When <code>p1</code> stops writting, it releases <code>R</code> so that others may write.</li>
+            <li>One problem is that, when <code>p1</code> locks <code>R</code> then crashes, then: <code>R</code> is locked and all other processes are prevented to write: computation stops.</li>
+            <li>An other problem occurs if <code>p1</code> corrupts the memory: all other processes are sent astray, then do not know what to do.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="ea5a7db2-ccb6-4075-80fa-8f48963012ad">
+          <p>How is Erlang solving <p>shared state concurrency</p>?</p>
+        </x-q>
+        <x-a id="10ea1146-560c-4409-93a7-952ec7d0901b">
+          <ol>
+            <li>By not having state: there are no mutable data structures so no locks.</li>
+            <li> ⇒ easy to parallelize computations</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="ae0fbe6f-5a77-4865-a578-45ccd3d75038">
+          <p>Given the Erlang programming language, how to parallelize execution?</p>
+        </x-q>
+        <x-a id="dda6675d-7451-4b43-83d2-1fb377bbc1ab">
+          <ol>
+            <li>your program must have lots of processes</li>
+            <li>avoid side effects</li>
+            <li>avoid sequential bottlenecks</li>
+            <li>write small messages, big computations code</li>            
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="9a0dc8bc-6da0-43df-a197-8601da49a088">
+          <p>Why having lots of processes favor parallel execution?</p>
+        </x-q>
+        <x-a id="74b06742-3ea3-4d15-84b6-5d92cf62268d">
+          <ol>
+            <li>All the CPUs should be busy all the time. The easiest way to achieve this is to have lots of processes.</li>
+            <li>Preferably the processes should do similar amounts of work. It’s a bad idea to write programs where one
+            process does a lot of work and the others do very little.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="a4efa176-8008-46fd-b1ca-355b02239d9a">
+          <p>Why avoiding side effects favors parallel execution?</p>
+        </x-q>
+        <x-a id="2d732dd5-ebc8-4057-a9fd-3b067f75e169">
+          <ol>
+            <li>Side effects prevent concurrency.</li>
+            <li>It may lead to concurrent writes to a single memory region leading to the use of mutexes.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="f07fe894-9dcd-43a7-8bce-48ca289ced5c">
+          <p>How is a <q>Distributed Ticket Booking System</q> linked to <q>distributed hash tables</q>?</p>
+        </x-q>
+        <x-a id="5f2e3aa9-e9a2-4d37-8221-6b32fa05d739">
+          <ol>
+            <li>If one agency sells tickets from a set of tickets, then: the agency is a sequential bottleneck.</li>
+            <li>If two agencies sells tickets, one with odd numbers and the other with even numbers, then: the agencies are guarenteed not to sell twice the same ticket.</li>
+            <li>Replacing the 2 agencies by n(t) agencies that can crash while maintaining the guarentee is an active area of research which goes by the name of <q>distributed hash table.</q></li>
+          </ol>
+        </x-a>
+      </x-qa>
+    </x-h3>
   </x-h2>
 
   <x-h2 name="Experiment" id="97a4b065-554b-45aa-b721-b91a2c378274">
