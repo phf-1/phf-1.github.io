@@ -289,6 +289,8 @@ let start_node
 let probes
 
 function setup() {
+    frameRate(20)
+    
     // The canvas is built.
     const parent = document.getElementById("p5")
     const canvas = new Canvas(parent)
@@ -318,10 +320,8 @@ function draw() {
     grid.draw()
     probes.forEach((probe) => probe.draw())
     start_node.draw_disk("black")        
-    if (frameCount % 10 === 0) {
-        probes.forEach((probe) => probe.next())
-        probes.every((probe) => !probe.moving) && noLoop()
-    }
+    probes.forEach((probe) => probe.next())
+    probes.every((probe) => !probe.moving) && noLoop()
 }
 
 function random_int(min, max) {
