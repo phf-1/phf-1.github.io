@@ -29,7 +29,7 @@
     <link rel="canonical" href="https://phfrohring.com/" />
     <link rel="stylesheet" href="/css/main.css" />
     <style>
-     
+      
     </style>
     <script defer type="module" src="/js/main.min.js"></script>
   </head>
@@ -65,7 +65,7 @@
 		<x-abstract>The publication <q>Laws for Communicating Parallel Processes</q> is analysed in terms of questions and answers so that being able to answer the questions ensure a consolidated understanding of the subject.</x-abstract>
 
 		<x-h2 name="Objective" id="8a3933c1-cb0b-4cf6-a20e-b1ff1eef2bf5">
-		  
+
 		</x-h2>
 
 		<x-h2 name="Result" id="11201e8f-7e8a-432c-94bf-1bb69d9b47ed">
@@ -97,9 +97,24 @@
 					</x-q>
 					<x-a id="ebb4a28e-4b4d-45c3-9fef-86d54ebe89aa">
 						<x-definition term="Event" id="0cd880a8-133b-4234-b524-528b2389c5db">
-						  <p>An event is the receipt of a message by an actor in a given actor model.</p>
-							<p>Given an event e, the associated message is: message(e).</p>
-							<p>The actor that received this message is: target(e).</p>
+							<ul>
+								<li>An event is the receipt of a message by an actor in a given actor model.</li>
+								<li>Given an event e, the associated message is: message(e).</li>
+								<li>The actor that received this message is: target(e).</li>
+							</ul>
+
+							<p>A number of notations are useful:</p>
+							<ul>
+							  <li>The notation: <code>a:Actor —[m:Message] → b:Actor</code> is equivalent to: <q>a message <code>m</code> of
+									type <code>Message</code> sent by the actor <code>a</code> of type <code>Actor</code> has been received by the actor
+									<code>b</code> of type <code>Actor</code></q>.</li>
+								<li>If we abstract away the name of the message, we write: <code>a —[:Message]→ b</code>.</li>
+								<li>If we abstract away the type of the message, we write: <code>a —[m]→ b</code>.</li>
+								<li>If we abstract away the name and the type of the message, we write: <code>a → b</code>.</li>
+								<li>Similarly, we can omit <code>:Actor</code>.</li>
+								<li>Given <code>e : Event</code>,  we have: <code>a —[message(e)]→ target(e)</code>.</li>
+							</ul>
+							</p>
 						</x-definition>
 					</x-a>
 				</x-qa>
@@ -252,7 +267,7 @@
 							<li>So, for a given actor, the activations relations form a tree.</li>
 							<li>This tree form a sub order of the actor computation.</li>
 							<li>It is called the <q>Activation Sub Order</q>.</li>
-						</ol>						  
+						</ol>
 						</x-definition>
 					</x-a>
 				</x-qa>
@@ -268,7 +283,7 @@
 							<li>We postulate an arbiter in front of every actor which allows only one message to be received at a time.</li>
 							<li>In terms of the precedes ordering on the events in a computation, this means that all events with the same target are totally ordered.</li>
 							<li>We call the	sub-relation defined by the restriction of the precedes relation to the set of events with a particular target actor the <q>arrival ordering</q> for that actor.</li>
-						</ol>						  
+						</ol>
 						</x-definition>
 					</x-a>
 				</x-qa>
@@ -301,7 +316,7 @@
 									<li>else: ⊥.</li>
 								</ol>
 							</li>
-						</ol>						  
+						</ol>
 						</x-definition>
 					</x-a>
 				</x-qa>
@@ -317,7 +332,7 @@
 						<ol>
 							<li>The precursor suborder is then the transitive closure of the precursor relation and is a suborder of "→".</li>
 							<li>The	precursor suborder is a tree with ⊥ as its root.</li>
-						</ol>						
+						</ol>
 				  </x-a>
 				</x-qa>
 
@@ -510,7 +525,7 @@
 						</ol>
 					</x-a>
 				</x-qa>
-			</x-h3>		  
+			</x-h3>
 		</x-h2>
 
 		<x-h2 name="Method" id="7893e5b6-4d8a-4d7a-961e-13e149212a20">
@@ -520,11 +535,11 @@
 		</x-h2>
 
 		<x-h2 name="Discussion" id="82ad66f1-f2f7-43c6-98b2-e312142c1caf">
-		  
+
 		</x-h2>
 
 		<x-h2 name="Conclusion" id="481bfb4f-0fe4-41e2-82f2-3f3ca7304763">
-		  
+
 		</x-h2>
 </x-h1>
 
@@ -538,37 +553,37 @@
                 rel="cc:attributionURL dct:creator"
                 property="cc:attributionName"
                 href="https://phfrohring.com"
-              >Pierre-Henry <span class="small-caps">fröhring</span></a
-																																		>
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
               is licensed under
               <a
                 href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
                 target="_blank"
                 rel="license noopener noreferrer"
                 style="display: inline-block"
-              >CC BY-SA 4.0<img
-														 style="
-																		height: 22px !important;
-																		margin-left: 3px;
-																		vertical-align: text-bottom;
-																		"
-														 src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
-														 alt="" /><img
-																				style="
-																							 height: 22px !important;
-																							 margin-left: 3px;
-																							 vertical-align: text-bottom;
-																							 "
-																							 src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
-																							 alt="" /><img
-																													style="
-																																 height: 22px !important;
-																																 margin-left: 3px;
-																																 vertical-align: text-bottom;
-																																 "
-																													src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
-																													alt=""
-																												/></a>
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
             </p>
           </footer>
         </div>

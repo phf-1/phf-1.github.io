@@ -1,0 +1,42 @@
+strict digraph {
+    node [shape=rect]
+
+    // Happy path
+    client -> dns [label=" Hello"]
+    dns -> vm
+    vm -> BEAM
+    BEAM -> or
+    or -> and
+    and -> handler
+    handler -> or2
+    or2 -> client2 [label=" World"]
+
+    // Handler crash
+    or2 -> supervisor [label=" Crash"]
+    supervisor -> client3  [label=" Error"]
+    supervisor -> logger2
+		logger2 -> developper2 [label=" Log"]
+
+    // BEAM crash
+    or -> systemd [label=" Crash"]
+
+    // Alarm
+    and -> alarm [minlen=8]
+    alarm -> logger
+    logger -> sysadmin [label=" Log"]
+
+    //// Node
+    {developper2 [label="developper"]}
+    {or [label="+" shape=circle]}
+    {or2 [label="+" shape=circle]}
+    {and [label="×" shape=circle]}
+    {client2 [label="client"]}
+    {client3 [label="client"]}
+    {logger2 [label="logger"]}
+
+    //// Ranks
+    {rank=same; and;alarm}
+    {rank=same; or;systemd}
+    {rank=same; supervisor;logger2}
+    {rank=same; or2;supervisor}
+}

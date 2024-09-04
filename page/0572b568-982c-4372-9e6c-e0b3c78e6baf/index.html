@@ -29,7 +29,7 @@
     <link rel="canonical" href="https://phfrohring.com/" />
     <link rel="stylesheet" href="/css/main.css" />
     <style>
-     
+      
     </style>
     <script defer type="module" src="/js/main.min.js"></script>
   </head>
@@ -126,7 +126,7 @@ client.deposit(60);
     </div>
     <pre id="msg" style="border: 1px solid currentColor; padding: 2px; min-height: 1rem;">Logs</pre>
     <p>Implementation: <a href="https://github.com/phf-1/phf-1.github.io/blob/main/page/0572b568-982c-4372-9e6c-e0b3c78e6baf/data/experiment.js">GitHub</a>.</p>
-  </x-h2>  
+  </x-h2>
 
   <x-h2 name="Method" id="8e5577c8-af0d-4a7f-9c7b-36cdba03224f">
     <x-h3 name="Context" id="bf5287dd-a17e-45c0-91da-e80497dff941">
@@ -144,19 +144,19 @@ class Actor {
    * The internal data of the Actor is known to itself only.
    */
   #example_var;
-  
+
   …
 }
       </x-blockcode>
     </x-h3>
-    
+
     <x-h3 name="Constructor" id="ff177099-e3d6-4d68-b3d6-a069a829088f">
       <p>An <code>Actor</code> is constructed by allocating memory, computation, and communication resources, including an address. This process is modeled by the class constructor.</p>
 
       <x-blockcode>
 class Actor {
   // State
-  
+
   /*
    * Constructor
    *
@@ -167,7 +167,7 @@ class Actor {
     // State is initialized.
     this.#example_var = init_value;
   }
-  
+
   …
 }
       </x-blockcode>
@@ -177,16 +177,16 @@ class Actor {
       <p>Using <code>actor</code> means sending messages to <code>actor</code>. Sending a message <code>hello</code> to <code>actor</code> is modeled by a method call:</p>
       <x-blockcode>
 class Actor {
-  // State  
+  // State
   // Constructor
-  
+
   /*
    * Interface
    *
    * Sends messages to the actor.
    * Replies may be waited for.
    */
-  
+
   hello() {
     …
   }
@@ -225,11 +225,11 @@ class Hello {
     this.#address = address;
     this.#content = content;
   }
-  
+
   get address() {
     return this.#address;
   }
-  
+
   get content() {
     return this.#content;
   }
@@ -265,13 +265,13 @@ class Actor {
   // State
   // Constructor
   // Interface
-        
+
   /*
    * Behavior
    *
    * Defines how the actor reacts to messages.
    */
-  
+
   async behavior(message) {
     if (message instanceof Hello) { return "world"; }
     throw new Error(`Unexpected message ${message}.`);
@@ -327,37 +327,37 @@ async hello() {
                 rel="cc:attributionURL dct:creator"
                 property="cc:attributionName"
                 href="https://phfrohring.com"
-              >Pierre-Henry <span class="small-caps">fröhring</span></a
-																																		>
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
               is licensed under
               <a
                 href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
                 target="_blank"
                 rel="license noopener noreferrer"
                 style="display: inline-block"
-              >CC BY-SA 4.0<img
-														 style="
-																		height: 22px !important;
-																		margin-left: 3px;
-																		vertical-align: text-bottom;
-																		"
-														 src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
-														 alt="" /><img
-																				style="
-																							 height: 22px !important;
-																							 margin-left: 3px;
-																							 vertical-align: text-bottom;
-																							 "
-																							 src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
-																							 alt="" /><img
-																													style="
-																																 height: 22px !important;
-																																 margin-left: 3px;
-																																 vertical-align: text-bottom;
-																																 "
-																													src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
-																													alt=""
-																												/></a>
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
             </p>
           </footer>
         </div>

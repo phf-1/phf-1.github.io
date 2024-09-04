@@ -1,0 +1,92 @@
+# Hello World
+
+```elixir
+Mix.install([
+  {:vega_lite, "~> 0.1.9"},
+  {:kino_vega_lite, "~> 0.1.11"},
+  {:explorer, "~> 0.9.2"},
+  {:req, "~> 0.5.6"}
+])
+```
+
+## Hypothesis
+
+The server can handle 1000 requests per second.
+
+## Method
+
+To test the hypothesis, the following has been implemented.
+
+* `Hello` represents a "hello" message.
+* `World` represents a "world" message.
+* `server` is the URL of the server.
+* `requests` is a list of `Hello` messages to be sent in parallel at the start of the experiment to `server`.
+* `length(requests) = 1000`
+* `timeout` is the timeout after which no replies from the server are considered.
+* `answers` is the list of replies received from the server.
+* `worlds` is the list of `World` replies received from the server.
+* If `length(worlds) = length(answers)`, then: the hypothesis is verified.
+
+## Experiment
+
+```elixir
+defmodule Hello do 
+  defstruct [type: "hello"]
+end
+```
+
+```elixir
+defmodule World do
+  defstruct [type: "world"]
+end
+```
+
+```elixir
+defmodule Error do
+  defstruct [msg: "No error message."]
+end
+```
+
+```elixir
+Supervisor.start_link([{Task.Supervisor, name: TaskSupervisor}], strategy: :one_for_one)
+```
+
+```elixir
+defmodule Experiment do 
+  def result(url, number_of_requests, duration) do
+    hellos = List.duplicate(%Hello{}, number_of_requests)
+    tasks = Enum.map(hellos, fn(hello) -> ask(url, hello) end)
+    replies = Task.await_many(tasks, duration * 1000)
+    worlds = Enum.filter(replies, fn(rep) -> match?(%World{}, rep) end)
+    length(hellos) == length(worlds)
+  end
+
+  def ask(url, msg) do
+    task = fn ->
+      map = Map.from_struct(msg)
+      with {:ok, reply} <- Req.post(url, json: map), 
+            %{"type" => "world"} <- reply.body do
+          %World{}
+      else
+        _ -> %Error{}
+      end
+    end
+    Task.Supervisor.async(TaskSupervisor, task)
+  end
+end
+```
+
+## Result
+
+```elixir
+port = 8082
+url = "http://localhost:#{port}/"
+number_of_requests = 10000
+duration = 1 # second
+conclusion = 
+  case Experiment.result(url, number_of_requests, duration) do 
+    true -> "The server can handle #{number_of_requests} requests per #{duration} second."
+    false -> "The server cannot handle #{number_of_requests} per #{duration} second."
+  end
+IO.puts(conclusion)
+```

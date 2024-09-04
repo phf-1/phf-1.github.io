@@ -29,7 +29,7 @@
     <link rel="canonical" href="https://phfrohring.com/" />
     <link rel="stylesheet" href="/css/main.css" />
     <style>
-     
+      
     </style>
     <script defer type="module" src="/js/main.min.js"></script>
   </head>
@@ -87,7 +87,7 @@
       <p>The objective of the experiment is to display a grid of interconnected
     nodes. An animation will demonstrate how <q>probes</q> propagate from one node to
     another by sensing the neighbors of each node and choosing to jump to the next
-    node in a given direction.</p>      
+    node in a given direction.</p>
     </x-objective>
 
     <x-result>
@@ -98,13 +98,13 @@
       <canvas></canvas>
       <script defer src="data/p5.min.js"></script>
       <script defer src="data/grid.js"></script>
-      <div class="actions" style="margin:1rem 0;display:flex;justify-content:right;"></div>         
+      <div class="actions" style="margin:1rem 0;display:flex;justify-content:right;"></div>
     </div>
   </x-h2>
-  
+
   <x-h2 name="QA" id="8ebb0b82-d944-43a6-9060-4b79dd6b0507">
 
-    <x-h3 name="A mental model" id="f43e6715-c871-4fe2-8e32-cdaa3df3ee9f">     
+    <x-h3 name="A mental model" id="f43e6715-c871-4fe2-8e32-cdaa3df3ee9f">
       <x-qa>
         <x-q id="9bbf5fdb-b48a-42cc-ab06-01200450c52e">
           <p>What is <a href="https://p5js.org/">p5.js</a> built for?</p>
@@ -132,7 +132,7 @@
               </ol>
             </li>
             <li>By default, when <code>p5</code> receives the <code>setup()</code> message, it does nothing.</li>
-            <li>By default, when <code>p5</code> receives the <code>draw()</code> message, it does nothing.</li>     
+            <li>By default, when <code>p5</code> receives the <code>draw()</code> message, it does nothing.</li>
           </ol>
         </x-a>
       </x-qa>
@@ -157,16 +157,16 @@
             <li>Create a canvas ;</li>
             <li>Paint it in red.</li>
           </ol>
-          <p>What could be the dialogue between the <code>programmer</code> actor and the <code>p5</code> actor?</p>          
+          <p>What could be the dialogue between the <code>programmer</code> actor and the <code>p5</code> actor?</p>
         </x-q>
         <x-a id="a5a292f8-f69d-4ef9-bb23-4c2d0c38fd05">
           <p>Here a possible dialogue:</p>
           <ol>
-            <li><code>programmer</code> to <code>p5</code>:            
+            <li><code>programmer</code> to <code>p5</code>:
               <ul>
                 <li>When you receive the <code>setup()</code> message, then: create your canvas. It should be 600 pixels wide and 300 pixels high.</li>
                 <li>When you receive the <code>draw()</code> message, then: paint your canvas red.</li>
-              </ul>            
+              </ul>
             </li>
           </ol>
           <p>That is how <code>programmer</code> and <code>p5</code> interact. As a <code>programmer</code>, the objective is to add more and more things to <code>setup</code> and <code>draw</code> to make <code>p5</code>draw what is desired on the canvas.</p>
@@ -188,13 +188,13 @@
             <li>the code might be:
               <x-blockcode lang="javascript">
 function setup() {
-  createCanvas(600, 300);              
+  createCanvas(600, 300);
 }
 
 function draw() {
-  background("red");                            
+  background("red");
 }
-              </x-blockcode>              
+              </x-blockcode>
             </li>
             <li>The result can be tested using: <a href="https://editor.p5js.org/">p5.js editor</a>.</li>
           </ol>
@@ -243,12 +243,12 @@ function draw() {
                 <li>The next shape will be filled with yellow.</li>
                 <li>The stroke of the next shape will be orange.</li>
                 <li>The stroke weight of the next shape will be 20.</li>
-                <li>Draw a circle shape with a center at (300px, 200px) and a diameter of 100px.</li>                
+                <li>Draw a circle shape with a center at (300px, 200px) and a diameter of 100px.</li>
               </ol>
-            </li>            
+            </li>
           </ol>
         </x-a>
-      </x-qa>      
+      </x-qa>
     </x-h3>
 
     <x-h3 name="A more involved example" id="04537f25-5fe8-4cb8-8c90-ca790e3c4273">
@@ -296,7 +296,7 @@ function draw() {
                 <li>It has a width.</li>
                 <li>It has a color.</li>
                 <li>It fits several nodes per line.</li>
-              </ul>             
+              </ul>
             </li>
 
             <li>There are nodes, instances of <code>Node</code>. A node has:
@@ -305,7 +305,7 @@ function draw() {
                 <li>a radius ;</li>
                 <li>a color ; </li>
                 <li>neighbors.</li>
-              </ul>                           
+              </ul>
             </li>
 
             <li>There are probes, instances of <code>Probe</code>. A probe has:
@@ -313,7 +313,7 @@ function draw() {
                 <li>a direction ;</li>
                 <li>a color ;</li>
                 <li>nodes that have been visited. </li>
-              </ul>                           
+              </ul>
             </li>
           </ol>
         </x-a>
@@ -324,7 +324,7 @@ function draw() {
           <p>Describe the grid computation in terms of actors.</p>
         </x-q>
         <x-a id="59e55064-17c8-4f32-a6e9-29fb22c78206">
-          <p>The computation might be mapped into the following sequence of events:</p>            
+          <p>The computation might be mapped into the following sequence of events:</p>
             <ol>
               <li><code>p5</code> receives the <code>setup()</code> event.
                 <ol>
@@ -362,7 +362,7 @@ canvas.start()
           <p>Provide an implementation of <code>setup</code>.</p>
         </x-q>
         <x-a id="f2f20a44-fc0c-4c85-b1b0-89b1d743c8ca">
-          <p>An implementation might be:</p>          
+          <p>An implementation might be:</p>
           <x-blockcode lang="javascript">
 function setup() {
     // The canvas is built.
@@ -401,10 +401,10 @@ function setup() {
           <p>An implementation might be:</p>
           <x-blockcode lang="javascript">
 function draw() {
-    background(gray_50.hex)    
+    background(gray_50.hex)
     grid.draw()
     probes.forEach((probe) => probe.draw())
-    start_node.draw_disk("black")        
+    start_node.draw_disk("black")
     probes.forEach((probe) => probe.next())
     probes.every((probe) => !probe.moving) && noLoop()
 }
@@ -417,7 +417,7 @@ function draw() {
           <p>Provide an implementation of <code>Node</code>.</p>
         </x-q>
         <x-a id="e54ff024-a5b1-480e-93e2-b7367d482cf6">
-          <p>An implementation might be:</p>          
+          <p>An implementation might be:</p>
           <x-blockcode lang="javascript">
 class Node {
     #pos
@@ -451,18 +451,18 @@ class Node {
     draw_disk(color = null) {
         fill(color === null ? this.#color : color)
         const start = this.#pos
-        circle(start.x, start.y, this.#radius * 2)        
+        circle(start.x, start.y, this.#radius * 2)
     }
 
     draw_edges() {
         stroke(this.#color)
-        const start = this.#pos        
+        const start = this.#pos
         this.#neighbors.forEach((neighbor) => {
             if (neighbor !== null) {
                 const end = neighbor.pos
                 line(start.x, start.y, end.x, end.y)
             }
-        })        
+        })
     }
 }
           </x-blockcode>
@@ -471,17 +471,17 @@ class Node {
 
       <x-qa>
         <x-q id="ab5d15b8-1f15-491d-a859-8e85103f9dbb">
-          <p>Provide an implementation of <code>Probe</code>.</p>          
+          <p>Provide an implementation of <code>Probe</code>.</p>
         </x-q>
         <x-a id="1e584d42-12a5-49df-8b43-d32f696ae73f">
-          <p>An implementation might be:</p>          
+          <p>An implementation might be:</p>
           <x-blockcode lang="javascript">
 class Probe {
     #color
     #dir
     #moving
     #nodes
-    #head    
+    #head
 
     constructor(node, color, dir) {
         this.#nodes = [node]
@@ -511,13 +511,13 @@ class Probe {
         this.#nodes.map((node) => {
             const pos = node.pos
             fill(this.#color.hex)
-            circle(pos.x, pos.y, node.radius * 2)            
+            circle(pos.x, pos.y, node.radius * 2)
         })
     }
 }
-          </x-blockcode>          
+          </x-blockcode>
         </x-a>
-      </x-qa>            
+      </x-qa>
     </x-h3>
   </x-h2>
 
@@ -575,37 +575,37 @@ class Probe {
                 rel="cc:attributionURL dct:creator"
                 property="cc:attributionName"
                 href="https://phfrohring.com"
-              >Pierre-Henry <span class="small-caps">fröhring</span></a
-																																		>
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
               is licensed under
               <a
                 href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
                 target="_blank"
                 rel="license noopener noreferrer"
                 style="display: inline-block"
-              >CC BY-SA 4.0<img
-														 style="
-																		height: 22px !important;
-																		margin-left: 3px;
-																		vertical-align: text-bottom;
-																		"
-														 src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
-														 alt="" /><img
-																				style="
-																							 height: 22px !important;
-																							 margin-left: 3px;
-																							 vertical-align: text-bottom;
-																							 "
-																							 src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
-																							 alt="" /><img
-																													style="
-																																 height: 22px !important;
-																																 margin-left: 3px;
-																																 vertical-align: text-bottom;
-																																 "
-																													src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
-																													alt=""
-																												/></a>
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
             </p>
           </footer>
         </div>

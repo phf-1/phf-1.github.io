@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- This Source Code Form is subject to the terms of the Mozilla Public
+			 - License, v. 2.0. If a copy of the MPL was not distributed with this
+			 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="LiveBook." />
+    <title>Pierre-Henry Fröhring's Website</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://phfrohring.com/" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      
+    </style>
+    <script defer type="module" src="/js/main.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <picture id="bg-image">
+        <source srcset="bg.webp" type="image/webp" />
+        <source srcset="bg.jpg" type="image/jpeg" />
+        <source srcset="bg.svg" type="image/svg+xml" />
+        <img
+          id="bg-image-img"
+          src="bg.jpg"
+          onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
+          alt="Illustration"
+        />
+      </picture>
+      <div id="container">
+        <div id="content">
+          <div id="topbar">
+            <nav class="actions">
+              <button id="toggle_toc_btn" class="button">TOC</button>
+              <button id="toggle_qa" class="button">SHOW ANSWERS</button>
+            </nav>
+            <nav class="navbar" id="navbar">
+              <a class="button" href="/">home</a>
+            </nav>
+            <x-toc></x-toc>
+          </div>
+
+          <x-h1
+  name="LiveBook"
+  id="e4b85a42-adaf-4cc8-94de-d8c5e9195aca"
+  type="dbf45859-7a1a-4939-9cdb-4f6306168323"
+>
+  <x-abstract>abstract</x-abstract>
+
+  <x-h2 name="Introduction" id="31dca9b5-3585-4d9c-8d89-4ed3d9095d6e"> </x-h2>
+
+  <x-h2 name="Objective" id="e77feadf-ba2e-4e33-b960-eacfc71a3203"> </x-h2>
+
+  <x-h2 name="Result" id="76b9ed30-df29-41d2-a50f-c302fba4e5a5">
+    <ol>
+      <li><a href="#b9ca078f-5a27-4b78-8d27-d94ab0fa0fc1">Installation</a></li>
+      <li><a href="#c9d20640-ac12-4f7d-8335-200862e75f3e">Start</a></li>
+      <li><a href="#c49d17e9-ad4c-4aaa-ac44-5a59044c358a">Save</a></li>
+      <li><a href="#39a664fd-cfaa-4c96-bced-1a1c35067f1a">Tools</a></li>
+    </ol>
+  </x-h2>
+
+  <x-h2 name="Installation" id="b9ca078f-5a27-4b78-8d27-d94ab0fa0fc1">
+    <p>If the current system is a recent <code>Debian</code> with <code>Elixir ≥
+    1.16</code> installed, then: <code>livebook</code> is installed on the current
+    system.</p>
+
+    <x-blockcode>
+mix do local.rebar --force, local.hex --force
+mix escript.install hex livebook
+export PATH="$PATH:$HOME/.mix/escripts"
+    </x-blockcode>
+  </x-h2>
+
+  <x-h2 name="Start" id="c9d20640-ac12-4f7d-8335-200862e75f3e">
+    <p>A <code>livebook</code> server is started.</p>
+    <x-blockcode>
+livebook server
+    </x-blockcode>
+  </x-h2>
+
+  <x-h2 name="Save" id="c49d17e9-ad4c-4aaa-ac44-5a59044c358a">
+    <p>To save a livebook, just <code>C-s</code>. It will be periodically saved unless <code>livebook</code> server told otherwise.</p>
+  </x-h2>
+
+  <x-h2 name="Tools" id="39a664fd-cfaa-4c96-bced-1a1c35067f1a">
+    <p>Various tools — <i>e.g.</i> to manipulate data or build visualization — are available here: <a href="https://livebook.dev/integrations/">Tools</a>.</p>
+  </x-h2>
+
+
+
+  <x-h2 name="Verification" id="16c0c72d-0cfc-43dc-b734-038d154d3c5b"> </x-h2>
+
+  <x-h2 name="Method" id="94f7f0ff-c44a-44c6-95fb-c008c2226139"> </x-h2>
+
+  <x-h2 name="Discussion" id="616affd3-4999-4cc2-b54e-3c5ecf313f4b">
+    <x-h3 name="Previous Reasearch" id="024c3466-8414-432a-a5a8-b108d3b34649">
+    </x-h3>
+
+    <x-h3 name="Implications" id="63122563-d81b-4022-b6af-6072901f2d8d"> </x-h3>
+
+    <x-h3 name="Limitations" id="6ecb0999-70e1-4484-8baf-f08220055efc"> </x-h3>
+
+    <x-h3 name="Future Research" id="42369a4a-9858-45c4-9b3f-f798ab0d3d0e">
+    </x-h3>
+  </x-h2>
+
+  <x-h2 name="Conclusion" id="ecd53cf9-2395-4f99-a766-f51ce80a0fe2"> </x-h2>
+
+  <x-h2 name="Reference" id="f67c5f18-cc95-4565-b524-ec9600ae504b">
+    <ul>
+      <li><a href=https://livebook.dev/integrations/>Tools</a></li>
+    </ul>
+  </x-h2>
+</x-h1>
+
+
+          <hr />
+
+          <footer>
+            <p xmlns:cc="http://creativecommons.org/ns#">
+              This work by
+              <a
+                rel="cc:attributionURL dct:creator"
+                property="cc:attributionName"
+                href="https://phfrohring.com"
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
+              is licensed under
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
+                target="_blank"
+                rel="license noopener noreferrer"
+                style="display: inline-block"
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- This Source Code Form is subject to the terms of the Mozilla Public
+			 - License, v. 2.0. If a copy of the MPL was not distributed with this
+			 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Actor computation." />
+    <title>Pierre-Henry Fröhring's Website</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://phfrohring.com/" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      
+    </style>
+    <script defer type="module" src="/js/main.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <picture id="bg-image">
+        <source srcset="bg.webp" type="image/webp" />
+        <source srcset="bg.jpg" type="image/jpeg" />
+        <source srcset="bg.svg" type="image/svg+xml" />
+        <img
+          id="bg-image-img"
+          src="bg.jpg"
+          onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
+          alt="Illustration"
+        />
+      </picture>
+      <div id="container">
+        <div id="content">
+          <div id="topbar">
+            <nav class="actions">
+              <button id="toggle_toc_btn" class="button">TOC</button>
+              <button id="toggle_qa" class="button">SHOW ANSWERS</button>
+            </nav>
+            <nav class="navbar" id="navbar">
+              <a class="button" href="/">home</a>
+            </nav>
+            <x-toc></x-toc>
+          </div>
+
+          <x-h1
+  name="Actor computation"
+  id="196338a6-b9f6-4fc2-87a3-2ce278167495"
+  type="dbf45859-7a1a-4939-9cdb-4f6306168323"
+>
+  <x-abstract>abstract</x-abstract>
+
+  <x-h2 name="Introduction" id="d341f315-5801-42d7-9847-109bf439a150"> </x-h2>
+
+  <x-h2 name="Objective" id="8900c537-d517-4f77-ba82-dac1957006bb"> </x-h2>
+
+  <x-h2 name="Result" id="96656f0d-0a8a-4dd9-9c6b-ca9cd0fa07cf">
+    <ol>
+      <li><a href="#d6b34665-9c93-49d9-a72f-f3d45555108c">Actor computation</a></li>
+    </ol>
+  </x-h2>
+
+  <x-h2 name="Actor computation" id="d6b34665-9c93-49d9-a72f-f3d45555108c">
+    <x-h3 name="Definition" id="86d48d8d-ff54-4b72-9709-7dc80763ab43">
+      <x-definition term="Actor computation" id="f1fdd237-16a0-4be9-b9c7-faf539367d17">
+        <ul>
+          <li>A collection of nodes represents actors. In other words: <code>nodes : List Actor</code>.</li>
+
+          <li>Each actor has an id. In other words, there is a function <code>id : Actor → Id</code>.</li>
+
+          <li>Each actor has an index in the list of actors. In other words, there is a function <code>index : Actor → Index</code>.</li>
+
+          <li>We say that two actors are equal in the list if they have the same ids, <i>i.e.,</i> <code>id(a1) = id(a2)</code>.</li>
+
+          <li>Actors may be repeated in the list, <i>i.e.,</i> it might be the case that <code>id(a1) = id(a2) ∧ index(a1) ≠ index(a2)</code>.</li>
+
+          <li>An edge <code> x —[t:AType]→ y</code> means that the node <code>y</code> has received the message
+            <code>t</code>, which is a data structure of type <code>AType</code>. In other words: <code>edge(x y t) :
+    Edge</code> and <code>edges : List Edge</code>.</li>
+
+          <li>We consider that two edges are equal if they start and end on the same nodes and transport the same
+            message. In other words, given <code>e1 ≡ edge(start1 end1 t1)</code> and <code>e2 ≡ edge(start2 end2
+    t2)</code>, we say that <code>e1 = e2</code> iff <code>start1 = start2 ∧ end1 = end2 ∧ t1 =
+    t2</code>.</li>
+
+          <li>The list of edges has no repetition.</li>
+
+          <li>Given <code>a1,a2</code> two actors of <code>nodes</code>, we say that <code>a &lt; b</code> iff there is an edge <code>e ≡ edge(a b t)</code> for some <code>t</code>.</li>
+
+          <li><code>a &lt; b</code> forms a strict partial order on the nodes.</li>
+
+          <li>Given nodes and edges, <code>(nodes,edges) : ActorComp</code> is an actor computation.</li>
+        </ul>
+      </x-definition>
+    </x-h3>
+
+    <x-h3 name="Example" id="416efc18-0c88-4d13-b76d-9abf6d31d71e">
+
+      <x-example>
+        <p><strong>If</strong> :
+          <ul>
+            <li><code>client</code> represents some client, for instance your web browser;</li>
+            <li><code>Hello</code> represents a <code>HTTP</code> request, for instance a <code>POST</code> request with data set to a <code>JSON</code> like <code>{"type": "hello"}</code></li>
+            <li><code>World</code> and <code>Error</code> are also HTTP requests;</li>
+            <li><code>server</code> represents some web server.</li>
+          </ul>
+        </p>
+
+        <p><strong>Then</strong> : we may represent the <q>discussion</q> between the client and the server by an actor computation graph as follows:</p>
+        <figure>
+          <img src="data/hello_world.svg" alt="First example">
+          <figcaption>First example</figcaption>
+        </figure>
+
+        <p>Translated into English, a possible associated dialogue may be:</p>
+        <ol>
+          <li>The server received an instance of a <code>Hello</code> message from the client.</li>
+          <li>The client received an instance of one of these two message types from the server: <code>World</code> or <code>Error</code>.</li>
+        </ol>
+      </x-example>
+    </x-h3>
+
+  </x-h2>
+
+  <x-h2 state="todo" name="Discussion" id="0956b8a4-310c-42e1-b15a-cfe94f1bb6ae">
+    <x-h3 name="Previous Research" id="dd706462-bc3e-4e52-b7ba-46dc1a639cdf">
+    </x-h3>
+
+    <x-h3 name="Implications" id="5e4ca54a-964a-4f4b-bd9c-4c18b536765e"> </x-h3>
+
+    <x-h3 name="Limitations" id="b23a199c-18b1-4aec-bb33-e5862e06e27d"> </x-h3>
+
+    <x-h3 name="Future Research" id="0e5a95c2-e840-4b12-bbca-a405edde5ab4">
+    </x-h3>
+  </x-h2>
+
+  <x-h2 name="Conclusion" id="5f89593f-2c84-41a2-9b38-0fce61cf03d6"> </x-h2>
+
+  <x-h2 name="Reference" id="a8284750-3207-4078-8212-30a5f33ad84b">
+    <ul>
+      
+    </ul>
+  </x-h2>
+</x-h1>
+
+
+          <hr />
+
+          <footer>
+            <p xmlns:cc="http://creativecommons.org/ns#">
+              This work by
+              <a
+                rel="cc:attributionURL dct:creator"
+                property="cc:attributionName"
+                href="https://phfrohring.com"
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
+              is licensed under
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
+                target="_blank"
+                rel="license noopener noreferrer"
+                style="display: inline-block"
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

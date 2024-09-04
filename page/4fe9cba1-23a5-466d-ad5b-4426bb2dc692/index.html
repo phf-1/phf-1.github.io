@@ -6,7 +6,7 @@
 			 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Notes on Erlang." />
+    <meta name="description" content="QA: Erlang" />
     <title>Pierre-Henry Fröhring's Website</title>
     <link
       rel="apple-touch-icon"
@@ -29,7 +29,7 @@
     <link rel="canonical" href="https://phfrohring.com/" />
     <link rel="stylesheet" href="/css/main.css" />
     <style>
-     
+      
     </style>
     <script defer type="module" src="/js/main.min.js"></script>
   </head>
@@ -60,18 +60,47 @@
           </div>
 
           <!-- :TYPE: dbf45859-7a1a-4939-9cdb-4f6306168323 --> 
-<x-h1 name="Notes on Erlang" id="a30d961c-08a6-49e5-9014-3ab2248a03cd">
+<x-h1 name="QA: Erlang" id="a30d961c-08a6-49e5-9014-3ab2248a03cd">
 
   <x-abstract>Abstract.</x-abstract>
 
   <x-h2 name="Objective" id="135d551a-fe57-4667-8741-0e199a6529dd">
-    <ol>
-		  <li>The objective is to capture the most common <a href="/page/d783662e-ba95-4f18-8893-cea7fc473814">invariants</a> when programming in Erlang.</li>
-		</ol>
+    <p>The objective is to define mathematical concepts found in Erlang.</p>
   </x-h2>
 
   <x-h2 name="Result" id="df56edbf-0d7c-4844-80fa-445e15546c5e">
-    
+		<x-qa>
+		  <x-q id="5c2f5627-4f26-401f-8c76-db3381a43d37">
+		    <p>Define what is meant by <em>State</em>.</p>
+		  </x-q>
+		  <x-a id="44539c6e-fe4a-4c6a-8c2d-ab9c8e4b6070">
+				<ol>
+				  <li>A State <code>s</code> is a finite amount of data — <i>i.e.</i> 0s and 1s in a memory somehere.</li>
+				</ol>
+		  </x-a>
+		</x-qa>
+
+		<x-qa>
+		  <x-q id="246e6611-c7f3-4f6a-abbe-8e301b3e23c3">
+		    <p>Define a process.</p>
+		  </x-q>
+		  <x-a id="294d14e1-c0dc-4a87-a20e-0b0d6d6fe545">
+				<ol>
+				  <li>A process <code>p</code> has:
+						<ol>
+						  <li>addresses(p) : List Address</li>
+							<li>state(p) : State</li>
+							<li>computation(state(p)) ≡ next(p) : Message → Message × State</li>
+						</ol>
+					</li>
+					<li>There is a function lookup(address) : Process</li>
+					<li>send(address, msg) causes lookup(address) ≡ p to receive msg.</li>
+					<li>If: p_next ≡ next(p), then: p_next(msg) ≡ (n_msg, n_state) is called.</li>
+					<li>n_msg my be sent.</li>
+					<li>state(p) :≡ n_state</li>
+				</ol>				
+		  </x-a>
+		</x-qa>
   </x-h2>
 
   <x-h2 name="Experiment" id="2c264107-a992-4bb2-9234-53e04bfa7b8b">
@@ -79,7 +108,15 @@
   </x-h2>  
 
   <x-h2 name="Method" id="eecb4cd0-1a2d-48f7-8f3d-1407d25490e8">
-
+    <ol>
+			<li>Concepts are selected from various sources and experiences listed below.
+				<ol>
+					<li><a href="/page/2b535fc4-c5f6-488d-ade7-ff388d2dbb58">Programming Erlang</a></li>
+				</ol>
+			</li>
+			<li>The various ideas are encoded using <a href="/page/61cf649f-da8b-4ee1-ae5b-56868017db47">Type Theory</a>				
+			</li>
+    </ol>
   </x-h2>
 
   <x-h2 name="Discussion" id="c118ccba-599b-47b6-8e33-6126a6dc9457">
@@ -91,7 +128,9 @@
   </x-h2>
 
   <x-h2 name="Reference" id="18bca467-0393-48af-9517-9279b5cf7a33">
-
+		<ul>
+		  
+		</ul>
   </x-h2>
 </x-h1>
 
@@ -105,37 +144,37 @@
                 rel="cc:attributionURL dct:creator"
                 property="cc:attributionName"
                 href="https://phfrohring.com"
-              >Pierre-Henry <span class="small-caps">fröhring</span></a
-																																		>
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
               is licensed under
               <a
                 href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
                 target="_blank"
                 rel="license noopener noreferrer"
                 style="display: inline-block"
-              >CC BY-SA 4.0<img
-														 style="
-																		height: 22px !important;
-																		margin-left: 3px;
-																		vertical-align: text-bottom;
-																		"
-														 src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
-														 alt="" /><img
-																				style="
-																							 height: 22px !important;
-																							 margin-left: 3px;
-																							 vertical-align: text-bottom;
-																							 "
-																							 src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
-																							 alt="" /><img
-																													style="
-																																 height: 22px !important;
-																																 margin-left: 3px;
-																																 vertical-align: text-bottom;
-																																 "
-																													src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
-																													alt=""
-																												/></a>
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
             </p>
           </footer>
         </div>

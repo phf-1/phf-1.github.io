@@ -6,7 +6,7 @@
 			 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Notes on: Programming Erlang." />
+    <meta name="description" content="QA: Programming Erlang" />
     <title>Pierre-Henry Fröhring's Website</title>
     <link
       rel="apple-touch-icon"
@@ -29,7 +29,7 @@
     <link rel="canonical" href="https://phfrohring.com/" />
     <link rel="stylesheet" href="/css/main.css" />
     <style>
-     
+      
     </style>
     <script defer type="module" src="/js/main.min.js"></script>
   </head>
@@ -59,12 +59,12 @@
             <x-toc></x-toc>
           </div>
 
-          <!-- :TYPE: dbf45859-7a1a-4939-9cdb-4f6306168323 --> 
-<x-h1 name="Notes on: Programming Erlang" id="9b8a77ce-5745-4848-bf5c-aab38b795a36">
+          <!-- :TYPE: dbf45859-7a1a-4939-9cdb-4f6306168323 -->
+<x-h1 name="QA: Programming Erlang" id="9b8a77ce-5745-4848-bf5c-aab38b795a36">
 
-  <x-abstract> Enough concepts about Elixir are presented here so that one can forget
- them and quickly revisit them. Some concepts are illustrated through experiments,
- while most are presented in a <em>Q & A</em> format. </x-abstract>
+  <x-abstract>Enough concepts about Erlang are presented here so that one can forget
+		them and quickly revisit them. Some concepts are illustrated through experiments,
+		while most are presented in a <em>Q & A</em> format.</x-abstract>
 
   <x-h2 name="Objective" id="0935151e-6643-481a-8915-ced52c725431">
     <p>The objective is to accumulate enough knowledge about Erlang so that one can forget it and quickly get back to it when needed.</p>
@@ -123,7 +123,7 @@
             <li>Erlang provides a way to define these processes in its language, then maps the process instructions to machine code instructions, distributing them across the cores while maintaining the guarantees of the processes.</li>
           </ol>
         </x-a>
-      </x-qa>      
+      </x-qa>
 
       <x-qa>
         <x-q id="14b6d478-14b2-4eb3-a074-6143b8a5be4d">
@@ -160,8 +160,8 @@
             <li>The bytcode is described <a href="https://github.com/erlang/otp/blob/master/lib/compiler/src/genop.tab">here</a>.</li>
           </ul>
         </x-a>
-      </x-qa>    
-      
+      </x-qa>
+
       <x-qa>
         <x-q id="eaf2ec13-7b9f-470a-aa93-1fad9577c377">
           <p>How to build a process?</p>
@@ -189,13 +189,13 @@ Joe
               <x-blockcode lang="erlang">
 Joe ! {self(), "Hello!"}
               </x-blockcode lang="erlang">
-            sends the message <code>{self(), "Hello!"}</code> to <code>Joe</code> where <code>self()</code> is the PID of the current process sending the message. 
+            sends the message <code>{self(), "Hello!"}</code> to <code>Joe</code> where <code>self()</code> is the PID of the current process sending the message.
             </li>
             <li>For Joe to reply, the <code>person</code> module should be completed with:
               <x-blockcode lang="erlang">
 -module(person).
 -export([init/1]).
-init(Name) -> 
+init(Name) ->
   receive
     {From, Content} ->
       …
@@ -206,7 +206,7 @@ init(Name) ->
           </ol>
         </x-a>
       </x-qa>
-      
+
       <x-qa>
         <x-q id="2cfdaf11-c298-422d-bf7a-400579fd1fe0">
           <p>What is process concurrency?</p>
@@ -247,7 +247,7 @@ init(Name) ->
           <p>Specification:</p>
           <ol>
             <li>Let <code>s = self()</code></li>
-            <li>A file server is a process <code>p = file_server:start(ADir)</code>.</li>         
+            <li>A file server is a process <code>p = file_server:start(ADir)</code>.</li>
             <li><code>p ! {s, list_dir}</code> causes <code>s</code> to receive a list of files in <code>ADir</code>.</li>
             <li> <code>p ! {s, {get_file, "a_file.txt"}}</code> causes <code>s</code> to receive the content of <code>"a_file.txt"</code> in <code>ADir</code>, if any.</li>
           </ol>
@@ -280,9 +280,9 @@ loop(Dir) ->
               <x-blockcode lang="erlang">
 …
 FS = file_server:start(ADir).
-FileList = file_client:ls(FS)       
-…       
-              </x-blockcode>         
+FileList = file_client:ls(FS)
+…
+              </x-blockcode>
             without having to be aware of the communication protocol.
             </li>
           </ol>
@@ -297,7 +297,7 @@ ls(Server) ->
     {Server, FileList} ->
       Filelist
   end.
-          </x-blockcode>         
+          </x-blockcode>
         </x-a>
       </x-qa>
     </x-h3>
@@ -326,7 +326,7 @@ ls(Server) ->
 start with a small module with a few functions, and then I compile it and test it with
 a few commands in the shell. Once I’m happy with it, I write a few more functions,
 compile them, test them, and so on.</p>
-            
+
             <p>Often I haven’t really decided what sort of data structures I’ll need in my program,
 and as I run small examples, I can see whether the data structures I have chosen
 are appropriate.</p>
@@ -337,7 +337,7 @@ wrong. Above all, it’s fun, I get immediate feedback, and I see whether my ide
 as soon as I have typed in the program.</p>
 
             <p>Once I’ve figured out how to do something in the shell, I usually then go and write a
-makefile and some code that reproduces what I’ve learned in the shell.</p>          
+makefile and some code that reproduces what I’ve learned in the shell.</p>
           </x-blockquote>
         </x-a>
       </x-qa>
@@ -362,7 +362,7 @@ makefile and some code that reproduces what I’ve learned in the shell.</p>
             <li>The function returns.</li>
             <li>An exception is raised.</li>
           </ol>
-        </x-a>      
+        </x-a>
       </x-qa>
 
       <x-qa>
@@ -441,7 +441,7 @@ makefile and some code that reproduces what I’ve learned in the shell.</p>
           </ol>
 
         </x-a>
-      </x-qa>      
+      </x-qa>
     </x-h3>
 
     <x-h3 name="Real-World Concurrency" id="55f32d2d-b054-4540-ba95-32968e11f7a9">
@@ -476,7 +476,7 @@ receive
   …
 after Time ->
   Expression
-end            
+end
           </x-blockcode>
         </x-a>
       </x-qa>
@@ -546,7 +546,7 @@ receive
 after Time ->
   ExpressionsTimeout
 end
-          </x-blockcode>          
+          </x-blockcode>
         </x-q>
         <x-a id="a96996ef-6ba2-4d66-8ed0-024d21c67f0c">
           <ol>
@@ -589,14 +589,14 @@ end
 -compile(export_all).
 start() ->
   spawn(?MODULE, loop, []).
-            
+
 rpc(Pid, Request) ->
   Pid ! {self(), Request},
   receive
     {Pid, Response} ->
       Response
   end.
-            
+
 loop(X) ->
   receive
     Any ->
@@ -605,7 +605,7 @@ loop(X) ->
   end.
           </x-blockcode>
         </x-a>
-      </x-qa>      
+      </x-qa>
     </x-h3>
 
     <x-h3 name="Errors in Concurrent Programs" id="4be8fc0f-5495-4013-875c-a5c25839a5f8">
@@ -829,7 +829,7 @@ on_exit(Pid, Fun) ->
         <x-a id="8a550d03-4bb1-4bf2-9ba0-3658ed484e2e">
           <x-definition term="Erlang node" id="7eebcab9-145c-4f8f-9cdd-6bea03fbf6bc">
             <p>It is a self-contained Erlang system containing a complete virtual machine with its own address space and
-            own set of processes.</p>            
+            own set of processes.</p>
           </x-definition>
         </x-a>
       </x-qa>
@@ -936,7 +936,7 @@ on_exit(Pid, Fun) ->
         <x-q id="a07d06b5-127a-4789-a828-30ba32d86b71">
           <p>Describe the behaviour of a <em>port</em>.</p>
         </x-q>
-        <x-a id="d862238f-a58f-4c45-bccd-6c6ea3eaf936">          
+        <x-a id="d862238f-a58f-4c45-bccd-6c6ea3eaf936">
           <ol>
             <li>The process that created the port is called the <em>connected process</em>.</li>
             <li>Erlang communicates with external programs through objects called ports.</li>
@@ -952,29 +952,29 @@ on_exit(Pid, Fun) ->
     </x-h3>
 
     <x-h3 state="todo" name="Programming with Files" id="bcd44d8b-694e-40a3-978e-35f16b597aa2">
-      
+
     </x-h3>
 
-    
+
     <x-h3 state="todo" name="Programming with Sockets" id="b6e6854b-2b8a-4c14-9b32-42e848133177">
-      
+
     </x-h3>
 
     <x-h3 state="todo" name="Browsing with Websockets and Erlang" id="40db60eb-b41a-4b0d-ab59-7e0ad79ad804">
-      
+
     </x-h3>
 
     <x-h3 state="todo" name="Storing Data with ETS and DETS" id="3516f52e-846f-4520-9f33-7d76199811c6">
-      
+
     </x-h3>
 
     <x-h3 state="todo" name="Mnesia: The Erlang Database" id="41982ced-4516-4d3c-8d24-d96e8dabfc47">
-      
+
     </x-h3>
 
-    
+
     <x-h3 state="todo" name="Profiling, Debugging, and Tracing" id="c5746d12-b76d-4278-8e52-010e6812883d">
-      
+
     </x-h3>
 
     <x-h3 name="Introducing OTP" id="a217b7bd-5bab-44a6-9191-25f57e5212e3">
@@ -1012,7 +1012,7 @@ on_exit(Pid, Fun) ->
               because this is provided by the behavior.</li>
             </ol>
           </x-definition>
-        </x-a>        
+        </x-a>
       </x-qa>
 
       <x-qa>
@@ -1060,7 +1060,7 @@ on_exit(Pid, Fun) ->
           <x-blockcode lang="erlang">
 -module(server1).
 -export([start/2, rpc/2]).
-            
+
 start(Name,Mod) ->
   register(Name, spawn(fun() -> loop(Name, Mod, Mod:init()))).
 
@@ -1109,7 +1109,7 @@ true
 ok
 3> name_server:find(joe).
 {ok,"at home"}
-          </x-blockcode>          
+          </x-blockcode>
         </x-a>
       </x-qa>
 
@@ -1118,7 +1118,7 @@ ok
           <p>What is the gen_server callback structure?</p>
         </x-q>
         <x-a id="24a106eb-368c-4342-a12f-5cac8d24fa07">
-          
+
           <ol>
             <li>Any ≡ Request</li>
             <li>Any ≡ Reply</li>
@@ -1133,15 +1133,15 @@ ok
             <li>handle_cast : Message State → noreply × State
               <ul>
                 <li>asynchronous calls</li>
-              </ul>              
+              </ul>
             </li>
             <li>handle_info : Message State → noreply × State
               <ul>
                 <li>messages not sent with call or cast</li>
-              </ul>                            
+              </ul>
             </li>
             <li>terminate : Reason State → ok</li>
-            <li>code_change : ??? → ???</li>                                                            
+            <li>code_change : ??? → ???</li>
           </ol>
         </x-a>
       </x-qa>
@@ -1228,7 +1228,7 @@ ok
           <ol>
             <li><strong>Programmer</strong>: to log an error, which procedure to call?</li>
             <li><strong>Configuration</strong>: where and how the error logger stores data?</li>
-            <li><strong>Report</strong>: how to analyse the errors?</li>                        
+            <li><strong>Report</strong>: how to analyse the errors?</li>
           </ol>
         </x-a>
       </x-qa>
@@ -1251,7 +1251,7 @@ ok
         </x-q>
         <x-a id="883d5acd-1074-41fb-95b6-177838351f7d">
           <ol>
-            <li>Using a configuration file so that we do not need to remember configuration arguments when implementing the system.</li>            
+            <li>Using a configuration file so that we do not need to remember configuration arguments when implementing the system.</li>
           </ol>
         </x-a>
       </x-qa>
@@ -1312,11 +1312,11 @@ ok
             <li>It describes an application is such a way that <code>erl</code> can start and stop the application:
               <x-blockcode>
 $ erl -boot start_sasl
-1> application:load(appname)                
-2> application:start(appname)                
-3> application:stop(appname)                
-4> application:unload(appname)                
-              </x-blockcode>              
+1> application:load(appname)
+2> application:start(appname)
+3> application:stop(appname)
+4> application:unload(appname)
+              </x-blockcode>
             </li>
           </ol>
 
@@ -1370,7 +1370,7 @@ $ erl -boot start_sasl
 -module(counter).
 -export([bump/2, read/1]).
 bump(n, {counter,k}) -> {counter, n + k}.
-read({counter, n}) -> n.                
+read({counter, n}) -> n.
               </x-blockcode>
 
               then:
@@ -1379,11 +1379,11 @@ $ erl
 1> c(counter)
 2> x = {counter, 2}
 3> x:read()
-2                
+2
               </x-blockcode>
             </li>
           </ol>
-        </x-a>        
+        </x-a>
       </x-qa>
 
       <x-qa>
@@ -1392,7 +1392,7 @@ $ erl
             <li>At time <code>t</code> a key/value store <code>kv_1</code> is chosen.</li>
             <li>from <code>t</code> to <code>t+99</code>, code accumulates around <code>kv_1</code> using <code>API(kv_1)</code></li>
 
-            <li>At time <code>t+100</code> a key/value store <code>kv_2</code> replaces <code>kv_1</code>.</li>              
+            <li>At time <code>t+100</code> a key/value store <code>kv_2</code> replaces <code>kv_1</code>.</li>
             <li><code>API(kv_1) ≠ API(kv_2)</code></li>
             <li>Consequence: everything breaks.</li>
             <li>How to avoid this pitfall?</li>
@@ -1423,7 +1423,7 @@ test() ->
   error = N2:lookup(nokey),
   ok.
               </x-blockcode>
-            </li>              
+            </li>
             <li>Implementation:
               <x-blockcode lang="erlang">
 -module(adapter_db1).
@@ -1435,18 +1435,18 @@ new(dict) ->
 new(lists) ->
   {?MODULE, list, []}.
 
-                
+
 store(Key, Val, {_, dict, D}) ->
   D1 = dict:store(Key, Val, D),
   {?MODULE, dict, D1};
-                
+
 store(Key, Val, {_, list, L}) ->
   L1 = lists:keystore(Key, 1, L, {Key,Val}),
   {?MODULE, list, L1}.
-                
+
 lookup(Key, {_,dict,D}) ->
   dict:find(Key, D);
-                
+
 lookup(Key, {_,list,L}) ->
   case lists:keysearch(Key, 1, L) of
     {value, {Key,Val}} -> {ok, Val};
@@ -1468,14 +1468,14 @@ lookup(Key, {_,list,L}) ->
             <li>For instance:
               <x-blockcode lang="erlang">
 lookup(Key, Dict) -> {ok, Value} | not_found
-              </x-blockcode>      
+              </x-blockcode>
             </li>
             <li>may be used to fetch a value, search a value and test if a key exists. Instead, better provide this API:
               <x-blockcode lang="erlang">
 dict:fetch(Key, Dict) = Val | EXIT
 dict:search(Key, Dict) = {found, Val} | not_found.
 dict:is_key(Key, Dict) = Boolean
-              </x-blockcode>              
+              </x-blockcode>
             </li>
           </ol>
         </x-a>
@@ -1536,7 +1536,7 @@ dict:is_key(Key, Dict) = Boolean
             <li>your program must have lots of processes</li>
             <li>avoid side effects</li>
             <li>avoid sequential bottlenecks</li>
-            <li>write small messages, big computations code</li>            
+            <li>write small messages, big computations code</li>
           </ol>
         </x-a>
       </x-qa>
@@ -1583,7 +1583,7 @@ dict:is_key(Key, Dict) = Boolean
 
   <x-h2 name="Experiment" id="97a4b065-554b-45aa-b721-b91a2c378274">
     <p>A list of experiments demonstrating various Elixir concepts in practice.</p>
-  </x-h2>  
+  </x-h2>
 
   <x-h2 name="Method" id="26801949-b973-4afe-8077-a042cf80ad25">
     <p>Whatever the source: books, documentation, blog post, …, reference whatever is useful.</p>
@@ -1616,37 +1616,37 @@ dict:is_key(Key, Dict) = Boolean
                 rel="cc:attributionURL dct:creator"
                 property="cc:attributionName"
                 href="https://phfrohring.com"
-              >Pierre-Henry <span class="small-caps">fröhring</span></a
-																																		>
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
               is licensed under
               <a
                 href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
                 target="_blank"
                 rel="license noopener noreferrer"
                 style="display: inline-block"
-              >CC BY-SA 4.0<img
-														 style="
-																		height: 22px !important;
-																		margin-left: 3px;
-																		vertical-align: text-bottom;
-																		"
-														 src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
-														 alt="" /><img
-																				style="
-																							 height: 22px !important;
-																							 margin-left: 3px;
-																							 vertical-align: text-bottom;
-																							 "
-																							 src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
-																							 alt="" /><img
-																													style="
-																																 height: 22px !important;
-																																 margin-left: 3px;
-																																 vertical-align: text-bottom;
-																																 "
-																													src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
-																													alt=""
-																												/></a>
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
             </p>
           </footer>
         </div>

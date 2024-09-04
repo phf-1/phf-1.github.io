@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- This Source Code Form is subject to the terms of the Mozilla Public
+			 - License, v. 2.0. If a copy of the MPL was not distributed with this
+			 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="QA: Type Theory" />
+    <title>Pierre-Henry Fröhring's Website</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://phfrohring.com/" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      
+    </style>
+    <script defer type="module" src="/js/main.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <picture id="bg-image">
+        <source srcset="bg.webp" type="image/webp" />
+        <source srcset="bg.jpg" type="image/jpeg" />
+        <source srcset="bg.svg" type="image/svg+xml" />
+        <img
+          id="bg-image-img"
+          src="bg.jpg"
+          onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
+          alt="Illustration"
+        />
+      </picture>
+      <div id="container">
+        <div id="content">
+          <div id="topbar">
+            <nav class="actions">
+              <button id="toggle_toc_btn" class="button">TOC</button>
+              <button id="toggle_qa" class="button">SHOW ANSWERS</button>
+            </nav>
+            <nav class="navbar" id="navbar">
+              <a class="button" href="/">home</a>
+            </nav>
+            <x-toc></x-toc>
+          </div>
+
+          <!-- :TYPE: dbf45859-7a1a-4939-9cdb-4f6306168323 -->
+<x-h1 name="QA: Type Theory" id="67bdb272-07cd-4532-9399-062a8844f1bc">
+
+  <x-abstract>Abstract.</x-abstract>
+
+  <x-h2 name="Objective" id="7fe2454c-d8d2-4c5c-97a6-681d73db852e">
+
+  </x-h2>
+
+  <x-h2 name="Result" id="f1bb66b6-884d-4f44-8fbc-f88fc03dcdd8">
+    <x-h3 name="Chapter 1: Type Theory" id="df99e53c-98c3-4ed6-8e5a-7760bebe7bfb">
+		  <x-qa>
+			  <x-q id="e82e1e7f-6a95-400c-b98e-e59d0c28e8b7">
+			    <p>What is the name of fundamental notion of Type Theory?</p>
+			  </x-q>
+			  <x-a id="f1e9c2ab-b9dc-4004-a49b-9ea7109dcf12">
+					<ol>
+					  <li><em>Type</em></li>
+						<li>Usual objects — <i>i.e.</i> structures, functions, propositions — are reframed as <em>Types</em>.</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="950142a6-2ebb-4a06-aad4-03570b784096">
+			    <p>What is a <em>proposition</em>?</p>
+			  </x-q>
+			  <x-a id="9e6ace0a-e40f-4c07-9c68-fe3493d08413">
+					<p>A proposition is:</p>
+					<ol>
+					  <li>a statement susceptible to proof.</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="638919ef-3fe3-4ce6-b76f-052ebe48544f">
+			    <p>What is a <em>theorem</em>?</p>
+			  </x-q>
+			  <x-a id="619b6edd-a87a-42d0-b08c-562426a90420">
+					<p>A theorem is:</p>
+					<ol>
+					  <li>a statement that has been proven.</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="475633a9-e481-47dc-a512-5d64efab781a">
+			    <p>In the context of Type Theory, what does <em>proving a theorem</em> means?</p>
+			  </x-q>
+			  <x-a id="17969e3c-7dc0-4abc-ba9a-1214c1446b59">
+					<p>It means:</p>
+					<ol>
+					  <li><em>constructing</em> a type that represents a proposition.</li>
+						<li><em>constructing</em> a term of that type that represents a proof.</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="f3019c77-e1db-4799-9811-1132a920e232">
+			    <p>Provide an informal description of a deductive system.</p>
+			  </x-q>
+			  <x-a id="37608af8-6e20-4bb2-a2f9-fb604d222ef8">
+					<p>A deductive system is:</p>
+					<ol>
+					  <li>A collections of <em>rules</em></li>
+						<li>that are used to derive <code>judgements</code></li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="bcdddb40-4646-417f-9490-ef602d67d27c">
+			    <p>How to represent a judgement?</p>
+			  </x-q>
+			  <x-a id="47878f04-6f5d-4113-8e18-051028375521">
+					<p>The judgement <q>the term a has type A</q> is written:</p>
+					<ol>
+					  <li>a : A</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="1dae7044-3787-4558-a5a6-09555673348c">
+			    <p>What does it mean: <q>a and b are propositionally equal</q>?</p>
+			  </x-q>
+			  <x-a id="58864599-e0e6-4a73-b34f-868a0f2c06b0">
+					<p>It means that there is a term <x-math>p ~:~ a =_A b</x-math></p>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="081dbe67-eeec-489c-b8a5-0f16fab20915">
+			    <p>What does it mean: <q>a and b are judgmentally equal</q>?</p>
+			  </x-q>
+			  <x-a id="ab275027-8d38-4f5e-95ad-e55f78555b5e">
+					<p>It means that a and b are equal by definition.</p>
+					<p>The expression used to refer to the term may be different, but it is same term.</p>
+					<p>For instance, if we define <x-math>f(x) = x^2</x-math>, then we write:</p>
+					<p> <x-math>f(3) \equiv{} 3^2 ~:~ ℕ</x-math></p>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="a2645a30-b814-47fc-b86b-77df603ee142">
+			    <p>Why these two equalities are useful?</p>
+			  </x-q>
+			  <x-a id="d7935529-45ae-4c03-9744-451d974bfd66">
+					<p>These equalities are useful because:</p>
+					<ol>
+						<li>Given:
+							<ol>
+						<li><x-math>x ~:~ ℕ</x-math></li>
+					  <li><x-math>f(x) \equiv{} x^2</x-math></li>
+					  <li><x-math>p ~:~ 3^2 = 9</x-math></li>
+							</ol>
+						</li>
+						<li>We want to be able to derive:
+							<ol>
+								<li><x-math>p ~:~ f(3) = 9</x-math></li>
+							</ol>
+						</li>
+					</ol>
+
+					<p>In other words:</p>
+					<ol>
+						<li>Given:
+							<ol>
+								<li><x-math>p ~:~ A</x-math></li>
+								<li><x-math>A \equiv{} B</x-math></li>
+							</ol>
+						</li>
+						<li>We may conclude: <x-math>p ~:~ B</x-math></li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="036bfa0f-4bb7-4629-94d5-d5c42b926927">
+			    <p>How to introduce a definitional equality?</p>
+			  </x-q>
+			  <x-a id="8a41a2aa-7304-4c4b-aee4-16d979d690ec">
+					<p>With <x-math>:\equiv{}</x-math>. For instance: <x-math>f(x) ~:\equiv{}~ x^2</x-math></p>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="341328d2-f492-4c39-b17c-869d495d6237">
+			    <p>What is a <em>context</em>?</p>
+			  </x-q>
+			  <x-a id="795d741e-0d96-4677-a9a8-2f4bc59853b0">
+					<ol>
+						<li>A context is the ordered list of assumptions that may lead to a judgement.</li>
+						<li>For instance: given <x-math>a,b~:~N</x-math> and <x-math>p~:~a = b</x-math>, we may construct <x-math>p^{-1}~:~b=a</x-math></li>
+						<li>The context is: <x-math>a,b~:~N</x-math>, <x-math>p~:~a = b</x-math></li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="fd77f0c4-9f0c-4f75-9ddb-0866c141f281">
+			    <p>What is a <em>type former</em>?</p>
+			  </x-q>
+			  <x-a id="ed96c47a-fe75-4019-a361-384501d61b2f">
+					<p>A type former is:</p>
+					<ol>
+					  <li>a way to construct a type</li>
+						<li>rules for the construction and behavior of elements of that type</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="78bbc112-380d-4d9d-963a-da33485922ae">
+			    <p>Are there any <em>axioms</em>?</p>
+			  </x-q>
+			  <x-a id="a4216648-09fa-4e0b-8273-dd7574ac549a">
+					<p>No, only rules.</p>
+					<ol>
+					  <li>In the description of deductive systems in terms of judgments, the
+							rules are what allow us to conclude one judgment from a collection of
+							others, while the axioms are the judgments we are given at the outset.</li>
+						<li>If we think of a deductive system as a formal game, then the rules
+							are the rules of the game, while the axioms are the starting position.</li>
+						<li>The advantage of formulating type theory using only rules is that
+							rules are “procedural”. In particular, this property is what makes
+							possible (though it does not automatically ensure) the good
+							computational properties of type theory, such as “canonicity”.</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="57fcc00e-708b-4444-b62c-2f1a707b2c18">
+			    <p>Define the function type.</p>
+			  </x-q>
+			  <x-a id="d10a4237-eb66-4a66-9d8d-7bf504fd7d14">
+					<ol>
+					  <li>Given: A,B:U, then: A → B</li>
+						<li>Given: a formula F, then: f :≡ λa:F</li>
+						<li>Given: f : A → B, then: f(a) :≡ (λx:F)(a) : B</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="b10b0bb8-7f5f-4b45-8b6c-fc2ff835dba1">
+			    <p>What are <em>universes</em>?</p>
+			  </x-q>
+			  <x-a id="8a934e82-54cf-4b20-ac42-9642d82f8e0d">
+					<ol>
+					  <li>A uniserve is a type whose elements are types.</li>
+						<li><x-math>U_0 ~:~ U_1 ~ …</x-math></li>
+						<li>Universes are cumulative.</li>
+						<li>A small type is a type of some universe U.</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="ad11a00f-b015-48de-9f7c-e4ed73c356b4">
+			    <p>How to model a collection of types varying over a given type A?</p>
+			  </x-q>
+			  <x-a id="f0898ca6-b764-4908-b550-032a6eb686ce">
+					<ol>
+					  <li><x-math>B ~:~ A \rightarrow{} U</x-math></li>
+						<li>It is called a family of types or <em>dependent types</em>.</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="83413181-4889-483a-9d89-a99bb4fb0100">
+			    <p>What is the dependent function types?</p>
+			  </x-q>
+			  <x-a id="582ed1af-9522-4974-a9aa-f1fdb1f15417">
+					<ol>
+					  <li>Given: A, B : A → U, then: ΠA→B</li>
+						<li>Given: a formula F, then: f :≡ λa:F</li>
+						<li>Given: f : ΠA→B, then: f(a) :≡ (λx:F)(a) : B(a)</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="1d4e0b57-3194-43c8-9968-61f3334d41fe">
+			    <p>What is the product type?</p>
+			  </x-q>
+			  <x-a id="4bf8402c-f2c2-484b-82fa-aec4c6ee6e76">
+					<ol>
+					  <li>Given: A,B:U, then: A × B</li>
+						<li>Given: a:A, b:B, then: (a,b) : A × B</li>
+						<li>Given: (a,b) : A × B, g : A → B → C, then: f((a,b)) :≡ g(a,b) : C</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="8c76491c-05d2-4264-9579-3290abd4a759">
+			    <p>What is the recursor on A × B?</p>
+			  </x-q>
+			  <x-a id="f350758a-5088-49cf-b3b4-3e8ac26e1569">
+					<p>It specifies how to build functions on A × B.</p>
+					<ol>
+					  <li>rec : Π(C:U)→(A→B→C)→(A×B→C)</li>
+						<li>rec C g (a,b) :≡ g(a,b)</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="33e088b7-7374-479e-88ec-fe12eee62e64">
+			    <p>What is the induction on A × B?</p>
+			  </x-q>
+			  <x-a id="e4fcdbd4-3884-4208-b3b4-625980c035b4">
+					<p>It specifies how to build dependent functions on A × B.</p>
+					<ol>
+					  <li>ind : Π(C:A×B→U)→(ΠA→ΠB→C)→(ΠA×B→C)</li>
+						<li>ind C g (a,b) :≡ g(a,b)</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="87edd072-bfe1-49de-a90d-230c20d36611">
+			    <p>What is the dependent pair Σ-types?</p>
+			  </x-q>
+			  <x-a id="f51c776b-e82d-4079-a426-e54e6e51e05d">
+					<ol>
+					  <li>Given: A:U, B:A→U, then: ΣA,B</li>
+						<li>Given: a:A, b:B(a), then: (a,b) : ΣA,B</li>
+						<li>rec : Π(C:U),(ΠA,B → C) → (ΣA,B → C)</li>
+						<li>rec C g (a,b) :≡ g(a,b)</li>
+						<li>ind : Π(C:Π(ΣA,B),U) → (ΠA,(ΠB,C)) → (Π(ΣA,B),C)</li>
+						<li>ind C g (a,b) :≡ g(a,b)</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="59b1ee5c-4f62-45fb-a60a-57d39bfadd7a">
+			    <p>Define a Magma.</p>
+			  </x-q>
+			  <x-a id="dafe2a04-2969-4d6c-9ed4-79c4c9fca6f2">
+					<ol>
+					  <li>Magam :≡ ΣA:U,A → A → A</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="cfa02091-eb0b-4a8a-a49c-c0255c796531">
+			    <p>Define a pointed magma.</p>
+			  </x-q>
+			  <x-a id="f22d2657-e8c3-49ad-8d87-8883728b1bfe">
+					<ol>
+					  <li>Magam :≡ ΣA:U,(A → A → A) × A</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="03b090c8-824e-40f8-b3f5-c366c9f62614">
+			    <p>Define the coproduct type.</p>
+			  </x-q>
+			  <x-a id="52bcdc02-5256-4c63-8123-81f9995bc4bf">
+					<ol>
+					  <li>Given: A,B:U , then: A+B</li>
+						<li>Given: a:A, b:B, then: inl(a), inr(b) : A+B</li>
+						<li>rec : Π(C:U),(A→C) → (B→C) → (A+B → C)</li>
+						<li>rec C (f,g) inl(a) :≡ f(a)</li>
+						<li>rec C (f,g) inr(b) :≡ g(b)</li>
+						<li>ind : Π(C:A+B → U), (ΠA,C) → (ΠB,C)→ (ΠA+B,C)</li>
+						<li>ind C (f,g) inl(a) :≡ f(a)</li>
+						<li>ind C (f,g) inr(b) :≡ g(b)</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="e4c47ec8-6b6e-4975-8eb7-cb05fb77c194">
+			    <p>Define the natural numbers.</p>
+			  </x-q>
+			  <x-a id="61d28836-115f-438c-b7ac-952a2f54ebaa">
+					<ol>
+					  <li>ℕ is the type of natural numbers.</li>
+						<li>0 : ℕ</li>
+						<li>Given: n:ℕ, then: succ(n):ℕ</li>
+						<li> rec : ΠC:U, C → (ℕ→C→C) → (ℕ→C)</li>
+						<li>rec C c0 cs 0 :≡ c0</li>
+						<li>rec C c0 cs succ(n) :≡ cs n rec(C c0 cs n)</li>
+						<li>ind : <x-todo></x-todo></li>
+						<li>ind <x-todo></x-todo> :≡  <x-todo></x-todo></li>
+					</ol>
+			  </x-a>
+			</x-qa>
+
+			<x-qa>
+			  <x-q id="4d29b772-a746-4e2b-a7a5-73f052860fbc">
+			    <p>Correspondance between logical operations on propositions and type-theoretic operations.</p>
+			  </x-q>
+			  <x-a id="c07cea9b-e880-4d8d-92c5-3b56e90fcfcb">
+					<ol>
+					  <li>True ↔ 1</li>
+						<li>False ↔ 0</li>
+						<li>A and B ↔ A × B</li>
+						<li>A or B ↔ A + B</li>
+						<li>If A, then: B ↔ A → B</li>
+						<li>A iff B ↔ (A → B) × (B → A)</li>
+						<li>Not A ↔ A → 0</li>
+						<li>∀x:A,P(x) ↔ Π(x:A),P(x)</li>
+						<li>∃x:A,P(x) ↔ Σ(x:A),P(x)</li>
+					</ol>
+			  </x-a>
+			</x-qa>
+		</x-h3>
+   </x-h2>
+
+  <x-h2 name="Experiment" id="78c50a2a-181e-46ab-98a5-be28b526f600">
+
+  </x-h2>
+
+  <x-h2 name="Method" id="9108f33b-1d39-46d5-9516-a550bf93781e">
+		<ol>
+		  <li>These chapters of the book <a href="https://github.com/HoTT/book">Homotopy Type Theory</a> are considered:
+				<ol>
+				  <li><q>Chapter 1: Type Theory</q></li>
+				  <li><q>Chapter 5: Induction</q></li>
+				  <li><q>Appendix A</q></li>
+				</ol>
+			</li>
+		</ol>
+
+  </x-h2>
+
+  <x-h2 name="Discussion" id="db9433a4-db18-4d26-8df7-eef72a031511">
+
+  </x-h2>
+
+  <x-h2 name="Conclusion" id="0e4a1b65-0ebe-4741-be7c-6c7ccb6be4bd">
+
+  </x-h2>
+
+  <x-h2 name="Reference" id="dccff8fd-4c3b-44e9-bb4d-29b22082ffbb">
+		<ul>
+		  <li><a href=https://github.com/HoTT/book>Homotopy Type Theory</a></li>
+		</ul>
+  </x-h2>
+</x-h1>
+
+
+          <hr />
+
+          <footer>
+            <p xmlns:cc="http://creativecommons.org/ns#">
+              This work by
+              <a
+                rel="cc:attributionURL dct:creator"
+                property="cc:attributionName"
+                href="https://phfrohring.com"
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
+              is licensed under
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
+                target="_blank"
+                rel="license noopener noreferrer"
+                style="display: inline-block"
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

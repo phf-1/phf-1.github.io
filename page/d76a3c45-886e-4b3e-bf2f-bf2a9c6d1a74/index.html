@@ -29,7 +29,7 @@
     <link rel="canonical" href="https://phfrohring.com/" />
     <link rel="stylesheet" href="/css/main.css" />
     <style>
-     
+      
     </style>
     <script defer type="module" src="/js/main.min.js"></script>
   </head>
@@ -65,7 +65,7 @@
 
   <x-h2 name="Objective" id="d46fe82d-1f4a-4fe3-a0c0-5ecab7343cc9">
     <ol>
-      <li>The objective is identical to the <a href="/page/7cbeef0f-6f18-41be-85fb-706ee226be2b/#3cf92627-4a43-431c-971d-94e39dfec233">Guix and Elixir</a> article.</li>
+      <li>The objective is identical to the <a href="/page/7cbeef0f-6f18-41be-85fb-706ee226be2b#3cf92627-4a43-431c-971d-94e39dfec233">Guix and Elixir</a> article.</li>
       <li>In addition, <code>propagated-inputs</code> should not be used in Guix packages definitions.</li>
 
     </ol>
@@ -73,7 +73,7 @@
   </x-h2>
 
   <x-h2 name="Result" id="4fc33be9-fed1-453b-a903-976f1adc9f3f">
-    <p>The result is identical to the <a href="/page/7cbeef0f-6f18-41be-85fb-706ee226be2b/#f5f91dac-81a8-4e3b-834c-1a80e8ff2cf9">Guix and Elixir</a> article.</p>
+    <p>The result is identical to the <a href="/page/7cbeef0f-6f18-41be-85fb-706ee226be2b#f5f91dac-81a8-4e3b-834c-1a80e8ff2cf9">Guix and Elixir</a> article.</p>
   </x-h2>
 
   <x-h2 name="Experiment" id="91deda7b-1b4e-4126-9b41-05835c8795f8">
@@ -81,7 +81,7 @@
     <p>The experiment is identical to the <a href="/page/7cbeef0f-6f18-41be-85fb-706ee226be2b#13792b8e-e68e-4e83-abf0-da9a8e55522e">Guix and Elixir</a> article.</p>
   </x-h2>
 
-  <x-h2 name="Method" id="4c21d27c-7080-4d3e-9219-07262477f3b8">    
+  <x-h2 name="Method" id="4c21d27c-7080-4d3e-9219-07262477f3b8">
     <x-h3 name="Refined Objective" id="fd39e942-ef20-48a1-8c38-76d99f8061d6">
       <ol>
         <li>If <code>elixir-pkg</code> is a Guix Elixir package such that:
@@ -103,7 +103,7 @@
             <li>If it provides an application <code>App</code>, then: <code>$ iex; $ {:ok, _} = Application.ensure_all_started(App)</code></li>
           </ul>
         </li>
-      </ol>      
+      </ol>
     </x-h3>
 
     <x-h3 name="test_project" id="0e886164-18f7-4c6d-9794-f32220ecbd24">
@@ -163,9 +163,9 @@ defmodule TestProject do
   def start(_type, _args) do
     event_handler_id = "test-project-instrument"
     handler = &__MODULE__.handle_event/4
-    event = [:hello]  
+    event = [:hello]
     :telemetry.attach_many(event_handler_id, [event], handler, nil)
-        
+
     Supervisor.start_link([], strategy: :one_for_one)
   end
 
@@ -188,11 +188,11 @@ end
 
       <p><code>TestProject.hello("name")</code> has two effects:</p>
       <ol>
-        <li>It sends a <code>:hello</code> message to the <code>:telemetry</code> application.</li>        
+        <li>It sends a <code>:hello</code> message to the <code>:telemetry</code> application.</li>
         <li>It returns the strings <code>"Hello name!"</code>.</li>
       </ol>
     </x-h3>
-    
+
     <x-h3 name="Erlang Telemetry Package" id="25ad5e6b-4ccc-43c9-9bd2-8c18db65f023">
       <p>Since the application model depends on <code>:telemetry</code>, then: a <code>erlang-telemetry</code> package is needed and will be used as a dependency of the application model Guix package definition.</p>
       <x-blockcode lang="scheme">
@@ -218,7 +218,7 @@ end
     <x-h3 name="Application Model Archive" id="018ef884-3ce2-44be-89c2-447db741b0f9">
       <p>A <code>Makefile</code> builds an archive <code>_build/test_project.tar.gz</code> out of the <code>test_project/</code>. This archive will serve as the <code>source</code> field of the application model Guix package.</p>
     </x-h3>
-    
+
     <x-h3 name="Application Model Package" id="21904a5b-eba1-4d0e-aa97-3a7e2519bac2">
       <p>The application model has an associated Guix package definition:</p>
       <x-blockcode lang="scheme">
@@ -319,7 +319,7 @@ $ guix shell -C -D -f test-project-package.scm --preserve=LC_ALL
           <x-blockcode>
 [env]$ echo /gnu/store/* | tr ' ' '\n' | grep telemetry
 /gnu/store/k2blpmzb8z15idsppifq1dhkxhwpgh0k-erlang-telemetry-1.2.1
-          </x-blockcode>          
+          </x-blockcode>
         </li>
         <li>The application is compiled:
           <x-blockcode>
@@ -339,7 +339,7 @@ _build/prod/
         └── ebin
             ├── Elixir.TestProject.beam
             └── test_project.app
-          </x-blockcode>          
+          </x-blockcode>
         </li>
 
         <li>The <code>test_project.app</code> Application Resource File lists <code>telemetry</code> in its <code>applications</code> field. So: <x-math>\text{inputs} \cap \text{applications} = \{ \text{telemetry} \}</x-math>
@@ -353,14 +353,14 @@ _build/prod/
               {registered,[]},
               {vsn,"0.1.0"},
               {mod,{'Elixir.TestProject',[]}}]}.
-          </x-blockcode>          
+          </x-blockcode>
         </li>
 
         <li>A way for the OS to tell an Erlang system about the existence of Erlang applications in the file system is through then <code>ERL_LIBS</code> environment variable:
           <x-blockcode>
 export ERL_LIBS=/gnu/store/k2blpmzb8z15idsppifq1dhkxhwpgh0k-erlang-telemetry-1.2.1/lib/erlang/lib
-export ERL_LIBS=${ERL_LIBS}:$PWD/src/test_project/_build/prod/lib            
-          </x-blockcode>          
+export ERL_LIBS=${ERL_LIBS}:$PWD/src/test_project/_build/prod/lib
+          </x-blockcode>
         </li>
 
         <li>The Application Model executes as expected:
@@ -369,14 +369,14 @@ export ERL_LIBS=${ERL_LIBS}:$PWD/src/test_project/_build/prod/lib
 
 iex(1)> Application.ensure_all_started(:test_project)
 {:ok, [:telemetry, :test_project]}
-            
+
 iex(2)> TestProject.hello("Joe")
 
 10:57:38.531 [info] [Name telemetry: Joe]
 "Hello Joe!"
-          </x-blockcode>          
+          </x-blockcode>
         </li>
-      </ol>      
+      </ol>
     </x-h3>
 
     <x-h3 name="Package ↦ runtime dependencies" id="f51fd748-dab9-4115-938c-8be994179d9e">
@@ -391,7 +391,7 @@ main([FileName]) ->
     [{application, _AppName, AppData}] = ApplicationSpecification,
     {applications, Applications} = lists:keyfind(applications, 1, AppData),
     io:format("~p~n", [Applications]).
-          </x-blockcode>          
+          </x-blockcode>
 
           <x-blockcode>
 [env]$ erlc read_applications.erl
@@ -430,7 +430,7 @@ main([FileName]) ->
           </x-blockcode>
 
           <x-blockcode>
-[env]$ guile read_applications.scm 
+[env]$ guile read_applications.scm
 ("kernel" "stdlib" "elixir" "logger" "telemetry")
           </x-blockcode>
         </li>
@@ -489,37 +489,37 @@ main([FileName]) ->
                 rel="cc:attributionURL dct:creator"
                 property="cc:attributionName"
                 href="https://phfrohring.com"
-              >Pierre-Henry <span class="small-caps">fröhring</span></a
-																																		>
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
               is licensed under
               <a
                 href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
                 target="_blank"
                 rel="license noopener noreferrer"
                 style="display: inline-block"
-              >CC BY-SA 4.0<img
-														 style="
-																		height: 22px !important;
-																		margin-left: 3px;
-																		vertical-align: text-bottom;
-																		"
-														 src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
-														 alt="" /><img
-																				style="
-																							 height: 22px !important;
-																							 margin-left: 3px;
-																							 vertical-align: text-bottom;
-																							 "
-																							 src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
-																							 alt="" /><img
-																													style="
-																																 height: 22px !important;
-																																 margin-left: 3px;
-																																 vertical-align: text-bottom;
-																																 "
-																													src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
-																													alt=""
-																												/></a>
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
             </p>
           </footer>
         </div>

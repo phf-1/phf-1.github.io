@@ -1,0 +1,5 @@
+strict digraph {
+    node [shape=rect]
+    client -> url [label=" Hello"]
+		url -> {client2 [label="client"]} [label=" World + Error"]
+}

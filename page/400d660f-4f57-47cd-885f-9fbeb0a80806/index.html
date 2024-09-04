@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- This Source Code Form is subject to the terms of the Mozilla Public
+			 - License, v. 2.0. If a copy of the MPL was not distributed with this
+			 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="QA: Elixir "Hello World!" server" />
+    <title>Pierre-Henry Fröhring's Website</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://phfrohring.com/" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      
+    </style>
+    <script defer type="module" src="/js/main.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <picture id="bg-image">
+        <source srcset="bg.webp" type="image/webp" />
+        <source srcset="bg.jpg" type="image/jpeg" />
+        <source srcset="bg.svg" type="image/svg+xml" />
+        <img
+          id="bg-image-img"
+          src="bg.jpg"
+          onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
+          alt="Illustration"
+        />
+      </picture>
+      <div id="container">
+        <div id="content">
+          <div id="topbar">
+            <nav class="actions">
+              <button id="toggle_toc_btn" class="button">TOC</button>
+              <button id="toggle_qa" class="button">SHOW ANSWERS</button>
+            </nav>
+            <nav class="navbar" id="navbar">
+              <a class="button" href="/">home</a>
+            </nav>
+            <x-toc></x-toc>
+          </div>
+
+          <!-- :TYPE: dbf45859-7a1a-4939-9cdb-4f6306168323 -->
+<x-h1 name="QA: Elixir Hello World! server" id="1d8ea468-4955-4116-9c02-7fe242eb1a2e">
+
+  <x-abstract>An Elixir service is built. The path from the specification to the
+		executable deployed on a VM is described. The service may be used as a template
+		for other services to serve requests beyond <q>hello world!</q>.</x-abstract>
+
+  <x-h2 name="Introduction" id="71c34db3-1d8e-4d8e-8286-92b5f65e06cf">
+    <p><x-todo></x-todo></p>
+  </x-h2>
+
+  <x-h2 name="Objective" id="5cb7de96-b879-45ac-8248-32b87b8f7cef">
+    <p>
+      The objective is to build and deploy a <a href="#25dbe993-fe53-4475-bd67-865704d3a764">manageable</a> <q>hello world</q> service using Elixir.
+    </p>
+
+		<x-definition term="manageable" id="25dbe993-fe53-4475-bd67-865704d3a764">
+		  <p>If a service satisfies the following properties, then: we say that the service is <strong>manageable</strong>.</p>
+			<ol>
+        <li><a href="#8575246a-0110-4767-8692-bb0e85af3fd6">understandable ;</a></li>
+        <li><a href="#b381bef7-89da-44b9-93b6-f0a584f5b96a">flexible ;</a></li>
+        <li><a href="#8e6b4f53-76bc-46b9-a191-4f71098832a2">efficient to debug ;</a></li>
+        <li><a href="#71217295-1417-458c-8c2f-f65f7e23232e">reliable ;</a></li>
+        <li><a href="#37129911-2ddb-4c0e-ac72-725cab69104d">scalable ;</a></li>
+        <li><a href="#527a23d5-8b25-4499-9e25-d80a22303467">performant ;</a></li>
+        <li><a href="#20a62e9a-7cc9-4483-a5dd-0f29e6135312">secure ;</a></li>
+        <li><a href="#ed076d68-caa7-4aa1-b77b-c54926dc4aa4">portable.</a></li>
+			</ol>
+		</x-definition>
+
+  </x-h2>
+
+  <x-h2 name="Result" id="54133c77-470b-4d13-949e-853eb167e42a">
+    <ul>
+      <li>The source code is available here: <a href="https://github.com/phf-1/articles/tree/main/400d660f-4f57-47cd-885f-9fbeb0a80806/data/hello_world">GitHub</a>.</li>
+      <li>The service is <a href="#25dbe993-fe53-4475-bd67-865704d3a764">manageable</a>.</li>
+    </ul>
+  </x-h2>
+
+  <x-h2 name="Understandable" id="8575246a-0110-4767-8692-bb0e85af3fd6">
+
+    <ul>
+      <li>By <q>Understandable</q> we mean being able to explain the computations using <a
+																																													href="/page/dab9edca-ca8b-4d7b-a1cb-934d07741e2b#f1fdd237-16a0-4be9-b9c7-faf539367d17">actor computations</a>.</li>
+      <li>In order to simplify the presentation, we present the computations from a given <em>point of view</em>.</li>
+
+      <li>A point of view on an object is the computation graph obtained <i>w.r.t.</i> a given actor. For instance, the client point of view or the programmer point of view.</li>
+
+      <li>Depending on the point of view, the object we describe may give rise to different actor computations without contradicting themselves.</li>
+    </ul>
+
+    <x-h3 name="Client point of view" id="dbf61639-fc91-48f3-a226-b8ae8f570acf">
+      <p>From the client point of view, the service takes the form of a URL. When the URL receives a <code>Hello</code> message, it should reply within 1 second with a <code>World</code> message or an <code>Error</code> message.</p>
+
+      <figure>
+        <img src="data/computation_client.svg" alt="Client point of view">
+        <figcaption>Client point of view</figcaption>
+      </figure>
+
+      <ul>
+        <li>A <code>Hello</code> message is a <code>POST</code> HTTP request with a body equal to <code>{"type": "Hello"}</code>.</li>
+        <li>A <code>World</code> message is a <code>POST</code> reply with a body equal to <code>{"type": "World"}</code>.</li>
+        <li>An <code>Error</code> message is a <code>POST</code> reply with a body equal to <code>{"type": "Error", "msg": reason}</code> where <code>reason</code> is a string.</li>
+      </ul>
+    </x-h3>
+
+    <x-h3 name="Programmer point of view" id="68e6c771-a9f8-4153-b569-168979ee7627">
+      <p>From the programmer point of view, many computations may occur:</p>
+
+      <p><strong>The happy path.</strong> Nothing crashes, everything is fine. When the client sends a message to the
+				service URL, DNS receives a message. Then, the VM receives a message. Then, the BEAM process on the VM receives
+				the message. Then, the handler in the BEAM process receives the message and computes a reply. Finally, the client
+				receives the reply.</p>
+
+      <p>The following cases are built by answering a question: <q>What if <em>such</em> and <em>such</em> happens on
+				the happy path?</q>:</p>
+      <ul>
+        <li><strong>The handler crashes.</strong> Then, the supervisor receives a notification that the
+					handler crashed for some reason. Then, the client receives an excuse note for the inconvenience while the logger
+					receives a detailed crash report. Finally, the developers receive a crash report.</li>
+        <li><strong>The BEAM crashes.</strong> Then, <code>systemd</code> receives a signal which triggers a restart of
+					the BEAM process.</li>
+        <li><strong>Clients cannot get enough of <q>hello world!</q></strong> The alarm mechanism detects a surge of
+					requests exceeding a threshold. Then, a notification is logged. Then, the developers are informed.</li>
+        <li><strong>The VM crashes.</strong> and so on.</li>
+      </ul>
+
+      <p>Using an actor computation graph, the following summary may be built:</p>
+
+      <figure>
+        <img src="data/computation_programmer.svg" alt="Programmer point of view">
+        <figcaption>Programmer point of view</figcaption>
+      </figure>
+    </x-h3>
+
+    <x-h3 name="Sysadmin point of view" id="01522a09-9a9f-41c1-8a22-1be864ff267b">
+      <p>For a sysadmin, the service is essentially a directory that gets transformed into a deployed web service. The computation graph may be:</p>
+      <figure>
+        <img src="data/computation_sysadmin.svg" alt="Sysadmin point of view">
+        <figcaption>Sysadmin point of view</figcaption>
+      </figure>
+    </x-h3>
+  </x-h2>
+
+  <x-h2 name="Efficient to debug" id="8e6b4f53-76bc-46b9-a191-4f71098832a2">
+    <p>Given that the execution is logged using the standard Elixir infrastructure and that additional production code
+			crashes are logged as well, the programmer can compare crash reports and their understanding of the
+			service which leads to a more efficient debugging process than if one of the above elements was missing. For instance, here is a crash report:</p>
+
+    <x-blockcode>
+			16:28:10.431 [error] #PID<0.388.0> running HelloWorld.Router (connection #PID<0.387.0>, stream id 1) terminated
+			Server: localhost:8081 (http)
+			Request: POST /
+			** (exit) an exception was raised:
+			** (CaseClauseError) no case clause matching: %{"type" => "Wrong"}
+			(hello_world 0.1.0) lib/hello_world/router.ex:15: anonymous fn/2 in HelloWorld.Router.do_match/4
+			(hello_world 0.1.0) deps/plug/lib/plug/router.ex:246: anonymous fn/4 in HelloWorld.Router.dispatch/2
+			(telemetry 1.2.1) …/hello_world/deps/telemetry/src/telemetry.erl:321: :telemetry.span/3
+			(hello_world 0.1.0) deps/plug/lib/plug/router.ex:242: HelloWorld.Router.dispatch/2
+			(hello_world 0.1.0) lib/hello_world/router.ex:1: HelloWorld.Router.plug_builder_call/2
+			(hello_world 0.1.0) deps/plug/lib/plug/error_handler.ex:80: HelloWorld.Router.call/2
+			(plug_cowboy 2.7.1) lib/plug/cowboy/handler.ex:11: Plug.Cowboy.Handler.init/2
+			(cowboy 2.12.0) …/hello_world/deps/cowboy/src/cowboy_handler.erl:37: :cowboy_handler.execute/2
+			(cowboy 2.12.0) …/hello_world/deps/cowboy/src/cowboy_stream_h.erl:306: :cowboy_stream_h.execute/3
+			(cowboy 2.12.0) …/hello_world/deps/cowboy/src/cowboy_stream_h.erl:295: :cowboy_stream_h.request_process/3
+			(stdlib 5.2) proc_lib.erl:241: :proc_lib.init_p_do_apply/3
+    </x-blockcode>
+  </x-h2>
+
+  <x-h2 name="Reliable" id="71217295-1417-458c-8c2f-f65f7e23232e">
+    <p>Considering the <a href="#68e6c771-a9f8-4153-b569-168979ee7627">computation graph</a> of the service, we say that it is reliable because:
+      <ul>
+        <li>If handling of a request crashes, then: the service keeps running.</li>
+        <li>If the service cannot keep up with the number of requests, then: an alarm is
+					sent to operators to request more resources.</li>
+        <li>If the service process crashes, then: systemd restarts the service process.</li>
+      </ul>
+    </p>
+
+    <p>While not impossible, these properties make the service hard to crash.</p>
+  </x-h2>
+
+  <x-h2 name="Performant" id="527a23d5-8b25-4499-9e25-d80a22303467">
+    <p>We will consider the <code>service</code> performant if it can handle 10000 messages under 1 second on a mid level PC. To test the hypothesis, the following code may be run in a <a href="https://livebook.dev/">livebook</a>:</p>
+
+		<x-blockcode lang="elixir">
+# Parameters
+port = 8082
+url = "http://localhost:#{port}/"
+number_of_requests = 10000
+duration = 1 # second
+# Libraries
+Mix.install([{:req, "~> 0.5.6"}])
+# Experiment
+defmodule Hello, do: defstruct [type: "hello"]
+defmodule World, do: defstruct [type: "world"]
+defmodule Error, do: defstruct [msg: "No error message."]
+Supervisor.start_link([{Task.Supervisor, name: TaskSupervisor}], strategy: :one_for_one)
+defmodule Experiment do
+  def result(url, number_of_requests, duration) do
+    hellos = List.duplicate(%Hello{}, number_of_requests)
+    tasks = Enum.map(hellos, fn(hello) -> ask(url, hello) end)
+    replies = Task.await_many(tasks, duration * 1000)
+    worlds = Enum.filter(replies, fn(rep) -> match?(%World{}, rep) end)
+    length(hellos) == length(worlds)
+  end
+
+  def ask(url, msg) do
+    task = fn ->
+      map = Map.from_struct(msg)
+      with {:ok, reply} <- Req.post(url, json: map),
+            %{"type" => "world"} <- reply.body do
+          %World{}
+      else
+        _ -> %Error{}
+      end
+    end
+    Task.Supervisor.async(TaskSupervisor, task)
+  end
+end
+# Result
+conclusion =
+  case Experiment.result(url, number_of_requests, duration) do
+    true -> "The server can handle #{number_of_requests} requests per #{duration} second."
+    false -> "The server cannot handle #{number_of_requests} per #{duration} second."
+  end
+IO.puts(conclusion)
+		</x-blockcode>
+  </x-h2>
+
+  <x-h2 name="Scalable" id="37129911-2ddb-4c0e-ac72-725cab69104d">
+    <p>Assuming the code is correct and performant, the <code>service</code> can still fail under the sheer number of
+			requests. In this case, adding more VMs becomes necessary to horizontally scale the <code>service</code>. The alarm
+			mechanism logs a notification so that a system administrator may add more VMs.</p>
+
+    <p>Additional actors should be added for the VMs to join seamlessly the system using standard Erlang mechanisms —
+      <i>e.g.</i> <a href="https://www.erlang.org/doc/apps/erts/epmd_cmd">epmd</a>.</p>
+  </x-h2>
+
+  <x-h2 name="Flexible" id="b381bef7-89da-44b9-93b6-f0a584f5b96a">
+    <p>
+			We use the term <q>flexible</q> in the same way as described by Gerald Jay Sussman in the book:
+      <a href="https://mitpress.mit.edu/9780262045490/software-design-for-flexibility/">Software Design for Flexibility</a>.
+			An explanation is available on YouTube: <a href="https://youtu.be/Tdwr9tweTDE">Three Directions in Design</a>. This
+			property is illustrated to some degree by how the computational graph has been built by adding more and more nodes and edges to
+			it.
+    </p>
+
+		<p><strong>Adding new protocols.</strong> Another way that flexibility is attained is by adding protocols to
+			existing actors. In effect, each actor may run arbitrary computations which means that it can <q>learn</q> new
+			protocols. Pushing the idea to its limit, an actor may be taught protocols on the fly, provided it was
+			<q>explained</q> to it appropriately. In the meantime, developers may add protocols to actors before
+			live-reloading actors giving a similar effect.</p>
+
+    <p><strong>Adding new actors.</strong> For instance, we started by the <em>happy path</em> and then, for each new
+			hypothesis — <i>e.g.</i> the handler crashes — we added communications and actors to deal with it — <i>e.g.</i> if
+			the handler crashes, then: a supervisor is informed and restarts it. Everything else was preserved, and a new
+			property to the system was added.</p>
+  </x-h2>
+
+  <x-h2 name="Secure" id="20a62e9a-7cc9-4483-a5dd-0f29e6135312">
+    <p>Securing the service has different meanings depending on the perspective adopted. From the client perspective, it
+			means that sending a <code>Hello</code> message to the address of the <code>service</code> results in the reception of
+			a <code>World</code> message in a timely manner or an error and nothing else. Given that the legitimate owner
+			controls the server, this property may be implemented using certificates — <i>i.e.</i> HTTPS for the client.</p>
+
+    <p>Adopting other perspectives, more properties should be added. For instance, it may be appropriate to add more
+			properties to the service in order to avoid a <a href="https://en.wikipedia.org/wiki/Supply_chain_attack">Supply
+			Chain Attack</a>.</p>
+
+		<p>Implementing a tight systemd service specification should improve security by constraining how the process and the
+			underlying OS interact — <i>e.g.</i> by constraining where the process can read/write in the filesystem.</p>
+  </x-h2>
+
+  <x-h2 name="Portable" id="ed076d68-caa7-4aa1-b77b-c54926dc4aa4">
+    <p>Portability is achieved by using the <a href="https://hexdocs.pm/mix/Mix.Tasks.Release.html">release
+			mechanism</a> of Elixir: <q>Once a release is assembled, it can be packaged and deployed to a target, as long as the
+			target runs on the same operating system (OS) distribution and version as the machine running the mix release
+			command.</q></p>
+  </x-h2>
+
+  <x-h2 name="Discussion" id="d6cc6b49-2df9-47a5-b9dc-57ac7b9a9b3f">
+    <ol>
+      <li><a href="https://12factor.net/">The Twelve Factors</a></li>
+      <li><a href="/page/4802e536-3c15-47d8-8cfd-6ac722b31e34#905d006f-46d0-448a-93d4-26b193111613">The Five-Year-Old Child</a></li>
+      <li><a href="/page/4802e536-3c15-47d8-8cfd-6ac722b31e34#ad0389f2-1153-42f5-a278-441b387c41ad">How To Draw An Owl</a></li>
+      <li><a href="/page/4802e536-3c15-47d8-8cfd-6ac722b31e34#6ba53bc9-96ff-4c54-b617-90507ce93ae2">The Rising Sea</a></li>
+      <li><a href="/page/4802e536-3c15-47d8-8cfd-6ac722b31e34#5d19731e-1656-458a-b5bd-846a5adebf58">A Tale Of Two Bridges</a></li>
+    </ol>
+
+  </x-h2>
+
+  <x-h2 name="Conclusion" id="a71f191f-ad87-4830-ba2f-d68c69def99e"> </x-h2>
+
+  <x-h2 name="Reference" id="bdf31dd7-0d4b-43ab-852c-1ffad11d7519">
+    <p>All references:</p>
+    <ul>
+      <li><a href=https://github.com/phf-1/articles/tree/main/400d660f-4f57-47cd-885f-9fbeb0a80806/data/hello_world>GitHub</a></li>
+<li><a href=https://mitpress.mit.edu/9780262045490/software-design-for-flexibility/>Software Design for Flexibility</a></li>
+<li><a href=https://en.wikipedia.org/wiki/Supply_chain_attack>Supply
+			Chain Attack</a></li>
+<li><a href=https://12factor.net/>The Twelve Factors</a></li>
+<li><a href=https://youtu.be/Tdwr9tweTDE>Three Directions in Design</a></li>
+<li><a href=https://www.erlang.org/doc/apps/erts/epmd_cmd>epmd</a></li>
+<li><a href=https://livebook.dev/>livebook</a></li>
+<li><a href=https://hexdocs.pm/mix/Mix.Tasks.Release.html>release
+			mechanism</a></li>
+    </ul>
+  </x-h2>
+</x-h1>
+
+
+          <hr />
+
+          <footer>
+            <p xmlns:cc="http://creativecommons.org/ns#">
+              This work by
+              <a
+                rel="cc:attributionURL dct:creator"
+                property="cc:attributionName"
+                href="https://phfrohring.com"
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
+              is licensed under
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
+                target="_blank"
+                rel="license noopener noreferrer"
+                style="display: inline-block"
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+strict digraph {
+    node [shape=rect]
+
+    // Graph
+    CICD -> tester [label=" Directory"]
+    tester -> or
+    or -> builder [label=" Directory"]
+    builder -> or2
+    or2 -> deployer [label=" Executable"]
+    deployer -> or3
+    or3 -> server [label=" Executable"]
+
+		// Deployer crash
+    or3 -> logger3 [label=" Report"]
+
+		// Builder crash
+    or2 -> logger2 [label=" Report"]
+
+		// Tester crash
+    or -> logger [label=" Report"]
+
+    //// Node
+    {or [label="+" shape=circle]}
+    {or2 [label="+" shape=circle]}
+    {or3 [label="+" shape=circle]}
+    {logger2 [label="logger"]}
+    {logger3 [label="logger"]}
+
+    //// Ranks
+    {rank=same; or;logger}
+    {rank=same; or2;logger2}
+    {rank=same; or3;logger3}
+
+}

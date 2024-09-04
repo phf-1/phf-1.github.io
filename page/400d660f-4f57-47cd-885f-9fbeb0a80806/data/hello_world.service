@@ -1,0 +1,54 @@
+[Unit]
+Description=Hello World Service
+
+# The service is started after the network is up.
+After=network.target
+
+[Install]
+
+# The service is started in the multi-user mode
+WantedBy=multi-user.target
+
+[Service]
+
+# There is only one process.
+Type=simple
+ExecStart=/path/to/hello_world start
+
+# Limit the capabilities of the process to what is strictly necessary.
+# see: capsh
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+
+# Whatever the reason, if the process stops, restart it after 5seconds.
+# If it does not start in 30sec, consider it a failure.
+# If it does not stop in 30sec, kill it.
+Restart=always
+RestartSec=5
+TimeoutStartSec=30
+TimeoutStopSec=30
+
+# The service cannot overwhelm the hardware resources.
+MemoryLimit=500M
+CPUQuota=90%
+
+# User with the least amount of rights.
+User=service-user
+Group=service-group
+
+# For the process, the system directories and it is home directory are read-only.
+ProtectSystem=full
+ProtectHome=true
+WorkingDirectory=/path/to/working/directory
+ReadWritePaths=/path/to/working/directory
+
+# Specify the process environment.
+Environment=VAR_NAME=value
+
+# The process logs are received by the syslog service.
+SyslogIdentifier=hello_world
+StandardOutput=syslog
+StandardError=syslog
+
+# Prevent the service from creating core dumps, which can take up disk space and may
+# contain sensitive information.
+LimitCORE=0

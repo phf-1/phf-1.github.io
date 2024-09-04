@@ -6,7 +6,7 @@
 			 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Article one line description." />
+    <meta name="description" content="QA: Elixir In Action." />
     <title>Pierre-Henry Fröhring's Website</title>
     <link
       rel="apple-touch-icon"
@@ -29,7 +29,7 @@
     <link rel="canonical" href="https://phfrohring.com/" />
     <link rel="stylesheet" href="/css/main.css" />
     <style>
-     
+      
     </style>
     <script defer type="module" src="/js/main.min.js"></script>
   </head>
@@ -59,25 +59,169 @@
             <x-toc></x-toc>
           </div>
 
-          <!-- :TYPE: dbf45859-7a1a-4939-9cdb-4f6306168323 --> 
-<x-h1 name="Title" id="cbefac94-5fbf-4f3b-911a-ce86843696c3">
+          <!-- :TYPE: dbf45859-7a1a-4939-9cdb-4f6306168323 -->
+<x-h1 name="QA: Elixir In Action" id="cbefac94-5fbf-4f3b-911a-ce86843696c3">
 
   <x-abstract>Abstract.</x-abstract>
 
   <x-h2 name="Objective" id="1b9a3e6e-1912-44c5-b819-a1ad33efa51f">
-    
+
   </x-h2>
 
   <x-h2 name="Result" id="f4d067e2-cba0-46f9-b8f5-7111ea5f1ef7">
-    
+    <x-h3 name="First Step" id="f507ddf2-720d-4b0d-8f17-2abc4d6bf4e9">
+      <x-qa>
+        <x-q id="37100bfb-9803-43f3-a7cd-f2e17d217daa">
+          <p>Describe the role of schedulers.</p>
+        </x-q>
+        <x-a id="69ad7c60-15aa-44f6-a574-169e1c827dc6">
+          <ol>
+            <li>CPU → BEAM → Scheduler</li>
+            <li>BEAM → List Process</li>
+
+            <li>A scheduler distribute the CPU time accross the processes of the associated BEAM.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="0fc97c3d-e3c3-44b7-bfc7-fe355e597611">
+          <p>Why Elixir?</p>
+        </x-q>
+        <x-a id="05370f9e-0d58-4458-9406-d05cf0c5a73f">
+          <ol>
+            <li>Less code than Erlang, thanks to Lisp like macros.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+    </x-h3>
+
+    <x-h3 name="Building blocks" id="81027322-f010-4778-b79a-cf9455c69156">
+      <x-qa>
+        <x-q id="71b83c65-f826-4103-b6da-3f2da02b6cb1">
+          <p>How many OS processes does the BEAM use?</p>
+        </x-q>
+        <x-a id="c31c0b67-9c00-4155-bcbf-0df4f40357ff">
+          <p>1</p>
+        </x-a>
+      </x-qa>
+    </x-h3>
+
+    <x-h3 name="Data abstractions" id="c1cd4701-7573-4672-a6d8-0cefce9493c3">
+      <x-qa>
+        <x-q id="774310f3-0c13-4b24-adf7-72c063164f7f">
+          <p>How to define structures?</p>
+        </x-q>
+        <x-a id="6006466c-cf4c-41f6-a088-fb4fc6a5e95c">
+          <p>To define a structure <code>$Name</code>:</p>
+          <x-blockcode lang="elixir">
+defmodule $Name do
+  defstruct $fields
+
+ $code
+end
+          </x-blockcode>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="1c04391b-6dd3-497e-9d83-866ffcbd1b54">
+          <p>Given a structure definition <code>$Name</code>, how to use it?</p>
+        </x-q>
+        <x-a id="b71ead5c-cab8-4da3-b82e-fc3052a123f0">
+          <ol>
+            <li>Build an instance <code>i</code>.</li>
+            <li>Read fields of <code>i</code>.</li>
+            <li>Derive other instances from <code>i</code>.</li>
+            <li>Use it like a Map without the protocols.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="92667ca4-8bd2-41c1-aedf-9a44d0b1c36e">
+          <ol>
+            <li>We observe that:
+              <ol>
+                <li>Given appropriate A and B:</li>
+                <li><code>Enum.map : List(A) (A → B) → List(B)</code></li>
+                <li><code>Enum.map : Range(A) (A → B) → List(B)</code></li>
+              </ol>
+            </li>
+            <li>How does it work?</li>
+          </ol>
+
+        </x-q>
+        <x-a id="8b39087c-32bb-43c0-82f8-00790170986f">
+          <p>This is an instance of <a href="https://en.wikipedia.org/wiki/Parametric_polymorphism">parametric polymorphism</a>.</p>
+          <ol>
+            <li>If: an actor <code>act</code> satisfies the <a href="https://hexdocs.pm/elixir/1.17.2/Enumerable.html">Enumerable</a> protocol,</li>
+            <li>then: the <code>Enum</code> procedures are defined on <code>act</code>.</li>
+          </ol>
+          <p>All instances of <code>List</code> and <code>Range</code> implement the <code>Enumerable</code> protocol.</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="bcd05ce2-daa2-4ba5-8d64-beaf2ccf4125">
+          <p>Define how to build a protocol <code>Proto</code>.</p>
+        </x-q>
+        <x-a id="c38b648b-44ea-4283-9636-dd3d383eafe0">
+          <p>The procedure du build a protocol <code>Proto</code> is:</p>
+          <ol>
+            <li>Build a new module called <code>Proto</code> using the <code>defprotocol</code> macro.</li>
+            <li>Add procedure specification to the module.</li>
+          </ol>
+          <p>Example:</p>
+          <x-blockcode lang="elixir">
+defprotocol Proto do
+  def area(term)
+end
+          </x-blockcode>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="94d65172-716c-4c06-9510-8f9ef1043c3e">
+          <p>Define how to use a protocol <code>Proto</code></p>
+        </x-q>
+        <x-a id="472c5342-be6b-4387-a213-e3191e5708d7">
+          <ol>
+            <li>Using a protocol <code>Proto</code> means that a module implements its procedures.</li>
+            <li>If Elixir evaluated this code, then: the module <code>Mod</code> implements the protocol <code>Proto</code>.
+              <x-blockcode lang="elixir">
+defimpl Proto, for: Mod do
+  def area(term), do: # return the area of term, instance of Mod.
+end
+              </x-blockcode>
+            </li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa>
+        <x-q id="907891b0-993b-4cdf-8844-ac8a530171f4">
+          <p>What is an OTP compliant process?</p>
+        </x-q>
+        <x-a id="ce5863eb-7743-43f0-9f22-f49e5baf2267">
+          <ol>
+            <li>If: a process implements an OTP behaviour — e.g. <code>GenServer</code> or <code>Supervisor</code>,</li>
+            <li>Then: it is an OTP compliant process.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+    </x-h3>
   </x-h2>
 
   <x-h2 name="Experiment" id="1e0a094a-69d5-4f3a-84b1-bb795d0479fd">
-    
-  </x-h2>  
+
+  </x-h2>
 
   <x-h2 name="Method" id="a3d2fc81-f6a9-47c1-ab29-2f25301eb4e7">
-
+    <ol>
+      <li>Only new ideas are recorded here.</li>
+      <li>We use the Actor Model metaphor for a few interpretations.</li>
+    </ol>
   </x-h2>
 
   <x-h2 name="Discussion" id="060b343b-9a38-4ba2-bd8b-29804cae6734">
@@ -89,7 +233,10 @@
   </x-h2>
 
   <x-h2 name="Reference" id="9f0e31f8-4282-4678-a80e-cc95ff54c09f">
-
+    <ul>
+    <li><a href=https://hexdocs.pm/elixir/1.17.2/Enumerable.html>Enumerable</a></li>
+<li><a href=https://en.wikipedia.org/wiki/Parametric_polymorphism>parametric polymorphism</a></li>
+    </ul>
   </x-h2>
 </x-h1>
 
@@ -103,37 +250,37 @@
                 rel="cc:attributionURL dct:creator"
                 property="cc:attributionName"
                 href="https://phfrohring.com"
-              >Pierre-Henry <span class="small-caps">fröhring</span></a
-																																		>
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
               is licensed under
               <a
                 href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
                 target="_blank"
                 rel="license noopener noreferrer"
                 style="display: inline-block"
-              >CC BY-SA 4.0<img
-														 style="
-																		height: 22px !important;
-																		margin-left: 3px;
-																		vertical-align: text-bottom;
-																		"
-														 src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
-														 alt="" /><img
-																				style="
-																							 height: 22px !important;
-																							 margin-left: 3px;
-																							 vertical-align: text-bottom;
-																							 "
-																							 src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
-																							 alt="" /><img
-																													style="
-																																 height: 22px !important;
-																																 margin-left: 3px;
-																																 vertical-align: text-bottom;
-																																 "
-																													src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
-																													alt=""
-																												/></a>
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
             </p>
           </footer>
         </div>

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- This Source Code Form is subject to the terms of the Mozilla Public
+			 - License, v. 2.0. If a copy of the MPL was not distributed with this
+			 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="QA: Elixir." />
+    <title>Pierre-Henry Fröhring's Website</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://phfrohring.com/" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      
+    </style>
+    <script defer type="module" src="/js/main.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <picture id="bg-image">
+        <source srcset="bg.webp" type="image/webp" />
+        <source srcset="bg.jpg" type="image/jpeg" />
+        <source srcset="bg.svg" type="image/svg+xml" />
+        <img
+          id="bg-image-img"
+          src="bg.jpg"
+          onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
+          alt="Illustration"
+        />
+      </picture>
+      <div id="container">
+        <div id="content">
+          <div id="topbar">
+            <nav class="actions">
+              <button id="toggle_toc_btn" class="button">TOC</button>
+              <button id="toggle_qa" class="button">SHOW ANSWERS</button>
+            </nav>
+            <nav class="navbar" id="navbar">
+              <a class="button" href="/">home</a>
+            </nav>
+            <x-toc></x-toc>
+          </div>
+
+          <x-h1
+  name="QA: Elixir"
+  id="0cea0817-55c2-48d3-9785-3c7b2cb722cb"
+  type="dbf45859-7a1a-4939-9cdb-4f6306168323"
+>
+  <x-abstract>abstract</x-abstract>
+
+  <x-h2 name="Introduction" id="8db4e67c-151e-4ba6-ac8f-26b63ce034b5"> </x-h2>
+
+  <x-h2 name="Objective" id="ff999ada-f635-419f-99c5-7305f69d8eec"> </x-h2>
+
+  <x-h2 name="Result" id="97042b6e-501a-4d4c-a501-74f6c76f7cdf"> </x-h2>
+
+  <x-h2 name="QA" id="c74c92a9-7cd8-43d7-8f84-14e1b90a5ada">
+
+    <x-qa>
+      <x-q id="a63bd6d0-9f59-4ea0-b973-46f5e73960a0">
+        <p>Given an <code>ElixirProject</code>, how to build an <code>Executable</code>?</p>
+      </x-q>
+      <x-a id="4e1e571c-c19a-4eb1-9456-d208a9a26570">
+        <p>Given an <a href="https://hexdocs.pm/mix/1.17.2/Mix.Tasks.New.html">Elixir project</a>,  <code>MIX_ENV=prod mix release</code>.</p>
+      </x-a>
+    </x-qa>
+
+    <x-qa>
+      <x-q id="52ff47e8-967d-4af3-a5f2-ce3a5df27233">
+        <p>How to build an <code>ElixirProject</code>?</p>
+      </x-q>
+      <x-a id="6d2aeb80-b80c-4910-86d9-3f23c2e470c6">
+        <p><code>mix new …</code></p>
+      </x-a>
+    </x-qa>
+
+    <x-qa>
+      <x-q id="e5c5b87c-88fb-4e12-b9d9-d26996e7cccb">
+        <p>How to use an <code>ElixirProject</code> ?</p>
+      </x-q>
+      <x-a id="3b93cf79-c11f-4821-8324-49c5959dfda4">
+        <ol>
+          <li><a href="https://hexdocs.pm/mix/Mix.Tasks.Deps.html"><code>mix deps</code></a>: fetch dependencies.</li>
+          <li><a href="https://hexdocs.pm/mix/Mix.Tasks.Format.html"><code>mix format</code></a>: format the code.</li>
+          <li><a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code>mix test</code></a>: execute tests.</li>
+          <li><a href="https://hexdocs.pm/mix/Mix.Tasks.Release.html"><code>MIX_ENV=prod mix release</code></a>: build the executable.</li>
+          <li><a href="https://hexdocs.pm/mix/Mix.Tasks.Clean.html"><code>mix clean</code></a>: delete all generated files.</li>
+        </ol>
+      </x-a>
+    </x-qa>
+
+		<x-qa id="fe1c48b5-9012-434e-9894-8bff94fa187a">
+		  <x-q>
+		    <p>How to define a function in the IEX console?</p>
+		  </x-q>
+		  <x-a>
+				<x-blockcode>
+$ iex
+func = fn(x) -> x + 1 end
+				</x-blockcode>
+		  </x-a>
+		</x-qa>
+
+		<x-h3 name="Plug" id="1d64dda5-7099-4777-89fb-dc317cfc4475">
+			<x-qa id="34474cd1-eaee-44c3-a56c-2a8ee6c934e1">
+				<x-q>
+					<p>What is a <q>Plug</q>?</p>
+				</x-q>
+				<x-a>
+					<p><x-todo></x-todo></p>
+				</x-a>
+			</x-qa>
+
+			<x-qa id="4be6a249-4979-4b0e-9627-30d4fd37eed8">
+			  <x-q>
+			    <p>How to handle errors in a Plug?</p>
+			  </x-q>
+			  <x-a>
+					<p>Use: <a href="https://hexdocs.pm/plug/Plug.ErrorHandler.html">Plug.ErrorHandler</a></p>
+			  </x-a>
+			</x-qa>
+		</x-h3>
+  </x-h2>
+
+  <x-h2 name="Reference" id="6a456893-e1da-46c8-9868-53ca59236d4b">
+    <ul>
+      <li><a href=https://hexdocs.pm/mix/Mix.Tasks.Release.html><code>MIX_ENV=prod mix release</code></a></li>
+<li><a href=https://hexdocs.pm/mix/Mix.Tasks.Clean.html><code>mix clean</code></a></li>
+<li><a href=https://hexdocs.pm/mix/Mix.Tasks.Deps.html><code>mix deps</code></a></li>
+<li><a href=https://hexdocs.pm/mix/Mix.Tasks.Format.html><code>mix format</code></a></li>
+<li><a href=https://hexdocs.pm/mix/Mix.Tasks.Test.html><code>mix test</code></a></li>
+<li><a href=https://hexdocs.pm/mix/1.17.2/Mix.Tasks.New.html>Elixir project</a></li>
+<li><a href=https://hexdocs.pm/plug/Plug.ErrorHandler.html>Plug.ErrorHandler</a></li>
+    </ul>
+  </x-h2>
+</x-h1>
+
+
+          <hr />
+
+          <footer>
+            <p xmlns:cc="http://creativecommons.org/ns#">
+              This work by
+              <a
+                rel="cc:attributionURL dct:creator"
+                property="cc:attributionName"
+                href="https://phfrohring.com"
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
+              is licensed under
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
+                target="_blank"
+                rel="license noopener noreferrer"
+                style="display: inline-block"
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
