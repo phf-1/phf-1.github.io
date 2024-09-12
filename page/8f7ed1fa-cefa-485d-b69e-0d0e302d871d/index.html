@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- This Source Code Form is subject to the terms of the Mozilla Public
+			 - License, v. 2.0. If a copy of the MPL was not distributed with this
+			 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Phoenix." />
+    <title>Pierre-Henry Fröhring's Website</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://phfrohring.com/" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      
+    </style>
+    <script defer type="module" src="/js/main.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <picture id="bg-image">
+        <source srcset="bg.webp" type="image/webp" />
+        <source srcset="bg.jpg" type="image/jpeg" />
+        <source srcset="bg.svg" type="image/svg+xml" />
+        <img
+          id="bg-image-img"
+          src="bg.jpg"
+          onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
+          alt="Illustration"
+        />
+      </picture>
+      <div id="container">
+        <div id="content">
+          <div id="topbar">
+            <nav class="actions">
+              <button id="toggle_toc_btn" class="button">TOC</button>
+              <button id="toggle_qa" class="button">SHOW ANSWERS</button>
+            </nav>
+            <nav class="navbar" id="navbar">
+              <a class="button" href="/">home</a>
+            </nav>
+            <x-toc></x-toc>
+          </div>
+
+          <x-h1
+  name="Phoenix"
+  id="d426c731-51a3-44f4-a13a-db30df41d87e"
+  type="dbf45859-7a1a-4939-9cdb-4f6306168323"
+>
+  <x-abstract>abstract</x-abstract>
+
+  <x-h2 name="Installation" id="74ccbcc1-654a-4cc2-bfb1-018eaa219031">
+    <x-h3 name="PostgreSQL" id="05b48362-46a2-48e7-9df1-c21b00a4cb69">
+      <x-blockcode>
+sudo apt install postgresql postgresql-contrib
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+sudo -i -u postgres
+createuser test_user
+createdb test_db -O test_user
+psql
+ALTER USER test_user PASSWORD '$PASSWD';
+\q
+sudo nano /etc/postgresql/15/main/pg_hba.conf
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+local   test_db         test_user                               md5
+sudo systemctl restart postgresql
+psql -d test_db -U test_user -W
+select usename from pg_user;
+\du
+\q
+sudo systemctl status postgresql
+      </x-blockcode>
+    </x-h3>
+  </x-h2>
+
+  <x-h2 name="QA" id="a5032e7e-9250-4149-a378-9b33db22c63d">
+    <x-h3 name="Tools" id="a1989d33-ca66-49c2-a1a7-e02e95342df7">
+      <x-qa id="ac931ea8-0139-4311-9d02-ea9ae1d70e7a">
+        <x-q>
+          <p>How to start an application in <code>app/</code> ?</p>
+        </x-q>
+        <x-a>
+          <ul>
+            <li>interactive session: <code>iex -S mix phx.server</code></li>
+            <li>not interactive session: <code>mix phx.server</code></li>
+          </ul>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="ef6a579d-234b-437c-ac3b-c96d22ae8a37">
+        <x-q>
+          <p>Where to get help?</p>
+        </x-q>
+        <x-a>
+          <ul>
+            <li>IRC</li>
+            <li>Discord</li>
+            <li>Elixir Forum</li>
+            <li>Stack Overflow</li>
+            <li>Twitter</li>
+            <li>Web Application Security Best Practices for BEAM languages</li>
+          </ul>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="f6000b73-cf99-4317-9300-a05ed3103b82">
+        <x-q>
+          <p>A package to use databases?</p>
+        </x-q>
+        <x-a>
+          <p>Ecto</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="18bcae5a-badb-46b1-b087-43a3b73650db">
+        <x-q>
+          <p>A package to use HTTP connections?</p>
+        </x-q>
+        <x-a>
+          <p>Plug</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="874e2d79-2ade-4e99-a791-0e557950a56c">
+        <x-q>
+          <p>A package to code?</p>
+        </x-q>
+        <x-a>
+          <p>ExUnit</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="d2d5602d-68e7-4d48-ac76-1fb812204889">
+        <x-q>
+          <p>A package for internationalization and localization?</p>
+        </x-q>
+        <x-a>
+          <p>Gettext</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="44c4c801-46e3-4e14-9c10-404ba45aa5e4">
+        <x-q>
+          <p>A package to use emails?</p>
+        </x-q>
+        <x-a>
+          <p>Swoosh</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="4e75ace5-5628-44d4-b5b8-327c94a05558">
+        <x-q>
+          <p>A package to use HTML?</p>
+        </x-q>
+        <x-a>
+          <p>Phoenix HTML</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="fa98439f-ed62-45fb-858e-be80f618881d">
+        <x-q>
+          <p>A package to build pub/sub systems?</p>
+        </x-q>
+        <x-a>
+          <p>Phoenix PubSub</p>
+        </x-a>
+      </x-qa>
+    </x-h3>
+
+    <x-h3 name="Directory structure" id="29c094d9-ba53-4992-bf4b-c50c1a13483a">
+
+      <x-qa id="9b5f408f-64b6-4e2b-9822-88619343130b">
+        <x-q>
+          <p>What is a directory structure built by <code>mix phx.new</code>?</p>
+        </x-q>
+        <x-a>
+          <x-blockcode>
+├── _build
+├── assets
+├── config
+├── deps
+├── lib
+│   ├── hello
+│   ├── hello.ex
+│   ├── hello_web
+│   └── hello_web.ex
+├── priv
+└── test
+          </x-blockcode>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="7e062946-bc0b-4a85-af90-a7ef1888ae51">
+        <x-q>
+          <p>What is <code>_build</code>? </p>
+        </x-q>
+        <x-a>
+          <p>It holds all compilation artifacts.</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="8c889abb-c26f-4417-923d-cc0eef03d9cc">
+        <x-q>
+          <p>What is <code>assets</code>?</p>
+        </x-q>
+        <x-a>
+          <p>This directory contains the front end code <i>e.g.</i> JavaScript and CSS.</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="c9b45c04-a8bc-439b-a1d9-ab7fb5cd5b8d">
+        <x-q>
+          <p>What is <code>config</code>?</p>
+        </x-q>
+        <x-a>
+          <p>This directory contains all the configuration data of the application.</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="2a088555-13ef-4a77-9f2e-81c9bc9c333c">
+        <x-q>
+          <p>What is <code>deps</code>?</p>
+        </x-q>
+        <x-a>
+          <p>This directory contains all dependencies installed by <code>mix</code>.</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="87a2be1f-178c-4ed3-9891-f3167eeb04b0">
+        <x-q>
+          <p>What is <code>lib</code>?</p>
+        </x-q>
+        <x-a>
+          <p><code>lib</code> contains the application source code.</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="c0b7ec93-e379-466f-a5c8-732d948a6927">
+        <x-q>
+          <p>What is <code>priv</code>?</p>
+        </x-q>
+        <x-a>
+          <p>This directory holds data that is necessary in production but are not source code — <i>e.g.</i> <code>priv/static</code> can contain images, <code>priv/static/assets</code> contains generated from files in <code>assets</code>.</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="d6f94389-236f-42c8-833b-256b51a5123f">
+        <x-q>
+          <p>What is <code>test</code>?</p>
+        </x-q>
+        <x-a>
+          <p>This directory contains tests and usually mirrors <code>lib</code>.</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="4a049106-0a20-4aff-bfe6-2e9d9954f833">
+        <x-q>
+          <p>Given an application named <code>hello</code>, what is <code>lib/hello</code>?</p>
+        </x-q>
+        <x-a>
+          <p>This directory contains:</p>
+          <x-blockcode>
+lib/hello
+├── application.ex
+├── mailer.ex
+└── repo.ex
+          </x-blockcode>
+          <ul>
+            <li><code>application.ex</code> defines an Elixir application, in particular, how to start it. Starting the application means starting a number of processes in order. These are defined and started in <code>start/2</code>.</li>
+            <li><code>mailer.ex</code> defines a module to send emails.</li>
+            <li><code>repo.ex</code> defines a module to interact with a DB</li>
+          </ul>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="d0cee6de-7632-413a-bcf9-4f8349e4cda4">
+        <x-q>
+          <p>Given an application named <code>hello</code>, what is <code>lib/hello_web</code>?</p>
+        </x-q>
+        <x-a>
+          <p>It gives an implementation to this <a href="/page/dab9edca-ca8b-4d7b-a1cb-934d07741e2b#f1fdd237-16a0-4be9-b9c7-faf539367d17">actor computation</a>.</p>
+          <figure>
+            <img src="data/request_to_html.svg" alt="Request to HTML">
+            <figcaption>Request to HTML</figcaption>
+          </figure>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="cc6e5e72-3d0b-4110-8009-da87c59202a1">
+        <x-q>
+          <p>Main steps to add a new page?</p>
+        </x-q>
+        <x-a>
+          <ol>
+            <li>Add a new route that points to a controller — <i>e.g.</i> <code>/hello</code> points to <code>HelloController</code>.</li>
+            <li>Add the new controller and make its view — <i>e.g.</i> <code>HelloHTML</code></li>
+          </ol>
+        </x-a>
+      </x-qa>
+    </x-h3>
+
+    <x-h3 name="Plug" id="900dcc21-062c-4fd2-bc1f-d5d1753116e4">
+
+      <x-qa id="7874e8ac-5aea-4266-97b6-a64bdc642252">
+        <x-q>
+          <p>What is a <q>Plug</q>?</p>
+        </x-q>
+        <x-a>
+          <ol>
+            <li>It is a function <code>: Plug.Conn Options → Plug.Conn</code></li>
+            <i>It is a module <code>m</code> such that:
+              <ul>
+                <li><code>m.init : Options → Options</code></li>
+                <li><code>m.call : Plug.Conn Options → Plug.Conn</code></li>
+              </ul>
+            </i>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="20c32e14-bcc1-4b72-801a-c7ba057e5e10">
+        <x-q>
+          <p>How to use a Plug?</p>
+        </x-q>
+        <x-a>
+          <p>In the context where <code>plug</code> is defined:</p>
+          <x-blockcode>
+plug :a_plug
+plug HelloWeb.Router
+
+def a_plug(conn, _opt), do: conn
+          </x-blockcode>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="09cd9dce-8817-4504-bd52-c12f0bd127c3">
+        <x-q>
+          <p>Where to use plugs?</p>
+        </x-q>
+        <x-a>
+          <ul>
+            <li>endpoint</li>
+            <li>router</li>
+            <li>controller</li>
+          </ul>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="f21dfa27-8c7f-44eb-a22f-c05c5bbfb4be">
+        <x-q>
+          <p>What is <code>halt(conn)</code>?</p>
+        </x-q>
+        <x-a>
+          <p>It tells that the next plug will not be called.</p>
+        </x-a>
+      </x-qa>
+    </x-h3>
+
+
+    <x-h3 name="Routing" id="61cf4821-2b65-4a70-befd-8be7a4d9dfb8">
+
+      <x-qa id="29f3ccc1-b202-4b3f-affd-a557d4b98cc9">
+        <x-q>
+          <p>What is a route? How to list all routes?</p>
+        </x-q>
+        <x-a>
+          <ul>
+            <li>A route is: <code>Verb x Path x Action</code></li>
+            <li><code>mix phx.routes</code></li>
+          </ul>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="de038907-00de-49cb-8e08-e14649f560c5">
+        <x-q>
+          <p>What is a <code>Resource</code>?</p>
+        </x-q>
+        <x-a>
+          <ul>
+            <li>A resource is a type of data that a client can interact with using a given set of HTTP requests.</li>
+            <li>For a resource <code>user</code>, the set of requests is:
+              <x-blockcode>
+  GET     /users                                 HelloWeb.UserController :index
+  GET     /users/:id/edit                        HelloWeb.UserController :edit
+  GET     /users/new                             HelloWeb.UserController :new
+  GET     /users/:id                             HelloWeb.UserController :show
+  POST    /users                                 HelloWeb.UserController :create
+  PATCH   /users/:id                             HelloWeb.UserController :update
+  PUT     /users/:id                             HelloWeb.UserController :update
+  DELETE  /users/:id                             HelloWeb.UserController :delete
+              </x-blockcode>
+            </li>
+          </ul>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="dc9f838e-122a-4bcb-b8b5-ba4b0e4f2b1f">
+        <x-q>
+          <p>How to build a resource named <code>users</code>?</p>
+        </x-q>
+        <x-a>
+          <ul>
+            <li>Using <code>resource users</code> under a given scope in the router.</li>
+            <li>Generated routes may be selected using the option <code>only: [:index, :show]</code></li>
+            <li>Or <code>except: [:delete]</code></li>
+            <li>Resources may be nested.</li>
+          </ul>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="c65aeff0-7d11-4868-85ea-0d1994f2aeb6">
+        <x-q>
+          <p>If a route needs to be tested, how to make sure that it is considered by the router?</p>
+        </x-q>
+        <x-a>
+          <p>By using <code>:verified_routes</code>.</p>
+          <x-blockcode lang="elixir">
+defmodule RouteExample do
+  use HelloWeb, :verified_routes
+
+  def example do
+    ~p"/comments"
+    ~p"/unknown/123"
+  end
+end
+          </x-blockcode>
+
+          <p>This code will check routes against the router's routes at compile time.</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="f223e142-b12a-4605-81db-d29601fa2b1b">
+        <x-q>
+          <p>If a resource needs a client API and an admin API, how to expose both APIs?</p>
+        </x-q>
+        <x-a>
+          <p>By using scopes. For instance:</p>
+          <x-blockcode lang="elixir">
+scope "/", HelloWeb do
+  pipe_through :browser
+  resources "/reviews", ReviewController
+end
+
+scope "/admin", HelloWeb.Admin do
+  pipe_through :browser
+  resources "/reviews", ReviewController
+end
+          </x-blockcode>
+
+          <p>Which gives:</p>
+          <x-blockcode>
+...
+GET     /reviews                 HelloWeb.ReviewController :index
+GET     /reviews/:id/edit        HelloWeb.ReviewController :edit
+GET     /reviews/new             HelloWeb.ReviewController :new
+GET     /reviews/:id             HelloWeb.ReviewController :show
+POST    /reviews                 HelloWeb.ReviewController :create
+PATCH   /reviews/:id             HelloWeb.ReviewController :update
+PUT     /reviews/:id             HelloWeb.ReviewController :update
+DELETE  /reviews/:id             HelloWeb.ReviewController :delete
+...
+GET     /admin/reviews           HelloWeb.Admin.ReviewController :index
+GET     /admin/reviews/:id/edit  HelloWeb.Admin.ReviewController :edit
+GET     /admin/reviews/new       HelloWeb.Admin.ReviewController :new
+GET     /admin/reviews/:id       HelloWeb.Admin.ReviewController :show
+POST    /admin/reviews           HelloWeb.Admin.ReviewController :create
+PATCH   /admin/reviews/:id       HelloWeb.Admin.ReviewController :update
+PUT     /admin/reviews/:id       HelloWeb.Admin.ReviewController :update
+DELETE  /admin/reviews/:id       HelloWeb.Admin.ReviewController :delete
+          </x-blockcode>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="821031a5-72d0-43eb-923d-bd63585fcfc9">
+        <x-q>
+          <ol>
+            <li>What is a pipeline?</li>
+            <li>How to build a pipeline?</li>
+            <li>How to use a pipeline?</li>
+          </ol>
+        </x-q>
+        <x-a>
+          <ul>
+            <li>A pipeline is a plug built by composing plugs — <i>i.e.</i> <code>p = p1 |> p2 …</code></li>
+            <li>To build a pipeline, one may use:
+              <x-blockcode lang="elixir">
+pipeline :browser do
+   plug :accepts, ["html"]
+   …
+   plug :put_secure_browser_headers
+end
+              </x-blockcode>
+            </li>
+            <li>The pipeline may be used within a scope:
+              <x-blockcode lang="elixir">
+scope "/reviews", HelloWeb do
+  pipe_through [:browser, :auth]
+  resources "/", ReviewController
+end
+              </x-blockcode>
+            </li>
+          </ul>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="211b57c9-6160-46f1-802d-ebe7a7171026">
+        <x-q>
+          <p>Give an example of scope and pipeline usage.</p>
+        </x-q>
+        <x-a>
+          <ul>
+            <li>An anonymous user can read the list of reviews.</li>
+            <li>An anonymous user can read a review.</li>
+            <li>An authentified user can create a review.</li>
+          </ul>
+
+          <x-blockcode lang="elixir">
+pipeline :browser, do: …
+pipeline :auth, do: …
+scope "/" do
+  pipe_through [:browser]
+  get "/reviews", PostController, :index
+  get "/reviews/:id", PostController, :show
+end
+scope "/" do
+  pipe_through [:browser, :auth]
+  get "/reviews/new", PostController, :new
+  post "/reviews", PostController, :create
+end
+          </x-blockcode>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="14d9c295-198e-4388-a5fd-2b0c4cb5cbfc">
+        <x-q>
+          <p>How to forward requests to an other plug?</p>
+        </x-q>
+        <x-a>
+          <p>By using the <code>forward</code> macro.</p>
+          <x-blockcode lang="elixir">
+defmodule HelloWeb.Router do
+  use HelloWeb, :router
+  scope "/", HelloWeb, do: …
+  forward "/jobs", BackgroundJob.Plug
+end
+          </x-blockcode>
+        </x-a>
+      </x-qa>
+    </x-h3>
+
+    <x-h3 name="Controller" id="16ff2cc9-12ef-485f-a3ea-360479373b06">
+      <x-qa id="97e5ddce-2c15-4f7c-a1be-6f819afe388c">
+        <x-q>
+          <ol>
+          <li>What is a Controller?</li>
+          <li>How to build a Controller?</li>
+          <li>How to use a Controller?</li>
+          </ol>
+        </x-q>
+        <x-a>
+          <ol>
+            <li>A controller gives meaning to a request — <i>i.e.</i> an HTTP request may be viewed as a message received from the client and the controller is the computation that follows.</li>
+            <li>A controller function is called an <code>action</code>.</li>
+            <li>To build a Controller for a given application <code>hello</code>, it is enough to define a module:
+              <x-blockcode lang="elixir">
+defmodule HelloWeb.PageController do
+  use HelloWeb, :controller
+  …
+end
+              </x-blockcode>
+            </li>
+            <li>To use a controller, it is enough to connect a route to one of its actions.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="42835fec-5ea3-472c-8478-003be88810ac">
+        <x-q>
+          <p>What are standard actions names?</p>
+        </x-q>
+        <x-a>
+          <ul>
+            <li>index - renders a list of all items of the given resource type</li>
+            <li>show - renders an individual item by ID</li>
+            <li>new - renders a form for creating a new item</li>
+            <li>create - receives parameters for one new item and saves it in a data store</li>
+            <li>edit - retrieves an individual item by ID and displays it in a form for editing</li>
+            <li>update - receives parameters for one edited item and saves the item to a data store</li>
+            <li>delete - receives an ID for an item to be deleted and deletes it from a data store</li>
+          </ul>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="012e3ba0-129e-42a4-a17a-2a9f5d61580c">
+        <x-q>
+          <p>Give an example of a Controller.</p>
+        </x-q>
+        <x-a>
+          <x-blockcode lang="elixir">
+defmodule HelloWeb.HelloController do
+  use HelloWeb, :controller
+
+  def show(conn, %{"messenger" => messenger}) do
+    render(conn, :show, messenger: messenger)
+  end
+end
+          </x-blockcode>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="9aa06258-6edf-4f99-af05-6b3001d00ab7">
+        <x-q>
+          <p>What types of output an Action may have?</p>
+        </x-q>
+        <x-a>
+          <ul>
+            <li><code>text(conn, …)</code></li>
+            <li><code>json(conn, …)</code></li>
+            <li><code>conn |> assign(:messenger, messenger) |> render(:show)</code></li>
+          </ul>
+
+          <p>Using render implies that a <code>show</code> templates exists and an associated view module.</p>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="96d9e750-8c1a-44c9-b99e-600a35182b49">
+        <x-q>
+          <p>Which formats are taken care of by a view?</p>
+        </x-q>
+        <x-a>
+          <ul>
+            <li>Any format will do as more may be added.</li>
+            <li>JSON views are already ready to be used.</li>
+            <li>Check the <a href="https://hexdocs.pm/mime/2.0.5/MIME.html">MIME</a> library for specifics.</li>
+          </ul>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="a4f8b021-e321-4ef4-bc3d-4d98d72f540d">
+        <x-q>
+          <p>How to send a response directly?</p>
+        </x-q>
+        <x-a>
+          <ul>
+            <li>By using <code>send_resp/3</code>.</li>
+            <li>And <code>put_resp_content_type/2</code></li>
+            <li>and <code>put_status/2</code></li>
+          </ul>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="5c7c8e20-2cd6-43c3-b9e1-c04b917cb5ca">
+        <x-q>
+          <p>Why and how to implement a re-direction?</p>
+        </x-q>
+        <x-a>
+          <p>For instance, if a user sends data to build a resource, he should then be re-directed to an other
+          page. Using the <code>redirect/2</code> function.</p>
+          <x-blockcode lang="elixir">
+defmodule HelloWeb.Router do
+  scope "/", HelloWeb do
+    get "/", PageController, :home
+    get "/redirect_test", PageController, :redirect_test
+  end
+end
+
+defmodule HelloWeb.PageController do
+  use HelloWeb, :controller
+  def home(conn, _params) do
+    redirect(conn, to: ~p"/redirect_test")
+  end
+  def redirect_test(conn, _params) do
+    render(conn, :home, layout: false)
+  end
+end
+          </x-blockcode>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="6d1056d9-c430-410f-b16f-162b1945b9ab">
+        <x-q>
+          <p>Why and how to use a Flash message?</p>
+        </x-q>
+        <x-a>
+          <p>Flash messages are short transient messages presented to the user. A flash message may be used to inform
+          him about the status of an action.</p>
+          <x-blockcode lang="elixir">
+defmodule HelloWeb.PageController do
+  def home(conn, _params) do
+    conn
+    |> put_flash(:error, "Let's pretend we have an error.")
+    |> render(:home, layout: false)
+  end
+end
+          </x-blockcode>
+        </x-a>
+      </x-qa>
+    </x-h3>
+
+    <x-h3 name="Components and HEEx" id="5beda77e-8815-4bb7-82bc-c74ce02344c7">
+      <x-qa id="91f10821-2048-4f12-8e3a-20857dd4fbc0">
+        <x-q>
+          <ol>
+            <li>Why are <q>function component</q> needed?</li>
+            <li>How to build a function component?</li>
+            <li>How to use a function component?</li>
+          </ol>
+        </x-q>
+        <x-a>
+          <ol>
+            <li>A recurring pattern is to assign values to variables into templates in order to build HTML fragments.</li>
+            <li>Composing these framents build an HTML page.</li>
+            <li>To build a function component, it is enough to define a function <code>Assigns → HEEx</code> using
+              <code>use Phoenix.Component</code>.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="471dd8ed-5dc2-4f5c-a672-c23993633b80">
+        <x-q>
+          <ol>
+            <li>Why are <q>HEEx</q> templates needed?</li>
+            <li>How to build an HEEx template?</li>
+            <li>How to use an HEEx template?</li>
+          </ol>
+        </x-q>
+        <x-a>
+          <ol>
+            <li>HTML needs to be generated from assigns.</li>
+            <li>HTML is static, so a DSL that augments HTML with programming constructs is built: HEEx.</li>
+            <li>To build an HEEx template, it is enough to use <code><%= … %></code>, <code><% … %></code>, <code>@…</code> and save the result as an otherwise HTML document/fragment in a <code>.heex</code> file.</li>
+            <li>To use it, it may be included as part of a view using <code>embed_templates/1</code> so that it is turned into a function component.</li>
+            <li>HTML extensions may be used, for instance:
+              <x-blockcode>
+<div title="My div" class={@class}>
+  <p>Hello <%= @username %></p>
+</div>
+
+<div title="My div" {@many_attributes}>
+  <p>Hello <%= @username %></p>
+</div>
+              </x-blockcode>
+            </li>
+          </ol>
+        </x-a>
+      </x-qa>
+
+      <x-qa id="22840fa5-d5d8-45d3-8d20-ad61b63b9859">
+        <x-q>
+          <p>Why a root and an app layouts?</p>
+        </x-q>
+        <x-a>
+          <ol>
+            <li>The root layout hardly changes.</li>
+            <li>There is a concept of LiveView which do not change root layouts but app layouts.</li>
+          </ol>
+        </x-a>
+      </x-qa>
+    </x-h3>
+
+    <x-h3 state="todo" name="Ecto" id="3e354403-f07c-4812-af1d-a50def624297">
+
+    </x-h3>
+
+    <x-h3 state="todo" name="Context" id="d67e181c-3f07-4175-9d52-14de27a82346">
+
+    </x-h3>
+
+    <x-h3 state="todo" name="JSON and APIs" id="d7445f61-72a2-4cea-81de-4db1a2f221fc">
+
+    </x-h3>
+
+    <x-h3 state="todo" name="Telemetry" id="c3cc4507-d57c-4110-9a8c-e11bcb4c323c">
+
+    </x-h3>
+
+    <x-h3 state="todo" name="Authentication" id="0f60e335-dd43-47be-845f-f89129b15fa1">
+
+    </x-h3>
+
+    <x-h3 state="todo" name="Real time" id="8f57ba19-dafe-4426-9b1b-97292e96ecf3">
+
+    </x-h3>
+
+    <x-h3 state="todo" name="Testing" id="f82789da-acf0-43b0-b903-b27d815c7137">
+
+    </x-h3>
+
+    <x-h3 state="todo" name="Deployment" id="c928554e-d3ff-451a-ae08-bf240d59c87e">
+
+    </x-h3>
+  </x-h2>
+</x-h1>
+
+
+          <hr />
+
+          <footer>
+            <p xmlns:cc="http://creativecommons.org/ns#">
+              This work by
+              <a
+                rel="cc:attributionURL dct:creator"
+                property="cc:attributionName"
+                href="https://phfrohring.com"
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
+              is licensed under
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
+                target="_blank"
+                rel="license noopener noreferrer"
+                style="display: inline-block"
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

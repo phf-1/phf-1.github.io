@@ -1,0 +1,13 @@
+strict digraph {
+    node [shape=rect]
+    client -> endpoint [label=" HTTP request"]
+		endpoint -> router
+		router -> controller
+		controller -> view
+		view -> client2 [label=" HTML"]
+
+		client2 [label="client"]
+		view [label="view\l- components\l- gettext\l"]
+		router [label="router\l- telemetry\l"]
+}
+
