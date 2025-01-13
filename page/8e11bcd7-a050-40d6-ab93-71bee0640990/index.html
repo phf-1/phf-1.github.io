@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- This Source Code Form is subject to the terms of the Mozilla Public
+			 - License, v. 2.0. If a copy of the MPL was not distributed with this
+			 - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Index of articles." />
+    <title>Pierre-Henry Fröhring's Website</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://phfrohring.com/" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      #bg-image-img {
+	top: -32%;
+}
+
+    </style>
+    <script defer type="module" src="/js/main.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <picture id="bg-image">
+        <source srcset="bg.webp" type="image/webp" />
+        <source srcset="bg.jpg" type="image/jpeg" />
+        <source srcset="bg.svg" type="image/svg+xml" />
+        <img
+          id="bg-image-img"
+          src="bg.jpg"
+          onerror="this.onerror = null;this.parentNode.children[0].srcset = this.parentNode.children[1].srcset = this.parentNode.children[2].srcset = this.src;"
+          alt="Illustration"
+        />
+      </picture>
+      <div id="container">
+        <div id="content">
+          <div id="topbar">
+            <nav class="actions">
+              <button id="toggle_toc_btn" class="button">TOC</button>
+              <button id="toggle_qa" class="button">SHOW ANSWERS</button>
+            </nav>
+            <nav class="navbar" id="navbar">
+              <a class="button" href="/">home</a>
+            </nav>
+            <x-toc></x-toc>
+          </div>
+
+          <x-h1 name="Index of articles" id="4df1aeb0-fb6e-4272-89a8-4742ce56836f">
+	<x-abstract>Articles are listed by latest modification.</x-abstract>
+	<x-h2 name="2025-01" id="2025-01"><ul><li><a href="/page/00000000-0000-0000-0000-000000000000/">Welcome page.</a></li></ul></x-h2><x-h2 name="2024-08" id="2024-08"><ul><li><a href="/page/8e11bcd7-a050-40d6-ab93-71bee0640990/">Index of articles.</a></li></ul></x-h2>
+</x-h1>
+
+
+          <hr />
+
+          <footer>
+            <p xmlns:cc="http://creativecommons.org/ns#">
+              This work by
+              <a
+                rel="cc:attributionURL dct:creator"
+                property="cc:attributionName"
+                href="https://phfrohring.com"
+                >Pierre-Henry <span class="small-caps">fröhring</span></a
+              >
+              is licensed under
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1"
+                target="_blank"
+                rel="license noopener noreferrer"
+                style="display: inline-block"
+                >CC BY-SA 4.0<img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="" /><img
+                  style="
+                    height: 22px !important;
+                    margin-left: 3px;
+                    vertical-align: text-bottom;
+                  "
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt=""
+              /></a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
